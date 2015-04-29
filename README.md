@@ -1,1 +1,3 @@
-# gocardless-pro-python
+# GoCardless Pro Python client library
+
+WIP!
