@@ -3,30 +3,30 @@
     "method": "POST",
     "path_template": "/customer_bank_accounts",
     "url_params": [],
-    "body": {"customer_bank_accounts":{"account_holder_name":"example account_holder_name 5285","account_number_ending":"example account_number_ending 8590","bank_name":"example bank_name 3410","country_code":"example country_code 3632","created_at":"2014-01-01T12:00:00.000Z","currency":"example currency 8591","enabled":true,"id":"BA123","links":{"customer":"example customer 8582"},"metadata":{}}}
+    "body": {"customer_bank_accounts":{"account_holder_name":"example account_holder_name 8582","account_number_ending":"example account_number_ending 3632","bank_name":"example bank_name 8553","country_code":"example country_code 5384","created_at":"2014-01-01T12:00:00.000Z","currency":null,"enabled":true,"id":"BA123","links":{"customer":"example customer 8591"},"metadata":{}}}
   },
   "list": {
     "method": "GET",
     "path_template": "/customer_bank_accounts",
     "url_params": [],
-    "body": {"customer_bank_accounts":[{"account_holder_name":"example account_holder_name 9271","account_number_ending":"example account_number_ending 5894","bank_name":"example bank_name 6137","country_code":"example country_code 1297","created_at":"2014-01-01T12:00:00.000Z","currency":null,"enabled":false,"id":"BA123","links":{"customer":"example customer 7726"},"metadata":{}},{"account_holder_name":"example account_holder_name 3086","account_number_ending":"example account_number_ending 9819","bank_name":"example bank_name 3981","country_code":"example country_code 2079","created_at":"2014-01-01T12:00:00.000Z","currency":"example currency 1270","enabled":true,"id":"BA123","links":{"customer":"example customer 493"},"metadata":{}}],"meta":{"cursors":{"after":null,"before":null},"limit":null}}
+    "body": {"customer_bank_accounts":[{"account_holder_name":"example account_holder_name 2079","account_number_ending":"example account_number_ending 2066","bank_name":"example bank_name 3981","country_code":"example country_code 9271","created_at":"2014-01-01T12:00:00.000Z","currency":null,"enabled":false,"id":"BA123","links":{"customer":"example customer 5802"},"metadata":{}},{"account_holder_name":"example account_holder_name 493","account_number_ending":"example account_number_ending 9819","bank_name":"example bank_name 6052","country_code":"example country_code 8981","created_at":"2014-01-01T12:00:00.000Z","currency":null,"enabled":false,"id":"BA123","links":{"customer":"example customer 3086"},"metadata":{}}],"meta":{"cursors":{"after":null,"before":null},"limit":null}}
   },
   "get": {
     "method": "GET",
     "path_template": "/customer_bank_accounts/:identity",
     "url_params": ["BA123"],
-    "body": {"customer_bank_accounts":{"account_holder_name":"example account_holder_name 4885","account_number_ending":"example account_number_ending 3749","bank_name":"example bank_name 5710","country_code":"example country_code 1528","created_at":"2014-01-01T12:00:00.000Z","currency":"example currency 4384","enabled":true,"id":"BA123","links":{"customer":"example customer 7175"},"metadata":{}}}
+    "body": {"customer_bank_accounts":{"account_holder_name":"example account_holder_name 1528","account_number_ending":"example account_number_ending 2818","bank_name":"example bank_name 4885","country_code":"example country_code 5710","created_at":"2014-01-01T12:00:00.000Z","currency":"example currency 7903","enabled":false,"id":"BA123","links":{"customer":"example customer 1387"},"metadata":{}}}
   },
   "update": {
     "method": "PUT",
     "path_template": "/customer_bank_accounts/:identity",
     "url_params": ["BA123"],
-    "body": {"customer_bank_accounts":{"account_holder_name":"example account_holder_name 3616","account_number_ending":"example account_number_ending 7903","bank_name":"example bank_name 540","country_code":"example country_code 7839","created_at":"2014-01-01T12:00:00.000Z","currency":"example currency 4547","enabled":false,"id":"BA123","links":{"customer":"example customer 1532"},"metadata":{}}}
+    "body": {"customer_bank_accounts":{"account_holder_name":"example account_holder_name 7839","account_number_ending":"example account_number_ending 1224","bank_name":"example bank_name 1532","country_code":"example country_code 540","created_at":"2014-01-01T12:00:00.000Z","currency":null,"enabled":false,"id":"BA123","links":{"customer":"example customer 3612"},"metadata":{}}}
   },
   "disable": {
     "method": "POST",
     "path_template": "/customer_bank_accounts/:identity/actions/disable",
     "url_params": ["BA123"],
-    "body": {"customer_bank_accounts":{"account_holder_name":"example account_holder_name 364","account_number_ending":"example account_number_ending 7051","bank_name":"example bank_name 7351","country_code":"example country_code 3640","created_at":"2014-01-01T12:00:00.000Z","currency":null,"enabled":false,"id":"BA123","links":{"customer":"example customer 5786"},"metadata":{}}}
+    "body": {"customer_bank_accounts":{"account_holder_name":"example account_holder_name 8076","account_number_ending":"example account_number_ending 3640","bank_name":"example bank_name 7351","country_code":"example country_code 5786","created_at":"2014-01-01T12:00:00.000Z","currency":null,"enabled":false,"id":"BA123","links":{"customer":"example customer 364"},"metadata":{}}}
   }
 }

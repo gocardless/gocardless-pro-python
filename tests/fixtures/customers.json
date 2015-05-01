@@ -3,24 +3,24 @@
     "method": "POST",
     "path_template": "/customers",
     "url_params": [],
-    "body": {"customers":{"address_line1":"1 Example House","address_line2":"17 Example Street","address_line3":null,"city":null,"country_code":"example country_code 9355","created_at":"2014-01-01T12:00:00.000Z","email":null,"family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":null,"region":null}}
+    "body": {"customers":{"address_line1":null,"address_line2":null,"address_line3":null,"city":null,"country_code":"example country_code 9828","created_at":"2014-01-01T12:00:00.000Z","email":null,"family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":"example postal_code 9355","region":null}}
   },
   "list": {
     "method": "GET",
     "path_template": "/customers",
     "url_params": [],
-    "body": {"customers":[{"address_line1":null,"address_line2":null,"address_line3":"example address_line3 5094","city":null,"country_code":null,"created_at":"2014-01-01T12:00:00.000Z","email":"user@example.com","family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":null,"region":"example region 9002"},{"address_line1":null,"address_line2":"17 Example Street","address_line3":null,"city":"London","country_code":null,"created_at":"2014-01-01T12:00:00.000Z","email":null,"family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":null,"region":null}],"meta":{"cursors":{"after":null,"before":"example before 9828"},"limit":null}}
+    "body": {"customers":[{"address_line1":null,"address_line2":null,"address_line3":null,"city":null,"country_code":null,"created_at":"2014-01-01T12:00:00.000Z","email":null,"family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":"example postal_code 5094","region":"example region 4376"},{"address_line1":null,"address_line2":"17 Example Street","address_line3":null,"city":"London","country_code":"example country_code 3133","created_at":"2014-01-01T12:00:00.000Z","email":null,"family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":null,"region":null}],"meta":{"cursors":{"after":null,"before":null},"limit":null}}
   },
   "get": {
     "method": "GET",
     "path_template": "/customers/:identity",
     "url_params": ["CU123"],
-    "body": {"customers":{"address_line1":"1 Example House","address_line2":null,"address_line3":"example address_line3 3033","city":"London","country_code":null,"created_at":"2014-01-01T12:00:00.000Z","email":null,"family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":"example postal_code 2002","region":"example region 2546"}}
+    "body": {"customers":{"address_line1":"1 Example House","address_line2":null,"address_line3":"example address_line3 9107","city":null,"country_code":"example country_code 6503","created_at":"2014-01-01T12:00:00.000Z","email":"user@example.com","family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":null,"region":"example region 2205"}}
   },
   "update": {
     "method": "PUT",
     "path_template": "/customers/:identity",
     "url_params": ["CU123"],
-    "body": {"customers":{"address_line1":null,"address_line2":null,"address_line3":null,"city":null,"country_code":"example country_code 1351","created_at":"2014-01-01T12:00:00.000Z","email":"user@example.com","family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":"example postal_code 1598","region":null}}
+    "body": {"customers":{"address_line1":null,"address_line2":null,"address_line3":null,"city":null,"country_code":"example country_code 5285","created_at":"2014-01-01T12:00:00.000Z","email":"user@example.com","family_name":"Osborne","given_name":"Frank","id":"CU123","metadata":{},"postal_code":"example postal_code 7425","region":null}}
   }
 }
