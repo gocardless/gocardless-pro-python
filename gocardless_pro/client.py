@@ -3,7 +3,7 @@
 #   https://github.com/gocardless/crank
 #
 
-import services
+from . import services
 from .http_client import HttpClient
 
 class Client(object):

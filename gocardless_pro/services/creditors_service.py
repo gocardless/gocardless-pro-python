@@ -3,7 +3,7 @@
 #   https://github.com/gocardless/crank
 #
 
-import base_service
+from . import base_service
 from .. import resources
 
 class CreditorsService(base_service.BaseService):

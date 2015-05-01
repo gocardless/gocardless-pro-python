@@ -3,7 +3,10 @@
 #   https://github.com/gocardless/crank
 #
 
-import urlparse
+try:
+    import urllib.parse as urlparse
+except ImportError:
+    import urlparse
 import json
 
 import requests
