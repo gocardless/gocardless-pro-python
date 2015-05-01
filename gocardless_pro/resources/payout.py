@@ -4,6 +4,13 @@
 #
 
 class Payout(object):
+    """A thin wrapper around a payout, providing easy access to its
+    attributes.
+
+    Example:
+      payout = client.payouts.get()
+      payout.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

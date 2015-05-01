@@ -4,6 +4,13 @@
 #
 
 class CreditorBankAccount(object):
+    """A thin wrapper around a creditor_bank_account, providing easy access to its
+    attributes.
+
+    Example:
+      creditor_bank_account = client.creditor_bank_accounts.get()
+      creditor_bank_account.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

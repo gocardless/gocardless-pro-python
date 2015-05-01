@@ -4,6 +4,13 @@
 #
 
 class RedirectFlow(object):
+    """A thin wrapper around a redirect_flow, providing easy access to its
+    attributes.
+
+    Example:
+      redirect_flow = client.redirect_flows.get()
+      redirect_flow.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

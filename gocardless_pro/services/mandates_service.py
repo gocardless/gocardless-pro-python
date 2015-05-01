@@ -3,48 +3,48 @@
 #   https://github.com/gocardless/crank
 #
 
-from ..resources.mandate import Mandate
-from .base_service import BaseService
+import base_service
+from .. import resources
 
-class MandatesService(BaseService):
-    RESOURCE_CLASS = Mandate
+class MandatesService(base_service.BaseService):
+    RESOURCE_CLASS = resources.Mandate
     RESOURCE_NAME = 'mandates'
 
     def create(self, params=None):
         path = '/mandates'
-        response = self.perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
     def list(self, params=None):
         path = '/mandates'
-        response = self.perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def get(self, identity, params=None):
         path = self._sub_url_params('/mandates/:identity', {
             'identity': identity,
         })
-        response = self.perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def update(self, identity, params=None):
         path = self._sub_url_params('/mandates/:identity', {
             'identity': identity,
         })
-        response = self.perform_request('PUT', path, params)
+        response = self._perform_request('PUT', path, params)
         return self._resource_for(response)
 
     def cancel(self, identity, params=None):
         path = self._sub_url_params('/mandates/:identity/actions/cancel', {
             'identity': identity,
         })
-        response = self.perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
     def reinstate(self, identity, params=None):
         path = self._sub_url_params('/mandates/:identity/actions/reinstate', {
             'identity': identity,
         })
-        response = self.perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 

@@ -4,6 +4,13 @@
 #
 
 class Event(object):
+    """A thin wrapper around a event, providing easy access to its
+    attributes.
+
+    Example:
+      event = client.events.get()
+      event.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

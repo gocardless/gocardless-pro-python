@@ -3,20 +3,20 @@
 #   https://github.com/gocardless/crank
 #
 
-from ..resources.helper import Helper
-from .base_service import BaseService
+import base_service
+from .. import resources
 
-class HelpersService(BaseService):
-    RESOURCE_CLASS = Helper
+class HelpersService(base_service.BaseService):
+    RESOURCE_CLASS = resources.Helper
     RESOURCE_NAME = 'helpers'
 
     def mandate(self, params=None):
         path = '/helpers/mandate'
-        response = self.perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
     def modulus_check(self, params=None):
         path = '/helpers/modulus_check'
-        response = self.perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 

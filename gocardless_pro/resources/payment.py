@@ -4,6 +4,13 @@
 #
 
 class Payment(object):
+    """A thin wrapper around a payment, providing easy access to its
+    attributes.
+
+    Example:
+      payment = client.payments.get()
+      payment.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

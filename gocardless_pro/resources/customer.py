@@ -4,6 +4,13 @@
 #
 
 class Customer(object):
+    """A thin wrapper around a customer, providing easy access to its
+    attributes.
+
+    Example:
+      customer = client.customers.get()
+      customer.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

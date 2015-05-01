@@ -3,34 +3,34 @@
 #   https://github.com/gocardless/crank
 #
 
-from ..resources.creditor_bank_account import CreditorBankAccount
-from .base_service import BaseService
+import base_service
+from .. import resources
 
-class CreditorBankAccountsService(BaseService):
-    RESOURCE_CLASS = CreditorBankAccount
+class CreditorBankAccountsService(base_service.BaseService):
+    RESOURCE_CLASS = resources.CreditorBankAccount
     RESOURCE_NAME = 'creditor_bank_accounts'
 
     def create(self, params=None):
         path = '/creditor_bank_accounts'
-        response = self.perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
     def list(self, params=None):
         path = '/creditor_bank_accounts'
-        response = self.perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def get(self, identity, params=None):
         path = self._sub_url_params('/creditor_bank_accounts/:identity', {
             'identity': identity,
         })
-        response = self.perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def disable(self, identity, params=None):
         path = self._sub_url_params('/creditor_bank_accounts/:identity/actions/disable', {
             'identity': identity,
         })
-        response = self.perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 

@@ -3,34 +3,34 @@
 #   https://github.com/gocardless/crank
 #
 
-from ..resources.customer import Customer
-from .base_service import BaseService
+import base_service
+from .. import resources
 
-class CustomersService(BaseService):
-    RESOURCE_CLASS = Customer
+class CustomersService(base_service.BaseService):
+    RESOURCE_CLASS = resources.Customer
     RESOURCE_NAME = 'customers'
 
     def create(self, params=None):
         path = '/customers'
-        response = self.perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
     def list(self, params=None):
         path = '/customers'
-        response = self.perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def get(self, identity, params=None):
         path = self._sub_url_params('/customers/:identity', {
             'identity': identity,
         })
-        response = self.perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def update(self, identity, params=None):
         path = self._sub_url_params('/customers/:identity', {
             'identity': identity,
         })
-        response = self.perform_request('PUT', path, params)
+        response = self._perform_request('PUT', path, params)
         return self._resource_for(response)
 

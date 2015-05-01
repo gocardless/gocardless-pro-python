@@ -4,6 +4,13 @@
 #
 
 class Mandate(object):
+    """A thin wrapper around a mandate, providing easy access to its
+    attributes.
+
+    Example:
+      mandate = client.mandates.get()
+      mandate.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

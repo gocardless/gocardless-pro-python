@@ -4,6 +4,13 @@
 #
 
 class Subscription(object):
+    """A thin wrapper around a subscription, providing easy access to its
+    attributes.
+
+    Example:
+      subscription = client.subscriptions.get()
+      subscription.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

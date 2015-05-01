@@ -3,22 +3,22 @@
 #   https://github.com/gocardless/crank
 #
 
-from ..resources.payout import Payout
-from .base_service import BaseService
+import base_service
+from .. import resources
 
-class PayoutsService(BaseService):
-    RESOURCE_CLASS = Payout
+class PayoutsService(base_service.BaseService):
+    RESOURCE_CLASS = resources.Payout
     RESOURCE_NAME = 'payouts'
 
     def list(self, params=None):
         path = '/payouts'
-        response = self.perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def get(self, identity, params=None):
         path = self._sub_url_params('/payouts/:identity', {
             'identity': identity,
         })
-        response = self.perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 

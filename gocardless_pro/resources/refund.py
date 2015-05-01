@@ -4,6 +4,13 @@
 #
 
 class Refund(object):
+    """A thin wrapper around a refund, providing easy access to its
+    attributes.
+
+    Example:
+      refund = client.refunds.get()
+      refund.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

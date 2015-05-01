@@ -7,15 +7,32 @@ import services
 from .http_client import HttpClient
 
 class Client(object):
+    """Client for interacting with the GoCardless Pro API.
 
-    def __init__(self, access_token=None, environment=None):
+    Instantiate a client object with your access token and environment, then
+    use the resource methods to access the API.
+
+    Args:
+      access_token (str): Find or generate this in your GoCardless Pro dashboard
+        (https://manage.gocardless.com/organisation/access-tokens).
+      environment (str): Either 'sandbox' or 'live'.
+      base_url (str): Manually set a base URL. Most people should use
+        `environment` instead.
+
+    Example:
+      client = Client(access_token=ACCESS_TOKEN, environment='sandbox')
+      for customer in client.customers.list():
+          print '{} {}'.format(customer.family_name, customer.given_name)
+    """
+
+    def __init__(self, access_token=None, environment=None, base_url=None):
         if access_token is None:
             raise ValueError('No access_token provided')
 
-        if environment is None:
-            raise ValueError('No environment specified')
+        if environment is None and base_url is None:
+            raise ValueError('No environment or base_url specified')
 
-        base_url = self._environment_url(environment)
+        base_url = base_url or self._environment_url(environment)
         self._http_client = HttpClient(base_url, access_token)
 
     @property
@@ -67,12 +84,16 @@ class Client(object):
         return services.SubscriptionsService(self._http_client)
 
     def _environment_url(self, environment):
-        if environment == 'live':
-            return 'https://api.gocardless.com'
+        environment_urls = { 
+            'live': 'https://api.gocardless.com',
+            'sandbox': 'https://api-sandbox.gocardless.com',
+        }
 
-        if environment == 'sandbox':
-            return 'https://api-sandbox.gocardless.com'
+        if environment not in environment_urls:
+            msg = 'Invalid environment "{env}", use one of {env_names}'.format(
+                env=environment,
+                env_names=', '.join(environment_urls.keys())
+            )
+            raise ValueError(msg)
 
-        raise ValueError('Invalid environment "{}" - use either "live" or '
-                         '"sandbox"'.format(environment))
-
+        return environment_urls[environment]

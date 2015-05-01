@@ -4,6 +4,13 @@
 #
 
 class Helper(object):
+    """A thin wrapper around a helper, providing easy access to its
+    attributes.
+
+    Example:
+      helper = client.helpers.get()
+      helper.id
+    """
 
     def __init__(self, attributes, response):
         self.attributes = attributes

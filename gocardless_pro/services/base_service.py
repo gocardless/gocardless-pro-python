@@ -4,22 +4,25 @@
 #
 
 import re
-from ..list_response import ListResponse
+from .. import list_response
 
 class BaseService(object):
+    """Base class for API service classes."""
 
     def __init__(self, http_client):
         self._http_client = http_client
 
-    def perform_request(self, method, path, params):
+    def _perform_request(self, method, path, params):
         if method == 'GET':
-            return self._http_client.get(path, params)
+            return self._http_client.get(path, params=params)
 
         if method == 'POST':
-            return self._http_client.post(path, {self._envelope_key(): params})
+            body = {self._envelope_key(): params}
+            return self._http_client.post(path, body=body)
 
         if method == 'PUT':
-            return self._http_client.put(path, {self._envelope_key(): params})
+            body = {self._envelope_key(): params}
+            return self._http_client.put(path, body=body)
 
         raise ValueError('Invalid method "{}"'.format(method))
 
@@ -33,7 +36,8 @@ class BaseService(object):
             return klass(data, response)
         else:
             resources = [klass(item, response) for item in data]
-            return ListResponse(resources, response)
+            return list_response.ListResponse(resources, response)
 
     def _sub_url_params(self, url, params):
         return re.sub(r':(\w+)', lambda match: params[match.group(1)], url)
+
