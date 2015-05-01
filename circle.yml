@@ -1,0 +1,9 @@
+checkout:
+  post:
+    - pip install -r requirements-dev.txt
+machine:
+  python:
+      version: 2.7.6
+test:
+  override:
+    - pyenv global 2.7.9 3.3.3 3.4.2 && tox
