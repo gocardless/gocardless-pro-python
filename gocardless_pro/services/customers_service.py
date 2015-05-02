@@ -7,20 +7,57 @@ from . import base_service
 from .. import resources
 
 class CustomersService(base_service.BaseService):
+    """Service class that provides access to the customers
+    endpoints of the GoCardless Pro API.
+    """
+
     RESOURCE_CLASS = resources.Customer
     RESOURCE_NAME = 'customers'
 
     def create(self, params=None):
+        """Create a customer.
+
+        Creates a new customer object.
+
+        Args:
+          params (dict, optional): Request body.
+
+        Returns:
+          Customer
+        """
         path = '/customers'
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
     def list(self, params=None):
+        """List customers.
+
+        Returns a
+        [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
+        list of your customers.
+
+        Args:
+          params (dict, optional): Query string parameters.
+
+        Returns:
+          ListResponse of Customer instances
+        """
         path = '/customers'
         response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def get(self, identity, params=None):
+        """Get a single customer.
+
+        Retrieves the details of an existing customer.
+
+        Args:
+          identity (string): Unique identifier, beginning with "CU".
+          params (dict, optional): Query string parameters.
+
+        Returns:
+          Customer
+        """
         path = self._sub_url_params('/customers/:identity', {
             'identity': identity,
         })
@@ -28,6 +65,18 @@ class CustomersService(base_service.BaseService):
         return self._resource_for(response)
 
     def update(self, identity, params=None):
+        """Update a customer.
+
+        Updates a customer object. Supports all of the fields supported when
+        creating a customer.
+
+        Args:
+          identity (string): Unique identifier, beginning with "CU".
+          params (dict, optional): Request body.
+
+        Returns:
+          Customer
+        """
         path = self._sub_url_params('/customers/:identity', {
             'identity': identity,
         })

@@ -7,20 +7,73 @@ from . import base_service
 from .. import resources
 
 class RefundsService(base_service.BaseService):
+    """Service class that provides access to the refunds
+    endpoints of the GoCardless Pro API.
+    """
+
     RESOURCE_CLASS = resources.Refund
     RESOURCE_NAME = 'refunds'
 
     def create(self, params=None):
+        """Create a refund.
+
+        Creates a new refund object.
+        
+        This fails with:<a
+        name="refund_payment_invalid_state"></a><a
+        name="total_amount_confirmation_invalid"></a>
+        
+        -
+        `refund_payment_invalid_state` error if the linked
+        [payment](https://developer.gocardless.com/pro/2015-04-29/#api-endpoints-payments)
+        isn't either `confirmed` or `paid_out`.
+        
+        -
+        `total_amount_confirmation_invalid` if the confirmation amount doesn't
+        match the total amount refunded for the payment. This safeguard is
+        there to prevent two processes from creating refunds without awareness
+        of each other.
+        
+
+        Args:
+          params (dict, optional): Request body.
+
+        Returns:
+          Refund
+        """
         path = '/refunds'
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
     def list(self, params=None):
+        """List refunds.
+
+        Returns a
+        [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
+        list of your refunds.
+
+        Args:
+          params (dict, optional): Query string parameters.
+
+        Returns:
+          ListResponse of Refund instances
+        """
         path = '/refunds'
         response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def get(self, identity, params=None):
+        """Get a single refund.
+
+        Retrieves all details for a single refund
+
+        Args:
+          identity (string): Unique identifier, beginning with "RF"
+          params (dict, optional): Query string parameters.
+
+        Returns:
+          Refund
+        """
         path = self._sub_url_params('/refunds/:identity', {
             'identity': identity,
         })
@@ -28,6 +81,17 @@ class RefundsService(base_service.BaseService):
         return self._resource_for(response)
 
     def update(self, identity, params=None):
+        """Update a refund.
+
+        Updates a refund object.
+
+        Args:
+          identity (string): Unique identifier, beginning with "RF"
+          params (dict, optional): Request body.
+
+        Returns:
+          Refund
+        """
         path = self._sub_url_params('/refunds/:identity', {
             'identity': identity,
         })

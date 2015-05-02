@@ -7,15 +7,42 @@ from . import base_service
 from .. import resources
 
 class PayoutsService(base_service.BaseService):
+    """Service class that provides access to the payouts
+    endpoints of the GoCardless Pro API.
+    """
+
     RESOURCE_CLASS = resources.Payout
     RESOURCE_NAME = 'payouts'
 
     def list(self, params=None):
+        """List payouts.
+
+        Returns a
+        [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
+        list of your payouts.
+
+        Args:
+          params (dict, optional): Query string parameters.
+
+        Returns:
+          ListResponse of Payout instances
+        """
         path = '/payouts'
         response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def get(self, identity, params=None):
+        """Get a single payout.
+
+        Retrieves the details of a single payout.
+
+        Args:
+          identity (string): Unique identifier, beginning with "PO"
+          params (dict, optional): Query string parameters.
+
+        Returns:
+          Payout
+        """
         path = self._sub_url_params('/payouts/:identity', {
             'identity': identity,
         })

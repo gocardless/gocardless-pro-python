@@ -88,7 +88,6 @@ class HttpClient(object):
             'Accept': 'application/json',
             'Authorization': 'Bearer {0}'.format(self.access_token),
             'Content-Type': 'application/json',
-            'User-Agent': 'gocardless-pro-python',  # TODO: add detail!
-            
+            'User-Agent': 'gocardless-pro-python',
             'GoCardless-Version': '2015-04-29',
         }

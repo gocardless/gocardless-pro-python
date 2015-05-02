@@ -7,15 +7,42 @@ from . import base_service
 from .. import resources
 
 class EventsService(base_service.BaseService):
+    """Service class that provides access to the events
+    endpoints of the GoCardless Pro API.
+    """
+
     RESOURCE_CLASS = resources.Event
     RESOURCE_NAME = 'events'
 
     def list(self, params=None):
+        """List events.
+
+        Returns a
+        [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
+        list of your events.
+
+        Args:
+          params (dict, optional): Query string parameters.
+
+        Returns:
+          ListResponse of Event instances
+        """
         path = '/events'
         response = self._perform_request('GET', path, params)
         return self._resource_for(response)
 
     def get(self, identity, params=None):
+        """Get a single event.
+
+        Retrieves the details of a single event.
+
+        Args:
+          identity (string): Unique identifier, beginning with "EV"
+          params (dict, optional): Query string parameters.
+
+        Returns:
+          Event
+        """
         path = self._sub_url_params('/events/:identity', {
             'identity': identity,
         })
