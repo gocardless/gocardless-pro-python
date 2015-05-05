@@ -44,21 +44,21 @@ def test_mandates_list():
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
     assert_equal([r.created_at for r in response],
-                  [b.get('created_at') for b in body])
+                 [b.get('created_at') for b in body])
     assert_equal([r.id for r in response],
-                  [b.get('id') for b in body])
+                 [b.get('id') for b in body])
     assert_equal([r.links for r in response],
-                  [b.get('links') for b in body])
+                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
-                  [b.get('metadata') for b in body])
+                 [b.get('metadata') for b in body])
     assert_equal([r.next_possible_charge_date for r in response],
-                  [b.get('next_possible_charge_date') for b in body])
+                 [b.get('next_possible_charge_date') for b in body])
     assert_equal([r.reference for r in response],
-                  [b.get('reference') for b in body])
+                 [b.get('reference') for b in body])
     assert_equal([r.scheme for r in response],
-                  [b.get('scheme') for b in body])
+                 [b.get('scheme') for b in body])
     assert_equal([r.status for r in response],
-                  [b.get('status') for b in body])
+                 [b.get('status') for b in body])
 
 @responses.activate
 def test_mandates_get():

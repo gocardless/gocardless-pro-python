@@ -26,19 +26,19 @@ def test_events_list():
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
     assert_equal([r.action for r in response],
-                  [b.get('action') for b in body])
+                 [b.get('action') for b in body])
     assert_equal([r.created_at for r in response],
-                  [b.get('created_at') for b in body])
+                 [b.get('created_at') for b in body])
     assert_equal([r.details for r in response],
-                  [b.get('details') for b in body])
+                 [b.get('details') for b in body])
     assert_equal([r.id for r in response],
-                  [b.get('id') for b in body])
+                 [b.get('id') for b in body])
     assert_equal([r.links for r in response],
-                  [b.get('links') for b in body])
+                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
-                  [b.get('metadata') for b in body])
+                 [b.get('metadata') for b in body])
     assert_equal([r.resource_type for r in response],
-                  [b.get('resource_type') for b in body])
+                 [b.get('resource_type') for b in body])
 
 @responses.activate
 def test_events_get():

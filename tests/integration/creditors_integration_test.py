@@ -47,27 +47,27 @@ def test_creditors_list():
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
     assert_equal([r.address_line1 for r in response],
-                  [b.get('address_line1') for b in body])
+                 [b.get('address_line1') for b in body])
     assert_equal([r.address_line2 for r in response],
-                  [b.get('address_line2') for b in body])
+                 [b.get('address_line2') for b in body])
     assert_equal([r.address_line3 for r in response],
-                  [b.get('address_line3') for b in body])
+                 [b.get('address_line3') for b in body])
     assert_equal([r.city for r in response],
-                  [b.get('city') for b in body])
+                 [b.get('city') for b in body])
     assert_equal([r.country_code for r in response],
-                  [b.get('country_code') for b in body])
+                 [b.get('country_code') for b in body])
     assert_equal([r.created_at for r in response],
-                  [b.get('created_at') for b in body])
+                 [b.get('created_at') for b in body])
     assert_equal([r.id for r in response],
-                  [b.get('id') for b in body])
+                 [b.get('id') for b in body])
     assert_equal([r.links for r in response],
-                  [b.get('links') for b in body])
+                 [b.get('links') for b in body])
     assert_equal([r.name for r in response],
-                  [b.get('name') for b in body])
+                 [b.get('name') for b in body])
     assert_equal([r.postal_code for r in response],
-                  [b.get('postal_code') for b in body])
+                 [b.get('postal_code') for b in body])
     assert_equal([r.region for r in response],
-                  [b.get('region') for b in body])
+                 [b.get('region') for b in body])
 
 @responses.activate
 def test_creditors_get():

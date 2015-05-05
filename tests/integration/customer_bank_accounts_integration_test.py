@@ -46,25 +46,25 @@ def test_customer_bank_accounts_list():
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
     assert_equal([r.account_holder_name for r in response],
-                  [b.get('account_holder_name') for b in body])
+                 [b.get('account_holder_name') for b in body])
     assert_equal([r.account_number_ending for r in response],
-                  [b.get('account_number_ending') for b in body])
+                 [b.get('account_number_ending') for b in body])
     assert_equal([r.bank_name for r in response],
-                  [b.get('bank_name') for b in body])
+                 [b.get('bank_name') for b in body])
     assert_equal([r.country_code for r in response],
-                  [b.get('country_code') for b in body])
+                 [b.get('country_code') for b in body])
     assert_equal([r.created_at for r in response],
-                  [b.get('created_at') for b in body])
+                 [b.get('created_at') for b in body])
     assert_equal([r.currency for r in response],
-                  [b.get('currency') for b in body])
+                 [b.get('currency') for b in body])
     assert_equal([r.enabled for r in response],
-                  [b.get('enabled') for b in body])
+                 [b.get('enabled') for b in body])
     assert_equal([r.id for r in response],
-                  [b.get('id') for b in body])
+                 [b.get('id') for b in body])
     assert_equal([r.links for r in response],
-                  [b.get('links') for b in body])
+                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
-                  [b.get('metadata') for b in body])
+                 [b.get('metadata') for b in body])
 
 @responses.activate
 def test_customer_bank_accounts_get():

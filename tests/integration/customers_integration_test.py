@@ -49,31 +49,31 @@ def test_customers_list():
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
     assert_equal([r.address_line1 for r in response],
-                  [b.get('address_line1') for b in body])
+                 [b.get('address_line1') for b in body])
     assert_equal([r.address_line2 for r in response],
-                  [b.get('address_line2') for b in body])
+                 [b.get('address_line2') for b in body])
     assert_equal([r.address_line3 for r in response],
-                  [b.get('address_line3') for b in body])
+                 [b.get('address_line3') for b in body])
     assert_equal([r.city for r in response],
-                  [b.get('city') for b in body])
+                 [b.get('city') for b in body])
     assert_equal([r.country_code for r in response],
-                  [b.get('country_code') for b in body])
+                 [b.get('country_code') for b in body])
     assert_equal([r.created_at for r in response],
-                  [b.get('created_at') for b in body])
+                 [b.get('created_at') for b in body])
     assert_equal([r.email for r in response],
-                  [b.get('email') for b in body])
+                 [b.get('email') for b in body])
     assert_equal([r.family_name for r in response],
-                  [b.get('family_name') for b in body])
+                 [b.get('family_name') for b in body])
     assert_equal([r.given_name for r in response],
-                  [b.get('given_name') for b in body])
+                 [b.get('given_name') for b in body])
     assert_equal([r.id for r in response],
-                  [b.get('id') for b in body])
+                 [b.get('id') for b in body])
     assert_equal([r.metadata for r in response],
-                  [b.get('metadata') for b in body])
+                 [b.get('metadata') for b in body])
     assert_equal([r.postal_code for r in response],
-                  [b.get('postal_code') for b in body])
+                 [b.get('postal_code') for b in body])
     assert_equal([r.region for r in response],
-                  [b.get('region') for b in body])
+                 [b.get('region') for b in body])
 
 @responses.activate
 def test_customers_get():

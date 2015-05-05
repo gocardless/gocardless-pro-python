@@ -42,17 +42,17 @@ def test_refunds_list():
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
     assert_equal([r.amount for r in response],
-                  [b.get('amount') for b in body])
+                 [b.get('amount') for b in body])
     assert_equal([r.created_at for r in response],
-                  [b.get('created_at') for b in body])
+                 [b.get('created_at') for b in body])
     assert_equal([r.currency for r in response],
-                  [b.get('currency') for b in body])
+                 [b.get('currency') for b in body])
     assert_equal([r.id for r in response],
-                  [b.get('id') for b in body])
+                 [b.get('id') for b in body])
     assert_equal([r.links for r in response],
-                  [b.get('links') for b in body])
+                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
-                  [b.get('metadata') for b in body])
+                 [b.get('metadata') for b in body])
 
 @responses.activate
 def test_refunds_get():
