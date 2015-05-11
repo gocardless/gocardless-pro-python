@@ -131,6 +131,9 @@ class MandatesService(base_service.BaseService):
       
          This will fail with a `mandate_not_inactive` error if the mandate is
         already being submitted, or is active.
+        
+        Mandates can be
+        resubmitted up to 3 times.
 
         Args:
           identity (string): Unique identifier, beginning with "MD"

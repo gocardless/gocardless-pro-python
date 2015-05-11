@@ -126,6 +126,9 @@ class PaymentsService(base_service.BaseService):
         
         This will return a `retry_failed` error if the
         payment has not failed.
+        
+        Payments can be retried up to
+        3 times.
 
         Args:
           identity (string): Unique identifier, beginning with "PM"
