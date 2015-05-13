@@ -34,6 +34,7 @@ def test_subscriptions_create():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
+    assert_equal(response.payment_reference, body.get('payment_reference'))
     assert_equal(response.start_at, body.get('start_at'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
@@ -77,6 +78,8 @@ def test_subscriptions_list():
                  [b.get('month') for b in body])
     assert_equal([r.name for r in response],
                  [b.get('name') for b in body])
+    assert_equal([r.payment_reference for r in response],
+                 [b.get('payment_reference') for b in body])
     assert_equal([r.start_at for r in response],
                  [b.get('start_at') for b in body])
     assert_equal([r.status for r in response],
@@ -106,6 +109,7 @@ def test_subscriptions_get():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
+    assert_equal(response.payment_reference, body.get('payment_reference'))
     assert_equal(response.start_at, body.get('start_at'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
@@ -132,6 +136,7 @@ def test_subscriptions_update():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
+    assert_equal(response.payment_reference, body.get('payment_reference'))
     assert_equal(response.start_at, body.get('start_at'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
@@ -158,6 +163,7 @@ def test_subscriptions_cancel():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
+    assert_equal(response.payment_reference, body.get('payment_reference'))
     assert_equal(response.start_at, body.get('start_at'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))

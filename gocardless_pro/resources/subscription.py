@@ -69,6 +69,10 @@ class Subscription(object):
         return self.attributes.get('name')
 
     @property
+    def payment_reference(self):
+        return self.attributes.get('payment_reference')
+
+    @property
     def start_at(self):
         return self.attributes.get('start_at')
 
