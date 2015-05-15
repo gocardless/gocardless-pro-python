@@ -22,7 +22,7 @@ class RefundsService(base_service.BaseService):
         This fails with:<a
         name="refund_payment_invalid_state"></a><a
         name="total_amount_confirmation_invalid"></a><a
-        name="total_number_of_refunds_exceeded"></a>
+        name="number_of_refunds_exceeded"></a>
         
         -
         `refund_payment_invalid_state` error if the linked
@@ -35,10 +35,9 @@ class RefundsService(base_service.BaseService):
         there to prevent two processes from creating refunds without awareness
         of each other.
         
-        - `total_number_of_refunds_exceeded` if
-        five or more refunds have already been created against the payment.
-   
-            
+        - `number_of_refunds_exceeded` if five
+        or more refunds have already been created against the payment.
+        
 
         Args:
           params (dict, optional): Request body.
