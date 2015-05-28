@@ -25,6 +25,7 @@ def test_customers_create():
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
     assert_equal(response.city, body.get('city'))
+    assert_equal(response.company_name, body.get('company_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.email, body.get('email'))
@@ -56,6 +57,8 @@ def test_customers_list():
                  [b.get('address_line3') for b in body])
     assert_equal([r.city for r in response],
                  [b.get('city') for b in body])
+    assert_equal([r.company_name for r in response],
+                 [b.get('company_name') for b in body])
     assert_equal([r.country_code for r in response],
                  [b.get('country_code') for b in body])
     assert_equal([r.created_at for r in response],
@@ -88,6 +91,7 @@ def test_customers_get():
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
     assert_equal(response.city, body.get('city'))
+    assert_equal(response.company_name, body.get('company_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.email, body.get('email'))
@@ -111,6 +115,7 @@ def test_customers_update():
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
     assert_equal(response.city, body.get('city'))
+    assert_equal(response.company_name, body.get('company_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.email, body.get('email'))

@@ -33,6 +33,10 @@ class Customer(object):
         return self.attributes.get('city')
 
     @property
+    def company_name(self):
+        return self.attributes.get('company_name')
+
+    @property
     def country_code(self):
         return self.attributes.get('country_code')
 
