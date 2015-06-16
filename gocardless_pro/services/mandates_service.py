@@ -17,7 +17,7 @@ class MandatesService(base_service.BaseService):
     def create(self, params=None):
         """Create a mandate.
 
-        Creates a new mandate object
+        Creates a new mandate object.
 
         Args:
           params (dict, optional): Request body.

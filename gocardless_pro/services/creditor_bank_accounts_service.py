@@ -18,10 +18,6 @@ class CreditorBankAccountsService(base_service.BaseService):
         """Create a creditor bank account.
 
         Creates a new creditor bank account object.
-        
-        Bank
-        account details may be supplied using the IBAN (international bank
-        account number) or [local details](#ui-compliance-local-bank-details).
 
         Args:
           params (dict, optional): Request body.

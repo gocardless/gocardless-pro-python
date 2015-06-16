@@ -17,13 +17,13 @@ class CustomerBankAccountsService(base_service.BaseService):
     def create(self, params=None):
         """Create a customer bank account.
 
-        Creates a new bank account object associated to a customer id.
-       
+        Creates a new customer bank account object.
         
-        There are three different ways to supply bank account
-        details:
+        There are
+        three different ways to supply bank account details:
         
-        - [Local
+        -
+        [Local
         details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
 
                
