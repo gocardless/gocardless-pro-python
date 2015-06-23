@@ -24,7 +24,7 @@ class CustomerBankAccountsService(base_service.BaseService):
         
         -
         [Local
-        details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details)
+        details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details)
 
                
         - IBAN
@@ -35,7 +35,7 @@ class CustomerBankAccountsService(base_service.BaseService):
                
         For more information on the different fields required
         in each country, see [local bank
-        details](https://developer.gocardless.com/pro/2015-04-29/#ui-compliance-local-bank-details).
+        details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
 
         Args:
           params (dict, optional): Request body.
