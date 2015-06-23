@@ -36,7 +36,7 @@ class RedirectFlowsService(base_service.BaseService):
         Returns all details about a single redirect flow
 
         Args:
-          identity (string): Unique identifier, beginning with "RE"
+          identity (string): Unique identifier, beginning with "RE".
           params (dict, optional): Query string parameters.
 
         Returns:
@@ -68,7 +68,7 @@ class RedirectFlowsService(base_service.BaseService):
         supplied when the redirect flow was created.
 
         Args:
-          identity (string): Unique identifier, beginning with "RE"
+          identity (string): Unique identifier, beginning with "RE".
           params (dict, optional): Request body.
 
         Returns:
