@@ -26,17 +26,17 @@ class RefundsService(base_service.BaseService):
         
         -
         `refund_payment_invalid_state` error if the linked
-        [payment](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-payments)
-        isn't either `confirmed` or `paid_out`.
+        [payment](#core-endpoints-payments) isn't either `confirmed` or
+        `paid_out`.
+        
+        - `total_amount_confirmation_invalid` if
+        the confirmation amount doesn't match the total amount refunded for the
+        payment. This safeguard is there to prevent two processes from creating
+        refunds without awareness of each other.
         
         -
-        `total_amount_confirmation_invalid` if the confirmation amount doesn't
-        match the total amount refunded for the payment. This safeguard is
-        there to prevent two processes from creating refunds without awareness
-        of each other.
-        
-        - `number_of_refunds_exceeded` if five
-        or more refunds have already been created against the payment.
+        `number_of_refunds_exceeded` if five or more refunds have already been
+        created against the payment.
         
 
         Args:
@@ -52,9 +52,8 @@ class RefundsService(base_service.BaseService):
     def list(self, params=None):
         """List refunds.
 
-        Returns a
-        [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-        list of your refunds.
+        Returns a [cursor-paginated](#overview-cursor-pagination) list of your
+        refunds.
 
         Args:
           params (dict, optional): Query string parameters.

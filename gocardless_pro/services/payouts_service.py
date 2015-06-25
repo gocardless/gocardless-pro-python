@@ -17,9 +17,8 @@ class PayoutsService(base_service.BaseService):
     def list(self, params=None):
         """List payouts.
 
-        Returns a
-        [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-        list of your payouts.
+        Returns a [cursor-paginated](#overview-cursor-pagination) list of your
+        payouts.
 
         Args:
           params (dict, optional): Query string parameters.

@@ -21,10 +21,9 @@ class PaymentsService(base_service.BaseService):
        
         
         This fails with a `mandate_is_inactive` error if the linked
-        [mandate](https://developer.gocardless.com/pro/2015-04-29/#core-endpoints-mandates)
-        is cancelled. Payments can be created against `pending_submission`
-        mandates, but they will not be submitted until the mandate becomes
-        active.
+        [mandate](#core-endpoints-mandates) is cancelled. Payments can be
+        created against `pending_submission` mandates, but they will not be
+        submitted until the mandate becomes active.
 
         Args:
           params (dict, optional): Request body.
@@ -39,9 +38,8 @@ class PaymentsService(base_service.BaseService):
     def list(self, params=None):
         """List payments.
 
-        Returns a
-        [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-        list of your payments.
+        Returns a [cursor-paginated](#overview-cursor-pagination) list of your
+        payments.
 
         Args:
           params (dict, optional): Query string parameters.

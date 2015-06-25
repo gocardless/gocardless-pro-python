@@ -23,19 +23,17 @@ class CustomerBankAccountsService(base_service.BaseService):
         three different ways to supply bank account details:
         
         -
-        [Local
-        details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details)
-
-               
+        [Local details](#ui-local-bank-details)
+        
         - IBAN
+       
         
         - [Customer Bank Account
-        Tokens](https://developer.gocardless.com/pro/2015-04-29/#js-flow-create-a-customer-bank-account-token)
-
-               
-        For more information on the different fields required
-        in each country, see [local bank
-        details](https://developer.gocardless.com/pro/2015-04-29/#ui-local-bank-details).
+        Tokens](#js-flow-create-a-customer-bank-account-token)
+        
+       
+        For more information on the different fields required in each country,
+        see [local bank details](#ui-local-bank-details).
 
         Args:
           params (dict, optional): Request body.
@@ -50,9 +48,8 @@ class CustomerBankAccountsService(base_service.BaseService):
     def list(self, params=None):
         """List customer bank accounts.
 
-        Returns a
-        [cursor-paginated](https://developer.gocardless.com/pro/2015-04-29/#overview-cursor-pagination)
-        list of your bank accounts.
+        Returns a [cursor-paginated](#overview-cursor-pagination) list of your
+        bank accounts.
 
         Args:
           params (dict, optional): Query string parameters.
