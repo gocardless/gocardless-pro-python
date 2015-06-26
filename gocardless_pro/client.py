@@ -64,6 +64,10 @@ class Client(object):
         return services.MandatesService(self._http_client)
 
     @property
+    def modulus_checks(self):
+        return services.ModulusChecksService(self._http_client)
+
+    @property
     def payments(self):
         return services.PaymentsService(self._http_client)
 

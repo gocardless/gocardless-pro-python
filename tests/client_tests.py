@@ -37,6 +37,9 @@ def test_helpers_returns_service():
 def test_mandates_returns_service():
     assert_is_instance(client.mandates, services.MandatesService)
 
+def test_modulus_checks_returns_service():
+    assert_is_instance(client.modulus_checks, services.ModulusChecksService)
+
 def test_payments_returns_service():
     assert_is_instance(client.payments, services.PaymentsService)
 
