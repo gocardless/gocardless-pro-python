@@ -67,7 +67,7 @@ class CustomerBankAccountsService(base_service.BaseService):
         Retrieves the details of an existing bank account.
 
         Args:
-          identity (string): Unique identifier, beginning with "BA"
+          identity (string): Unique identifier, beginning with "BA".
           params (dict, optional): Query string parameters.
 
         Returns:
@@ -86,7 +86,7 @@ class CustomerBankAccountsService(base_service.BaseService):
         allowed.
 
         Args:
-          identity (string): Unique identifier, beginning with "BA"
+          identity (string): Unique identifier, beginning with "BA".
           params (dict, optional): Request body.
 
         Returns:
@@ -112,7 +112,7 @@ class CustomerBankAccountsService(base_service.BaseService):
         the same details.
 
         Args:
-          identity (string): Unique identifier, beginning with "BA"
+          identity (string): Unique identifier, beginning with "BA".
           params (dict, optional): Request body.
 
         Returns:

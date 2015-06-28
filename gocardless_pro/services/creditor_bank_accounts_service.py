@@ -51,7 +51,7 @@ class CreditorBankAccountsService(base_service.BaseService):
         Retrieves the details of an existing creditor bank account.
 
         Args:
-          identity (string): Unique identifier, beginning with "BA"
+          identity (string): Unique identifier, beginning with "BA".
           params (dict, optional): Query string parameters.
 
         Returns:
@@ -77,7 +77,7 @@ class CreditorBankAccountsService(base_service.BaseService):
         resource with the same details.
 
         Args:
-          identity (string): Unique identifier, beginning with "BA"
+          identity (string): Unique identifier, beginning with "BA".
           params (dict, optional): Request body.
 
         Returns:

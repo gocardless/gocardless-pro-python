@@ -38,7 +38,7 @@ class PayoutsService(base_service.BaseService):
         guide](#events-fetching-events-for-a-payout).
 
         Args:
-          identity (string): Unique identifier, beginning with "PO"
+          identity (string): Unique identifier, beginning with "PO".
           params (dict, optional): Query string parameters.
 
         Returns:

@@ -57,7 +57,7 @@ class PaymentsService(base_service.BaseService):
         Retrieves the details of a single existing payment.
 
         Args:
-          identity (string): Unique identifier, beginning with "PM"
+          identity (string): Unique identifier, beginning with "PM".
           params (dict, optional): Query string parameters.
 
         Returns:
@@ -75,7 +75,7 @@ class PaymentsService(base_service.BaseService):
         Updates a payment object. This accepts only the metadata parameter.
 
         Args:
-          identity (string): Unique identifier, beginning with "PM"
+          identity (string): Unique identifier, beginning with "PM".
           params (dict, optional): Request body.
 
         Returns:
@@ -99,7 +99,7 @@ class PaymentsService(base_service.BaseService):
         `pending_submission`.
 
         Args:
-          identity (string): Unique identifier, beginning with "PM"
+          identity (string): Unique identifier, beginning with "PM".
           params (dict, optional): Request body.
 
         Returns:
@@ -129,7 +129,7 @@ class PaymentsService(base_service.BaseService):
         3 times.
 
         Args:
-          identity (string): Unique identifier, beginning with "PM"
+          identity (string): Unique identifier, beginning with "PM".
           params (dict, optional): Request body.
 
         Returns:

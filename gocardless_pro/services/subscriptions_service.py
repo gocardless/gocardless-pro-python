@@ -51,7 +51,7 @@ class SubscriptionsService(base_service.BaseService):
         Retrieves the details of a single subscription.
 
         Args:
-          identity (string): Unique identifier, beginning with "SB"
+          identity (string): Unique identifier, beginning with "SB".
           params (dict, optional): Query string parameters.
 
         Returns:
@@ -69,7 +69,7 @@ class SubscriptionsService(base_service.BaseService):
         Updates a subscription object.
 
         Args:
-          identity (string): Unique identifier, beginning with "SB"
+          identity (string): Unique identifier, beginning with "SB".
           params (dict, optional): Request body.
 
         Returns:
@@ -93,7 +93,7 @@ class SubscriptionsService(base_service.BaseService):
         cancelled or finished.
 
         Args:
-          identity (string): Unique identifier, beginning with "SB"
+          identity (string): Unique identifier, beginning with "SB".
           params (dict, optional): Request body.
 
         Returns:

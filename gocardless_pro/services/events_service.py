@@ -36,7 +36,7 @@ class EventsService(base_service.BaseService):
         Retrieves the details of a single event.
 
         Args:
-          identity (string): Unique identifier, beginning with "EV"
+          identity (string): Unique identifier, beginning with "EV".
           params (dict, optional): Query string parameters.
 
         Returns:

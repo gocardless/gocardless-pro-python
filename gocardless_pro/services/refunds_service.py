@@ -71,7 +71,7 @@ class RefundsService(base_service.BaseService):
         Retrieves all details for a single refund
 
         Args:
-          identity (string): Unique identifier, beginning with "RF"
+          identity (string): Unique identifier, beginning with "RF".
           params (dict, optional): Query string parameters.
 
         Returns:
@@ -89,7 +89,7 @@ class RefundsService(base_service.BaseService):
         Updates a refund object.
 
         Args:
-          identity (string): Unique identifier, beginning with "RF"
+          identity (string): Unique identifier, beginning with "RF".
           params (dict, optional): Request body.
 
         Returns:

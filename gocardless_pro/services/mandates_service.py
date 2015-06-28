@@ -63,7 +63,7 @@ class MandatesService(base_service.BaseService):
         language code as an `Accept-Language` header.
 
         Args:
-          identity (string): Unique identifier, beginning with "MD"
+          identity (string): Unique identifier, beginning with "MD".
           params (dict, optional): Query string parameters.
 
         Returns:
@@ -81,7 +81,7 @@ class MandatesService(base_service.BaseService):
         Updates a mandate object. This accepts only the metadata parameter.
 
         Args:
-          identity (string): Unique identifier, beginning with "MD"
+          identity (string): Unique identifier, beginning with "MD".
           params (dict, optional): Request body.
 
         Returns:
@@ -104,7 +104,7 @@ class MandatesService(base_service.BaseService):
         `cancellation_failed` error if the mandate is already cancelled.
 
         Args:
-          identity (string): Unique identifier, beginning with "MD"
+          identity (string): Unique identifier, beginning with "MD".
           params (dict, optional): Request body.
 
         Returns:
@@ -135,7 +135,7 @@ class MandatesService(base_service.BaseService):
         resubmitted up to 3 times.
 
         Args:
-          identity (string): Unique identifier, beginning with "MD"
+          identity (string): Unique identifier, beginning with "MD".
           params (dict, optional): Request body.
 
         Returns:
