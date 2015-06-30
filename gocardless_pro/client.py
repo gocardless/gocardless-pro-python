@@ -64,6 +64,10 @@ class Client(object):
         return services.MandatesService(self._http_client)
 
     @property
+    def mandate_pdfs(self):
+        return services.MandatePdfsService(self._http_client)
+
+    @property
     def modulus_checks(self):
         return services.ModulusChecksService(self._http_client)
 

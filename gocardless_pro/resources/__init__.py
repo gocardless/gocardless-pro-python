@@ -10,6 +10,7 @@ from .customer_bank_account import CustomerBankAccount
 from .event import Event
 from .helper import Helper
 from .mandate import Mandate
+from .mandate_pdf import MandatePdf
 from .modulus_check import ModulusCheck
 from .payment import Payment
 from .payout import Payout
