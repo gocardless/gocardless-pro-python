@@ -28,10 +28,17 @@ def test_payments_create():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+    assert_equal(response.links.payout,
+                 body.get('links')['payout'])
+    assert_equal(response.links.subscription,
+                 body.get('links')['subscription'])
 
 @responses.activate
 def test_payments_list():
@@ -60,8 +67,6 @@ def test_payments_list():
                  [b.get('description') for b in body])
     assert_equal([r.id for r in response],
                  [b.get('id') for b in body])
-    assert_equal([r.links for r in response],
-                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
                  [b.get('metadata') for b in body])
     assert_equal([r.reference for r in response],
@@ -85,10 +90,17 @@ def test_payments_get():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+    assert_equal(response.links.payout,
+                 body.get('links')['payout'])
+    assert_equal(response.links.subscription,
+                 body.get('links')['subscription'])
 
 @responses.activate
 def test_payments_update():
@@ -106,10 +118,17 @@ def test_payments_update():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+    assert_equal(response.links.payout,
+                 body.get('links')['payout'])
+    assert_equal(response.links.subscription,
+                 body.get('links')['subscription'])
 
 @responses.activate
 def test_payments_cancel():
@@ -127,10 +146,17 @@ def test_payments_cancel():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+    assert_equal(response.links.payout,
+                 body.get('links')['payout'])
+    assert_equal(response.links.subscription,
+                 body.get('links')['subscription'])
 
 @responses.activate
 def test_payments_retry():
@@ -148,8 +174,15 @@ def test_payments_retry():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+    assert_equal(response.links.payout,
+                 body.get('links')['payout'])
+    assert_equal(response.links.subscription,
+                 body.get('links')['subscription'])
 

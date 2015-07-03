@@ -24,11 +24,14 @@ def test_redirect_flows_create():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.redirect_url, body.get('redirect_url'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.session_token, body.get('session_token'))
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
 
 @responses.activate
 def test_redirect_flows_get():
@@ -42,11 +45,14 @@ def test_redirect_flows_get():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.redirect_url, body.get('redirect_url'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.session_token, body.get('session_token'))
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
 
 @responses.activate
 def test_redirect_flows_complete():
@@ -60,9 +66,12 @@ def test_redirect_flows_complete():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.redirect_url, body.get('redirect_url'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.session_token, body.get('session_token'))
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
 

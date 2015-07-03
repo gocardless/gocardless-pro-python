@@ -29,12 +29,8 @@ def test_events_list():
                  [b.get('action') for b in body])
     assert_equal([r.created_at for r in response],
                  [b.get('created_at') for b in body])
-    assert_equal([r.details for r in response],
-                 [b.get('details') for b in body])
     assert_equal([r.id for r in response],
                  [b.get('id') for b in body])
-    assert_equal([r.links for r in response],
-                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
                  [b.get('metadata') for b in body])
     assert_equal([r.resource_type for r in response],
@@ -51,9 +47,33 @@ def test_events_get():
 
     assert_equal(response.action, body.get('action'))
     assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.details, body.get('details'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.resource_type, body.get('resource_type'))
+    assert_equal(response.details.cause,
+                 body.get('details')['cause'])
+    assert_equal(response.details.description,
+                 body.get('details')['description'])
+    assert_equal(response.details.origin,
+                 body.get('details')['origin'])
+    assert_equal(response.details.reason_code,
+                 body.get('details')['reason_code'])
+    assert_equal(response.details.scheme,
+                 body.get('details')['scheme'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+    assert_equal(response.links.new_customer_bank_account,
+                 body.get('links')['new_customer_bank_account'])
+    assert_equal(response.links.parent_event,
+                 body.get('links')['parent_event'])
+    assert_equal(response.links.payment,
+                 body.get('links')['payment'])
+    assert_equal(response.links.payout,
+                 body.get('links')['payout'])
+    assert_equal(response.links.previous_customer_bank_account,
+                 body.get('links')['previous_customer_bank_account'])
+    assert_equal(response.links.refund,
+                 body.get('links')['refund'])
+    assert_equal(response.links.subscription,
+                 body.get('links')['subscription'])
 

@@ -3,6 +3,7 @@
 #   https://github.com/gocardless/crank
 #
 
+from .bank_details_lookup import BankDetailsLookup
 from .creditor import Creditor
 from .creditor_bank_account import CreditorBankAccount
 from .customer import Customer
@@ -11,7 +12,6 @@ from .event import Event
 from .helper import Helper
 from .mandate import Mandate
 from .mandate_pdf import MandatePdf
-from .modulus_check import ModulusCheck
 from .payment import Payment
 from .payout import Payout
 from .redirect_flow import RedirectFlow

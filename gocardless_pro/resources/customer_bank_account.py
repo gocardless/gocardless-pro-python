@@ -50,12 +50,19 @@ class CustomerBankAccount(object):
 
     @property
     def links(self):
-        return self.attributes.get('links')
+        return self.Links(self.attributes.get('links'))
 
     @property
     def metadata(self):
         return self.attributes.get('metadata')
 
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
 
-# TODO: handle links properly, and double check how response is exposed
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def customer(self):
+            return self.attributes.get('customer')
 

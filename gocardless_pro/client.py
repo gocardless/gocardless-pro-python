@@ -36,6 +36,10 @@ class Client(object):
         self._http_client = HttpClient(base_url, access_token)
 
     @property
+    def bank_details_lookups(self):
+        return services.BankDetailsLookupsService(self._http_client)
+
+    @property
     def creditors(self):
         return services.CreditorsService(self._http_client)
 
@@ -66,10 +70,6 @@ class Client(object):
     @property
     def mandate_pdfs(self):
         return services.MandatePdfsService(self._http_client)
-
-    @property
-    def modulus_checks(self):
-        return services.ModulusChecksService(self._http_client)
 
     @property
     def payments(self):

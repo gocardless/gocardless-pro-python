@@ -30,7 +30,6 @@ def test_subscriptions_create():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
     assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
@@ -38,6 +37,8 @@ def test_subscriptions_create():
     assert_equal(response.start_at, body.get('start_at'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
 
 @responses.activate
 def test_subscriptions_list():
@@ -70,8 +71,6 @@ def test_subscriptions_list():
                  [b.get('interval') for b in body])
     assert_equal([r.interval_unit for r in response],
                  [b.get('interval_unit') for b in body])
-    assert_equal([r.links for r in response],
-                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
                  [b.get('metadata') for b in body])
     assert_equal([r.month for r in response],
@@ -105,7 +104,6 @@ def test_subscriptions_get():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
     assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
@@ -113,6 +111,8 @@ def test_subscriptions_get():
     assert_equal(response.start_at, body.get('start_at'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
 
 @responses.activate
 def test_subscriptions_update():
@@ -132,7 +132,6 @@ def test_subscriptions_update():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
     assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
@@ -140,6 +139,8 @@ def test_subscriptions_update():
     assert_equal(response.start_at, body.get('start_at'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
 
 @responses.activate
 def test_subscriptions_cancel():
@@ -159,7 +160,6 @@ def test_subscriptions_cancel():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
     assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
@@ -167,4 +167,6 @@ def test_subscriptions_cancel():
     assert_equal(response.start_at, body.get('start_at'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
 

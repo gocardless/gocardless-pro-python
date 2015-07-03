@@ -23,12 +23,15 @@ def test_mandates_create():
 
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
 
 @responses.activate
 def test_mandates_list():
@@ -47,8 +50,6 @@ def test_mandates_list():
                  [b.get('created_at') for b in body])
     assert_equal([r.id for r in response],
                  [b.get('id') for b in body])
-    assert_equal([r.links for r in response],
-                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
                  [b.get('metadata') for b in body])
     assert_equal([r.next_possible_charge_date for r in response],
@@ -71,12 +72,15 @@ def test_mandates_get():
 
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
 
 @responses.activate
 def test_mandates_update():
@@ -89,12 +93,15 @@ def test_mandates_update():
 
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
 
 @responses.activate
 def test_mandates_cancel():
@@ -107,12 +114,15 @@ def test_mandates_cancel():
 
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
 
 @responses.activate
 def test_mandates_reinstate():
@@ -125,10 +135,13 @@ def test_mandates_reinstate():
 
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
 

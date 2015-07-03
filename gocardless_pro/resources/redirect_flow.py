@@ -30,7 +30,7 @@ class RedirectFlow(object):
 
     @property
     def links(self):
-        return self.attributes.get('links')
+        return self.Links(self.attributes.get('links'))
 
     @property
     def redirect_url(self):
@@ -48,6 +48,17 @@ class RedirectFlow(object):
     def success_redirect_url(self):
         return self.attributes.get('success_redirect_url')
 
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
 
-# TODO: handle links properly, and double check how response is exposed
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def creditor(self):
+            return self.attributes.get('creditor')
+
+        @property
+        def mandate(self):
+            return self.attributes.get('mandate')
 

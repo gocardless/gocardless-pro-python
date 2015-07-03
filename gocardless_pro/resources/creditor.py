@@ -46,7 +46,7 @@ class Creditor(object):
 
     @property
     def links(self):
-        return self.attributes.get('links')
+        return self.Links(self.attributes.get('links'))
 
     @property
     def name(self):
@@ -60,6 +60,17 @@ class Creditor(object):
     def region(self):
         return self.attributes.get('region')
 
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
 
-# TODO: handle links properly, and double check how response is exposed
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def default_eur_payout_account(self):
+            return self.attributes.get('default_eur_payout_account')
+
+        @property
+        def default_gbp_payout_account(self):
+            return self.attributes.get('default_gbp_payout_account')
 

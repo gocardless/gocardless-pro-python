@@ -33,8 +33,6 @@ def test_payouts_list():
                  [b.get('currency') for b in body])
     assert_equal([r.id for r in response],
                  [b.get('id') for b in body])
-    assert_equal([r.links for r in response],
-                 [b.get('links') for b in body])
     assert_equal([r.reference for r in response],
                  [b.get('reference') for b in body])
     assert_equal([r.status for r in response],
@@ -53,7 +51,10 @@ def test_payouts_get():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.creditor_bank_account,
+                 body.get('links')['creditor_bank_account'])
 

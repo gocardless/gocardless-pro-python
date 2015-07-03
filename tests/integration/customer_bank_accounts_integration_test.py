@@ -29,8 +29,9 @@ def test_customer_bank_accounts_create():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.enabled, body.get('enabled'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
 
 @responses.activate
 def test_customer_bank_accounts_list():
@@ -61,8 +62,6 @@ def test_customer_bank_accounts_list():
                  [b.get('enabled') for b in body])
     assert_equal([r.id for r in response],
                  [b.get('id') for b in body])
-    assert_equal([r.links for r in response],
-                 [b.get('links') for b in body])
     assert_equal([r.metadata for r in response],
                  [b.get('metadata') for b in body])
 
@@ -83,8 +82,9 @@ def test_customer_bank_accounts_get():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.enabled, body.get('enabled'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
 
 @responses.activate
 def test_customer_bank_accounts_update():
@@ -103,8 +103,9 @@ def test_customer_bank_accounts_update():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.enabled, body.get('enabled'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
 
 @responses.activate
 def test_customer_bank_accounts_disable():
@@ -123,6 +124,7 @@ def test_customer_bank_accounts_disable():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.enabled, body.get('enabled'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.links, body.get('links'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
 

@@ -24,6 +24,3 @@ class MandatePdf(object):
     def url(self):
         return self.attributes.get('url')
 
-
-# TODO: handle links properly, and double check how response is exposed
-

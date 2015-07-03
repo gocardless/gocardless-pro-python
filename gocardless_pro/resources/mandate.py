@@ -26,7 +26,7 @@ class Mandate(object):
 
     @property
     def links(self):
-        return self.attributes.get('links')
+        return self.Links(self.attributes.get('links'))
 
     @property
     def metadata(self):
@@ -48,6 +48,17 @@ class Mandate(object):
     def status(self):
         return self.attributes.get('status')
 
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
 
-# TODO: handle links properly, and double check how response is exposed
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def creditor(self):
+            return self.attributes.get('creditor')
+
+        @property
+        def customer_bank_account(self):
+            return self.attributes.get('customer_bank_account')
 

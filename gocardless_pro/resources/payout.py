@@ -34,7 +34,7 @@ class Payout(object):
 
     @property
     def links(self):
-        return self.attributes.get('links')
+        return self.Links(self.attributes.get('links'))
 
     @property
     def reference(self):
@@ -44,6 +44,17 @@ class Payout(object):
     def status(self):
         return self.attributes.get('status')
 
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
 
-# TODO: handle links properly, and double check how response is exposed
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def creditor(self):
+            return self.attributes.get('creditor')
+
+        @property
+        def creditor_bank_account(self):
+            return self.attributes.get('creditor_bank_account')
 

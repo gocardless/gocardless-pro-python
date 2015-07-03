@@ -72,6 +72,3 @@ class Customer(object):
     def region(self):
         return self.attributes.get('region')
 
-
-# TODO: handle links properly, and double check how response is exposed
-

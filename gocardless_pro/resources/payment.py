@@ -46,7 +46,7 @@ class Payment(object):
 
     @property
     def links(self):
-        return self.attributes.get('links')
+        return self.Links(self.attributes.get('links'))
 
     @property
     def metadata(self):
@@ -60,6 +60,25 @@ class Payment(object):
     def status(self):
         return self.attributes.get('status')
 
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
 
-# TODO: handle links properly, and double check how response is exposed
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def creditor(self):
+            return self.attributes.get('creditor')
+
+        @property
+        def mandate(self):
+            return self.attributes.get('mandate')
+
+        @property
+        def payout(self):
+            return self.attributes.get('payout')
+
+        @property
+        def subscription(self):
+            return self.attributes.get('subscription')
 

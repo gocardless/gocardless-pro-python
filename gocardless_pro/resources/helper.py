@@ -16,6 +16,3 @@ class Helper(object):
         self.attributes = attributes
         self.response = response
 
-
-# TODO: handle links properly, and double check how response is exposed
-

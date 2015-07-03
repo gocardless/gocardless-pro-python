@@ -26,7 +26,7 @@ class Event(object):
 
     @property
     def details(self):
-        return self.attributes.get('details')
+        return self.Details(self.attributes.get('details'))
 
     @property
     def id(self):
@@ -34,7 +34,7 @@ class Event(object):
 
     @property
     def links(self):
-        return self.attributes.get('links')
+        return self.Links(self.attributes.get('links'))
 
     @property
     def metadata(self):
@@ -44,6 +44,67 @@ class Event(object):
     def resource_type(self):
         return self.attributes.get('resource_type')
 
+    class Details(object):
+        """Wrapper for the response's 'details' attribute."""
 
-# TODO: handle links properly, and double check how response is exposed
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def cause(self):
+            return self.attributes.get('cause')
+
+        @property
+        def description(self):
+            return self.attributes.get('description')
+
+        @property
+        def origin(self):
+            return self.attributes.get('origin')
+
+        @property
+        def reason_code(self):
+            return self.attributes.get('reason_code')
+
+        @property
+        def scheme(self):
+            return self.attributes.get('scheme')
+
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def mandate(self):
+            return self.attributes.get('mandate')
+
+        @property
+        def new_customer_bank_account(self):
+            return self.attributes.get('new_customer_bank_account')
+
+        @property
+        def parent_event(self):
+            return self.attributes.get('parent_event')
+
+        @property
+        def payment(self):
+            return self.attributes.get('payment')
+
+        @property
+        def payout(self):
+            return self.attributes.get('payout')
+
+        @property
+        def previous_customer_bank_account(self):
+            return self.attributes.get('previous_customer_bank_account')
+
+        @property
+        def refund(self):
+            return self.attributes.get('refund')
+
+        @property
+        def subscription(self):
+            return self.attributes.get('subscription')
 

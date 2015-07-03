@@ -54,7 +54,7 @@ class Subscription(object):
 
     @property
     def links(self):
-        return self.attributes.get('links')
+        return self.Links(self.attributes.get('links'))
 
     @property
     def metadata(self):
@@ -84,6 +84,13 @@ class Subscription(object):
     def upcoming_payments(self):
         return self.attributes.get('upcoming_payments')
 
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
 
-# TODO: handle links properly, and double check how response is exposed
+        def __init__(self, attributes):
+            self.attributes = attributes
+
+        @property
+        def mandate(self):
+            return self.attributes.get('mandate')
 

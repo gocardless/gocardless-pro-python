@@ -3,6 +3,7 @@
 #   https://github.com/gocardless/crank
 #
 
+from .bank_details_lookups_service import BankDetailsLookupsService
 from .creditors_service import CreditorsService
 from .creditor_bank_accounts_service import CreditorBankAccountsService
 from .customers_service import CustomersService
@@ -11,7 +12,6 @@ from .events_service import EventsService
 from .helpers_service import HelpersService
 from .mandates_service import MandatesService
 from .mandate_pdfs_service import MandatePdfsService
-from .modulus_checks_service import ModulusChecksService
 from .payments_service import PaymentsService
 from .payouts_service import PayoutsService
 from .redirect_flows_service import RedirectFlowsService
