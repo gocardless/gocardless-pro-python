@@ -17,8 +17,8 @@ class BankDetailsLookup(object):
         self.response = response
 
     @property
-    def available_schemes(self):
-        return self.attributes.get('available_schemes')
+    def available_debit_schemes(self):
+        return self.attributes.get('available_debit_schemes')
 
     @property
     def bank_name(self):
