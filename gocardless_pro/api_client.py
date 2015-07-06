@@ -3,8 +3,6 @@
 #   https://github.com/gocardless/crank
 #
 
-from . import errors
-
 try:
     import urllib.parse as urlparse
 except ImportError:
@@ -12,6 +10,8 @@ except ImportError:
 import json
 
 import requests
+
+from . import errors
 
 class ApiClient(object):
     """Client for interacting with a JSON HTTP API, using OAuth2-style auth.

@@ -12,9 +12,9 @@ class Payout(object):
       payout.id
     """
 
-    def __init__(self, attributes, response):
+    def __init__(self, attributes, api_response):
         self.attributes = attributes
-        self.response = response
+        self.api_response = api_response
 
     @property
     def amount(self):

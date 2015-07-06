@@ -12,9 +12,9 @@ class BankDetailsLookup(object):
       bank_details_lookup.id
     """
 
-    def __init__(self, attributes, response):
+    def __init__(self, attributes, api_response):
         self.attributes = attributes
-        self.response = response
+        self.api_response = api_response
 
     @property
     def available_debit_schemes(self):

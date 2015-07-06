@@ -1,6 +1,6 @@
 # GoCardless Pro Python client library
 
-A simple Python client for interacting with the GoCardless Pro API.
+A Python client for interacting with the GoCardless Pro API.
 
 Tested against Python 2.7, 3.3, and 3.4.
 
@@ -56,5 +56,4 @@ To run the test suite against multiple Python versions, run `tox`.
 
 If you don't have all versions of Python installed, you can run the tests in
 a Docker container by running `make`.
-
 

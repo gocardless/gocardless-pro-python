@@ -12,9 +12,9 @@ class Event(object):
       event.id
     """
 
-    def __init__(self, attributes, response):
+    def __init__(self, attributes, api_response):
         self.attributes = attributes
-        self.response = response
+        self.api_response = api_response
 
     @property
     def action(self):
