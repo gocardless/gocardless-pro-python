@@ -41,28 +41,28 @@ def test_creditor_bank_accounts_list():
     body = fixture['body']['creditor_bank_accounts']
 
     assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(next(iter(response)), resources.CreditorBankAccount)
+    assert_is_instance(response.records[0], resources.CreditorBankAccount)
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-    assert_equal([r.account_holder_name for r in response],
+    assert_equal([r.account_holder_name for r in response.records],
                  [b.get('account_holder_name') for b in body])
-    assert_equal([r.account_number_ending for r in response],
+    assert_equal([r.account_number_ending for r in response.records],
                  [b.get('account_number_ending') for b in body])
-    assert_equal([r.bank_name for r in response],
+    assert_equal([r.bank_name for r in response.records],
                  [b.get('bank_name') for b in body])
-    assert_equal([r.country_code for r in response],
+    assert_equal([r.country_code for r in response.records],
                  [b.get('country_code') for b in body])
-    assert_equal([r.created_at for r in response],
+    assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
-    assert_equal([r.currency for r in response],
+    assert_equal([r.currency for r in response.records],
                  [b.get('currency') for b in body])
-    assert_equal([r.enabled for r in response],
+    assert_equal([r.enabled for r in response.records],
                  [b.get('enabled') for b in body])
-    assert_equal([r.id for r in response],
+    assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.metadata for r in response],
+    assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
 
 @responses.activate

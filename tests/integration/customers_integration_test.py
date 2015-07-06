@@ -44,38 +44,38 @@ def test_customers_list():
     body = fixture['body']['customers']
 
     assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(next(iter(response)), resources.Customer)
+    assert_is_instance(response.records[0], resources.Customer)
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-    assert_equal([r.address_line1 for r in response],
+    assert_equal([r.address_line1 for r in response.records],
                  [b.get('address_line1') for b in body])
-    assert_equal([r.address_line2 for r in response],
+    assert_equal([r.address_line2 for r in response.records],
                  [b.get('address_line2') for b in body])
-    assert_equal([r.address_line3 for r in response],
+    assert_equal([r.address_line3 for r in response.records],
                  [b.get('address_line3') for b in body])
-    assert_equal([r.city for r in response],
+    assert_equal([r.city for r in response.records],
                  [b.get('city') for b in body])
-    assert_equal([r.company_name for r in response],
+    assert_equal([r.company_name for r in response.records],
                  [b.get('company_name') for b in body])
-    assert_equal([r.country_code for r in response],
+    assert_equal([r.country_code for r in response.records],
                  [b.get('country_code') for b in body])
-    assert_equal([r.created_at for r in response],
+    assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
-    assert_equal([r.email for r in response],
+    assert_equal([r.email for r in response.records],
                  [b.get('email') for b in body])
-    assert_equal([r.family_name for r in response],
+    assert_equal([r.family_name for r in response.records],
                  [b.get('family_name') for b in body])
-    assert_equal([r.given_name for r in response],
+    assert_equal([r.given_name for r in response.records],
                  [b.get('given_name') for b in body])
-    assert_equal([r.id for r in response],
+    assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.metadata for r in response],
+    assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
-    assert_equal([r.postal_code for r in response],
+    assert_equal([r.postal_code for r in response.records],
                  [b.get('postal_code') for b in body])
-    assert_equal([r.region for r in response],
+    assert_equal([r.region for r in response.records],
                  [b.get('region') for b in body])
 
 @responses.activate

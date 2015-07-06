@@ -44,30 +44,30 @@ def test_creditors_list():
     body = fixture['body']['creditors']
 
     assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(next(iter(response)), resources.Creditor)
+    assert_is_instance(response.records[0], resources.Creditor)
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-    assert_equal([r.address_line1 for r in response],
+    assert_equal([r.address_line1 for r in response.records],
                  [b.get('address_line1') for b in body])
-    assert_equal([r.address_line2 for r in response],
+    assert_equal([r.address_line2 for r in response.records],
                  [b.get('address_line2') for b in body])
-    assert_equal([r.address_line3 for r in response],
+    assert_equal([r.address_line3 for r in response.records],
                  [b.get('address_line3') for b in body])
-    assert_equal([r.city for r in response],
+    assert_equal([r.city for r in response.records],
                  [b.get('city') for b in body])
-    assert_equal([r.country_code for r in response],
+    assert_equal([r.country_code for r in response.records],
                  [b.get('country_code') for b in body])
-    assert_equal([r.created_at for r in response],
+    assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
-    assert_equal([r.id for r in response],
+    assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.name for r in response],
+    assert_equal([r.name for r in response.records],
                  [b.get('name') for b in body])
-    assert_equal([r.postal_code for r in response],
+    assert_equal([r.postal_code for r in response.records],
                  [b.get('postal_code') for b in body])
-    assert_equal([r.region for r in response],
+    assert_equal([r.region for r in response.records],
                  [b.get('region') for b in body])
 
 @responses.activate

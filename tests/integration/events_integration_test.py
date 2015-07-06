@@ -20,20 +20,20 @@ def test_events_list():
     body = fixture['body']['events']
 
     assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(next(iter(response)), resources.Event)
+    assert_is_instance(response.records[0], resources.Event)
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-    assert_equal([r.action for r in response],
+    assert_equal([r.action for r in response.records],
                  [b.get('action') for b in body])
-    assert_equal([r.created_at for r in response],
+    assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
-    assert_equal([r.id for r in response],
+    assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.metadata for r in response],
+    assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
-    assert_equal([r.resource_type for r in response],
+    assert_equal([r.resource_type for r in response.records],
                  [b.get('resource_type') for b in body])
 
 @responses.activate

@@ -20,22 +20,22 @@ def test_payouts_list():
     body = fixture['body']['payouts']
 
     assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(next(iter(response)), resources.Payout)
+    assert_is_instance(response.records[0], resources.Payout)
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-    assert_equal([r.amount for r in response],
+    assert_equal([r.amount for r in response.records],
                  [b.get('amount') for b in body])
-    assert_equal([r.created_at for r in response],
+    assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
-    assert_equal([r.currency for r in response],
+    assert_equal([r.currency for r in response.records],
                  [b.get('currency') for b in body])
-    assert_equal([r.id for r in response],
+    assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.reference for r in response],
+    assert_equal([r.reference for r in response.records],
                  [b.get('reference') for b in body])
-    assert_equal([r.status for r in response],
+    assert_equal([r.status for r in response.records],
                  [b.get('status') for b in body])
 
 @responses.activate

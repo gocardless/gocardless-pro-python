@@ -6,6 +6,7 @@
 import re
 
 from .. import list_response
+from ..api_response import ApiResponse
 
 class BaseService(object):
     """Base class for API service classes."""
@@ -31,13 +32,15 @@ class BaseService(object):
         return type(self).RESOURCE_NAME
 
     def _resource_for(self, response):
-        data = response.json()[self._envelope_key()]
+        api_response = ApiResponse(response)
+
+        data = api_response.body[self._envelope_key()]
         klass = type(self).RESOURCE_CLASS
         if isinstance(data, dict):
-            return klass(data, response)
+            return klass(data, api_response)
         else:
-            resources = [klass(item, response) for item in data]
-            return list_response.ListResponse(resources, response)
+            records = [klass(item, api_response) for item in data]
+            return list_response.ListResponse(records, api_response)
 
     def _sub_url_params(self, url, params):
         return re.sub(r':(\w+)', lambda match: params[match.group(1)], url)

@@ -41,24 +41,24 @@ def test_mandates_list():
     body = fixture['body']['mandates']
 
     assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(next(iter(response)), resources.Mandate)
+    assert_is_instance(response.records[0], resources.Mandate)
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-    assert_equal([r.created_at for r in response],
+    assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
-    assert_equal([r.id for r in response],
+    assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.metadata for r in response],
+    assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
-    assert_equal([r.next_possible_charge_date for r in response],
+    assert_equal([r.next_possible_charge_date for r in response.records],
                  [b.get('next_possible_charge_date') for b in body])
-    assert_equal([r.reference for r in response],
+    assert_equal([r.reference for r in response.records],
                  [b.get('reference') for b in body])
-    assert_equal([r.scheme for r in response],
+    assert_equal([r.scheme for r in response.records],
                  [b.get('scheme') for b in body])
-    assert_equal([r.status for r in response],
+    assert_equal([r.status for r in response.records],
                  [b.get('status') for b in body])
 
 @responses.activate

@@ -48,42 +48,42 @@ def test_subscriptions_list():
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(next(iter(response)), resources.Subscription)
+    assert_is_instance(response.records[0], resources.Subscription)
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-    assert_equal([r.amount for r in response],
+    assert_equal([r.amount for r in response.records],
                  [b.get('amount') for b in body])
-    assert_equal([r.count for r in response],
+    assert_equal([r.count for r in response.records],
                  [b.get('count') for b in body])
-    assert_equal([r.created_at for r in response],
+    assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
-    assert_equal([r.currency for r in response],
+    assert_equal([r.currency for r in response.records],
                  [b.get('currency') for b in body])
-    assert_equal([r.day_of_month for r in response],
+    assert_equal([r.day_of_month for r in response.records],
                  [b.get('day_of_month') for b in body])
-    assert_equal([r.end_date for r in response],
+    assert_equal([r.end_date for r in response.records],
                  [b.get('end_date') for b in body])
-    assert_equal([r.id for r in response],
+    assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.interval for r in response],
+    assert_equal([r.interval for r in response.records],
                  [b.get('interval') for b in body])
-    assert_equal([r.interval_unit for r in response],
+    assert_equal([r.interval_unit for r in response.records],
                  [b.get('interval_unit') for b in body])
-    assert_equal([r.metadata for r in response],
+    assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
-    assert_equal([r.month for r in response],
+    assert_equal([r.month for r in response.records],
                  [b.get('month') for b in body])
-    assert_equal([r.name for r in response],
+    assert_equal([r.name for r in response.records],
                  [b.get('name') for b in body])
-    assert_equal([r.payment_reference for r in response],
+    assert_equal([r.payment_reference for r in response.records],
                  [b.get('payment_reference') for b in body])
-    assert_equal([r.start_date for r in response],
+    assert_equal([r.start_date for r in response.records],
                  [b.get('start_date') for b in body])
-    assert_equal([r.status for r in response],
+    assert_equal([r.status for r in response.records],
                  [b.get('status') for b in body])
-    assert_equal([r.upcoming_payments for r in response],
+    assert_equal([r.upcoming_payments for r in response.records],
                  [b.get('upcoming_payments') for b in body])
 
 @responses.activate
