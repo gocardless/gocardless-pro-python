@@ -60,10 +60,6 @@ class Client(object):
         return services.EventsService(self._api_client)
 
     @property
-    def helpers(self):
-        return services.HelpersService(self._api_client)
-
-    @property
     def mandates(self):
         return services.MandatesService(self._api_client)
 

@@ -26,7 +26,7 @@ def test_subscriptions_create():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.end_at, body.get('end_at'))
+    assert_equal(response.end_date, body.get('end_date'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
     assert_equal(response.interval_unit, body.get('interval_unit'))
@@ -34,7 +34,7 @@ def test_subscriptions_create():
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.start_at, body.get('start_at'))
+    assert_equal(response.start_date, body.get('start_date'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
     assert_equal(response.links.mandate,
@@ -63,8 +63,8 @@ def test_subscriptions_list():
                  [b.get('currency') for b in body])
     assert_equal([r.day_of_month for r in response],
                  [b.get('day_of_month') for b in body])
-    assert_equal([r.end_at for r in response],
-                 [b.get('end_at') for b in body])
+    assert_equal([r.end_date for r in response],
+                 [b.get('end_date') for b in body])
     assert_equal([r.id for r in response],
                  [b.get('id') for b in body])
     assert_equal([r.interval for r in response],
@@ -79,8 +79,8 @@ def test_subscriptions_list():
                  [b.get('name') for b in body])
     assert_equal([r.payment_reference for r in response],
                  [b.get('payment_reference') for b in body])
-    assert_equal([r.start_at for r in response],
-                 [b.get('start_at') for b in body])
+    assert_equal([r.start_date for r in response],
+                 [b.get('start_date') for b in body])
     assert_equal([r.status for r in response],
                  [b.get('status') for b in body])
     assert_equal([r.upcoming_payments for r in response],
@@ -100,7 +100,7 @@ def test_subscriptions_get():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.end_at, body.get('end_at'))
+    assert_equal(response.end_date, body.get('end_date'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
     assert_equal(response.interval_unit, body.get('interval_unit'))
@@ -108,7 +108,7 @@ def test_subscriptions_get():
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.start_at, body.get('start_at'))
+    assert_equal(response.start_date, body.get('start_date'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
     assert_equal(response.links.mandate,
@@ -128,7 +128,7 @@ def test_subscriptions_update():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.end_at, body.get('end_at'))
+    assert_equal(response.end_date, body.get('end_date'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
     assert_equal(response.interval_unit, body.get('interval_unit'))
@@ -136,7 +136,7 @@ def test_subscriptions_update():
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.start_at, body.get('start_at'))
+    assert_equal(response.start_date, body.get('start_date'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
     assert_equal(response.links.mandate,
@@ -156,7 +156,7 @@ def test_subscriptions_cancel():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.end_at, body.get('end_at'))
+    assert_equal(response.end_date, body.get('end_date'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
     assert_equal(response.interval_unit, body.get('interval_unit'))
@@ -164,7 +164,7 @@ def test_subscriptions_cancel():
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.start_at, body.get('start_at'))
+    assert_equal(response.start_date, body.get('start_date'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
     assert_equal(response.links.mandate,

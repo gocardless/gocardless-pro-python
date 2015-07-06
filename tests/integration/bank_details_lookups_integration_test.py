@@ -12,3 +12,15 @@ from gocardless_pro import list_response
 
 from .. import helpers
 
+@responses.activate
+def test_bank_details_lookups_create():
+    fixture = helpers.load_fixture('bank_details_lookups')['create']
+    helpers.stub_response(fixture)
+    response = helpers.client.bank_details_lookups.create(*fixture['url_params'])
+    body = fixture['body']['bank_details_lookups']
+
+    assert_is_instance(response, resources.BankDetailsLookup)
+
+    assert_equal(response.available_debit_schemes, body.get('available_debit_schemes'))
+    assert_equal(response.bank_name, body.get('bank_name'))
+

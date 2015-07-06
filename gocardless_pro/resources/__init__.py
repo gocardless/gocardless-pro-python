@@ -9,7 +9,6 @@ from .creditor_bank_account import CreditorBankAccount
 from .customer import Customer
 from .customer_bank_account import CustomerBankAccount
 from .event import Event
-from .helper import Helper
 from .mandate import Mandate
 from .mandate_pdf import MandatePdf
 from .payment import Payment

@@ -34,9 +34,6 @@ def test_customer_bank_accounts_returns_service():
 def test_events_returns_service():
     assert_is_instance(client.events, services.EventsService)
 
-def test_helpers_returns_service():
-    assert_is_instance(client.helpers, services.HelpersService)
-
 def test_mandates_returns_service():
     assert_is_instance(client.mandates, services.MandatesService)
 

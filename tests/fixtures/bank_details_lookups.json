@@ -1,2 +1,8 @@
 { 
+  "create": {
+    "method": "POST",
+    "path_template": "/bank_details_lookups",
+    "url_params": [],
+    "body": {"bank_details_lookups":{"available_debit_schemes":null,"bank_name":null}}
+  }
 }

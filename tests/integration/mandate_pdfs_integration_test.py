@@ -12,3 +12,15 @@ from gocardless_pro import list_response
 
 from .. import helpers
 
+@responses.activate
+def test_mandate_pdfs_create():
+    fixture = helpers.load_fixture('mandate_pdfs')['create']
+    helpers.stub_response(fixture)
+    response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
+    body = fixture['body']['mandate_pdfs']
+
+    assert_is_instance(response, resources.MandatePdf)
+
+    assert_equal(response.expires_at, body.get('expires_at'))
+    assert_equal(response.url, body.get('url'))
+

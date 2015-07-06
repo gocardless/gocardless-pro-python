@@ -9,7 +9,6 @@ from .creditor_bank_accounts_service import CreditorBankAccountsService
 from .customers_service import CustomersService
 from .customer_bank_accounts_service import CustomerBankAccountsService
 from .events_service import EventsService
-from .helpers_service import HelpersService
 from .mandates_service import MandatesService
 from .mandate_pdfs_service import MandatePdfsService
 from .payments_service import PaymentsService

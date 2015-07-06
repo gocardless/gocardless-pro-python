@@ -37,8 +37,8 @@ class Subscription(object):
         return self.attributes.get('day_of_month')
 
     @property
-    def end_at(self):
-        return self.attributes.get('end_at')
+    def end_date(self):
+        return self.attributes.get('end_date')
 
     @property
     def id(self):
@@ -73,8 +73,8 @@ class Subscription(object):
         return self.attributes.get('payment_reference')
 
     @property
-    def start_at(self):
-        return self.attributes.get('start_at')
+    def start_date(self):
+        return self.attributes.get('start_date')
 
     @property
     def status(self):
