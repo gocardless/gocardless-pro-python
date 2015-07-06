@@ -3,6 +3,8 @@
 #   https://github.com/gocardless/crank
 #
 
+from . import errors
+
 try:
     import urllib.parse as urlparse
 except ImportError:
@@ -11,8 +13,8 @@ import json
 
 import requests
 
-class HttpClient(object):
-    """HTTP Client for interacting with a JSON API, using OAuth2-style auth.
+class ApiClient(object):
+    """Client for interacting with a JSON HTTP API, using OAuth2-style auth.
 
     Args:
       base_url (string): The prefix that's prepended to all request paths.
@@ -31,16 +33,18 @@ class HttpClient(object):
           params (dict, optional): Dictionary of param names to values.
 
         Example:
-          http_client.get('/users', params={'active': True})
+          api_client.get('/users', params={'active': True})
 
         Returns:
           A requests ``Response`` object.
         """
-        return requests.get(
+        response = requests.get(
             self._url_for(path),
             params=params,
             headers=self._default_headers()
         )
+        self._handle_errors(response)
+        return response
 
     def post(self, path, body):
         """Perform a POST request, providing a body, which will be JSON-encoded.
@@ -50,16 +54,18 @@ class HttpClient(object):
           body (dict): Dictionary that will be JSON-encoded and sent as the body.
 
         Example:
-          http_client.post('/users', body={'name': 'Billy Jean'})
+          api_client.post('/users', body={'name': 'Billy Jean'})
 
         Returns:
           A requests ``Response`` object.
         """
-        return requests.post(
+        response = requests.post(
             self._url_for(path),
             data=json.dumps(body),
             headers=self._default_headers()
         )
+        self._handle_errors(response)
+        return response
 
     def put(self, path, body):
         """Perform a PUT request, providing a body, which will be JSON-encoded.
@@ -69,16 +75,32 @@ class HttpClient(object):
           body (dict): Dictionary that will be JSON-encoded and sent as the body.
 
         Example:
-          http_client.put('/users', body={'name': 'Billy Jean'})
+          api_client.put('/users', body={'name': 'Billy Jean'})
 
         Returns:
           A requests ``Response`` object.
         """
-        return requests.put(
+        response = requests.put(
             self._url_for(path),
             data=json.dumps(body),
             headers=self._default_headers()
         )
+        self._handle_errors(response)
+        return response
+
+    def _handle_errors(self, response):
+        try:
+            response_body = response.json()
+        except ValueError:
+            msg = 'Malformed response received from server'
+            raise errors.MalformedResponseError(msg, response.text)
+
+        if response.status_code < 400:
+            return
+
+        error = response.json()['error']
+        exception_class = errors.ApiError.exception_for(error['type'])
+        raise exception_class(error)
 
     def _url_for(self, path):
         return urlparse.urljoin(self.base_url, path)

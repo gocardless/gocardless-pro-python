@@ -4,7 +4,7 @@
 #
 
 from . import services
-from .http_client import HttpClient
+from .api_client import ApiClient
 
 class Client(object):
     """Client for interacting with the GoCardless Pro API.
@@ -33,63 +33,63 @@ class Client(object):
             raise ValueError('No environment or base_url specified')
 
         base_url = base_url or self._environment_url(environment)
-        self._http_client = HttpClient(base_url, access_token)
+        self._api_client = ApiClient(base_url, access_token)
 
     @property
     def bank_details_lookups(self):
-        return services.BankDetailsLookupsService(self._http_client)
+        return services.BankDetailsLookupsService(self._api_client)
 
     @property
     def creditors(self):
-        return services.CreditorsService(self._http_client)
+        return services.CreditorsService(self._api_client)
 
     @property
     def creditor_bank_accounts(self):
-        return services.CreditorBankAccountsService(self._http_client)
+        return services.CreditorBankAccountsService(self._api_client)
 
     @property
     def customers(self):
-        return services.CustomersService(self._http_client)
+        return services.CustomersService(self._api_client)
 
     @property
     def customer_bank_accounts(self):
-        return services.CustomerBankAccountsService(self._http_client)
+        return services.CustomerBankAccountsService(self._api_client)
 
     @property
     def events(self):
-        return services.EventsService(self._http_client)
+        return services.EventsService(self._api_client)
 
     @property
     def helpers(self):
-        return services.HelpersService(self._http_client)
+        return services.HelpersService(self._api_client)
 
     @property
     def mandates(self):
-        return services.MandatesService(self._http_client)
+        return services.MandatesService(self._api_client)
 
     @property
     def mandate_pdfs(self):
-        return services.MandatePdfsService(self._http_client)
+        return services.MandatePdfsService(self._api_client)
 
     @property
     def payments(self):
-        return services.PaymentsService(self._http_client)
+        return services.PaymentsService(self._api_client)
 
     @property
     def payouts(self):
-        return services.PayoutsService(self._http_client)
+        return services.PayoutsService(self._api_client)
 
     @property
     def redirect_flows(self):
-        return services.RedirectFlowsService(self._http_client)
+        return services.RedirectFlowsService(self._api_client)
 
     @property
     def refunds(self):
-        return services.RefundsService(self._http_client)
+        return services.RefundsService(self._api_client)
 
     @property
     def subscriptions(self):
-        return services.SubscriptionsService(self._http_client)
+        return services.SubscriptionsService(self._api_client)
 
     def _environment_url(self, environment):
         environment_urls = { 

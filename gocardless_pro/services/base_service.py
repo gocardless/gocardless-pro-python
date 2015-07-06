@@ -9,20 +9,20 @@ from .. import list_response
 class BaseService(object):
     """Base class for API service classes."""
 
-    def __init__(self, http_client):
-        self._http_client = http_client
+    def __init__(self, api_client):
+        self._api_client = api_client
 
     def _perform_request(self, method, path, params):
         if method == 'GET':
-            return self._http_client.get(path, params=params)
+            return self._api_client.get(path, params=params)
 
         if method == 'POST':
             body = {self._envelope_key(): params}
-            return self._http_client.post(path, body=body)
+            return self._api_client.post(path, body=body)
 
         if method == 'PUT':
             body = {self._envelope_key(): params}
-            return self._http_client.put(path, body=body)
+            return self._api_client.put(path, body=body)
 
         raise ValueError('Invalid method "{}"'.format(method))
 
