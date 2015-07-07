@@ -5,6 +5,7 @@
 
 from . import base_service
 from .. import resources
+from ..paginator import Paginator
 
 class RefundsService(base_service.BaseService):
     """Service class that provides access to the refunds
@@ -64,6 +65,11 @@ class RefundsService(base_service.BaseService):
         path = '/refunds'
         response = self._perform_request('GET', path, params)
         return self._resource_for(response)
+
+    def all(self, params=None):
+        if params is None:
+            params = {}
+        return Paginator(self, params)
 
     def get(self, identity, params=None):
         """Get a single refund.

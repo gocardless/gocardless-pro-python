@@ -5,6 +5,7 @@
 
 from . import base_service
 from .. import resources
+from ..paginator import Paginator
 
 class RedirectFlowsService(base_service.BaseService):
     """Service class that provides access to the redirect_flows

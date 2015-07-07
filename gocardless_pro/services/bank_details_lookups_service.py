@@ -5,6 +5,7 @@
 
 from . import base_service
 from .. import resources
+from ..paginator import Paginator
 
 class BankDetailsLookupsService(base_service.BaseService):
     """Service class that provides access to the bank_details_lookups
@@ -20,8 +21,8 @@ class BankDetailsLookupsService(base_service.BaseService):
         Performs a bank details lookup.
         
         Bank account details
-        may be supplied using [local details](#ui-local-bank-details) or an
-        IBAN.
+        may be supplied using [local details](#appendix-local-bank-details) or
+        an IBAN.
 
         Args:
           params (dict, optional): Request body.

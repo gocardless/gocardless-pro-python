@@ -3,6 +3,8 @@
 #   https://github.com/gocardless/crank
 #
 
+import json
+
 import requests
 import responses
 from nose.tools import assert_equal, assert_is_instance
@@ -73,6 +75,25 @@ def test_payments_list():
                  [b.get('reference') for b in body])
     assert_equal([r.status for r in response.records],
                  [b.get('status') for b in body])
+
+@responses.activate
+def test_payments_all():
+    fixture = helpers.load_fixture('payments')['list']
+
+    def callback(request):
+        if 'after=123' in request.url:
+          fixture['body']['meta']['cursors']['after'] = None
+        else:
+          fixture['body']['meta']['cursors']['after'] = '123'
+        return [200, {}, json.dumps(fixture['body'])]
+
+    url = 'http://example.com' + fixture['path_template']
+    responses.add_callback(fixture['method'], url, callback)
+
+    all_records = list(helpers.client.payments.all())
+    assert_equal(len(all_records), len(fixture['body']['payments']) * 2)
+    for record in all_records:
+      assert_is_instance(record, resources.Payment)
 
 @responses.activate
 def test_payments_get():

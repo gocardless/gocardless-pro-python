@@ -3,6 +3,8 @@
 #   https://github.com/gocardless/crank
 #
 
+import json
+
 import requests
 import responses
 from nose.tools import assert_equal, assert_is_instance

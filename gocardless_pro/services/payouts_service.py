@@ -5,6 +5,7 @@
 
 from . import base_service
 from .. import resources
+from ..paginator import Paginator
 
 class PayoutsService(base_service.BaseService):
     """Service class that provides access to the payouts
@@ -29,6 +30,11 @@ class PayoutsService(base_service.BaseService):
         path = '/payouts'
         response = self._perform_request('GET', path, params)
         return self._resource_for(response)
+
+    def all(self, params=None):
+        if params is None:
+            params = {}
+        return Paginator(self, params)
 
     def get(self, identity, params=None):
         """Get a single payout.

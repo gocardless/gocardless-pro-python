@@ -3,6 +3,8 @@
 #   https://github.com/gocardless/crank
 #
 
+import json
+
 import requests
 import responses
 from nose.tools import assert_equal, assert_is_instance
@@ -69,6 +71,25 @@ def test_creditors_list():
                  [b.get('postal_code') for b in body])
     assert_equal([r.region for r in response.records],
                  [b.get('region') for b in body])
+
+@responses.activate
+def test_creditors_all():
+    fixture = helpers.load_fixture('creditors')['list']
+
+    def callback(request):
+        if 'after=123' in request.url:
+          fixture['body']['meta']['cursors']['after'] = None
+        else:
+          fixture['body']['meta']['cursors']['after'] = '123'
+        return [200, {}, json.dumps(fixture['body'])]
+
+    url = 'http://example.com' + fixture['path_template']
+    responses.add_callback(fixture['method'], url, callback)
+
+    all_records = list(helpers.client.creditors.all())
+    assert_equal(len(all_records), len(fixture['body']['creditors']) * 2)
+    for record in all_records:
+      assert_is_instance(record, resources.Creditor)
 
 @responses.activate
 def test_creditors_get():
