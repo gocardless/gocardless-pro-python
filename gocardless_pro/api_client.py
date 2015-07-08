@@ -3,6 +3,8 @@
 #   https://github.com/gocardless/crank
 #
 
+import sys
+import platform
 try:
     import urllib.parse as urlparse
 except ImportError:
@@ -113,3 +115,15 @@ class ApiClient(object):
             'User-Agent': 'gocardless-pro-python',
             'GoCardless-Version': '2015-07-06',
         }
+
+    def _user_agent(self):
+        python_version = '.'.join(platform.python_version_tuple()[0:2])
+        vm_version = '{}.{}.{}-{}{}'.format(*sys.version_info)
+        return ' '.join([
+            'gocardless_pro/0.1.0',
+            'python/{0}'.format(python_version),
+            '{0}/{1}'.format(platform.python_implementation(), vm_version),
+            '{0}/{1}'.format(platform.system(), platform.release()),
+            'requests/{0}'.format(requests.__version__),
+        ])
+
