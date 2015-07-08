@@ -112,7 +112,7 @@ class ApiClient(object):
             'Accept': 'application/json',
             'Authorization': 'Bearer {0}'.format(self.access_token),
             'Content-Type': 'application/json',
-            'User-Agent': 'gocardless-pro-python',
+            'User-Agent': self._user_agent(),
             'GoCardless-Version': '2015-07-06',
         }
 
