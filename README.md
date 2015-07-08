@@ -28,18 +28,259 @@ client = gocardless_pro.Client(access_token=token, environment='live')
 Access API endpoints using the corresponding methods on the client object:
 
 ```python
+# Create a new customer
+customer = client.customers.create(params={'email': 'jane@example.com'})
+
 # Fetch a payment by its id
-payment = client.payments.get("<id>")
+payment = client.payments.get("PA123")
 
-# Create a new payment
-payment = client.payments.create(params={...})
-
-# Loop through a page of payments
+# Loop through a page of payments, printing each payment's amount
 for payment in client.payments.list():
-    do_things_with(payment)
+    decimal_amount = decimal.Decimal(payment.amount) / 100
+    print('Payment for £{0}'.format(decimal_amount))
 ```
 
 For full documentation, see our [API docs](https://developer.gocardless.com/pro).
+
+
+### Available resources
+
+#### Bank details lookups
+
+```python
+# Perform a bank details lookup
+client.bank_details_lookups.create(params={...})
+
+```
+
+#### Creditors
+
+```python
+# Create a creditor
+client.creditors.create(params={...})
+
+# List creditors
+client.creditors.list(params={...})
+
+# Iterate through all creditors
+client.creditors.all(params={...})
+
+# Get a single creditor
+client.creditors.get('CR123', params={...})
+
+# Update a creditor
+client.creditors.update('CR123', params={...})
+
+```
+
+#### Creditor bank accounts
+
+```python
+# Create a creditor bank account
+client.creditor_bank_accounts.create(params={...})
+
+# List creditor bank accounts
+client.creditor_bank_accounts.list(params={...})
+
+# Iterate through all creditor_bank_accounts
+client.creditor_bank_accounts.all(params={...})
+
+# Get a single creditor bank account
+client.creditor_bank_accounts.get('BA123', params={...})
+
+# Disable a creditor bank account
+client.creditor_bank_accounts.disable('BA123', params={...})
+
+```
+
+#### Customers
+
+```python
+# Create a customer
+client.customers.create(params={...})
+
+# List customers
+client.customers.list(params={...})
+
+# Iterate through all customers
+client.customers.all(params={...})
+
+# Get a single customer
+client.customers.get('CU123', params={...})
+
+# Update a customer
+client.customers.update('CU123', params={...})
+
+```
+
+#### Customer bank accounts
+
+```python
+# Create a customer bank account
+client.customer_bank_accounts.create(params={...})
+
+# List customer bank accounts
+client.customer_bank_accounts.list(params={...})
+
+# Iterate through all customer_bank_accounts
+client.customer_bank_accounts.all(params={...})
+
+# Get a single customer bank account
+client.customer_bank_accounts.get('BA123', params={...})
+
+# Update a customer bank account
+client.customer_bank_accounts.update('BA123', params={...})
+
+# Disable a customer bank account
+client.customer_bank_accounts.disable('BA123', params={...})
+
+```
+
+#### Events
+
+```python
+# List events
+client.events.list(params={...})
+
+# Iterate through all events
+client.events.all(params={...})
+
+# Get a single event
+client.events.get('EV123', params={...})
+
+```
+
+#### Mandates
+
+```python
+# Create a mandate
+client.mandates.create(params={...})
+
+# List mandates
+client.mandates.list(params={...})
+
+# Iterate through all mandates
+client.mandates.all(params={...})
+
+# Get a single mandate
+client.mandates.get('MD123', params={...})
+
+# Update a mandate
+client.mandates.update('MD123', params={...})
+
+# Cancel a mandate
+client.mandates.cancel('MD123', params={...})
+
+# Reinstate a mandate
+client.mandates.reinstate('MD123', params={...})
+
+```
+
+#### Mandate pdfs
+
+```python
+# Create a mandate PDF
+client.mandate_pdfs.create(params={...})
+
+```
+
+#### Payments
+
+```python
+# Create a payment
+client.payments.create(params={...})
+
+# List payments
+client.payments.list(params={...})
+
+# Iterate through all payments
+client.payments.all(params={...})
+
+# Get a single payment
+client.payments.get('PM123', params={...})
+
+# Update a payment
+client.payments.update('PM123', params={...})
+
+# Cancel a payment
+client.payments.cancel('PM123', params={...})
+
+# Retry a payment
+client.payments.retry('PM123', params={...})
+
+```
+
+#### Payouts
+
+```python
+# List payouts
+client.payouts.list(params={...})
+
+# Iterate through all payouts
+client.payouts.all(params={...})
+
+# Get a single payout
+client.payouts.get('PO123', params={...})
+
+```
+
+#### Redirect flows
+
+```python
+# Create a redirect flow
+client.redirect_flows.create(params={...})
+
+# Get a single redirect flow
+client.redirect_flows.get('RE123456', params={...})
+
+# Complete a redirect flow
+client.redirect_flows.complete('RE123456', params={...})
+
+```
+
+#### Refunds
+
+```python
+# Create a refund
+client.refunds.create(params={...})
+
+# List refunds
+client.refunds.list(params={...})
+
+# Iterate through all refunds
+client.refunds.all(params={...})
+
+# Get a single refund
+client.refunds.get('RF123', params={...})
+
+# Update a refund
+client.refunds.update('RF123', params={...})
+
+```
+
+#### Subscriptions
+
+```python
+# Create a subscription
+client.subscriptions.create(params={...})
+
+# List subscriptions
+client.subscriptions.list(params={...})
+
+# Iterate through all subscriptions
+client.subscriptions.all(params={...})
+
+# Get a single subscription
+client.subscriptions.get('SB123', params={...})
+
+# Update a subscription
+client.subscriptions.update('SB123', params={...})
+
+# Cancel a subscription
+client.subscriptions.cancel('SB123', params={...})
+
+```
+
 
 
 ## Running tests
