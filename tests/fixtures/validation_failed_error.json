@@ -10,8 +10,8 @@
         "message": "must be a number",
         "field": "branch_code"
       }, {
-        "message": "is the wrong length (should be 8 characters)",
-        "field": "branch_code"
+        "message": "is invalid",
+        "field": "country_code"
       }
     ]
   }

@@ -3,6 +3,8 @@
 #   https://github.com/gocardless/crank
 #
 
+import json
+
 class GoCardlessProError(Exception):
     """Base exception class for gocardless_pro errors."""
 
@@ -15,29 +17,37 @@ class ApiError(GoCardlessProError):
     def __init__(self, error):
         self.error = error
 
+    def __str__(self):
+        messages = [error['message'] for error in (self.errors or [])
+                    if error['message'] != self.message]
+        if messages:
+            return '{} ({})'.format(self.message, ', '.join(messages))
+        else:
+            return self.message
+
     @property
     def type(self):
-        return self.error['type']
+        return self.error.get('type')
 
     @property
     def code(self):
-        return self.error['code']
+        return self.error.get('code')
 
     @property
     def errors(self):
-        return self.error['errors']
+        return self.error.get('errors')
 
     @property
     def documentation_url(self):
-        return self.error['documentation_url']
+        return self.error.get('documentation_url')
 
     @property
     def message(self):
-        return self.error['message']
+        return self.error.get('message')
 
     @property
     def request_id(self):
-        return self.error['request_id']
+        return self.error.get('request_id')
 
     @classmethod
     def exception_for(cls, error_type):
@@ -53,7 +63,10 @@ class ApiError(GoCardlessProError):
 
 
 class ValidationFailedError(ApiError):
-    pass
+
+    def __str__(self):
+        errors = ['{field} {message}'.format(**error) for error in self.errors]
+        return '{} ({})'.format(self.message, ', '.join(errors))
 
 
 class InvalidApiUsageError(ApiError):
@@ -73,5 +86,4 @@ class MalformedResponseError(GoCardlessProError):
     def __init__(self, message, response):
         super(MalformedResponseError, self).__init__(message)
         self.response = response
-
 

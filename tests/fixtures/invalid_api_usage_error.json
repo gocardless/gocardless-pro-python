@@ -7,8 +7,7 @@
     "code": 400,
     "errors": [
       {
-        "reason": "invalid_document_structure",
-        "message": "Invalid document structure"
+        "message": "Root element must be an object."
       }
     ]
   }
