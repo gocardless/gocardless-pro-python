@@ -28,6 +28,8 @@ class RedirectFlowsService(base_service.BaseService):
           RedirectFlow
         """
         path = '/redirect_flows'
+        if params is not None:
+            params = {self._envelope_key(): params}
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
@@ -75,6 +77,8 @@ class RedirectFlowsService(base_service.BaseService):
         path = self._sub_url_params('/redirect_flows/:identity/actions/complete', {
             'identity': identity,
         })
+        if params is not None:
+            params = {'data': params}
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 

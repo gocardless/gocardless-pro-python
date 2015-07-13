@@ -31,6 +31,8 @@ class BankDetailsLookupsService(base_service.BaseService):
           BankDetailsLookup
         """
         path = '/bank_details_lookups'
+        if params is not None:
+            params = {self._envelope_key(): params}
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 

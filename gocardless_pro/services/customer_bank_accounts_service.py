@@ -43,6 +43,8 @@ class CustomerBankAccountsService(base_service.BaseService):
           CustomerBankAccount
         """
         path = '/customer_bank_accounts'
+        if params is not None:
+            params = {self._envelope_key(): params}
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
@@ -101,6 +103,8 @@ class CustomerBankAccountsService(base_service.BaseService):
         path = self._sub_url_params('/customer_bank_accounts/:identity', {
             'identity': identity,
         })
+        if params is not None:
+            params = {self._envelope_key(): params}
         response = self._perform_request('PUT', path, params)
         return self._resource_for(response)
 
@@ -127,6 +131,8 @@ class CustomerBankAccountsService(base_service.BaseService):
         path = self._sub_url_params('/customer_bank_accounts/:identity/actions/disable', {
             'identity': identity,
         })
+        if params is not None:
+            params = {'data': params}
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 

@@ -19,12 +19,10 @@ class BaseService(object):
             return self._api_client.get(path, params=params)
 
         if method == 'POST':
-            body = {self._envelope_key(): params}
-            return self._api_client.post(path, body=body)
+            return self._api_client.post(path, body=params)
 
         if method == 'PUT':
-            body = {self._envelope_key(): params}
-            return self._api_client.put(path, body=body)
+            return self._api_client.put(path, body=params)
 
         raise ValueError('Invalid method "{}"'.format(method))
 

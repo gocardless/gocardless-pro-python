@@ -27,6 +27,8 @@ class SubscriptionsService(base_service.BaseService):
           Subscription
         """
         path = '/subscriptions'
+        if params is not None:
+            params = {self._envelope_key(): params}
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
@@ -84,6 +86,8 @@ class SubscriptionsService(base_service.BaseService):
         path = self._sub_url_params('/subscriptions/:identity', {
             'identity': identity,
         })
+        if params is not None:
+            params = {self._envelope_key(): params}
         response = self._perform_request('PUT', path, params)
         return self._resource_for(response)
 
@@ -108,6 +112,8 @@ class SubscriptionsService(base_service.BaseService):
         path = self._sub_url_params('/subscriptions/:identity/actions/cancel', {
             'identity': identity,
         })
+        if params is not None:
+            params = {'data': params}
         response = self._perform_request('POST', path, params)
         return self._resource_for(response)
 
