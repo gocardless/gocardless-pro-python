@@ -25,4 +25,5 @@ def test_bank_details_lookups_create():
 
     assert_equal(response.available_debit_schemes, body.get('available_debit_schemes'))
     assert_equal(response.bank_name, body.get('bank_name'))
+    assert_equal(response.bic, body.get('bic'))
 

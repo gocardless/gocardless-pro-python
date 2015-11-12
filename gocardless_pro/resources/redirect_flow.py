@@ -59,6 +59,14 @@ class RedirectFlow(object):
             return self.attributes.get('creditor')
 
         @property
+        def customer(self):
+            return self.attributes.get('customer')
+
+        @property
+        def customer_bank_account(self):
+            return self.attributes.get('customer_bank_account')
+
+        @property
         def mandate(self):
             return self.attributes.get('mandate')
 

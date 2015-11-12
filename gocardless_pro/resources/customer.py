@@ -61,6 +61,10 @@ class Customer(object):
         return self.attributes.get('id')
 
     @property
+    def language(self):
+        return self.attributes.get('language')
+
+    @property
     def metadata(self):
         return self.attributes.get('metadata')
 
@@ -71,4 +75,8 @@ class Customer(object):
     @property
     def region(self):
         return self.attributes.get('region')
+
+    @property
+    def swedish_identity_number(self):
+        return self.attributes.get('swedish_identity_number')
 

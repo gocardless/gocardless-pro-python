@@ -28,6 +28,7 @@ def test_refunds_create():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.reference, body.get('reference'))
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 
@@ -54,6 +55,8 @@ def test_refunds_list():
                  [b.get('id') for b in body])
     assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
+    assert_equal([r.reference for r in response.records],
+                 [b.get('reference') for b in body])
 
 @responses.activate
 def test_refunds_all():
@@ -88,6 +91,7 @@ def test_refunds_get():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.reference, body.get('reference'))
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 
@@ -105,6 +109,7 @@ def test_refunds_update():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.reference, body.get('reference'))
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 

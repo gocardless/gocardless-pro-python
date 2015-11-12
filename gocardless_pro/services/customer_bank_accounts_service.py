@@ -24,17 +24,17 @@ class CustomerBankAccountsService(base_service.BaseService):
         three different ways to supply bank account details:
         
         -
-        [Local details](#ui-local-bank-details)
+        [Local details](#appendix-local-bank-details)
         
         - IBAN
-       
-        
+ 
+              
         - [Customer Bank Account
         Tokens](#js-flow-create-a-customer-bank-account-token)
         
        
         For more information on the different fields required in each country,
-        see [local bank details](#ui-local-bank-details).
+        see [local bank details](#appendix-local-bank-details).
 
         Args:
           params (dict, optional): Request body.

@@ -74,3 +74,7 @@ class Creditor(object):
         def default_gbp_payout_account(self):
             return self.attributes.get('default_gbp_payout_account')
 
+        @property
+        def default_sek_payout_account(self):
+            return self.attributes.get('default_sek_payout_account')
+

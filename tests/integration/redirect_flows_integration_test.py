@@ -32,6 +32,10 @@ def test_redirect_flows_create():
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
 
@@ -53,6 +57,10 @@ def test_redirect_flows_get():
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
 
@@ -74,6 +82,10 @@ def test_redirect_flows_complete():
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
 

@@ -24,3 +24,7 @@ class BankDetailsLookup(object):
     def bank_name(self):
         return self.attributes.get('bank_name')
 
+    @property
+    def bic(self):
+        return self.attributes.get('bic')
+

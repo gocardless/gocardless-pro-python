@@ -40,6 +40,10 @@ class Refund(object):
     def metadata(self):
         return self.attributes.get('metadata')
 
+    @property
+    def reference(self):
+        return self.attributes.get('reference')
+
     class Links(object):
         """Wrapper for the response's 'links' attribute."""
 
