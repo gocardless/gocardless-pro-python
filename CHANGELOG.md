@@ -1,3 +1,14 @@
+# 0.2.0 / 2015-12-15
+
+* Add new API attributes to resource classes:
+  * `BankDetailsLookup.bic`
+  * `Creditor.default_sek_payout_account`
+  * `Customer.language`
+  * `Customer.swedish_identity_number`
+  * `Event.organisation`
+  * `RedirectFlow.customer`
+  * `Refund.reference`
+
 # 0.1.2 / 2015-07-13
 
 * Fix support for endpoints that use "data" as the request envelope
