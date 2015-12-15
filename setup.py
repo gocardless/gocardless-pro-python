@@ -5,7 +5,7 @@ with open('README.rst') as file:
 
 setup(
     name = 'gocardless_pro',
-    version = '0.1.2',
+    version = '0.2.0',
     packages = find_packages(),
     install_requires = ['requests>=2.6'],
     author = 'GoCardless',
