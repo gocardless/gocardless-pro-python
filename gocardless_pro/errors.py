@@ -4,6 +4,8 @@
 #
 
 import json
+import string
+from collections import defaultdict
 
 class GoCardlessProError(Exception):
     """Base exception class for gocardless_pro errors."""
@@ -65,7 +67,7 @@ class ApiError(GoCardlessProError):
 class ValidationFailedError(ApiError):
 
     def __str__(self):
-        errors = ['{field} {message}'.format(**error) for error in self.errors]
+        errors = [string.Formatter().vformat('{field} {message}', (), defaultdict(str, **error)) for error in self.errors]
         return '{} ({})'.format(self.message, ', '.join(errors))
 
 
