@@ -21,6 +21,10 @@ class Payout(object):
         return self.attributes.get('amount')
 
     @property
+    def arrival_date(self):
+        return self.attributes.get('arrival_date')
+
+    @property
     def created_at(self):
         return self.attributes.get('created_at')
 
