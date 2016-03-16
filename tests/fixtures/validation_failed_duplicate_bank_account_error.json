@@ -1,0 +1,18 @@
+{
+  "error": {
+    "documentation_url": "https://developer.gocardless.com/pro#bank_account_exists",
+    "message": "Bank account already exists",
+    "type": "validation_failed",
+    "code": 409,
+    "request_id": "dd50eaaf-8213-48fe-90d6-5466872efbc4",
+    "errors": [
+      {
+        "reason": "bank_account_exists",
+        "message": "Bank account already exists",
+        "links": {
+          "customer_bank_account": "xyz"
+        }
+      }
+    ]
+  }
+}

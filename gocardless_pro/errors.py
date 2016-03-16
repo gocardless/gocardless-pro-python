@@ -65,8 +65,10 @@ class ApiError(GoCardlessProError):
 class ValidationFailedError(ApiError):
 
     def __str__(self):
-        errors = ['{field} {message}'.format(**error) for error in self.errors]
-        return '{} ({})'.format(self.message, ', '.join(errors))
+        if self.errors and 'field' in self.errors[0]:
+            errors = ['{field} {message}'.format(**error) for error in self.errors]
+            return '{} ({})'.format(self.message, ', '.join(errors))
+        return super(ValidationFailedError, self).__str__()
 
 
 class InvalidApiUsageError(ApiError):

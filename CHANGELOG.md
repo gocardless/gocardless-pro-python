@@ -1,3 +1,11 @@
+# 0.2.2 / 2016-03-16
+
+* Fix duplicate bank account error string representation (#4)
+
+# 0.2.1 / 2016-02-05
+
+* Exclude tests from the installed package
+
 # 0.2.0 / 2015-12-15
 
 * Add new API attributes to resource classes:

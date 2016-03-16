@@ -120,7 +120,7 @@ class ApiClient(object):
         python_version = '.'.join(platform.python_version_tuple()[0:2])
         vm_version = '{}.{}.{}-{}{}'.format(*sys.version_info)
         return ' '.join([
-            'gocardless_pro/0.2.1',
+            'gocardless_pro/0.2.2',
             'python/{0}'.format(python_version),
             '{0}/{1}'.format(platform.python_implementation(), vm_version),
             '{0}/{1}'.format(platform.system(), platform.release()),

@@ -24,6 +24,11 @@ def test_validation_failed_message():
     error = errors.ValidationFailedError(fixture['error'])
     assert_equal(str(error), 'Validation failed (branch_code must be a number, country_code is invalid)')
 
+def test_validation_failed_duplicate_bank_account_message():
+    fixture = helpers.load_fixture('validation_failed_duplicate_bank_account_error')
+    error = errors.ValidationFailedError(fixture['error'])
+    assert_equal(str(error), 'Bank account already exists')
+
 def test_gocardless_error_message():
     fixture = helpers.load_fixture('gocardless_error')
     error = errors.GoCardlessInternalError(fixture['error'])
