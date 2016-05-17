@@ -19,7 +19,7 @@ class RedirectFlowsService(base_service.BaseService):
         """Create a redirect flow.
 
         Creates a redirect flow object which can then be used to redirect your
-        customer to the GoCardless Pro hosted payment pages.
+        customer to the GoCardless hosted payment pages.
 
         Args:
           params (dict, optional): Request body.
