@@ -39,7 +39,7 @@ Access API endpoints using the corresponding methods on the client object:
     payment = client.payments.get("PA123")
 
     # Loop through a page of payments, printing each payment's amount
-    for payment in client.payments.list():
+    for payment in client.payments.list().records:
         decimal_amount = decimal.Decimal(payment.amount) / 100
         print('Payment for £{0}'.format(decimal_amount))
 
