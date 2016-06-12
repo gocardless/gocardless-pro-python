@@ -23,8 +23,9 @@ class PaymentsService(base_service.BaseService):
         
         This fails with a `mandate_is_inactive` error if the linked
         [mandate](#core-endpoints-mandates) is cancelled or has failed.
-        Payments can be created against `pending_submission` and `submitted` as
-        well as `active` mandates.
+        Payments can be created against mandates with status of:
+        `pending_customer_approval`, `pending_submission`, `submitted`, and
+        `active`.
 
         Args:
           params (dict, optional): Request body.
