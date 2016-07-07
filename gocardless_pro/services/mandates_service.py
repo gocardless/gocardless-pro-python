@@ -36,8 +36,7 @@ class MandatesService(base_service.BaseService):
         """List mandates.
 
         Returns a [cursor-paginated](#overview-cursor-pagination) list of your
-        mandates. Except where stated, these filters can only be used one at a
-        time.
+        mandates.
 
         Args:
           params (dict, optional): Query string parameters.
