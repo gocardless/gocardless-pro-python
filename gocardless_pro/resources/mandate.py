@@ -37,6 +37,10 @@ class Mandate(object):
         return self.attributes.get('next_possible_charge_date')
 
     @property
+    def payments_require_approval(self):
+        return self.attributes.get('payments_require_approval')
+
+    @property
     def reference(self):
         return self.attributes.get('reference')
 

@@ -27,6 +27,7 @@ def test_mandates_create():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
+    assert_equal(response.payments_require_approval, body.get('payments_require_approval'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
@@ -56,6 +57,8 @@ def test_mandates_list():
                  [b.get('metadata') for b in body])
     assert_equal([r.next_possible_charge_date for r in response.records],
                  [b.get('next_possible_charge_date') for b in body])
+    assert_equal([r.payments_require_approval for r in response.records],
+                 [b.get('payments_require_approval') for b in body])
     assert_equal([r.reference for r in response.records],
                  [b.get('reference') for b in body])
     assert_equal([r.scheme for r in response.records],
@@ -95,6 +98,7 @@ def test_mandates_get():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
+    assert_equal(response.payments_require_approval, body.get('payments_require_approval'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
@@ -116,6 +120,7 @@ def test_mandates_update():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
+    assert_equal(response.payments_require_approval, body.get('payments_require_approval'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
@@ -137,6 +142,7 @@ def test_mandates_cancel():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
+    assert_equal(response.payments_require_approval, body.get('payments_require_approval'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
@@ -158,6 +164,7 @@ def test_mandates_reinstate():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
+    assert_equal(response.payments_require_approval, body.get('payments_require_approval'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
