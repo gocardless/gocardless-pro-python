@@ -4,6 +4,7 @@
 #
 
 import sys
+import os
 import platform
 try:
     import urllib.parse as urlparse
