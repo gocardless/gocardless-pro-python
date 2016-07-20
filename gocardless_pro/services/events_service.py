@@ -15,7 +15,7 @@ class EventsService(base_service.BaseService):
     RESOURCE_CLASS = resources.Event
     RESOURCE_NAME = 'events'
 
-    def list(self, params=None):
+    def list(self, params=None, headers=None):
         """List events.
 
         Returns a [cursor-paginated](#overview-cursor-pagination) list of your
@@ -28,7 +28,7 @@ class EventsService(base_service.BaseService):
           ListResponse of Event instances
         """
         path = '/events'
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
     def all(self, params=None):
@@ -36,7 +36,7 @@ class EventsService(base_service.BaseService):
             params = {}
         return Paginator(self, params)
 
-    def get(self, identity, params=None):
+    def get(self, identity, params=None, headers=None):
         """Get a single event.
 
         Retrieves the details of a single event.
@@ -51,6 +51,6 @@ class EventsService(base_service.BaseService):
         path = self._sub_url_params('/events/:identity', {
             'identity': identity,
         })
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 

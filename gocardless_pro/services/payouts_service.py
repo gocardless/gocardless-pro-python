@@ -15,7 +15,7 @@ class PayoutsService(base_service.BaseService):
     RESOURCE_CLASS = resources.Payout
     RESOURCE_NAME = 'payouts'
 
-    def list(self, params=None):
+    def list(self, params=None, headers=None):
         """List payouts.
 
         Returns a [cursor-paginated](#overview-cursor-pagination) list of your
@@ -28,7 +28,7 @@ class PayoutsService(base_service.BaseService):
           ListResponse of Payout instances
         """
         path = '/payouts'
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
     def all(self, params=None):
@@ -36,7 +36,7 @@ class PayoutsService(base_service.BaseService):
             params = {}
         return Paginator(self, params)
 
-    def get(self, identity, params=None):
+    def get(self, identity, params=None, headers=None):
         """Get a single payout.
 
         Retrieves the details of a single payout. For an example of how to
@@ -53,6 +53,6 @@ class PayoutsService(base_service.BaseService):
         path = self._sub_url_params('/payouts/:identity', {
             'identity': identity,
         })
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 

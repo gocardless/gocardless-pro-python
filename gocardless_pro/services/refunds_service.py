@@ -15,7 +15,7 @@ class RefundsService(base_service.BaseService):
     RESOURCE_CLASS = resources.Refund
     RESOURCE_NAME = 'refunds'
 
-    def create(self, params=None):
+    def create(self, params=None, headers=None):
         """Create a refund.
 
         Creates a new refund object.
@@ -49,10 +49,10 @@ class RefundsService(base_service.BaseService):
         path = '/refunds'
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
-    def list(self, params=None):
+    def list(self, params=None, headers=None):
         """List refunds.
 
         Returns a [cursor-paginated](#overview-cursor-pagination) list of your
@@ -65,7 +65,7 @@ class RefundsService(base_service.BaseService):
           ListResponse of Refund instances
         """
         path = '/refunds'
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
     def all(self, params=None):
@@ -73,7 +73,7 @@ class RefundsService(base_service.BaseService):
             params = {}
         return Paginator(self, params)
 
-    def get(self, identity, params=None):
+    def get(self, identity, params=None, headers=None):
         """Get a single refund.
 
         Retrieves all details for a single refund
@@ -88,10 +88,10 @@ class RefundsService(base_service.BaseService):
         path = self._sub_url_params('/refunds/:identity', {
             'identity': identity,
         })
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
-    def update(self, identity, params=None):
+    def update(self, identity, params=None, headers=None):
         """Update a refund.
 
         Updates a refund object.
@@ -108,6 +108,6 @@ class RefundsService(base_service.BaseService):
         })
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('PUT', path, params)
+        response = self._perform_request('PUT', path, params, headers)
         return self._resource_for(response)
 

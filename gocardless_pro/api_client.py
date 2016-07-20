@@ -27,7 +27,7 @@ class ApiClient(object):
         self.base_url = base_url
         self.access_token = access_token
 
-    def get(self, path, params=None):
+    def get(self, path, params=None, headers=None):
         """Perform a GET request, optionally providing query-string params.
 
         Args:
@@ -43,12 +43,12 @@ class ApiClient(object):
         response = requests.get(
             self._url_for(path),
             params=params,
-            headers=self._default_headers()
+            headers=self._headers(headers)
         )
         self._handle_errors(response)
         return response
 
-    def post(self, path, body):
+    def post(self, path, body, headers=None):
         """Perform a POST request, providing a body, which will be JSON-encoded.
 
         Args:
@@ -64,12 +64,12 @@ class ApiClient(object):
         response = requests.post(
             self._url_for(path),
             data=json.dumps(body),
-            headers=self._default_headers()
+            headers=self._headers(headers)
         )
         self._handle_errors(response)
         return response
 
-    def put(self, path, body):
+    def put(self, path, body, headers=None):
         """Perform a PUT request, providing a body, which will be JSON-encoded.
 
         Args:
@@ -85,7 +85,7 @@ class ApiClient(object):
         response = requests.put(
             self._url_for(path),
             data=json.dumps(body),
-            headers=self._default_headers()
+            headers=self._headers(headers)
         )
         self._handle_errors(response)
         return response
@@ -106,6 +106,12 @@ class ApiClient(object):
 
     def _url_for(self, path):
         return urlparse.urljoin(self.base_url, path)
+
+    def _headers(self, custom_headers):
+        headers = self._default_headers()
+        if custom_headers:
+          headers.update(custom_headers)
+        return headers
 
     def _default_headers(self):
         return {

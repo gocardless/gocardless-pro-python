@@ -15,7 +15,7 @@ class CustomerBankAccountsService(base_service.BaseService):
     RESOURCE_CLASS = resources.CustomerBankAccount
     RESOURCE_NAME = 'customer_bank_accounts'
 
-    def create(self, params=None):
+    def create(self, params=None, headers=None):
         """Create a customer bank account.
 
         Creates a new customer bank account object.
@@ -45,10 +45,10 @@ class CustomerBankAccountsService(base_service.BaseService):
         path = '/customer_bank_accounts'
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
-    def list(self, params=None):
+    def list(self, params=None, headers=None):
         """List customer bank accounts.
 
         Returns a [cursor-paginated](#overview-cursor-pagination) list of your
@@ -61,7 +61,7 @@ class CustomerBankAccountsService(base_service.BaseService):
           ListResponse of CustomerBankAccount instances
         """
         path = '/customer_bank_accounts'
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
     def all(self, params=None):
@@ -69,7 +69,7 @@ class CustomerBankAccountsService(base_service.BaseService):
             params = {}
         return Paginator(self, params)
 
-    def get(self, identity, params=None):
+    def get(self, identity, params=None, headers=None):
         """Get a single customer bank account.
 
         Retrieves the details of an existing bank account.
@@ -84,10 +84,10 @@ class CustomerBankAccountsService(base_service.BaseService):
         path = self._sub_url_params('/customer_bank_accounts/:identity', {
             'identity': identity,
         })
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
-    def update(self, identity, params=None):
+    def update(self, identity, params=None, headers=None):
         """Update a customer bank account.
 
         Updates a customer bank account object. Only the metadata parameter is
@@ -105,10 +105,10 @@ class CustomerBankAccountsService(base_service.BaseService):
         })
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('PUT', path, params)
+        response = self._perform_request('PUT', path, params, headers)
         return self._resource_for(response)
 
-    def disable(self, identity, params=None):
+    def disable(self, identity, params=None, headers=None):
         """Disable a customer bank account.
 
         Immediately cancels all associated mandates and cancellable payments.
@@ -133,6 +133,6 @@ class CustomerBankAccountsService(base_service.BaseService):
         })
         if params is not None:
             params = {'data': params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 

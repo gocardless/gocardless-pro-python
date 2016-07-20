@@ -43,6 +43,12 @@ Access API endpoints using the corresponding methods on the client object:
         decimal_amount = decimal.Decimal(payment.amount) / 100
         print('Payment for £{0}'.format(decimal_amount))
 
+    # Create a mandate PDF in a specific language
+    client.mandate_pdfs.create(
+        params={'links': {'mandate': 'MD00001234XYZ'}},
+        headers={'Accept-Language': 'fr'}
+    )
+
 For full documentation, see our `API docs`_.
 
 .. _API docs: https://developer.gocardless.com/pro

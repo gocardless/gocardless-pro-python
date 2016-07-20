@@ -15,7 +15,7 @@ class PaymentsService(base_service.BaseService):
     RESOURCE_CLASS = resources.Payment
     RESOURCE_NAME = 'payments'
 
-    def create(self, params=None):
+    def create(self, params=None, headers=None):
         """Create a payment.
 
         <a name="mandate_is_inactive"></a>Creates a new payment object.
@@ -36,10 +36,10 @@ class PaymentsService(base_service.BaseService):
         path = '/payments'
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
-    def list(self, params=None):
+    def list(self, params=None, headers=None):
         """List payments.
 
         Returns a [cursor-paginated](#overview-cursor-pagination) list of your
@@ -52,7 +52,7 @@ class PaymentsService(base_service.BaseService):
           ListResponse of Payment instances
         """
         path = '/payments'
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
     def all(self, params=None):
@@ -60,7 +60,7 @@ class PaymentsService(base_service.BaseService):
             params = {}
         return Paginator(self, params)
 
-    def get(self, identity, params=None):
+    def get(self, identity, params=None, headers=None):
         """Get a single payment.
 
         Retrieves the details of a single existing payment.
@@ -75,10 +75,10 @@ class PaymentsService(base_service.BaseService):
         path = self._sub_url_params('/payments/:identity', {
             'identity': identity,
         })
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
-    def update(self, identity, params=None):
+    def update(self, identity, params=None, headers=None):
         """Update a payment.
 
         Updates a payment object. This accepts only the metadata parameter.
@@ -95,10 +95,10 @@ class PaymentsService(base_service.BaseService):
         })
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('PUT', path, params)
+        response = self._perform_request('PUT', path, params, headers)
         return self._resource_for(response)
 
-    def cancel(self, identity, params=None):
+    def cancel(self, identity, params=None, headers=None):
         """Cancel a payment.
 
         Cancels the payment if it has not already been submitted to the banks.
@@ -121,10 +121,10 @@ class PaymentsService(base_service.BaseService):
         })
         if params is not None:
             params = {'data': params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
-    def retry(self, identity, params=None):
+    def retry(self, identity, params=None, headers=None):
         """Retry a payment.
 
         <a name="retry_failed"></a>Retries a failed payment if the underlying
@@ -153,6 +153,6 @@ class PaymentsService(base_service.BaseService):
         })
         if params is not None:
             params = {'data': params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 

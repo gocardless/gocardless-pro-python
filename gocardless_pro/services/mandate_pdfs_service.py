@@ -15,7 +15,7 @@ class MandatePdfsService(base_service.BaseService):
     RESOURCE_CLASS = resources.MandatePdf
     RESOURCE_NAME = 'mandate_pdfs'
 
-    def create(self, params=None):
+    def create(self, params=None, headers=None):
         """Create a mandate PDF.
 
         Generates a PDF mandate and returns its temporary URL.
@@ -41,6 +41,6 @@ class MandatePdfsService(base_service.BaseService):
         path = '/mandate_pdfs'
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 

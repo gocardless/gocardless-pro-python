@@ -14,15 +14,15 @@ class BaseService(object):
     def __init__(self, api_client):
         self._api_client = api_client
 
-    def _perform_request(self, method, path, params):
+    def _perform_request(self, method, path, params, headers):
         if method == 'GET':
-            return self._api_client.get(path, params=params)
+            return self._api_client.get(path, params=params, headers=headers)
 
         if method == 'POST':
-            return self._api_client.post(path, body=params)
+            return self._api_client.post(path, body=params, headers=headers)
 
         if method == 'PUT':
-            return self._api_client.put(path, body=params)
+            return self._api_client.put(path, body=params, headers=headers)
 
         raise ValueError('Invalid method "{}"'.format(method))
 

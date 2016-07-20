@@ -15,7 +15,7 @@ class MandatesService(base_service.BaseService):
     RESOURCE_CLASS = resources.Mandate
     RESOURCE_NAME = 'mandates'
 
-    def create(self, params=None):
+    def create(self, params=None, headers=None):
         """Create a mandate.
 
         Creates a new mandate object.
@@ -29,10 +29,10 @@ class MandatesService(base_service.BaseService):
         path = '/mandates'
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
-    def list(self, params=None):
+    def list(self, params=None, headers=None):
         """List mandates.
 
         Returns a [cursor-paginated](#overview-cursor-pagination) list of your
@@ -45,7 +45,7 @@ class MandatesService(base_service.BaseService):
           ListResponse of Mandate instances
         """
         path = '/mandates'
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
     def all(self, params=None):
@@ -53,7 +53,7 @@ class MandatesService(base_service.BaseService):
             params = {}
         return Paginator(self, params)
 
-    def get(self, identity, params=None):
+    def get(self, identity, params=None, headers=None):
         """Get a single mandate.
 
         Retrieves the details of an existing mandate.
@@ -68,10 +68,10 @@ class MandatesService(base_service.BaseService):
         path = self._sub_url_params('/mandates/:identity', {
             'identity': identity,
         })
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
-    def update(self, identity, params=None):
+    def update(self, identity, params=None, headers=None):
         """Update a mandate.
 
         Updates a mandate object. This accepts only the metadata parameter.
@@ -88,10 +88,10 @@ class MandatesService(base_service.BaseService):
         })
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('PUT', path, params)
+        response = self._perform_request('PUT', path, params, headers)
         return self._resource_for(response)
 
-    def cancel(self, identity, params=None):
+    def cancel(self, identity, params=None, headers=None):
         """Cancel a mandate.
 
         Immediately cancels a mandate and all associated cancellable payments.
@@ -113,10 +113,10 @@ class MandatesService(base_service.BaseService):
         })
         if params is not None:
             params = {'data': params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
-    def reinstate(self, identity, params=None):
+    def reinstate(self, identity, params=None, headers=None):
         """Reinstate a mandate.
 
         <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired
@@ -146,6 +146,6 @@ class MandatesService(base_service.BaseService):
         })
         if params is not None:
             params = {'data': params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 

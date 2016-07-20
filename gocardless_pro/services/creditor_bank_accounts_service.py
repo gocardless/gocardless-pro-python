@@ -15,7 +15,7 @@ class CreditorBankAccountsService(base_service.BaseService):
     RESOURCE_CLASS = resources.CreditorBankAccount
     RESOURCE_NAME = 'creditor_bank_accounts'
 
-    def create(self, params=None):
+    def create(self, params=None, headers=None):
         """Create a creditor bank account.
 
         Creates a new creditor bank account object.
@@ -29,10 +29,10 @@ class CreditorBankAccountsService(base_service.BaseService):
         path = '/creditor_bank_accounts'
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
-    def list(self, params=None):
+    def list(self, params=None, headers=None):
         """List creditor bank accounts.
 
         Returns a [cursor-paginated](#overview-cursor-pagination) list of your
@@ -45,7 +45,7 @@ class CreditorBankAccountsService(base_service.BaseService):
           ListResponse of CreditorBankAccount instances
         """
         path = '/creditor_bank_accounts'
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
     def all(self, params=None):
@@ -53,7 +53,7 @@ class CreditorBankAccountsService(base_service.BaseService):
             params = {}
         return Paginator(self, params)
 
-    def get(self, identity, params=None):
+    def get(self, identity, params=None, headers=None):
         """Get a single creditor bank account.
 
         Retrieves the details of an existing creditor bank account.
@@ -68,10 +68,10 @@ class CreditorBankAccountsService(base_service.BaseService):
         path = self._sub_url_params('/creditor_bank_accounts/:identity', {
             'identity': identity,
         })
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
-    def disable(self, identity, params=None):
+    def disable(self, identity, params=None, headers=None):
         """Disable a creditor bank account.
 
         Immediately disables the bank account, no money can be paid out to a
@@ -96,6 +96,6 @@ class CreditorBankAccountsService(base_service.BaseService):
         })
         if params is not None:
             params = {'data': params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 

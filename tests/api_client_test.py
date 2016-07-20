@@ -30,6 +30,12 @@ def test_authorization_header_present():
                   'Bearer ' + access_token)
 
 @responses.activate
+def test_includes_custom_header():
+    responses.add(responses.GET, 'http://example.com/test', body='{}')
+    client.get('/test', headers={'Accept-Language': 'fr'})
+    assert_equals(responses.calls[0].request.headers['accept-language'], 'fr')
+
+@responses.activate
 def test_includes_query_params():
     responses.add(responses.GET, 'http://example.com/test', body='{}')
     client.get('/test', params={'page': '1'})

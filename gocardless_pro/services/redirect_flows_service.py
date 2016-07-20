@@ -15,7 +15,7 @@ class RedirectFlowsService(base_service.BaseService):
     RESOURCE_CLASS = resources.RedirectFlow
     RESOURCE_NAME = 'redirect_flows'
 
-    def create(self, params=None):
+    def create(self, params=None, headers=None):
         """Create a redirect flow.
 
         Creates a redirect flow object which can then be used to redirect your
@@ -30,10 +30,10 @@ class RedirectFlowsService(base_service.BaseService):
         path = '/redirect_flows'
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
-    def get(self, identity, params=None):
+    def get(self, identity, params=None, headers=None):
         """Get a single redirect flow.
 
         Returns all details about a single redirect flow
@@ -48,10 +48,10 @@ class RedirectFlowsService(base_service.BaseService):
         path = self._sub_url_params('/redirect_flows/:identity', {
             'identity': identity,
         })
-        response = self._perform_request('GET', path, params)
+        response = self._perform_request('GET', path, params, headers)
         return self._resource_for(response)
 
-    def complete(self, identity, params=None):
+    def complete(self, identity, params=None, headers=None):
         """Complete a redirect flow.
 
         This creates a [customer](#core-endpoints-customers), [customer bank
@@ -79,6 +79,6 @@ class RedirectFlowsService(base_service.BaseService):
         })
         if params is not None:
             params = {'data': params}
-        response = self._perform_request('POST', path, params)
+        response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
 
