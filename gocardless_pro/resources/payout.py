@@ -33,6 +33,10 @@ class Payout(object):
         return self.attributes.get('currency')
 
     @property
+    def deducted_fees(self):
+        return self.attributes.get('deducted_fees')
+
+    @property
     def id(self):
         return self.attributes.get('id')
 
