@@ -1,3 +1,9 @@
+# 0.2.3 / 2016-08-03
+
+* Allow passing in custom headers (e.g. Accept-Language)
+* Add `payments_require_approval` to Mandates
+* Add `deducted_fees` to Payouts
+
 # 0.2.2 / 2016-03-16
 
 * Fix duplicate bank account error string representation (#4)
@@ -33,4 +39,3 @@
 
 Initial public release. This library is in beta until it hits 1.0, so backwards
 incompatible changes may be made in minor version releases.
-
