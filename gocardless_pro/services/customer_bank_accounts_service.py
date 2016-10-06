@@ -30,11 +30,11 @@ class CustomerBankAccountsService(base_service.BaseService):
  
               
         - [Customer Bank Account
-        Tokens](#js-flow-create-a-customer-bank-account-token)
-        
+        Tokens](#javascript-flow-create-a-customer-bank-account-token)
        
-        For more information on the different fields required in each country,
-        see [local bank details](#appendix-local-bank-details).
+        
+        For more information on the different fields required in each
+        country, see [local bank details](#appendix-local-bank-details).
 
         Args:
           params (dict, optional): Request body.
@@ -51,7 +51,7 @@ class CustomerBankAccountsService(base_service.BaseService):
     def list(self, params=None, headers=None):
         """List customer bank accounts.
 
-        Returns a [cursor-paginated](#overview-cursor-pagination) list of your
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
         bank accounts.
 
         Args:

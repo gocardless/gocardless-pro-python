@@ -18,7 +18,7 @@ class PayoutsService(base_service.BaseService):
     def list(self, params=None, headers=None):
         """List payouts.
 
-        Returns a [cursor-paginated](#overview-cursor-pagination) list of your
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
         payouts.
 
         Args:

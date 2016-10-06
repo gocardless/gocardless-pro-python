@@ -35,7 +35,7 @@ class CreditorBankAccountsService(base_service.BaseService):
     def list(self, params=None, headers=None):
         """List creditor bank accounts.
 
-        Returns a [cursor-paginated](#overview-cursor-pagination) list of your
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
         creditor bank accounts.
 
         Args:
