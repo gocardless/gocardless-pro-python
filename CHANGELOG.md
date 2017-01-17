@@ -1,3 +1,7 @@
+# 0.2.4 / 2017-01-17
+
+* Fix bug in setup.py preventing installation for some users (see #9)
+
 # 0.2.3 / 2016-08-03
 
 * Allow passing in custom headers (e.g. Accept-Language)
