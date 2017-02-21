@@ -85,6 +85,10 @@ class Event(object):
             return self.attributes.get('new_customer_bank_account')
 
         @property
+        def new_mandate(self):
+            return self.attributes.get('new_mandate')
+
+        @property
         def organisation(self):
             return self.attributes.get('organisation')
 

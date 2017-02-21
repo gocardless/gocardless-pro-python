@@ -85,6 +85,8 @@ def test_events_get():
                  body.get('links')['mandate'])
     assert_equal(response.links.new_customer_bank_account,
                  body.get('links')['new_customer_bank_account'])
+    assert_equal(response.links.new_mandate,
+                 body.get('links')['new_mandate'])
     assert_equal(response.links.organisation,
                  body.get('links')['organisation'])
     assert_equal(response.links.parent_event,

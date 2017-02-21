@@ -33,8 +33,12 @@ def test_mandates_create():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
+    assert_equal(response.links.new_mandate,
+                 body.get('links')['new_mandate'])
 
 @responses.activate
 def test_mandates_list():
@@ -104,8 +108,12 @@ def test_mandates_get():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
+    assert_equal(response.links.new_mandate,
+                 body.get('links')['new_mandate'])
 
 @responses.activate
 def test_mandates_update():
@@ -126,8 +134,12 @@ def test_mandates_update():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
+    assert_equal(response.links.new_mandate,
+                 body.get('links')['new_mandate'])
 
 @responses.activate
 def test_mandates_cancel():
@@ -148,8 +160,12 @@ def test_mandates_cancel():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
+    assert_equal(response.links.new_mandate,
+                 body.get('links')['new_mandate'])
 
 @responses.activate
 def test_mandates_reinstate():
@@ -170,6 +186,10 @@ def test_mandates_reinstate():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
+    assert_equal(response.links.new_mandate,
+                 body.get('links')['new_mandate'])
 

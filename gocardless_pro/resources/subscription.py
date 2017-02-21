@@ -21,10 +21,6 @@ class Subscription(object):
         return self.attributes.get('amount')
 
     @property
-    def count(self):
-        return self.attributes.get('count')
-
-    @property
     def created_at(self):
         return self.attributes.get('created_at')
 

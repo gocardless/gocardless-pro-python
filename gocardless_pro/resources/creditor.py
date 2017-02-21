@@ -49,6 +49,10 @@ class Creditor(object):
         return self.Links(self.attributes.get('links'))
 
     @property
+    def logo_url(self):
+        return self.attributes.get('logo_url')
+
+    @property
     def name(self):
         return self.attributes.get('name')
 
@@ -59,6 +63,10 @@ class Creditor(object):
     @property
     def region(self):
         return self.attributes.get('region')
+
+    @property
+    def scheme_identifiers(self):
+        return self.attributes.get('scheme_identifiers')
 
     class Links(object):
         """Wrapper for the response's 'links' attribute."""

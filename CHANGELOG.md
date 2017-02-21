@@ -1,3 +1,7 @@
+# 0.2.5 / 2017-02-21
+
+* Add `six` dependency
+
 # 0.2.4 / 2017-01-17
 
 * Fix bug in setup.py preventing installation for some users (see #9)

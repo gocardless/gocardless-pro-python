@@ -30,9 +30,11 @@ def test_creditors_create():
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
+    assert_equal(response.logo_url, body.get('logo_url'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
+    assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
     assert_equal(response.links.default_eur_payout_account,
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,
@@ -67,12 +69,16 @@ def test_creditors_list():
                  [b.get('created_at') for b in body])
     assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
+    assert_equal([r.logo_url for r in response.records],
+                 [b.get('logo_url') for b in body])
     assert_equal([r.name for r in response.records],
                  [b.get('name') for b in body])
     assert_equal([r.postal_code for r in response.records],
                  [b.get('postal_code') for b in body])
     assert_equal([r.region for r in response.records],
                  [b.get('region') for b in body])
+    assert_equal([r.scheme_identifiers for r in response.records],
+                 [b.get('scheme_identifiers') for b in body])
 
 @responses.activate
 def test_creditors_all():
@@ -109,9 +115,11 @@ def test_creditors_get():
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
+    assert_equal(response.logo_url, body.get('logo_url'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
+    assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
     assert_equal(response.links.default_eur_payout_account,
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,
@@ -135,9 +143,11 @@ def test_creditors_update():
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
+    assert_equal(response.logo_url, body.get('logo_url'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
+    assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
     assert_equal(response.links.default_eur_payout_account,
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,

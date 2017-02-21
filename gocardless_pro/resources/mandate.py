@@ -63,6 +63,14 @@ class Mandate(object):
             return self.attributes.get('creditor')
 
         @property
+        def customer(self):
+            return self.attributes.get('customer')
+
+        @property
         def customer_bank_account(self):
             return self.attributes.get('customer_bank_account')
+
+        @property
+        def new_mandate(self):
+            return self.attributes.get('new_mandate')
 

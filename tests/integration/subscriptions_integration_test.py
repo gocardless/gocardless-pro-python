@@ -24,7 +24,6 @@ def test_subscriptions_create():
     assert_is_instance(response, resources.Subscription)
 
     assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.count, body.get('count'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
@@ -57,8 +56,6 @@ def test_subscriptions_list():
 
     assert_equal([r.amount for r in response.records],
                  [b.get('amount') for b in body])
-    assert_equal([r.count for r in response.records],
-                 [b.get('count') for b in body])
     assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
     assert_equal([r.currency for r in response.records],
@@ -117,7 +114,6 @@ def test_subscriptions_get():
     assert_is_instance(response, resources.Subscription)
 
     assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.count, body.get('count'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
@@ -145,7 +141,6 @@ def test_subscriptions_update():
     assert_is_instance(response, resources.Subscription)
 
     assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.count, body.get('count'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
@@ -173,7 +168,6 @@ def test_subscriptions_cancel():
     assert_is_instance(response, resources.Subscription)
 
     assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.count, body.get('count'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
