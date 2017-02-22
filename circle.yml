@@ -1,5 +1,6 @@
 checkout:
   post:
+    - pip install -U six packaging appdirs
     - pip install -U setuptools
     - pip install -r requirements-dev.txt
 machine:

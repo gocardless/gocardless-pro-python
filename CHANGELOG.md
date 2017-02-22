@@ -1,3 +1,11 @@
+# 0.3.0 / 2017-02-22
+
+* Add `scheme_identifiers` and `logo_url` to `creditor` resource
+* Updates documentation
+* Add `new_mandate` to `event` `Links`
+* Add `new_mandate` and `customer` to `mandate` `Links`
+* Remove unused `count` from `subscription` response
+
 # 0.2.5 / 2017-02-21
 
 * Add `six` dependency
