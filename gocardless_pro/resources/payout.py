@@ -45,6 +45,10 @@ class Payout(object):
         return self.Links(self.attributes.get('links'))
 
     @property
+    def payout_type(self):
+        return self.attributes.get('payout_type')
+
+    @property
     def reference(self):
         return self.attributes.get('reference')
 

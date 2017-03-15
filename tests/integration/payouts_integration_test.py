@@ -39,6 +39,8 @@ def test_payouts_list():
                  [b.get('deducted_fees') for b in body])
     assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
+    assert_equal([r.payout_type for r in response.records],
+                 [b.get('payout_type') for b in body])
     assert_equal([r.reference for r in response.records],
                  [b.get('reference') for b in body])
     assert_equal([r.status for r in response.records],
@@ -78,6 +80,7 @@ def test_payouts_get():
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.deducted_fees, body.get('deducted_fees'))
     assert_equal(response.id, body.get('id'))
+    assert_equal(response.payout_type, body.get('payout_type'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.creditor,
