@@ -22,7 +22,6 @@ def test_payments_create():
     body = fixture['body']['payments']
 
     assert_is_instance(response, resources.Payment)
-
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.amount_refunded, body.get('amount_refunded'))
     assert_equal(response.charge_date, body.get('charge_date'))
@@ -54,7 +53,6 @@ def test_payments_list():
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-
     assert_equal([r.amount for r in response.records],
                  [b.get('amount') for b in body])
     assert_equal([r.amount_refunded for r in response.records],
@@ -95,6 +93,7 @@ def test_payments_all():
     for record in all_records:
       assert_is_instance(record, resources.Payment)
 
+
 @responses.activate
 def test_payments_get():
     fixture = helpers.load_fixture('payments')['get']
@@ -103,7 +102,6 @@ def test_payments_get():
     body = fixture['body']['payments']
 
     assert_is_instance(response, resources.Payment)
-
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.amount_refunded, body.get('amount_refunded'))
     assert_equal(response.charge_date, body.get('charge_date'))
@@ -131,7 +129,6 @@ def test_payments_update():
     body = fixture['body']['payments']
 
     assert_is_instance(response, resources.Payment)
-
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.amount_refunded, body.get('amount_refunded'))
     assert_equal(response.charge_date, body.get('charge_date'))
@@ -159,7 +156,6 @@ def test_payments_cancel():
     body = fixture['body']['payments']
 
     assert_is_instance(response, resources.Payment)
-
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.amount_refunded, body.get('amount_refunded'))
     assert_equal(response.charge_date, body.get('charge_date'))
@@ -187,7 +183,6 @@ def test_payments_retry():
     body = fixture['body']['payments']
 
     assert_is_instance(response, resources.Payment)
-
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.amount_refunded, body.get('amount_refunded'))
     assert_equal(response.charge_date, body.get('charge_date'))
@@ -206,4 +201,3 @@ def test_payments_retry():
                  body.get('links')['payout'])
     assert_equal(response.links.subscription,
                  body.get('links')['subscription'])
-

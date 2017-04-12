@@ -22,7 +22,6 @@ def test_customers_create():
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)
-
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -52,7 +51,6 @@ def test_customers_list():
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-
     assert_equal([r.address_line1 for r in response.records],
                  [b.get('address_line1') for b in body])
     assert_equal([r.address_line2 for r in response.records],
@@ -105,6 +103,7 @@ def test_customers_all():
     for record in all_records:
       assert_is_instance(record, resources.Customer)
 
+
 @responses.activate
 def test_customers_get():
     fixture = helpers.load_fixture('customers')['get']
@@ -113,7 +112,6 @@ def test_customers_get():
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)
-
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -139,7 +137,6 @@ def test_customers_update():
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)
-
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -156,4 +153,3 @@ def test_customers_update():
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
     assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
-

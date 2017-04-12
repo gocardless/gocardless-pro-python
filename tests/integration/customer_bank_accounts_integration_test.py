@@ -22,7 +22,6 @@ def test_customer_bank_accounts_create():
     body = fixture['body']['customer_bank_accounts']
 
     assert_is_instance(response, resources.CustomerBankAccount)
-
     assert_equal(response.account_holder_name, body.get('account_holder_name'))
     assert_equal(response.account_number_ending, body.get('account_number_ending'))
     assert_equal(response.bank_name, body.get('bank_name'))
@@ -47,7 +46,6 @@ def test_customer_bank_accounts_list():
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-
     assert_equal([r.account_holder_name for r in response.records],
                  [b.get('account_holder_name') for b in body])
     assert_equal([r.account_number_ending for r in response.records],
@@ -86,6 +84,7 @@ def test_customer_bank_accounts_all():
     for record in all_records:
       assert_is_instance(record, resources.CustomerBankAccount)
 
+
 @responses.activate
 def test_customer_bank_accounts_get():
     fixture = helpers.load_fixture('customer_bank_accounts')['get']
@@ -94,7 +93,6 @@ def test_customer_bank_accounts_get():
     body = fixture['body']['customer_bank_accounts']
 
     assert_is_instance(response, resources.CustomerBankAccount)
-
     assert_equal(response.account_holder_name, body.get('account_holder_name'))
     assert_equal(response.account_number_ending, body.get('account_number_ending'))
     assert_equal(response.bank_name, body.get('bank_name'))
@@ -115,7 +113,6 @@ def test_customer_bank_accounts_update():
     body = fixture['body']['customer_bank_accounts']
 
     assert_is_instance(response, resources.CustomerBankAccount)
-
     assert_equal(response.account_holder_name, body.get('account_holder_name'))
     assert_equal(response.account_number_ending, body.get('account_number_ending'))
     assert_equal(response.bank_name, body.get('bank_name'))
@@ -136,7 +133,6 @@ def test_customer_bank_accounts_disable():
     body = fixture['body']['customer_bank_accounts']
 
     assert_is_instance(response, resources.CustomerBankAccount)
-
     assert_equal(response.account_holder_name, body.get('account_holder_name'))
     assert_equal(response.account_number_ending, body.get('account_number_ending'))
     assert_equal(response.bank_name, body.get('bank_name'))
@@ -148,4 +144,3 @@ def test_customer_bank_accounts_disable():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
-

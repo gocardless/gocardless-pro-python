@@ -22,7 +22,6 @@ def test_creditors_create():
     body = fixture['body']['creditors']
 
     assert_is_instance(response, resources.Creditor)
-
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -54,7 +53,6 @@ def test_creditors_list():
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-
     assert_equal([r.address_line1 for r in response.records],
                  [b.get('address_line1') for b in body])
     assert_equal([r.address_line2 for r in response.records],
@@ -99,6 +97,7 @@ def test_creditors_all():
     for record in all_records:
       assert_is_instance(record, resources.Creditor)
 
+
 @responses.activate
 def test_creditors_get():
     fixture = helpers.load_fixture('creditors')['get']
@@ -107,7 +106,6 @@ def test_creditors_get():
     body = fixture['body']['creditors']
 
     assert_is_instance(response, resources.Creditor)
-
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -135,7 +133,6 @@ def test_creditors_update():
     body = fixture['body']['creditors']
 
     assert_is_instance(response, resources.Creditor)
-
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -154,4 +151,3 @@ def test_creditors_update():
                  body.get('links')['default_gbp_payout_account'])
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
-

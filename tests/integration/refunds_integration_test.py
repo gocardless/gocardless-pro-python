@@ -22,7 +22,6 @@ def test_refunds_create():
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)
-
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
@@ -44,7 +43,6 @@ def test_refunds_list():
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-
     assert_equal([r.amount for r in response.records],
                  [b.get('amount') for b in body])
     assert_equal([r.created_at for r in response.records],
@@ -77,6 +75,7 @@ def test_refunds_all():
     for record in all_records:
       assert_is_instance(record, resources.Refund)
 
+
 @responses.activate
 def test_refunds_get():
     fixture = helpers.load_fixture('refunds')['get']
@@ -85,7 +84,6 @@ def test_refunds_get():
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)
-
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
@@ -103,7 +101,6 @@ def test_refunds_update():
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)
-
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
@@ -112,4 +109,3 @@ def test_refunds_update():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
-
