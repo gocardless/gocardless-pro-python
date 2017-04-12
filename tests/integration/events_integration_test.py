@@ -26,6 +26,7 @@ def test_events_list():
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+
     assert_equal([r.action for r in response.records],
                  [b.get('action') for b in body])
     assert_equal([r.created_at for r in response.records],
@@ -56,7 +57,6 @@ def test_events_all():
     for record in all_records:
       assert_is_instance(record, resources.Event)
 
-
 @responses.activate
 def test_events_get():
     fixture = helpers.load_fixture('events')['get']
@@ -65,6 +65,7 @@ def test_events_get():
     body = fixture['body']['events']
 
     assert_is_instance(response, resources.Event)
+
     assert_equal(response.action, body.get('action'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
@@ -100,3 +101,4 @@ def test_events_get():
                  body.get('links')['refund'])
     assert_equal(response.links.subscription,
                  body.get('links')['subscription'])
+

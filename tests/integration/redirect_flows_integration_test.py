@@ -22,6 +22,7 @@ def test_redirect_flows_create():
     body = fixture['body']['redirect_flows']
 
     assert_is_instance(response, resources.RedirectFlow)
+
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
@@ -46,6 +47,7 @@ def test_redirect_flows_get():
     body = fixture['body']['redirect_flows']
 
     assert_is_instance(response, resources.RedirectFlow)
+
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
@@ -70,6 +72,7 @@ def test_redirect_flows_complete():
     body = fixture['body']['redirect_flows']
 
     assert_is_instance(response, resources.RedirectFlow)
+
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
@@ -85,3 +88,4 @@ def test_redirect_flows_complete():
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
+

@@ -22,6 +22,7 @@ def test_subscriptions_create():
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
+
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
@@ -52,6 +53,7 @@ def test_subscriptions_list():
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+
     assert_equal([r.amount for r in response.records],
                  [b.get('amount') for b in body])
     assert_equal([r.created_at for r in response.records],
@@ -102,7 +104,6 @@ def test_subscriptions_all():
     for record in all_records:
       assert_is_instance(record, resources.Subscription)
 
-
 @responses.activate
 def test_subscriptions_get():
     fixture = helpers.load_fixture('subscriptions')['get']
@@ -111,6 +112,7 @@ def test_subscriptions_get():
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
+
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
@@ -137,6 +139,7 @@ def test_subscriptions_update():
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
+
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
@@ -163,6 +166,7 @@ def test_subscriptions_cancel():
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
+
     assert_equal(response.amount, body.get('amount'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
@@ -180,3 +184,4 @@ def test_subscriptions_cancel():
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
+

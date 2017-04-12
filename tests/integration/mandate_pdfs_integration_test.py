@@ -22,5 +22,7 @@ def test_mandate_pdfs_create():
     body = fixture['body']['mandate_pdfs']
 
     assert_is_instance(response, resources.MandatePdf)
+
     assert_equal(response.expires_at, body.get('expires_at'))
     assert_equal(response.url, body.get('url'))
+
