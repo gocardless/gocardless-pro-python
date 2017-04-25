@@ -6,6 +6,7 @@
 from . import base_service
 from .. import resources
 from ..paginator import Paginator
+from .. import errors
 
 class PaymentsService(base_service.BaseService):
     """Service class that provides access to the payments
@@ -15,7 +16,8 @@ class PaymentsService(base_service.BaseService):
     RESOURCE_CLASS = resources.Payment
     RESOURCE_NAME = 'payments'
 
-    def create(self, params=None, headers=None):
+
+    def create(self,params=None, headers=None):
         """Create a payment.
 
         <a name="mandate_is_inactive"></a>Creates a new payment object.
@@ -28,77 +30,104 @@ class PaymentsService(base_service.BaseService):
         `active`.
 
         Args:
-          params (dict, optional): Request body.
+              params (dict, optional): Request body.
 
         Returns:
-          Payment
+              ListResponse of Payment instances
         """
         path = '/payments'
+        
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params, headers)
+        try:
+          response = self._perform_request('POST', path, params, headers,
+                                           max_network_retries=3,
+                                           retry_delay_in_seconds=0.5)
+        except errors.IdempotentCreationConflictError as err:
+          return self.get(identity = err.conflicting_resource_id,
+                                params = params,
+                                headers = headers)
         return self._resource_for(response)
+  
 
-    def list(self, params=None, headers=None):
+    def list(self,params=None, headers=None):
         """List payments.
 
         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
         payments.
 
         Args:
-          params (dict, optional): Query string parameters.
+              params (dict, optional): Query string parameters.
 
         Returns:
-          ListResponse of Payment instances
+              Payment
         """
         path = '/payments'
-        response = self._perform_request('GET', path, params, headers)
+        
+
+        response = self._perform_request('GET', path, params, headers,
+                                         max_network_retries=3,
+                                         retry_delay_in_seconds=0.5)
         return self._resource_for(response)
 
     def all(self, params=None):
         if params is None:
             params = {}
         return Paginator(self, params)
+    
+  
 
-    def get(self, identity, params=None, headers=None):
+    def get(self,identity,params=None, headers=None):
         """Get a single payment.
 
         Retrieves the details of a single existing payment.
 
         Args:
-          identity (string): Unique identifier, beginning with "PM".
-          params (dict, optional): Query string parameters.
+              identity (string): Unique identifier, beginning with "PM".
+              params (dict, optional): Query string parameters.
 
         Returns:
-          Payment
+              ListResponse of Payment instances
         """
         path = self._sub_url_params('/payments/:identity', {
+          
             'identity': identity,
-        })
-        response = self._perform_request('GET', path, params, headers)
-        return self._resource_for(response)
+          })
+        
 
-    def update(self, identity, params=None, headers=None):
+        response = self._perform_request('GET', path, params, headers,
+                                         max_network_retries=3,
+                                         retry_delay_in_seconds=0.5)
+        return self._resource_for(response)
+  
+
+    def update(self,identity,params=None, headers=None):
         """Update a payment.
 
         Updates a payment object. This accepts only the metadata parameter.
 
         Args:
-          identity (string): Unique identifier, beginning with "PM".
-          params (dict, optional): Request body.
+              identity (string): Unique identifier, beginning with "PM".
+              params (dict, optional): Request body.
 
         Returns:
-          Payment
+              ListResponse of Payment instances
         """
         path = self._sub_url_params('/payments/:identity', {
+          
             'identity': identity,
-        })
+          })
+        
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('PUT', path, params, headers)
-        return self._resource_for(response)
 
-    def cancel(self, identity, params=None, headers=None):
+        response = self._perform_request('PUT', path, params, headers,
+                                         max_network_retries=3,
+                                         retry_delay_in_seconds=0.5)
+        return self._resource_for(response)
+  
+
+    def cancel(self,identity,params=None, headers=None):
         """Cancel a payment.
 
         Cancels the payment if it has not already been submitted to the banks.
@@ -110,21 +139,24 @@ class PaymentsService(base_service.BaseService):
         `pending_submission`.
 
         Args:
-          identity (string): Unique identifier, beginning with "PM".
-          params (dict, optional): Request body.
+              identity (string): Unique identifier, beginning with "PM".
+              params (dict, optional): Request body.
 
         Returns:
-          Payment
+              ListResponse of Payment instances
         """
         path = self._sub_url_params('/payments/:identity/actions/cancel', {
+          
             'identity': identity,
-        })
+          })
+        
         if params is not None:
             params = {'data': params}
         response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
+  
 
-    def retry(self, identity, params=None, headers=None):
+    def retry(self,identity,params=None, headers=None):
         """Retry a payment.
 
         <a name="retry_failed"></a>Retries a failed payment if the underlying
@@ -142,17 +174,19 @@ class PaymentsService(base_service.BaseService):
         3 times.
 
         Args:
-          identity (string): Unique identifier, beginning with "PM".
-          params (dict, optional): Request body.
+              identity (string): Unique identifier, beginning with "PM".
+              params (dict, optional): Request body.
 
         Returns:
-          Payment
+              ListResponse of Payment instances
         """
         path = self._sub_url_params('/payments/:identity/actions/retry', {
+          
             'identity': identity,
-        })
+          })
+        
         if params is not None:
             params = {'data': params}
         response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
-
+  

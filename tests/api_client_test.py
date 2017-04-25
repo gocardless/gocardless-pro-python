@@ -91,6 +91,19 @@ def test_handles_invalid_state_error():
     assert_equals(assertion.exception.errors, fixture['error']['errors'])
 
 @responses.activate
+def test_handles_idempotent_creation_conflict_error():
+    fixture = helpers.idempotent_creation_conflict_body('PM00001078ZJJN')
+    responses.add(responses.POST, 'http://example.com/test',
+                  body=json.dumps(fixture), status=fixture['error']['code'])
+
+    with assert_raises(errors.IdempotentCreationConflictError) as assertion:
+        client.post('/test', body={'name': 'Billy Jean'})
+
+    assert_equals(assertion.exception.errors, fixture['error']['errors'])
+    assert_equals(assertion.exception.conflicting_resource_id,
+                  fixture['error']['errors'][0]['links']['conflicting_resource_id'])
+
+@responses.activate
 def test_handles_gocardless_error():
     fixture = helpers.load_fixture('gocardless_error')
     responses.add(responses.POST, 'http://example.com/test',
@@ -109,4 +122,3 @@ def test_handles_malformed_response():
 
     with assert_raises(errors.MalformedResponseError) as assertion:
         client.post('/test', body={'name': 'Billy Jean'})
-

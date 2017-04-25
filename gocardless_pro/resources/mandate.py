@@ -19,58 +19,87 @@ class Mandate(object):
     @property
     def created_at(self):
         return self.attributes.get('created_at')
+  
 
     @property
     def id(self):
         return self.attributes.get('id')
+  
 
     @property
     def links(self):
         return self.Links(self.attributes.get('links'))
+  
 
     @property
     def metadata(self):
         return self.attributes.get('metadata')
+  
 
     @property
     def next_possible_charge_date(self):
         return self.attributes.get('next_possible_charge_date')
+  
 
     @property
     def payments_require_approval(self):
         return self.attributes.get('payments_require_approval')
+  
 
     @property
     def reference(self):
         return self.attributes.get('reference')
+  
 
     @property
     def scheme(self):
         return self.attributes.get('scheme')
+  
 
     @property
     def status(self):
         return self.attributes.get('status')
+  
 
+
+  
+
+  
+
+  
     class Links(object):
         """Wrapper for the response's 'links' attribute."""
 
         def __init__(self, attributes):
             self.attributes = attributes
-
+    
         @property
         def creditor(self):
             return self.attributes.get('creditor')
-
+    
         @property
         def customer(self):
             return self.attributes.get('customer')
-
+    
         @property
         def customer_bank_account(self):
             return self.attributes.get('customer_bank_account')
-
+    
         @property
         def new_mandate(self):
             return self.attributes.get('new_mandate')
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 

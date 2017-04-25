@@ -33,3 +33,9 @@ def test_gocardless_error_message():
     fixture = helpers.load_fixture('gocardless_error')
     error = errors.GoCardlessInternalError(fixture['error'])
     assert_equal(str(error), 'Uh-oh!')
+
+def test_idempotent_creation_conflict_error_message():
+    fixture = helpers.idempotent_creation_conflict_body('PM00001078ZJJN')
+    error = errors.IdempotentCreationConflictError(fixture['error'])
+    assert_equal(str(error), "None (A resource has already been created with this idempotency key)")
+    assert_equal(error.conflicting_resource_id, "PM00001078ZJJN")

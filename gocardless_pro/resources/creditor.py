@@ -19,70 +19,111 @@ class Creditor(object):
     @property
     def address_line1(self):
         return self.attributes.get('address_line1')
+  
 
     @property
     def address_line2(self):
         return self.attributes.get('address_line2')
+  
 
     @property
     def address_line3(self):
         return self.attributes.get('address_line3')
+  
 
     @property
     def city(self):
         return self.attributes.get('city')
+  
 
     @property
     def country_code(self):
         return self.attributes.get('country_code')
+  
 
     @property
     def created_at(self):
         return self.attributes.get('created_at')
+  
 
     @property
     def id(self):
         return self.attributes.get('id')
+  
 
     @property
     def links(self):
         return self.Links(self.attributes.get('links'))
+  
 
     @property
     def logo_url(self):
         return self.attributes.get('logo_url')
+  
 
     @property
     def name(self):
         return self.attributes.get('name')
+  
 
     @property
     def postal_code(self):
         return self.attributes.get('postal_code')
+  
 
     @property
     def region(self):
         return self.attributes.get('region')
+  
 
     @property
     def scheme_identifiers(self):
         return self.attributes.get('scheme_identifiers')
+  
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     class Links(object):
         """Wrapper for the response's 'links' attribute."""
 
         def __init__(self, attributes):
             self.attributes = attributes
-
+    
         @property
         def default_eur_payout_account(self):
             return self.attributes.get('default_eur_payout_account')
-
+    
         @property
         def default_gbp_payout_account(self):
             return self.attributes.get('default_gbp_payout_account')
-
+    
         @property
         def default_sek_payout_account(self):
             return self.attributes.get('default_sek_payout_account')
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 

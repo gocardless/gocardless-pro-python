@@ -6,6 +6,7 @@
 from . import base_service
 from .. import resources
 from ..paginator import Paginator
+from .. import errors
 
 class MandatePdfsService(base_service.BaseService):
     """Service class that provides access to the mandate_pdfs
@@ -15,7 +16,8 @@ class MandatePdfsService(base_service.BaseService):
     RESOURCE_CLASS = resources.MandatePdf
     RESOURCE_NAME = 'mandate_pdfs'
 
-    def create(self, params=None, headers=None):
+
+    def create(self,params=None, headers=None):
         """Create a mandate PDF.
 
         Generates a PDF mandate and returns its temporary URL.
@@ -33,14 +35,18 @@ class MandatePdfsService(base_service.BaseService):
         Italian, Portuguese, Spanish and Swedish.
 
         Args:
-          params (dict, optional): Request body.
+              params (dict, optional): Request body.
 
         Returns:
-          MandatePdf
+              ListResponse of MandatePdf instances
         """
         path = '/mandate_pdfs'
+        
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params, headers)
-        return self._resource_for(response)
 
+        response = self._perform_request('POST', path, params, headers,
+                                         max_network_retries=3,
+                                         retry_delay_in_seconds=0.5)
+        return self._resource_for(response)
+  

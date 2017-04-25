@@ -19,38 +19,61 @@ class Refund(object):
     @property
     def amount(self):
         return self.attributes.get('amount')
+  
 
     @property
     def created_at(self):
         return self.attributes.get('created_at')
+  
 
     @property
     def currency(self):
         return self.attributes.get('currency')
+  
 
     @property
     def id(self):
         return self.attributes.get('id')
+  
 
     @property
     def links(self):
         return self.Links(self.attributes.get('links'))
+  
 
     @property
     def metadata(self):
         return self.attributes.get('metadata')
+  
 
     @property
     def reference(self):
         return self.attributes.get('reference')
+  
 
+
+  
+
+  
+
+  
+
+  
+
+  
     class Links(object):
         """Wrapper for the response's 'links' attribute."""
 
         def __init__(self, attributes):
             self.attributes = attributes
-
+    
         @property
         def payment(self):
             return self.attributes.get('payment')
+    
+  
+
+  
+
+  
 

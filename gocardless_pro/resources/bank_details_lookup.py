@@ -19,12 +19,22 @@ class BankDetailsLookup(object):
     @property
     def available_debit_schemes(self):
         return self.attributes.get('available_debit_schemes')
+  
 
     @property
     def bank_name(self):
         return self.attributes.get('bank_name')
+  
 
     @property
     def bic(self):
         return self.attributes.get('bic')
+  
+
+
+  
+
+  
+
+  
 

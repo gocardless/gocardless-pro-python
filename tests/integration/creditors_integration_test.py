@@ -7,12 +7,20 @@ import json
 
 import requests
 import responses
-from nose.tools import assert_equal, assert_is_instance
+from nose.tools import (
+  assert_equal,
+  assert_is_instance,
+  assert_is_none,
+  assert_is_not_none,
+  assert_raises
+)
 
+from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
+  
 
 @responses.activate
 def test_creditors_create():
@@ -22,7 +30,7 @@ def test_creditors_create():
     body = fixture['body']['creditors']
 
     assert_is_instance(response, resources.Creditor)
-
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -42,6 +50,34 @@ def test_creditors_create():
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
 
+def test_timeout_creditors_idempotency_conflict():
+    create_fixture = helpers.load_fixture('creditors')['create']
+    get_fixture = helpers.load_fixture('creditors')['get']
+    with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
+      response = helpers.client.creditors.create(*create_fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+
+    assert_is_instance(response, resources.Creditor)
+
+def test_timeout_creditors_retries():
+    fixture = helpers.load_fixture('creditors')['create']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.creditors.create(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['creditors']
+
+    assert_is_instance(response, resources.Creditor)
+
+def test_502_creditors_retries():
+    fixture = helpers.load_fixture('creditors')['create']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.creditors.create(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['creditors']
+
+    assert_is_instance(response, resources.Creditor)
+  
+
 @responses.activate
 def test_creditors_list():
     fixture = helpers.load_fixture('creditors')['list']
@@ -54,7 +90,7 @@ def test_creditors_list():
 
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-
+    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal([r.address_line1 for r in response.records],
                  [b.get('address_line1') for b in body])
     assert_equal([r.address_line2 for r in response.records],
@@ -80,6 +116,32 @@ def test_creditors_list():
     assert_equal([r.scheme_identifiers for r in response.records],
                  [b.get('scheme_identifiers') for b in body])
 
+def test_timeout_creditors_retries():
+    fixture = helpers.load_fixture('creditors')['list']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.creditors.list(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['creditors']
+
+    assert_is_instance(response, list_response.ListResponse)
+    assert_is_instance(response.records[0], resources.Creditor)
+
+    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
+    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+
+def test_502_creditors_retries():
+    fixture = helpers.load_fixture('creditors')['list']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.creditors.list(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['creditors']
+
+    assert_is_instance(response, list_response.ListResponse)
+    assert_is_instance(response.records[0], resources.Creditor)
+
+    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
+    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+
 @responses.activate
 def test_creditors_all():
     fixture = helpers.load_fixture('creditors')['list']
@@ -98,6 +160,8 @@ def test_creditors_all():
     assert_equal(len(all_records), len(fixture['body']['creditors']) * 2)
     for record in all_records:
       assert_is_instance(record, resources.Creditor)
+    
+  
 
 @responses.activate
 def test_creditors_get():
@@ -107,7 +171,7 @@ def test_creditors_get():
     body = fixture['body']['creditors']
 
     assert_is_instance(response, resources.Creditor)
-
+    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -126,6 +190,25 @@ def test_creditors_get():
                  body.get('links')['default_gbp_payout_account'])
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
+
+def test_timeout_creditors_retries():
+    fixture = helpers.load_fixture('creditors')['get']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.creditors.get(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['creditors']
+
+    assert_is_instance(response, resources.Creditor)
+
+def test_502_creditors_retries():
+    fixture = helpers.load_fixture('creditors')['get']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.creditors.get(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['creditors']
+
+    assert_is_instance(response, resources.Creditor)
+  
 
 @responses.activate
 def test_creditors_update():
@@ -135,7 +218,7 @@ def test_creditors_update():
     body = fixture['body']['creditors']
 
     assert_is_instance(response, resources.Creditor)
-
+    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
@@ -155,3 +238,21 @@ def test_creditors_update():
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
 
+def test_timeout_creditors_retries():
+    fixture = helpers.load_fixture('creditors')['update']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.creditors.update(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['creditors']
+
+    assert_is_instance(response, resources.Creditor)
+
+def test_502_creditors_retries():
+    fixture = helpers.load_fixture('creditors')['update']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.creditors.update(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['creditors']
+
+    assert_is_instance(response, resources.Creditor)
+  

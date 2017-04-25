@@ -19,8 +19,15 @@ class MandatePdf(object):
     @property
     def expires_at(self):
         return self.attributes.get('expires_at')
+  
 
     @property
     def url(self):
         return self.attributes.get('url')
+  
+
+
+  
+
+  
 

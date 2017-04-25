@@ -4,17 +4,19 @@
 #
 
 import re
+import time
 
+from requests import Timeout, ConnectionError
 from .. import list_response
 from ..api_response import ApiResponse
+from ..errors import MalformedResponseError
 
 class BaseService(object):
     """Base class for API service classes."""
-
     def __init__(self, api_client):
         self._api_client = api_client
 
-    def _perform_request(self, method, path, params, headers):
+    def _attempt_request(self, method, path, params, headers):
         if method == 'GET':
             return self._api_client.get(path, params=params, headers=headers)
 
@@ -25,6 +27,18 @@ class BaseService(object):
             return self._api_client.put(path, body=params, headers=headers)
 
         raise ValueError('Invalid method "{}"'.format(method))
+
+    def _perform_request(self, *args, **kwargs):
+        max_network_retries = kwargs.pop('max_network_retries', 1)
+        retry_delay_in_seconds = kwargs.pop('retry_delay_in_seconds', 0.5)
+        for retries_left in range(max_network_retries-1, -1, -1):
+            try:
+                return self._attempt_request(*args, **kwargs)
+            except (Timeout, ConnectionError, MalformedResponseError) as err:
+                if retries_left == 0:
+                    raise err
+                else:
+                    time.sleep(retry_delay_in_seconds)
 
     def _envelope_key(self):
         return type(self).RESOURCE_NAME
@@ -42,4 +56,3 @@ class BaseService(object):
 
     def _sub_url_params(self, url, params):
         return re.sub(r':(\w+)', lambda match: params[match.group(1)], url)
-

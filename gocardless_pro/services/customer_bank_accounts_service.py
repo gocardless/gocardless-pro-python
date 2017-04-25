@@ -6,6 +6,7 @@
 from . import base_service
 from .. import resources
 from ..paginator import Paginator
+from .. import errors
 
 class CustomerBankAccountsService(base_service.BaseService):
     """Service class that provides access to the customer_bank_accounts
@@ -15,7 +16,8 @@ class CustomerBankAccountsService(base_service.BaseService):
     RESOURCE_CLASS = resources.CustomerBankAccount
     RESOURCE_NAME = 'customer_bank_accounts'
 
-    def create(self, params=None, headers=None):
+
+    def create(self,params=None, headers=None):
         """Create a customer bank account.
 
         Creates a new customer bank account object.
@@ -37,78 +39,105 @@ class CustomerBankAccountsService(base_service.BaseService):
         country, see [local bank details](#appendix-local-bank-details).
 
         Args:
-          params (dict, optional): Request body.
+              params (dict, optional): Request body.
 
         Returns:
-          CustomerBankAccount
+              ListResponse of CustomerBankAccount instances
         """
         path = '/customer_bank_accounts'
+        
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params, headers)
+        try:
+          response = self._perform_request('POST', path, params, headers,
+                                           max_network_retries=3,
+                                           retry_delay_in_seconds=0.5)
+        except errors.IdempotentCreationConflictError as err:
+          return self.get(identity = err.conflicting_resource_id,
+                                params = params,
+                                headers = headers)
         return self._resource_for(response)
+  
 
-    def list(self, params=None, headers=None):
+    def list(self,params=None, headers=None):
         """List customer bank accounts.
 
         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
         bank accounts.
 
         Args:
-          params (dict, optional): Query string parameters.
+              params (dict, optional): Query string parameters.
 
         Returns:
-          ListResponse of CustomerBankAccount instances
+              CustomerBankAccount
         """
         path = '/customer_bank_accounts'
-        response = self._perform_request('GET', path, params, headers)
+        
+
+        response = self._perform_request('GET', path, params, headers,
+                                         max_network_retries=3,
+                                         retry_delay_in_seconds=0.5)
         return self._resource_for(response)
 
     def all(self, params=None):
         if params is None:
             params = {}
         return Paginator(self, params)
+    
+  
 
-    def get(self, identity, params=None, headers=None):
+    def get(self,identity,params=None, headers=None):
         """Get a single customer bank account.
 
         Retrieves the details of an existing bank account.
 
         Args:
-          identity (string): Unique identifier, beginning with "BA".
-          params (dict, optional): Query string parameters.
+              identity (string): Unique identifier, beginning with "BA".
+              params (dict, optional): Query string parameters.
 
         Returns:
-          CustomerBankAccount
+              ListResponse of CustomerBankAccount instances
         """
         path = self._sub_url_params('/customer_bank_accounts/:identity', {
+          
             'identity': identity,
-        })
-        response = self._perform_request('GET', path, params, headers)
-        return self._resource_for(response)
+          })
+        
 
-    def update(self, identity, params=None, headers=None):
+        response = self._perform_request('GET', path, params, headers,
+                                         max_network_retries=3,
+                                         retry_delay_in_seconds=0.5)
+        return self._resource_for(response)
+  
+
+    def update(self,identity,params=None, headers=None):
         """Update a customer bank account.
 
         Updates a customer bank account object. Only the metadata parameter is
         allowed.
 
         Args:
-          identity (string): Unique identifier, beginning with "BA".
-          params (dict, optional): Request body.
+              identity (string): Unique identifier, beginning with "BA".
+              params (dict, optional): Request body.
 
         Returns:
-          CustomerBankAccount
+              ListResponse of CustomerBankAccount instances
         """
         path = self._sub_url_params('/customer_bank_accounts/:identity', {
+          
             'identity': identity,
-        })
+          })
+        
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('PUT', path, params, headers)
-        return self._resource_for(response)
 
-    def disable(self, identity, params=None, headers=None):
+        response = self._perform_request('PUT', path, params, headers,
+                                         max_network_retries=3,
+                                         retry_delay_in_seconds=0.5)
+        return self._resource_for(response)
+  
+
+    def disable(self,identity,params=None, headers=None):
         """Disable a customer bank account.
 
         Immediately cancels all associated mandates and cancellable payments.
@@ -122,17 +151,19 @@ class CustomerBankAccountsService(base_service.BaseService):
         the same details.
 
         Args:
-          identity (string): Unique identifier, beginning with "BA".
-          params (dict, optional): Request body.
+              identity (string): Unique identifier, beginning with "BA".
+              params (dict, optional): Request body.
 
         Returns:
-          CustomerBankAccount
+              ListResponse of CustomerBankAccount instances
         """
         path = self._sub_url_params('/customer_bank_accounts/:identity/actions/disable', {
+          
             'identity': identity,
-        })
+          })
+        
         if params is not None:
             params = {'data': params}
         response = self._perform_request('POST', path, params, headers)
         return self._resource_for(response)
-
+  

@@ -12,6 +12,7 @@ except ImportError:
 import json
 
 import requests
+from uuid import uuid4
 
 from . import errors
 
@@ -61,6 +62,10 @@ class ApiClient(object):
         Returns:
           A requests ``Response`` object.
         """
+        headers = headers or {}
+        if 'Idempotency-Key' not in headers:
+            headers['Idempotency-Key'] = str(uuid4())
+
         response = requests.post(
             self._url_for(path),
             data=json.dumps(body),
@@ -101,7 +106,7 @@ class ApiClient(object):
             return
 
         error = response.json()['error']
-        exception_class = errors.ApiError.exception_for(error['type'])
+        exception_class = errors.ApiError.exception_for(error['type'], error.get('errors'))
         raise exception_class(error)
 
     def _url_for(self, path):
@@ -132,4 +137,3 @@ class ApiClient(object):
             '{0}/{1}'.format(platform.system(), platform.release()),
             'requests/{0}'.format(requests.__version__),
         ])
-

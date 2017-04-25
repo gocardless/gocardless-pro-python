@@ -6,6 +6,7 @@
 from . import base_service
 from .. import resources
 from ..paginator import Paginator
+from .. import errors
 
 class BankDetailsLookupsService(base_service.BaseService):
     """Service class that provides access to the bank_details_lookups
@@ -15,7 +16,8 @@ class BankDetailsLookupsService(base_service.BaseService):
     RESOURCE_CLASS = resources.BankDetailsLookup
     RESOURCE_NAME = 'bank_details_lookups'
 
-    def create(self, params=None, headers=None):
+
+    def create(self,params=None, headers=None):
         """Perform a bank details lookup.
 
         Performs a bank details lookup.
@@ -34,14 +36,18 @@ class BankDetailsLookupsService(base_service.BaseService):
         not for payment collection, please get in touch.
 
         Args:
-          params (dict, optional): Request body.
+              params (dict, optional): Request body.
 
         Returns:
-          BankDetailsLookup
+              ListResponse of BankDetailsLookup instances
         """
         path = '/bank_details_lookups'
+        
         if params is not None:
             params = {self._envelope_key(): params}
-        response = self._perform_request('POST', path, params, headers)
-        return self._resource_for(response)
 
+        response = self._perform_request('POST', path, params, headers,
+                                         max_network_retries=3,
+                                         retry_delay_in_seconds=0.5)
+        return self._resource_for(response)
+  

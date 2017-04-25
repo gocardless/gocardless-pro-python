@@ -7,12 +7,20 @@ import json
 
 import requests
 import responses
-from nose.tools import assert_equal, assert_is_instance
+from nose.tools import (
+  assert_equal,
+  assert_is_instance,
+  assert_is_none,
+  assert_is_not_none,
+  assert_raises
+)
 
+from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
+  
 
 @responses.activate
 def test_redirect_flows_create():
@@ -22,7 +30,7 @@ def test_redirect_flows_create():
     body = fixture['body']['redirect_flows']
 
     assert_is_instance(response, resources.RedirectFlow)
-
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
@@ -38,6 +46,34 @@ def test_redirect_flows_create():
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
+
+def test_timeout_redirect_flows_idempotency_conflict():
+    create_fixture = helpers.load_fixture('redirect_flows')['create']
+    get_fixture = helpers.load_fixture('redirect_flows')['get']
+    with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
+      response = helpers.client.redirect_flows.create(*create_fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+
+    assert_is_instance(response, resources.RedirectFlow)
+
+def test_timeout_redirect_flows_retries():
+    fixture = helpers.load_fixture('redirect_flows')['create']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.redirect_flows.create(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['redirect_flows']
+
+    assert_is_instance(response, resources.RedirectFlow)
+
+def test_502_redirect_flows_retries():
+    fixture = helpers.load_fixture('redirect_flows')['create']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.redirect_flows.create(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['redirect_flows']
+
+    assert_is_instance(response, resources.RedirectFlow)
+  
 
 @responses.activate
 def test_redirect_flows_get():
@@ -47,7 +83,7 @@ def test_redirect_flows_get():
     body = fixture['body']['redirect_flows']
 
     assert_is_instance(response, resources.RedirectFlow)
-
+    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
@@ -63,6 +99,25 @@ def test_redirect_flows_get():
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
+
+def test_timeout_redirect_flows_retries():
+    fixture = helpers.load_fixture('redirect_flows')['get']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.redirect_flows.get(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['redirect_flows']
+
+    assert_is_instance(response, resources.RedirectFlow)
+
+def test_502_redirect_flows_retries():
+    fixture = helpers.load_fixture('redirect_flows')['get']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.redirect_flows.get(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+    body = fixture['body']['redirect_flows']
+
+    assert_is_instance(response, resources.RedirectFlow)
+  
 
 @responses.activate
 def test_redirect_flows_complete():
@@ -72,7 +127,7 @@ def test_redirect_flows_complete():
     body = fixture['body']['redirect_flows']
 
     assert_is_instance(response, resources.RedirectFlow)
-
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
@@ -89,3 +144,17 @@ def test_redirect_flows_complete():
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
 
+def test_timeout_redirect_flows_doesnt_retry():
+    fixture = helpers.load_fixture('redirect_flows')['complete']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.redirect_flows.complete(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_redirect_flows_doesnt_retry():
+    fixture = helpers.load_fixture('redirect_flows')['complete']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.redirect_flows.complete(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+  
