@@ -4,6 +4,7 @@
 #
 
 import sys
+import os
 import platform
 try:
     import urllib.parse as urlparse
@@ -119,13 +120,20 @@ class ApiClient(object):
         return headers
 
     def _default_headers(self):
-        return {
+        params = {
             'Accept': 'application/json',
             'Authorization': 'Bearer {0}'.format(self.access_token),
             'Content-Type': 'application/json',
             'User-Agent': self._user_agent(),
             'GoCardless-Version': '2015-07-06',
         }
+
+        env = os.getenv('ACCEPT_LANGUAGE', '')
+
+        if env:
+            params['Accept-Language'] = env
+
+        return params
 
     def _user_agent(self):
         python_version = '.'.join(platform.python_version_tuple()[0:2])
