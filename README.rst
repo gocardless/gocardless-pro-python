@@ -3,7 +3,7 @@ GoCardless Pro Python client library
 
 A Python client for interacting with the GoCardless Pro API.
 
-Tested against Python 2.7, 3.3, and 3.4.
+Tested against Python 2.7, 3.3, 3.4, 3.5, and 3.6.
 
 - `"Getting Started" guide <https://developer.gocardless.com/getting-started/api/introduction/?lang=python>`_ with copy and paste Python code samples
 - `API reference <https://developer.gocardless.com/api-reference>`_
