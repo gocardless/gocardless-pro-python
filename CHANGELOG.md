@@ -1,3 +1,11 @@
+# 0.3.1 / 2017-05-17
+
+* Add `GoCardless-Client-Library` and `GoCardless-Client-Version` headers.
+* Add a random idempotency key to any POST request where it is not specified.
+* Automatically retry failed requests of idempotent methods.
+* On idempotency conflict during `create`, GET and return the existing resource.
+* Add support for python3.5 and python3.6 .
+
 # 0.3.0 / 2017-02-22
 
 * Add `scheme_identifiers` and `logo_url` to `creditor` resource
