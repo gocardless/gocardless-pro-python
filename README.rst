@@ -5,9 +5,8 @@ A Python client for interacting with the GoCardless Pro API.
 
 Tested against Python 2.7, 3.3, and 3.4.
 
-- ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/?lang=python) with copy and paste Python code samples
-- [API Reference](https://developer.gocardless.com/api-reference)
-
+- `"Getting Started" guide <https://developer.gocardless.com/getting-started/api/introduction/?lang=python>`_ with copy and paste Python code samples
+- `API reference <https://developer.gocardless.com/api-reference>`_
 ------------
 
 Install from PyPI:
