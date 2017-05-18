@@ -81,6 +81,11 @@ class Creditor(object):
         return self.attributes.get('scheme_identifiers')
   
 
+    @property
+    def verification_status(self):
+        return self.attributes.get('verification_status')
+  
+
 
   
 
@@ -115,6 +120,8 @@ class Creditor(object):
         def default_sek_payout_account(self):
             return self.attributes.get('default_sek_payout_account')
     
+  
+
   
 
   

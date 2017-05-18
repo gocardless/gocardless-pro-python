@@ -43,6 +43,7 @@ def test_creditors_create():
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
     assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
+    assert_equal(response.verification_status, body.get('verification_status'))
     assert_equal(response.links.default_eur_payout_account,
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,
@@ -115,6 +116,8 @@ def test_creditors_list():
                  [b.get('region') for b in body])
     assert_equal([r.scheme_identifiers for r in response.records],
                  [b.get('scheme_identifiers') for b in body])
+    assert_equal([r.verification_status for r in response.records],
+                 [b.get('verification_status') for b in body])
 
 def test_timeout_creditors_retries():
     fixture = helpers.load_fixture('creditors')['list']
@@ -184,6 +187,7 @@ def test_creditors_get():
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
     assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
+    assert_equal(response.verification_status, body.get('verification_status'))
     assert_equal(response.links.default_eur_payout_account,
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,
@@ -231,6 +235,7 @@ def test_creditors_update():
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
     assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
+    assert_equal(response.verification_status, body.get('verification_status'))
     assert_equal(response.links.default_eur_payout_account,
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,
