@@ -1,10 +1,12 @@
-# 0.3.1 / 2017-05-17
+# 1.0.0 / 2017-05-19
 
-* Add `GoCardless-Client-Library` and `GoCardless-Client-Version` headers.
-* Add a random idempotency key to any POST request where it is not specified.
-* Automatically retry failed requests of idempotent methods.
-* On idempotency conflict during `create`, GET and return the existing resource.
-* Add support for python3.5 and python3.6 .
+* Add safe retrying for requests where possible:
+  * Automatically retry requests that fail due to network or GoCardless errors.
+  * Automatically add an [idempotency key](https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys) for POST requests if not provided manually
+  * **Breaking change**: Automatically retrieve and return the existing resource in the event of a `409 idempotent_creation_conflict` response. This changes previous behaviour - instead of seeing an exception at this point, the client will now automatically retrieve the original resource that was created with that idempotency key.
+* Support the new `verification_status` attribute in the Creditors API, which may be either `action_required`, `in_review` or `successful`. See the new ["Helping your users get verified" section in the partner guide](https://developer.gocardless.com/getting-started/partners/helping-your-users-get-verified/) for details.
+* Add `GoCardless-Client-Library` and `GoCardless-Client-Version` headers to aid identification of requests
+* Add support for Python 3.5 and Python 3.6
 
 # 0.3.0 / 2017-02-22
 
