@@ -12,6 +12,7 @@ from nose.tools import (
   assert_is_instance,
   assert_is_none,
   assert_is_not_none,
+  assert_not_equal,
   assert_raises
 )
 
@@ -54,11 +55,14 @@ def test_payouts_list():
     assert_equal([r.status for r in response.records],
                  [b.get('status') for b in body])
 
-def test_timeout_payouts_retries():
+@responses.activate
+def test_timeout_payouts_list_retries():
     fixture = helpers.load_fixture('payouts')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.payouts.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['payouts']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -67,11 +71,13 @@ def test_timeout_payouts_retries():
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-def test_502_payouts_retries():
+def test_502_payouts_list_retries():
     fixture = helpers.load_fixture('payouts')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.payouts.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['payouts']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -124,20 +130,25 @@ def test_payouts_get():
     assert_equal(response.links.creditor_bank_account,
                  body.get('links')['creditor_bank_account'])
 
-def test_timeout_payouts_retries():
+@responses.activate
+def test_timeout_payouts_get_retries():
     fixture = helpers.load_fixture('payouts')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.payouts.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['payouts']
 
     assert_is_instance(response, resources.Payout)
 
-def test_502_payouts_retries():
+def test_502_payouts_get_retries():
     fixture = helpers.load_fixture('payouts')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.payouts.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['payouts']
 
     assert_is_instance(response, resources.Payout)

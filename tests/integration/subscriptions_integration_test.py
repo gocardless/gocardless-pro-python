@@ -12,6 +12,7 @@ from nose.tools import (
   assert_is_instance,
   assert_is_none,
   assert_is_not_none,
+  assert_not_equal,
   assert_raises
 )
 
@@ -49,7 +50,16 @@ def test_subscriptions_create():
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
 
-def test_timeout_subscriptions_idempotency_conflict():
+@responses.activate
+def test_subscriptions_create_new_idempotency_key_for_each_call():
+    fixture = helpers.load_fixture('subscriptions')['create']
+    helpers.stub_response(fixture)
+    helpers.client.subscriptions.create(*fixture['url_params'])
+    helpers.client.subscriptions.create(*fixture['url_params'])
+    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
+                     responses.calls[1].request.headers.get('Idempotency-Key'))
+
+def test_timeout_subscriptions_create_idempotency_conflict():
     create_fixture = helpers.load_fixture('subscriptions')['create']
     get_fixture = helpers.load_fixture('subscriptions')['get']
     with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
@@ -58,20 +68,25 @@ def test_timeout_subscriptions_idempotency_conflict():
 
     assert_is_instance(response, resources.Subscription)
 
-def test_timeout_subscriptions_retries():
+@responses.activate
+def test_timeout_subscriptions_create_retries():
     fixture = helpers.load_fixture('subscriptions')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
 
-def test_502_subscriptions_retries():
+def test_502_subscriptions_create_retries():
     fixture = helpers.load_fixture('subscriptions')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
@@ -121,11 +136,14 @@ def test_subscriptions_list():
     assert_equal([r.upcoming_payments for r in response.records],
                  [b.get('upcoming_payments') for b in body])
 
-def test_timeout_subscriptions_retries():
+@responses.activate
+def test_timeout_subscriptions_list_retries():
     fixture = helpers.load_fixture('subscriptions')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -134,11 +152,13 @@ def test_timeout_subscriptions_retries():
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-def test_502_subscriptions_retries():
+def test_502_subscriptions_list_retries():
     fixture = helpers.load_fixture('subscriptions')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -195,20 +215,25 @@ def test_subscriptions_get():
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
 
-def test_timeout_subscriptions_retries():
+@responses.activate
+def test_timeout_subscriptions_get_retries():
     fixture = helpers.load_fixture('subscriptions')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
 
-def test_502_subscriptions_retries():
+def test_502_subscriptions_get_retries():
     fixture = helpers.load_fixture('subscriptions')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
@@ -241,20 +266,25 @@ def test_subscriptions_update():
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
 
-def test_timeout_subscriptions_retries():
+@responses.activate
+def test_timeout_subscriptions_update_retries():
     fixture = helpers.load_fixture('subscriptions')['update']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.update(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
 
-def test_502_subscriptions_retries():
+def test_502_subscriptions_update_retries():
     fixture = helpers.load_fixture('subscriptions')['update']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.update(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['subscriptions']
 
     assert_is_instance(response, resources.Subscription)
@@ -287,14 +317,14 @@ def test_subscriptions_cancel():
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
 
-def test_timeout_subscriptions_doesnt_retry():
+def test_timeout_subscriptions_cancel_doesnt_retry():
     fixture = helpers.load_fixture('subscriptions')['cancel']
     with helpers.stub_timeout(fixture) as rsps:
       with assert_raises(requests.ConnectTimeout):
         response = helpers.client.subscriptions.cancel(*fixture['url_params'])
       assert_equal(1, len(rsps.calls))
 
-def test_502_subscriptions_doesnt_retry():
+def test_502_subscriptions_cancel_doesnt_retry():
     fixture = helpers.load_fixture('subscriptions')['cancel']
     with helpers.stub_502(fixture) as rsps:
       with assert_raises(MalformedResponseError):

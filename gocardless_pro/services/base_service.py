@@ -5,16 +5,35 @@
 
 import re
 import time
-
 from requests import Timeout, ConnectionError
+from uuid import uuid4
+
 from .. import list_response
 from ..api_response import ApiResponse
 from ..errors import MalformedResponseError
 
 class BaseService(object):
     """Base class for API service classes."""
-    def __init__(self, api_client):
+    def __init__(self, api_client, max_network_retries=3, retry_delay_in_seconds=0.5):
         self._api_client = api_client
+        self.max_network_retries = max_network_retries
+        self.retry_delay_in_seconds = retry_delay_in_seconds
+
+    def _perform_request(self, method, path, params, headers=None, retry_failures=False):
+        if method == 'POST':
+            headers = self._inject_idempotency_key(headers)
+
+        if retry_failures:
+            for retries_left in range(self.max_network_retries-1, -1, -1):
+                try:
+                    return self._attempt_request(method, path, params, headers)
+                except (Timeout, ConnectionError, MalformedResponseError) as err:
+                    if retries_left > 0:
+                        time.sleep(self.retry_delay_in_seconds)
+                    else:
+                        raise err
+        else:
+            return self._attempt_request(method, path, params, headers)
 
     def _attempt_request(self, method, path, params, headers):
         if method == 'GET':
@@ -28,17 +47,13 @@ class BaseService(object):
 
         raise ValueError('Invalid method "{}"'.format(method))
 
-    def _perform_request(self, *args, **kwargs):
-        max_network_retries = kwargs.pop('max_network_retries', 1)
-        retry_delay_in_seconds = kwargs.pop('retry_delay_in_seconds', 0.5)
-        for retries_left in range(max_network_retries-1, -1, -1):
-            try:
-                return self._attempt_request(*args, **kwargs)
-            except (Timeout, ConnectionError, MalformedResponseError) as err:
-                if retries_left == 0:
-                    raise err
-                else:
-                    time.sleep(retry_delay_in_seconds)
+
+    def _inject_idempotency_key(self, headers):
+        headers = headers or {}
+        if 'Idempotency-Key' not in headers:
+            headers['Idempotency-Key'] = str(uuid4())
+
+        return headers
 
     def _envelope_key(self):
         return type(self).RESOURCE_NAME

@@ -32,14 +32,14 @@ class CreditorsService(base_service.BaseService):
         
         if params is not None:
             params = {self._envelope_key(): params}
+
         try:
           response = self._perform_request('POST', path, params, headers,
-                                           max_network_retries=3,
-                                           retry_delay_in_seconds=0.5)
+                                            retry_failures=True)
         except errors.IdempotentCreationConflictError as err:
-          return self.get(identity = err.conflicting_resource_id,
-                                params = params,
-                                headers = headers)
+          return self.get(identity=err.conflicting_resource_id,
+                          params=params,
+                          headers=headers)
         return self._resource_for(response)
   
 
@@ -59,8 +59,7 @@ class CreditorsService(base_service.BaseService):
         
 
         response = self._perform_request('GET', path, params, headers,
-                                         max_network_retries=3,
-                                         retry_delay_in_seconds=0.5)
+                                         retry_failures=True)
         return self._resource_for(response)
 
     def all(self, params=None):
@@ -89,8 +88,7 @@ class CreditorsService(base_service.BaseService):
         
 
         response = self._perform_request('GET', path, params, headers,
-                                         max_network_retries=3,
-                                         retry_delay_in_seconds=0.5)
+                                         retry_failures=True)
         return self._resource_for(response)
   
 
@@ -116,7 +114,6 @@ class CreditorsService(base_service.BaseService):
             params = {self._envelope_key(): params}
 
         response = self._perform_request('PUT', path, params, headers,
-                                         max_network_retries=3,
-                                         retry_delay_in_seconds=0.5)
+                                         retry_failures=True)
         return self._resource_for(response)
   

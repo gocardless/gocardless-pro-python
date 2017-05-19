@@ -37,55 +37,55 @@ class Client(object):
 
     @property
     def bank_details_lookups(self):
-        return services.BankDetailsLookupsService(self._api_client)
+        return services.BankDetailsLookupsService(self._api_client, 3, 0.5)
 
     @property
     def creditors(self):
-        return services.CreditorsService(self._api_client)
+        return services.CreditorsService(self._api_client, 3, 0.5)
 
     @property
     def creditor_bank_accounts(self):
-        return services.CreditorBankAccountsService(self._api_client)
+        return services.CreditorBankAccountsService(self._api_client, 3, 0.5)
 
     @property
     def customers(self):
-        return services.CustomersService(self._api_client)
+        return services.CustomersService(self._api_client, 3, 0.5)
 
     @property
     def customer_bank_accounts(self):
-        return services.CustomerBankAccountsService(self._api_client)
+        return services.CustomerBankAccountsService(self._api_client, 3, 0.5)
 
     @property
     def events(self):
-        return services.EventsService(self._api_client)
+        return services.EventsService(self._api_client, 3, 0.5)
 
     @property
     def mandates(self):
-        return services.MandatesService(self._api_client)
+        return services.MandatesService(self._api_client, 3, 0.5)
 
     @property
     def mandate_pdfs(self):
-        return services.MandatePdfsService(self._api_client)
+        return services.MandatePdfsService(self._api_client, 3, 0.5)
 
     @property
     def payments(self):
-        return services.PaymentsService(self._api_client)
+        return services.PaymentsService(self._api_client, 3, 0.5)
 
     @property
     def payouts(self):
-        return services.PayoutsService(self._api_client)
+        return services.PayoutsService(self._api_client, 3, 0.5)
 
     @property
     def redirect_flows(self):
-        return services.RedirectFlowsService(self._api_client)
+        return services.RedirectFlowsService(self._api_client, 3, 0.5)
 
     @property
     def refunds(self):
-        return services.RefundsService(self._api_client)
+        return services.RefundsService(self._api_client, 3, 0.5)
 
     @property
     def subscriptions(self):
-        return services.SubscriptionsService(self._api_client)
+        return services.SubscriptionsService(self._api_client, 3, 0.5)
 
     def _environment_url(self, environment):
         environment_urls = { 

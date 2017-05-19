@@ -12,6 +12,7 @@ from nose.tools import (
   assert_is_instance,
   assert_is_none,
   assert_is_not_none,
+  assert_not_equal,
   assert_raises
 )
 
@@ -46,11 +47,14 @@ def test_events_list():
     assert_equal([r.resource_type for r in response.records],
                  [b.get('resource_type') for b in body])
 
-def test_timeout_events_retries():
+@responses.activate
+def test_timeout_events_list_retries():
     fixture = helpers.load_fixture('events')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.events.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['events']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -59,11 +63,13 @@ def test_timeout_events_retries():
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-def test_502_events_retries():
+def test_502_events_list_retries():
     fixture = helpers.load_fixture('events')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.events.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['events']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -138,20 +144,25 @@ def test_events_get():
     assert_equal(response.links.subscription,
                  body.get('links')['subscription'])
 
-def test_timeout_events_retries():
+@responses.activate
+def test_timeout_events_get_retries():
     fixture = helpers.load_fixture('events')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.events.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['events']
 
     assert_is_instance(response, resources.Event)
 
-def test_502_events_retries():
+def test_502_events_get_retries():
     fixture = helpers.load_fixture('events')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.events.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['events']
 
     assert_is_instance(response, resources.Event)

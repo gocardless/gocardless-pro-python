@@ -12,7 +12,6 @@ except ImportError:
 import json
 
 import requests
-from uuid import uuid4
 
 from . import errors
 
@@ -62,9 +61,6 @@ class ApiClient(object):
         Returns:
           A requests ``Response`` object.
         """
-        headers = headers or {}
-        if 'Idempotency-Key' not in headers:
-            headers['Idempotency-Key'] = str(uuid4())
 
         response = requests.post(
             self._url_for(path),

@@ -12,6 +12,7 @@ from nose.tools import (
   assert_is_instance,
   assert_is_none,
   assert_is_not_none,
+  assert_not_equal,
   assert_raises
 )
 
@@ -40,7 +41,16 @@ def test_refunds_create():
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 
-def test_timeout_refunds_idempotency_conflict():
+@responses.activate
+def test_refunds_create_new_idempotency_key_for_each_call():
+    fixture = helpers.load_fixture('refunds')['create']
+    helpers.stub_response(fixture)
+    helpers.client.refunds.create(*fixture['url_params'])
+    helpers.client.refunds.create(*fixture['url_params'])
+    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
+                     responses.calls[1].request.headers.get('Idempotency-Key'))
+
+def test_timeout_refunds_create_idempotency_conflict():
     create_fixture = helpers.load_fixture('refunds')['create']
     get_fixture = helpers.load_fixture('refunds')['get']
     with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
@@ -49,20 +59,25 @@ def test_timeout_refunds_idempotency_conflict():
 
     assert_is_instance(response, resources.Refund)
 
-def test_timeout_refunds_retries():
+@responses.activate
+def test_timeout_refunds_create_retries():
     fixture = helpers.load_fixture('refunds')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.refunds.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)
 
-def test_502_refunds_retries():
+def test_502_refunds_create_retries():
     fixture = helpers.load_fixture('refunds')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.refunds.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)
@@ -94,11 +109,14 @@ def test_refunds_list():
     assert_equal([r.reference for r in response.records],
                  [b.get('reference') for b in body])
 
-def test_timeout_refunds_retries():
+@responses.activate
+def test_timeout_refunds_list_retries():
     fixture = helpers.load_fixture('refunds')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.refunds.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['refunds']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -107,11 +125,13 @@ def test_timeout_refunds_retries():
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-def test_502_refunds_retries():
+def test_502_refunds_list_retries():
     fixture = helpers.load_fixture('refunds')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.refunds.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['refunds']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -159,20 +179,25 @@ def test_refunds_get():
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 
-def test_timeout_refunds_retries():
+@responses.activate
+def test_timeout_refunds_get_retries():
     fixture = helpers.load_fixture('refunds')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.refunds.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)
 
-def test_502_refunds_retries():
+def test_502_refunds_get_retries():
     fixture = helpers.load_fixture('refunds')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.refunds.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)
@@ -196,20 +221,25 @@ def test_refunds_update():
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 
-def test_timeout_refunds_retries():
+@responses.activate
+def test_timeout_refunds_update_retries():
     fixture = helpers.load_fixture('refunds')['update']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.refunds.update(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)
 
-def test_502_refunds_retries():
+def test_502_refunds_update_retries():
     fixture = helpers.load_fixture('refunds')['update']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.refunds.update(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['refunds']
 
     assert_is_instance(response, resources.Refund)

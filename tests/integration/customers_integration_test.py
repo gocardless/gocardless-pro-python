@@ -12,6 +12,7 @@ from nose.tools import (
   assert_is_instance,
   assert_is_none,
   assert_is_not_none,
+  assert_not_equal,
   assert_raises
 )
 
@@ -48,7 +49,16 @@ def test_customers_create():
     assert_equal(response.region, body.get('region'))
     assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
 
-def test_timeout_customers_idempotency_conflict():
+@responses.activate
+def test_customers_create_new_idempotency_key_for_each_call():
+    fixture = helpers.load_fixture('customers')['create']
+    helpers.stub_response(fixture)
+    helpers.client.customers.create(*fixture['url_params'])
+    helpers.client.customers.create(*fixture['url_params'])
+    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
+                     responses.calls[1].request.headers.get('Idempotency-Key'))
+
+def test_timeout_customers_create_idempotency_conflict():
     create_fixture = helpers.load_fixture('customers')['create']
     get_fixture = helpers.load_fixture('customers')['get']
     with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
@@ -57,20 +67,25 @@ def test_timeout_customers_idempotency_conflict():
 
     assert_is_instance(response, resources.Customer)
 
-def test_timeout_customers_retries():
+@responses.activate
+def test_timeout_customers_create_retries():
     fixture = helpers.load_fixture('customers')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.customers.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)
 
-def test_502_customers_retries():
+def test_502_customers_create_retries():
     fixture = helpers.load_fixture('customers')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.customers.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)
@@ -122,11 +137,14 @@ def test_customers_list():
     assert_equal([r.swedish_identity_number for r in response.records],
                  [b.get('swedish_identity_number') for b in body])
 
-def test_timeout_customers_retries():
+@responses.activate
+def test_timeout_customers_list_retries():
     fixture = helpers.load_fixture('customers')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.customers.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['customers']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -135,11 +153,13 @@ def test_timeout_customers_retries():
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
 
-def test_502_customers_retries():
+def test_502_customers_list_retries():
     fixture = helpers.load_fixture('customers')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.customers.list(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['customers']
 
     assert_is_instance(response, list_response.ListResponse)
@@ -195,20 +215,25 @@ def test_customers_get():
     assert_equal(response.region, body.get('region'))
     assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
 
-def test_timeout_customers_retries():
+@responses.activate
+def test_timeout_customers_get_retries():
     fixture = helpers.load_fixture('customers')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.customers.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)
 
-def test_502_customers_retries():
+def test_502_customers_get_retries():
     fixture = helpers.load_fixture('customers')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.customers.get(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)
@@ -240,20 +265,25 @@ def test_customers_update():
     assert_equal(response.region, body.get('region'))
     assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
 
-def test_timeout_customers_retries():
+@responses.activate
+def test_timeout_customers_update_retries():
     fixture = helpers.load_fixture('customers')['update']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.customers.update(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)
 
-def test_502_customers_retries():
+def test_502_customers_update_retries():
     fixture = helpers.load_fixture('customers')['update']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.customers.update(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['customers']
 
     assert_is_instance(response, resources.Customer)

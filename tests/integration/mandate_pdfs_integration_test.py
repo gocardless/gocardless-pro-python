@@ -12,6 +12,7 @@ from nose.tools import (
   assert_is_instance,
   assert_is_none,
   assert_is_not_none,
+  assert_not_equal,
   assert_raises
 )
 
@@ -34,20 +35,25 @@ def test_mandate_pdfs_create():
     assert_equal(response.expires_at, body.get('expires_at'))
     assert_equal(response.url, body.get('url'))
 
-def test_timeout_mandate_pdfs_retries():
+@responses.activate
+def test_timeout_mandate_pdfs_create_retries():
     fixture = helpers.load_fixture('mandate_pdfs')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['mandate_pdfs']
 
     assert_is_instance(response, resources.MandatePdf)
 
-def test_502_mandate_pdfs_retries():
+def test_502_mandate_pdfs_create_retries():
     fixture = helpers.load_fixture('mandate_pdfs')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['mandate_pdfs']
 
     assert_is_instance(response, resources.MandatePdf)

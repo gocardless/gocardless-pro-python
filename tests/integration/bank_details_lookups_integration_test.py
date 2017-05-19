@@ -12,6 +12,7 @@ from nose.tools import (
   assert_is_instance,
   assert_is_none,
   assert_is_not_none,
+  assert_not_equal,
   assert_raises
 )
 
@@ -35,20 +36,25 @@ def test_bank_details_lookups_create():
     assert_equal(response.bank_name, body.get('bank_name'))
     assert_equal(response.bic, body.get('bic'))
 
-def test_timeout_bank_details_lookups_retries():
+@responses.activate
+def test_timeout_bank_details_lookups_create_retries():
     fixture = helpers.load_fixture('bank_details_lookups')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.bank_details_lookups.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['bank_details_lookups']
 
     assert_is_instance(response, resources.BankDetailsLookup)
 
-def test_502_bank_details_lookups_retries():
+def test_502_bank_details_lookups_create_retries():
     fixture = helpers.load_fixture('bank_details_lookups')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.bank_details_lookups.create(*fixture['url_params'])
       assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
     body = fixture['body']['bank_details_lookups']
 
     assert_is_instance(response, resources.BankDetailsLookup)
