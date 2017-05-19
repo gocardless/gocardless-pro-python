@@ -32,10 +32,13 @@ Access API endpoints using the corresponding methods on the client object:
 
 .. code:: python
 
-    # Create a new customer
+    # Create a new customer. We automatically add idempotency keys to requests to create
+    # resources, stopping duplicates accidentally getting created if something goes wrong
+    # with the API (e.g. networking problems) - see https://developer.gocardless.com/api
+    # -reference/#making-requests-idempotency-keys for details
     customer = client.customers.create(params={'email': 'jane@example.com'})
 
-    # Fetch a payment by its id
+    # Fetch a payment by its ID
     payment = client.payments.get("PA123")
 
     # Loop through a page of payments, printing each payment's amount
@@ -49,9 +52,9 @@ Access API endpoints using the corresponding methods on the client object:
         headers={'Accept-Language': 'fr'}
     )
 
-For full documentation, see our `API docs`_.
+For full documentation, see our `API reference`_.
 
-.. _API docs: https://developer.gocardless.com/api-reference
+.. _API reference: https://developer.gocardless.com/api-reference
 
 
 Available resources
