@@ -1,7 +1,14 @@
+.. |circle-badge| image:: https://circleci.com/gh/gocardless/gocardless-pro-python.svg?style=shield&circle-token=:circle-token
+    :target: https://circleci.com/gh/gocardless/gocardless-pro-python
+.. |pypi-badge| image:: https://badge.fury.io/py/gocardless_pro.svg
+    :target: https://pypi.python.org/pypi/gocardless_pro
+
 GoCardless Pro Python client library
 ============================================
 
 A Python client for interacting with the GoCardless Pro API.
+
+|circle-badge| |pypi-badge|
 
 Tested against Python 2.7, 3.3, 3.4, 3.5, and 3.6.
 
