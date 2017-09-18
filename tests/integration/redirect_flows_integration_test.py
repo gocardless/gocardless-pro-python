@@ -32,6 +32,7 @@ def test_redirect_flows_create():
 
     assert_is_instance(response, resources.RedirectFlow)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.confirmation_url, body.get('confirmation_url'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
@@ -99,6 +100,7 @@ def test_redirect_flows_get():
 
     assert_is_instance(response, resources.RedirectFlow)
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.confirmation_url, body.get('confirmation_url'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))
@@ -148,6 +150,7 @@ def test_redirect_flows_complete():
 
     assert_is_instance(response, resources.RedirectFlow)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.confirmation_url, body.get('confirmation_url'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.id, body.get('id'))

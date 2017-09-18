@@ -17,6 +17,11 @@ class RedirectFlow(object):
         self.api_response = api_response
 
     @property
+    def confirmation_url(self):
+        return self.attributes.get('confirmation_url')
+  
+
+    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -56,6 +61,8 @@ class RedirectFlow(object):
         return self.attributes.get('success_redirect_url')
   
 
+
+  
 
   
 
