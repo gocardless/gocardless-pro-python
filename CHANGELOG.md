@@ -1,3 +1,7 @@
+# 1.1.0 / 2017-09-18
+
+* Add `confirmation_url` to Redirect Flows
+
 # 1.0.0 / 2017-05-19
 
 * Add safe retrying for requests where possible:
