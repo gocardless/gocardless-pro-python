@@ -98,12 +98,11 @@ class CreditorBankAccountsService(base_service.BaseService):
         Immediately disables the bank account, no money can be paid out to a
         disabled account.
         
-        This will return a `disable_failed`
-        error if the bank account has already been disabled.
+        This will return a `disable_failed` error if the bank account has
+        already been disabled.
         
-        A
-        disabled bank account can be re-enabled by creating a new bank account
-        resource with the same details.
+        A disabled bank account can be re-enabled by creating a new bank
+        account resource with the same details.
 
         Args:
               identity (string): Unique identifier, beginning with "BA".

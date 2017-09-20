@@ -22,14 +22,12 @@ class MandatePdfsService(base_service.BaseService):
 
         Generates a PDF mandate and returns its temporary URL.
         
-       
         Customer and bank account details can be left blank (for a blank
         mandate), provided manually, or inferred from the ID of an existing
         [mandate](#core-endpoints-mandates).
         
-        To generate a PDF
-        mandate in a foreign language, set your `Accept-Language` header to the
-        relevant [ISO
+        To generate a PDF mandate in a foreign language, set your
+        `Accept-Language` header to the relevant [ISO
         639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table)
         language code. Supported languages are Dutch, English, French, German,
         Italian, Portuguese, Spanish and Swedish.

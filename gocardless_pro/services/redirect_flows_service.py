@@ -75,7 +75,6 @@ class RedirectFlowsService(base_service.BaseService):
         [mandate](#core-endpoints-mandates) using the details supplied by your
         customer and returns the ID of the created mandate.
         
-       
         This will return a `redirect_flow_incomplete` error if your customer
         has not yet been redirected back to your site, and a
         `redirect_flow_already_completed` error if your integration has already

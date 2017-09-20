@@ -22,21 +22,17 @@ class CustomerBankAccountsService(base_service.BaseService):
 
         Creates a new customer bank account object.
         
-        There are
-        three different ways to supply bank account details:
+        There are three different ways to supply bank account details:
         
-        -
-        [Local details](#appendix-local-bank-details)
+        - [Local details](#appendix-local-bank-details)
         
         - IBAN
- 
-              
+        
         - [Customer Bank Account
         Tokens](#javascript-flow-create-a-customer-bank-account-token)
-       
         
-        For more information on the different fields required in each
-        country, see [local bank details](#appendix-local-bank-details).
+        For more information on the different fields required in each country,
+        see [local bank details](#appendix-local-bank-details).
 
         Args:
               params (dict, optional): Request body.
@@ -138,14 +134,12 @@ class CustomerBankAccountsService(base_service.BaseService):
         """Disable a customer bank account.
 
         Immediately cancels all associated mandates and cancellable payments.
- 
-              
-        This will return a `disable_failed` error if the bank
-        account has already been disabled.
         
-        A disabled bank
-        account can be re-enabled by creating a new bank account resource with
-        the same details.
+        This will return a `disable_failed` error if the bank account has
+        already been disabled.
+        
+        A disabled bank account can be re-enabled by creating a new bank
+        account resource with the same details.
 
         Args:
               identity (string): Unique identifier, beginning with "BA".

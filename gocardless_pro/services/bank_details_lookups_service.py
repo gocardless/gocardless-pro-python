@@ -20,20 +20,25 @@ class BankDetailsLookupsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Perform a bank details lookup.
 
-        Performs a bank details lookup.
+        Performs a bank details lookup. As part of the lookup, a modulus check
+        and
+        reachability check are performed.
         
-        As part of the lookup
-        a modulus check and reachability check are performed.
+        If your request returns an [error](#api-usage-errors) or the
+        `available_debit_schemes`
+        attribute is an empty array, you will not be able to collect payments
+        from the
+        specified bank account. GoCardless may be able to collect payments from
+        an account
+        even if no `bic` is returned.
         
-       
         Bank account details may be supplied using [local
         details](#appendix-local-bank-details) or an IBAN.
         
-       
         _Note:_ Usage of this endpoint is monitored. If your organisation
         relies on GoCardless for
-        modulus or reachability checking but
-        not for payment collection, please get in touch.
+        modulus or reachability checking but not for payment collection, please
+        get in touch.
 
         Args:
               params (dict, optional): Request body.

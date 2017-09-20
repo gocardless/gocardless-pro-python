@@ -21,7 +21,6 @@ class PaymentsService(base_service.BaseService):
         """Create a payment.
 
         <a name="mandate_is_inactive"></a>Creates a new payment object.
-       
         
         This fails with a `mandate_is_inactive` error if the linked
         [mandate](#core-endpoints-mandates) is cancelled or has failed.
@@ -131,9 +130,8 @@ class PaymentsService(base_service.BaseService):
         Any metadata supplied to this endpoint will be stored on the payment
         cancellation event it causes.
         
-        This will fail with a
-        `cancellation_failed` error unless the payment's status is
-        `pending_submission`.
+        This will fail with a `cancellation_failed` error unless the payment's
+        status is `pending_submission`.
 
         Args:
               identity (string): Unique identifier, beginning with "PM".
@@ -162,14 +160,11 @@ class PaymentsService(base_service.BaseService):
         but after that retrying the payment follows the same process as its
         initial creation, so you will receive a `submitted` webhook, followed
         by a `confirmed` or `failed` event. Any metadata supplied to this
-        endpoint will be stored against the payment submission event it
-        causes.
+        endpoint will be stored against the payment submission event it causes.
         
-        This will return a `retry_failed` error if the
-        payment has not failed.
+        This will return a `retry_failed` error if the payment has not failed.
         
-        Payments can be retried up to
-        3 times.
+        Payments can be retried up to 3 times.
 
         Args:
               identity (string): Unique identifier, beginning with "PM".

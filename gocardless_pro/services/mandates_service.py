@@ -124,8 +124,8 @@ class MandatesService(base_service.BaseService):
         Any metadata supplied to this endpoint will be stored on the mandate
         cancellation event it causes.
         
-        This will fail with a
-        `cancellation_failed` error if the mandate is already cancelled.
+        This will fail with a `cancellation_failed` error if the mandate is
+        already cancelled.
 
         Args:
               identity (string): Unique identifier, beginning with "MD".
@@ -157,12 +157,10 @@ class MandatesService(base_service.BaseService):
         working days later. Any metadata supplied to this endpoint will be
         stored on the `resubmission_requested` event it causes.
         
-      
-         This will fail with a `mandate_not_inactive` error if the mandate is
+        This will fail with a `mandate_not_inactive` error if the mandate is
         already being submitted, or is active.
         
-        Mandates can be
-        resubmitted up to 3 times.
+        Mandates can be resubmitted up to 3 times.
 
         Args:
               identity (string): Unique identifier, beginning with "MD".
