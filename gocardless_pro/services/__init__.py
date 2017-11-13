@@ -13,6 +13,7 @@ from .mandates_service import MandatesService
 from .mandate_pdfs_service import MandatePdfsService
 from .payments_service import PaymentsService
 from .payouts_service import PayoutsService
+from .payout_items_service import PayoutItemsService
 from .redirect_flows_service import RedirectFlowsService
 from .refunds_service import RefundsService
 from .subscriptions_service import SubscriptionsService

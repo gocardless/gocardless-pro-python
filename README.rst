@@ -246,6 +246,17 @@ Payouts
     # Get a single payout
     client.payouts.get('PO123', params={...})
 
+Payout items
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Get all payout items in a single payout
+    client.payout_items.list(params={...})
+
+    # Iterate through all payout_items
+    client.payout_items.all(params={...})
+
 Redirect flows
 ''''''''''''''''''''''''''''''''''''''''''
 

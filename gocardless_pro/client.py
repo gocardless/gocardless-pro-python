@@ -76,6 +76,10 @@ class Client(object):
         return services.PayoutsService(self._api_client, 3, 0.5)
 
     @property
+    def payout_items(self):
+        return services.PayoutItemsService(self._api_client, 3, 0.5)
+
+    @property
     def redirect_flows(self):
         return services.RedirectFlowsService(self._api_client, 3, 0.5)
 

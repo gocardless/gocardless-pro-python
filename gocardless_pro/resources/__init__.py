@@ -23,6 +23,8 @@ from .payment import Payment
 
 from .payout import Payout
 
+from .payout_item import PayoutItem
+
 from .redirect_flow import RedirectFlow
 
 from .refund import Refund

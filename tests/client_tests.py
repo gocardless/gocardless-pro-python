@@ -46,6 +46,9 @@ def test_payments_returns_service():
 def test_payouts_returns_service():
     assert_is_instance(client.payouts, services.PayoutsService)
 
+def test_payout_items_returns_service():
+    assert_is_instance(client.payout_items, services.PayoutItemsService)
+
 def test_redirect_flows_returns_service():
     assert_is_instance(client.redirect_flows, services.RedirectFlowsService)
 
