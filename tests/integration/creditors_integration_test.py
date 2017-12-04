@@ -35,6 +35,7 @@ def test_creditors_create():
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.can_create_refunds, body.get('can_create_refunds'))
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
@@ -113,6 +114,8 @@ def test_creditors_list():
                  [b.get('address_line2') for b in body])
     assert_equal([r.address_line3 for r in response.records],
                  [b.get('address_line3') for b in body])
+    assert_equal([r.can_create_refunds for r in response.records],
+                 [b.get('can_create_refunds') for b in body])
     assert_equal([r.city for r in response.records],
                  [b.get('city') for b in body])
     assert_equal([r.country_code for r in response.records],
@@ -198,6 +201,7 @@ def test_creditors_get():
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.can_create_refunds, body.get('can_create_refunds'))
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
@@ -251,6 +255,7 @@ def test_creditors_update():
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.can_create_refunds, body.get('can_create_refunds'))
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))

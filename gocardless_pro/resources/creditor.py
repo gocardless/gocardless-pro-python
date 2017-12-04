@@ -32,6 +32,11 @@ class Creditor(object):
   
 
     @property
+    def can_create_refunds(self):
+        return self.attributes.get('can_create_refunds')
+  
+
+    @property
     def city(self):
         return self.attributes.get('city')
   
@@ -86,6 +91,8 @@ class Creditor(object):
         return self.attributes.get('verification_status')
   
 
+
+  
 
   
 

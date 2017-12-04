@@ -1,3 +1,11 @@
+# 1.3.0 / 2017-12-04
+
+* Add `can_create_refunds` to `creditor` response.
+
+# 1.2.0 / 2017-11-13
+
+Add `payout_items` API.
+
 # 1.1.0 / 2017-09-18
 
 * Add `confirmation_url` to Redirect Flows
