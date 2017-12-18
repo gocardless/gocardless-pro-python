@@ -39,6 +39,7 @@ def test_customers_create():
     assert_equal(response.company_name, body.get('company_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.danish_identity_number, body.get('danish_identity_number'))
     assert_equal(response.email, body.get('email'))
     assert_equal(response.family_name, body.get('family_name'))
     assert_equal(response.given_name, body.get('given_name'))
@@ -118,6 +119,8 @@ def test_customers_list():
                  [b.get('country_code') for b in body])
     assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
+    assert_equal([r.danish_identity_number for r in response.records],
+                 [b.get('danish_identity_number') for b in body])
     assert_equal([r.email for r in response.records],
                  [b.get('email') for b in body])
     assert_equal([r.family_name for r in response.records],
@@ -205,6 +208,7 @@ def test_customers_get():
     assert_equal(response.company_name, body.get('company_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.danish_identity_number, body.get('danish_identity_number'))
     assert_equal(response.email, body.get('email'))
     assert_equal(response.family_name, body.get('family_name'))
     assert_equal(response.given_name, body.get('given_name'))
@@ -255,6 +259,7 @@ def test_customers_update():
     assert_equal(response.company_name, body.get('company_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.danish_identity_number, body.get('danish_identity_number'))
     assert_equal(response.email, body.get('email'))
     assert_equal(response.family_name, body.get('family_name'))
     assert_equal(response.given_name, body.get('given_name'))

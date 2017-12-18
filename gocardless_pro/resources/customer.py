@@ -52,6 +52,11 @@ class Customer(object):
   
 
     @property
+    def danish_identity_number(self):
+        return self.attributes.get('danish_identity_number')
+  
+
+    @property
     def email(self):
         return self.attributes.get('email')
   
@@ -96,6 +101,8 @@ class Customer(object):
         return self.attributes.get('swedish_identity_number')
   
 
+
+  
 
   
 
