@@ -38,6 +38,8 @@ def test_refunds_create():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 
@@ -176,6 +178,8 @@ def test_refunds_get():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 
@@ -218,6 +222,8 @@ def test_refunds_update():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
 

@@ -68,6 +68,10 @@ class Refund(object):
             self.attributes = attributes
     
         @property
+        def mandate(self):
+            return self.attributes.get('mandate')
+    
+        @property
         def payment(self):
             return self.attributes.get('payment')
     
