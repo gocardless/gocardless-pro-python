@@ -1,3 +1,8 @@
+# 1.4.0 / 2018-03-16
+
+* Add `default_dkk_payout_account` to Creditor
+* Add `danish_identity_number` to Customer
+
 # 1.3.1 / 2017-12-04
 
 * Fix README.rst for correct display on PyPI.
