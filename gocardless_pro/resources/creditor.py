@@ -116,6 +116,10 @@ class Creditor(object):
             self.attributes = attributes
     
         @property
+        def default_aud_payout_account(self):
+            return self.attributes.get('default_aud_payout_account')
+    
+        @property
         def default_dkk_payout_account(self):
             return self.attributes.get('default_dkk_payout_account')
     

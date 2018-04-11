@@ -46,6 +46,8 @@ def test_creditors_create():
     assert_equal(response.region, body.get('region'))
     assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
     assert_equal(response.verification_status, body.get('verification_status'))
+    assert_equal(response.links.default_aud_payout_account,
+                 body.get('links')['default_aud_payout_account'])
     assert_equal(response.links.default_dkk_payout_account,
                  body.get('links')['default_dkk_payout_account'])
     assert_equal(response.links.default_eur_payout_account,
@@ -214,6 +216,8 @@ def test_creditors_get():
     assert_equal(response.region, body.get('region'))
     assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
     assert_equal(response.verification_status, body.get('verification_status'))
+    assert_equal(response.links.default_aud_payout_account,
+                 body.get('links')['default_aud_payout_account'])
     assert_equal(response.links.default_dkk_payout_account,
                  body.get('links')['default_dkk_payout_account'])
     assert_equal(response.links.default_eur_payout_account,
@@ -270,6 +274,8 @@ def test_creditors_update():
     assert_equal(response.region, body.get('region'))
     assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
     assert_equal(response.verification_status, body.get('verification_status'))
+    assert_equal(response.links.default_aud_payout_account,
+                 body.get('links')['default_aud_payout_account'])
     assert_equal(response.links.default_dkk_payout_account,
                  body.get('links')['default_dkk_payout_account'])
     assert_equal(response.links.default_eur_payout_account,
