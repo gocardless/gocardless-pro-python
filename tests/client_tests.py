@@ -37,6 +37,12 @@ def test_events_returns_service():
 def test_mandates_returns_service():
     assert_is_instance(client.mandates, services.MandatesService)
 
+def test_mandate_imports_returns_service():
+    assert_is_instance(client.mandate_imports, services.MandateImportsService)
+
+def test_mandate_import_entries_returns_service():
+    assert_is_instance(client.mandate_import_entries, services.MandateImportEntriesService)
+
 def test_mandate_pdfs_returns_service():
     assert_is_instance(client.mandate_pdfs, services.MandatePdfsService)
 

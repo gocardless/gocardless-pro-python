@@ -199,6 +199,37 @@ Mandates
     # Reinstate a mandate
     client.mandates.reinstate('MD123', params={...})
 
+Mandate imports
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a new mandate import
+    client.mandate_imports.create(params={...})
+
+    # Get a mandate import
+    client.mandate_imports.get('IM000010790WX1', params={...})
+
+    # Submit a mandate import
+    client.mandate_imports.submit('IM000010790WX1', params={...})
+
+    # Cancel a mandate import
+    client.mandate_imports.cancel('IM000010790WX1', params={...})
+
+Mandate import entries
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Add a mandate import entry
+    client.mandate_import_entries.create(params={...})
+
+    # List all mandate import entries
+    client.mandate_import_entries.list(params={...})
+
+    # Iterate through all mandate_import_entries
+    client.mandate_import_entries.all(params={...})
+
 Mandate pdfs
 ''''''''''''''''''''''''''''''''''''''''''
 

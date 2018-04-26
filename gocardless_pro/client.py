@@ -64,6 +64,14 @@ class Client(object):
         return services.MandatesService(self._api_client, 3, 0.5)
 
     @property
+    def mandate_imports(self):
+        return services.MandateImportsService(self._api_client, 3, 0.5)
+
+    @property
+    def mandate_import_entries(self):
+        return services.MandateImportEntriesService(self._api_client, 3, 0.5)
+
+    @property
     def mandate_pdfs(self):
         return services.MandatePdfsService(self._api_client, 3, 0.5)
 

@@ -17,6 +17,10 @@ from .event import Event
 
 from .mandate import Mandate
 
+from .mandate_import import MandateImport
+
+from .mandate_import_entry import MandateImportEntry
+
 from .mandate_pdf import MandatePdf
 
 from .payment import Payment

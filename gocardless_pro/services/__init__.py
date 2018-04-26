@@ -10,6 +10,8 @@ from .customers_service import CustomersService
 from .customer_bank_accounts_service import CustomerBankAccountsService
 from .events_service import EventsService
 from .mandates_service import MandatesService
+from .mandate_imports_service import MandateImportsService
+from .mandate_import_entries_service import MandateImportEntriesService
 from .mandate_pdfs_service import MandatePdfsService
 from .payments_service import PaymentsService
 from .payouts_service import PayoutsService
