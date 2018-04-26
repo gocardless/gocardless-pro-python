@@ -1,3 +1,13 @@
+# 1.6.0
+
+* Add new [Mandate Imports API](https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports)
+
+# 1.5.0 / 2018-04-11
+
+* Add `mandate` to `Refund` links
+* Add `mandate` to `PayoutItem` links
+* Add `default_aud_payout_account` to `Creditor` links
+
 # 1.4.0 / 2018-03-16
 
 * Add `default_dkk_payout_account` to Creditor
@@ -75,12 +85,10 @@ Add `payout_items` API.
 * Fix support for endpoints that use "data" as the request envelope
 * Make exception string representations more detailed
 
-
 # 0.1.1 / 2015-07-08
 
 * Update to api version 2015-07-06
 * Add more detailed user agent header
-
 
 # 0.1.0 / 2015-07-08
 
