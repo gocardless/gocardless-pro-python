@@ -22,6 +22,11 @@ class Subscription(object):
   
 
     @property
+    def app_fee(self):
+        return self.attributes.get('app_fee')
+  
+
+    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -96,6 +101,8 @@ class Subscription(object):
         return self.attributes.get('upcoming_payments')
   
 
+
+  
 
   
 
