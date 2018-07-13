@@ -1,3 +1,13 @@
+# 1.8.0
+
+* Add support for passing customer address fields to the Mandate PDFs
+  creation endpoint.
+
+# 1.7.0
+
+* Add support for the new `app_fee` attribute returned by the Subscriptions API
+* Improve the documentation of the Mandate PDFs API
+
 # 1.6.0
 
 * Add new [Mandate Imports API](https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports)

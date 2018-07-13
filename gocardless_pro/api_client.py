@@ -120,7 +120,7 @@ class ApiClient(object):
             'Authorization': 'Bearer {0}'.format(self.access_token),
             'Content-Type': 'application/json',
             'GoCardless-Client-Library': 'gocardless-pro-python',
-            'GoCardless-Client-Version': '1.7.0',
+            'GoCardless-Client-Version': '1.8.0',
             'User-Agent': self._user_agent(),
             'GoCardless-Version': '2015-07-06',
         }
@@ -129,7 +129,7 @@ class ApiClient(object):
         python_version = '.'.join(platform.python_version_tuple()[0:2])
         vm_version = '{}.{}.{}-{}{}'.format(*sys.version_info)
         return ' '.join([
-            'gocardless-pro-python/1.7.0',
+            'gocardless-pro-python/1.8.0',
             'python/{0}'.format(python_version),
             '{0}/{1}'.format(platform.python_implementation(), vm_version),
             '{0}/{1}'.format(platform.system(), platform.release()),
