@@ -8,6 +8,7 @@ from .creditors_service import CreditorsService
 from .creditor_bank_accounts_service import CreditorBankAccountsService
 from .customers_service import CustomersService
 from .customer_bank_accounts_service import CustomerBankAccountsService
+from .customer_notifications_service import CustomerNotificationsService
 from .events_service import EventsService
 from .mandates_service import MandatesService
 from .mandate_imports_service import MandateImportsService

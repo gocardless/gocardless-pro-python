@@ -159,6 +159,14 @@ Customer bank accounts
     # Disable a customer bank account
     client.customer_bank_accounts.disable('BA123', params={...})
 
+Customer notifications
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Handle a notification
+    client.customer_notifications.handle('SN123', params={...})
+
 Events
 ''''''''''''''''''''''''''''''''''''''''''
 

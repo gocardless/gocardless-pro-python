@@ -13,6 +13,8 @@ from .customer import Customer
 
 from .customer_bank_account import CustomerBankAccount
 
+from .customer_notification import CustomerNotification
+
 from .event import Event
 
 from .mandate import Mandate

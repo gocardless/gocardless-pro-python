@@ -27,6 +27,11 @@ class Event(object):
   
 
     @property
+    def customer_notifications(self):
+        return self.attributes.get('customer_notifications')
+  
+
+    @property
     def details(self):
         return self.Details(self.attributes.get('details'))
   
@@ -51,6 +56,8 @@ class Event(object):
         return self.attributes.get('resource_type')
   
 
+
+  
 
   
 

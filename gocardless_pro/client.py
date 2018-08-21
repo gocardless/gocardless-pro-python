@@ -56,6 +56,10 @@ class Client(object):
         return services.CustomerBankAccountsService(self._api_client, 3, 0.5)
 
     @property
+    def customer_notifications(self):
+        return services.CustomerNotificationsService(self._api_client, 3, 0.5)
+
+    @property
     def events(self):
         return services.EventsService(self._api_client, 3, 0.5)
 
