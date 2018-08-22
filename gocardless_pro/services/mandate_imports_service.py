@@ -79,6 +79,14 @@ class MandateImportsService(base_service.BaseService):
         GoCardless team. Once the import has been submitted, it can no longer
         have entries
         added to it.
+        
+        In our sandbox environment, to aid development, we automatically
+        process mandate
+        imports approximately 10 seconds after they are submitted. This will
+        allow you to
+        test both the "submitted" response and wait for the webhook to confirm
+        the
+        processing has begun.
 
         Args:
               identity (string): Unique identifier, beginning with "IM".
@@ -107,8 +115,8 @@ class MandateImportsService(base_service.BaseService):
         being set up in GoCardless. Once the import has been cancelled, it can
         no longer have
         entries added to it. Mandate imports which have already been submitted
-        cannot be
-        cancelled.
+        or processed
+        cannot be cancelled.
 
         Args:
               identity (string): Unique identifier, beginning with "IM".
