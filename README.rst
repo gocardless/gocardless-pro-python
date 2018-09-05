@@ -165,7 +165,7 @@ Customer notifications
 .. code:: python
 
     # Handle a notification
-    client.customer_notifications.handle('SN123', params={...})
+    client.customer_notifications.handle('PCN123', params={...})
 
 Events
 ''''''''''''''''''''''''''''''''''''''''''
