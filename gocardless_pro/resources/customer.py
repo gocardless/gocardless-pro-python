@@ -87,6 +87,11 @@ class Customer(object):
   
 
     @property
+    def phone_number(self):
+        return self.attributes.get('phone_number')
+  
+
+    @property
     def postal_code(self):
         return self.attributes.get('postal_code')
   
@@ -101,6 +106,8 @@ class Customer(object):
         return self.attributes.get('swedish_identity_number')
   
 
+
+  
 
   
 

@@ -46,6 +46,7 @@ def test_customers_create():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.language, body.get('language'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.phone_number, body.get('phone_number'))
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
     assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
@@ -133,6 +134,8 @@ def test_customers_list():
                  [b.get('language') for b in body])
     assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
+    assert_equal([r.phone_number for r in response.records],
+                 [b.get('phone_number') for b in body])
     assert_equal([r.postal_code for r in response.records],
                  [b.get('postal_code') for b in body])
     assert_equal([r.region for r in response.records],
@@ -215,6 +218,7 @@ def test_customers_get():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.language, body.get('language'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.phone_number, body.get('phone_number'))
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
     assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
@@ -266,6 +270,7 @@ def test_customers_update():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.language, body.get('language'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.phone_number, body.get('phone_number'))
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.region, body.get('region'))
     assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
