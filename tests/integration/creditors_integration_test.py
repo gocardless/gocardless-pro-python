@@ -54,6 +54,8 @@ def test_creditors_create():
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,
                  body.get('links')['default_gbp_payout_account'])
+    assert_equal(response.links.default_nzd_payout_account,
+                 body.get('links')['default_nzd_payout_account'])
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
 
@@ -224,6 +226,8 @@ def test_creditors_get():
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,
                  body.get('links')['default_gbp_payout_account'])
+    assert_equal(response.links.default_nzd_payout_account,
+                 body.get('links')['default_nzd_payout_account'])
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
 
@@ -282,6 +286,8 @@ def test_creditors_update():
                  body.get('links')['default_eur_payout_account'])
     assert_equal(response.links.default_gbp_payout_account,
                  body.get('links')['default_gbp_payout_account'])
+    assert_equal(response.links.default_nzd_payout_account,
+                 body.get('links')['default_nzd_payout_account'])
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
 
