@@ -21,13 +21,13 @@ def load_fixture(resource):
     return json.load(open(fixture_path))
 
 def stub_response(resource_fixture):
-    path = re.sub(r':(\w+)', r'\w+', resource_fixture['path_template'])
+    path = re.sub(r':(\w+)', r'\\w+', resource_fixture['path_template'])
     url_pattern = re.compile('http://example.com' + path)
     json_body = json.dumps(resource_fixture['body'])
     responses.add(resource_fixture['method'], url_pattern, body=json_body)
 
 def url_pattern_for(resource_fixture):
-    path = re.sub(r':(\w+)', r'\w+', resource_fixture['path_template'])
+    path = re.sub(r':(\w+)', r'\\w+', resource_fixture['path_template'])
     return re.compile('http://example.com' + path)
 
 @contextmanager
