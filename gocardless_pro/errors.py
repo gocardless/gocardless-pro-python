@@ -103,3 +103,9 @@ class MalformedResponseError(GoCardlessProError):
     def __init__(self, message, response):
         super(MalformedResponseError, self).__init__(message)
         self.response = response
+
+
+class InvalidSignatureError(GoCardlessProError):
+    pass
+
+
