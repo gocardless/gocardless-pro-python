@@ -49,4 +49,3 @@ def to_string(byte_sequence):
         return byte_sequence.decode("utf-8")
 
     return byte_sequence
-

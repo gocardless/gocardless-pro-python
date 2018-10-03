@@ -1,8 +1,0 @@
-dependencies:
-  pre:
-    - pip install -U six packaging appdirs
-    - pip install -U setuptools
-    - pip install -r requirements-dev.txt
-machine:
-  post:
-    - pyenv global 2.7.12 3.3.6 3.4.4 3.5.3 3.6.1
