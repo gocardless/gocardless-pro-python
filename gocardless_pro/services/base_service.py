@@ -45,6 +45,9 @@ class BaseService(object):
         if method == 'PUT':
             return self._api_client.put(path, body=params, headers=headers)
 
+        if method == 'DELETE':
+            return self._api_client.delete(path, body=params, headers=headers)
+
         raise ValueError('Invalid method "{}"'.format(method))
 
 

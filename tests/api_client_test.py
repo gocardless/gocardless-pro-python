@@ -54,6 +54,12 @@ def test_put_includes_json_body():
     assert_equals(responses.calls[0].request.body, '{"name": "Billy Jean"}')
 
 @responses.activate
+def test_delete_includes_json_body():
+    responses.add(responses.DELETE, 'http://example.com/test', body='{}')
+    client.delete('/test', body={'name': 'Billy Jean'})
+    assert_equals(responses.calls[0].request.body, '{"name": "Billy Jean"}')
+
+@responses.activate
 def test_handles_validation_failed_error():
     fixture = helpers.load_fixture('validation_failed_error')
     responses.add(responses.POST, 'http://example.com/test',
