@@ -14,6 +14,8 @@ import json
 import requests
 
 from . import errors
+from .ratelimit import RateLimit, ratelimitupdate
+
 
 class ApiClient(object):
     """Client for interacting with a JSON HTTP API, using OAuth2-style auth.
@@ -26,7 +28,9 @@ class ApiClient(object):
     def __init__(self, base_url, access_token):
         self.base_url = base_url
         self.access_token = access_token
+        self.ratelimit = RateLimit(1000)
 
+    @ratelimitupdate
     def get(self, path, params=None, headers=None):
         """Perform a GET request, optionally providing query-string params.
 
@@ -48,6 +52,7 @@ class ApiClient(object):
         self._handle_errors(response)
         return response
 
+    @ratelimitupdate
     def post(self, path, body, headers=None):
         """Perform a POST request, providing a body, which will be JSON-encoded.
 
@@ -70,6 +75,7 @@ class ApiClient(object):
         self._handle_errors(response)
         return response
 
+    @ratelimitupdate
     def put(self, path, body, headers=None):
         """Perform a PUT request, providing a body, which will be JSON-encoded.
 

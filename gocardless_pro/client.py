@@ -103,6 +103,10 @@ class Client(object):
     def subscriptions(self):
         return services.SubscriptionsService(self._api_client, 3, 0.5)
 
+    @property
+    def ratelimit(self):
+        return self._api_client.ratelimit
+
     def _environment_url(self, environment):
         environment_urls = { 
             'live': 'https://api.gocardless.com',
