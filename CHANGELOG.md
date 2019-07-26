@@ -1,3 +1,12 @@
+# 1.10.0
+
+* Addition of the customer removal API
+* Support account_type in bank account API
+
+# 1.9.0
+
+* Add webhooks module for parsing webhook bodies.
+
 # 1.8.0
 
 * Add support for passing customer address fields to the Mandate PDFs
