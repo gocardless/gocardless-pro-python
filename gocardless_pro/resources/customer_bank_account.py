@@ -27,6 +27,11 @@ class CustomerBankAccount(object):
   
 
     @property
+    def account_type(self):
+        return self.attributes.get('account_type')
+  
+
+    @property
     def bank_name(self):
         return self.attributes.get('bank_name')
   
@@ -66,6 +71,8 @@ class CustomerBankAccount(object):
         return self.attributes.get('metadata')
   
 
+
+  
 
   
 

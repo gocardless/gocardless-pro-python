@@ -136,6 +136,9 @@ Customers
     # Update a customer
     client.customers.update('CU123', params={...})
 
+    # Remove a customer
+    client.customers.remove('CU123', params={...})
+
 Customer bank accounts
 ''''''''''''''''''''''''''''''''''''''''''
 

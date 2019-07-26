@@ -117,3 +117,33 @@ class CustomersService(base_service.BaseService):
                                          retry_failures=True)
         return self._resource_for(response)
   
+
+    def remove(self,identity,params=None, headers=None):
+        """Remove a customer.
+
+        Removed customers will not appear in search results or lists of
+        customers (in our API
+        or exports), and it will not be possible to load an individually
+        removed customer by
+        ID.
+        
+        <p class="restricted-notice"><strong>The action of removing a customer
+        cannot be
+        reversed, so please use with care.</strong></p>
+
+        Args:
+              identity (string): Unique identifier, beginning with "CU".
+              params (dict, optional): Request body.
+
+        Returns:
+              ListResponse of Customer instances
+        """
+        path = self._sub_url_params('/customers/:identity', {
+          
+            'identity': identity,
+          })
+        
+        response = self._perform_request('DELETE', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  

@@ -75,7 +75,7 @@ class MandatesService(base_service.BaseService):
         Retrieves the details of an existing mandate.
 
         Args:
-              identity (string): Unique identifier, beginning with "MD".
+              identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.
               params (dict, optional): Query string parameters.
 
         Returns:
@@ -98,7 +98,7 @@ class MandatesService(base_service.BaseService):
         Updates a mandate object. This accepts only the metadata parameter.
 
         Args:
-              identity (string): Unique identifier, beginning with "MD".
+              identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.
               params (dict, optional): Request body.
 
         Returns:
@@ -128,7 +128,7 @@ class MandatesService(base_service.BaseService):
         already cancelled.
 
         Args:
-              identity (string): Unique identifier, beginning with "MD".
+              identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.
               params (dict, optional): Request body.
 
         Returns:
@@ -163,7 +163,7 @@ class MandatesService(base_service.BaseService):
         Mandates can be resubmitted up to 3 times.
 
         Args:
-              identity (string): Unique identifier, beginning with "MD".
+              identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.
               params (dict, optional): Request body.
 
         Returns:

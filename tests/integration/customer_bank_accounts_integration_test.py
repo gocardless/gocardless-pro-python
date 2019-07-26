@@ -34,6 +34,7 @@ def test_customer_bank_accounts_create():
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.account_holder_name, body.get('account_holder_name'))
     assert_equal(response.account_number_ending, body.get('account_number_ending'))
+    assert_equal(response.account_type, body.get('account_type'))
     assert_equal(response.bank_name, body.get('bank_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
@@ -103,6 +104,8 @@ def test_customer_bank_accounts_list():
                  [b.get('account_holder_name') for b in body])
     assert_equal([r.account_number_ending for r in response.records],
                  [b.get('account_number_ending') for b in body])
+    assert_equal([r.account_type for r in response.records],
+                 [b.get('account_type') for b in body])
     assert_equal([r.bank_name for r in response.records],
                  [b.get('bank_name') for b in body])
     assert_equal([r.country_code for r in response.records],
@@ -181,6 +184,7 @@ def test_customer_bank_accounts_get():
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.account_holder_name, body.get('account_holder_name'))
     assert_equal(response.account_number_ending, body.get('account_number_ending'))
+    assert_equal(response.account_type, body.get('account_type'))
     assert_equal(response.bank_name, body.get('bank_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
@@ -226,6 +230,7 @@ def test_customer_bank_accounts_update():
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.account_holder_name, body.get('account_holder_name'))
     assert_equal(response.account_number_ending, body.get('account_number_ending'))
+    assert_equal(response.account_type, body.get('account_type'))
     assert_equal(response.bank_name, body.get('bank_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
@@ -271,6 +276,7 @@ def test_customer_bank_accounts_disable():
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.account_holder_name, body.get('account_holder_name'))
     assert_equal(response.account_number_ending, body.get('account_number_ending'))
+    assert_equal(response.account_type, body.get('account_type'))
     assert_equal(response.bank_name, body.get('bank_name'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))

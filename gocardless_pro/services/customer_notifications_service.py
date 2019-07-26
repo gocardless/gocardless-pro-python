@@ -27,7 +27,7 @@ class CustomerNotificationsService(base_service.BaseService):
         notify has passed,
         this endpoint will return an `already_actioned` error and you should
         not take
-        further action.
+        further action. This endpoint takes no additional parameters.
         
 
         Args:

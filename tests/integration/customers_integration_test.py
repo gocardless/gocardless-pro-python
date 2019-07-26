@@ -298,3 +298,46 @@ def test_502_customers_update_retries():
 
     assert_is_instance(response, resources.Customer)
   
+
+@responses.activate
+def test_customers_remove():
+    fixture = helpers.load_fixture('customers')['remove']
+    helpers.stub_response(fixture)
+    response = helpers.client.customers.remove(*fixture['url_params'])
+    body = fixture['body']['customers']
+
+    assert_is_instance(response, resources.Customer)
+    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.address_line1, body.get('address_line1'))
+    assert_equal(response.address_line2, body.get('address_line2'))
+    assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.city, body.get('city'))
+    assert_equal(response.company_name, body.get('company_name'))
+    assert_equal(response.country_code, body.get('country_code'))
+    assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.danish_identity_number, body.get('danish_identity_number'))
+    assert_equal(response.email, body.get('email'))
+    assert_equal(response.family_name, body.get('family_name'))
+    assert_equal(response.given_name, body.get('given_name'))
+    assert_equal(response.id, body.get('id'))
+    assert_equal(response.language, body.get('language'))
+    assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.phone_number, body.get('phone_number'))
+    assert_equal(response.postal_code, body.get('postal_code'))
+    assert_equal(response.region, body.get('region'))
+    assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
+
+def test_timeout_customers_remove_doesnt_retry():
+    fixture = helpers.load_fixture('customers')['remove']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.customers.remove(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_customers_remove_doesnt_retry():
+    fixture = helpers.load_fixture('customers')['remove']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.customers.remove(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+  

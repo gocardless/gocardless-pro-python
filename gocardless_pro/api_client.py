@@ -91,6 +91,27 @@ class ApiClient(object):
         self._handle_errors(response)
         return response
 
+    def delete(self, path, body, headers=None):
+        """Perform a DELETE request, providing a body, which will be JSON-encoded.
+
+        Args:
+          path (str): A path that gets appended to ``base_url``.
+          body (dict): Dictionary that will be JSON-encoded and sent as the body.
+
+        Example:
+          api_client.delete('/users', body={'name': 'Billy Jean'})
+
+        Returns:
+          A requests ``Response`` object.
+        """
+        response = requests.delete(
+            self._url_for(path),
+            data=json.dumps(body),
+            headers=self._headers(headers)
+        )
+        self._handle_errors(response)
+        return response
+
     def _handle_errors(self, response):
         try:
             response_body = response.json()
@@ -120,7 +141,7 @@ class ApiClient(object):
             'Authorization': 'Bearer {0}'.format(self.access_token),
             'Content-Type': 'application/json',
             'GoCardless-Client-Library': 'gocardless-pro-python',
-            'GoCardless-Client-Version': '1.8.0',
+            'GoCardless-Client-Version': '1.9.0',
             'User-Agent': self._user_agent(),
             'GoCardless-Version': '2015-07-06',
         }
@@ -129,7 +150,7 @@ class ApiClient(object):
         python_version = '.'.join(platform.python_version_tuple()[0:2])
         vm_version = '{}.{}.{}-{}{}'.format(*sys.version_info)
         return ' '.join([
-            'gocardless-pro-python/1.8.0',
+            'gocardless-pro-python/1.9.0',
             'python/{0}'.format(python_version),
             '{0}/{1}'.format(platform.python_implementation(), vm_version),
             '{0}/{1}'.format(platform.system(), platform.release()),
