@@ -38,6 +38,14 @@ def test_refunds_create():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.payment,
@@ -178,6 +186,14 @@ def test_refunds_get():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.payment,
@@ -222,6 +238,14 @@ def test_refunds_update():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.payment,

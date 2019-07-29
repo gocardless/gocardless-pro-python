@@ -42,6 +42,14 @@ def test_payments_create():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.mandate,
@@ -198,6 +206,14 @@ def test_payments_get():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.mandate,
@@ -250,6 +266,14 @@ def test_payments_update():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.mandate,
@@ -302,6 +326,14 @@ def test_payments_cancel():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.mandate,
@@ -345,6 +377,14 @@ def test_payments_retry():
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.mandate,

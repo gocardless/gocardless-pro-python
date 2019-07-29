@@ -39,6 +39,7 @@ def test_creditors_create():
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.fx_payout_currency, body.get('fx_payout_currency'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.logo_url, body.get('logo_url'))
     assert_equal(response.name, body.get('name'))
@@ -130,6 +131,8 @@ def test_creditors_list():
                  [b.get('country_code') for b in body])
     assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
+    assert_equal([r.fx_payout_currency for r in response.records],
+                 [b.get('fx_payout_currency') for b in body])
     assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
     assert_equal([r.logo_url for r in response.records],
@@ -213,6 +216,7 @@ def test_creditors_get():
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.fx_payout_currency, body.get('fx_payout_currency'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.logo_url, body.get('logo_url'))
     assert_equal(response.name, body.get('name'))
@@ -275,6 +279,7 @@ def test_creditors_update():
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.fx_payout_currency, body.get('fx_payout_currency'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.logo_url, body.get('logo_url'))
     assert_equal(response.name, body.get('name'))

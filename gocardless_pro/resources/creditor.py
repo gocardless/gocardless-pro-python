@@ -52,6 +52,11 @@ class Creditor(object):
   
 
     @property
+    def fx_payout_currency(self):
+        return self.attributes.get('fx_payout_currency')
+  
+
+    @property
     def id(self):
         return self.attributes.get('id')
   
@@ -91,6 +96,8 @@ class Creditor(object):
         return self.attributes.get('verification_status')
   
 
+
+  
 
   
 
