@@ -1,3 +1,8 @@
+# 1.11.0
+
+* Add fx_payout_currency to creditor
+* Add fx to payment, payout and refund
+
 # 1.10.0
 
 * Addition of the customer removal API
