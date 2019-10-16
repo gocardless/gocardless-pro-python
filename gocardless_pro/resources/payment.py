@@ -47,6 +47,11 @@ class Payment(object):
   
 
     @property
+    def fx(self):
+        return self.Fx(self.attributes.get('fx'))
+  
+
+    @property
     def id(self):
         return self.attributes.get('id')
   
@@ -82,6 +87,31 @@ class Payment(object):
 
   
 
+  
+
+  
+    class Fx(object):
+        """Wrapper for the response's 'fx' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def estimated_exchange_rate(self):
+            return self.attributes.get('estimated_exchange_rate')
+    
+        @property
+        def exchange_rate(self):
+            return self.attributes.get('exchange_rate')
+    
+        @property
+        def fx_amount(self):
+            return self.attributes.get('fx_amount')
+    
+        @property
+        def fx_currency(self):
+            return self.attributes.get('fx_currency')
+    
   
 
   

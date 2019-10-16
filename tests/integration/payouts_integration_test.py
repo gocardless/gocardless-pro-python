@@ -125,6 +125,14 @@ def test_payouts_get():
     assert_equal(response.payout_type, body.get('payout_type'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.fx.estimated_exchange_rate,
+                 body.get('fx')['estimated_exchange_rate'])
+    assert_equal(response.fx.exchange_rate,
+                 body.get('fx')['exchange_rate'])
+    assert_equal(response.fx.fx_amount,
+                 body.get('fx')['fx_amount'])
+    assert_equal(response.fx.fx_currency,
+                 body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.creditor_bank_account,
