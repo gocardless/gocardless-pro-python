@@ -56,6 +56,11 @@ class Refund(object):
         return self.attributes.get('reference')
   
 
+    @property
+    def status(self):
+        return self.attributes.get('status')
+  
+
 
   
 
@@ -105,6 +110,8 @@ class Refund(object):
         def payment(self):
             return self.attributes.get('payment')
     
+  
+
   
 
   
