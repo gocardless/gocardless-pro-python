@@ -102,6 +102,10 @@ class Event(object):
             self.attributes = attributes
     
         @property
+        def instalment_schedule(self):
+            return self.attributes.get('instalment_schedule')
+    
+        @property
         def mandate(self):
             return self.attributes.get('mandate')
     

@@ -126,6 +126,8 @@ def test_events_get():
                  body.get('details')['reason_code'])
     assert_equal(response.details.scheme,
                  body.get('details')['scheme'])
+    assert_equal(response.links.instalment_schedule,
+                 body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.new_customer_bank_account,
