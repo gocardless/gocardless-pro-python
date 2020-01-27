@@ -44,8 +44,6 @@ def test_instalment_schedules_create():
                  body.get('links')['customer'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
-    assert_equal(response.links.organisation,
-                 body.get('links')['organisation'])
     assert_equal(response.links.payments,
                  body.get('links')['payments'])
 
@@ -194,8 +192,6 @@ def test_instalment_schedules_get():
                  body.get('links')['customer'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
-    assert_equal(response.links.organisation,
-                 body.get('links')['organisation'])
     assert_equal(response.links.payments,
                  body.get('links')['payments'])
 
@@ -244,8 +240,6 @@ def test_instalment_schedules_cancel():
                  body.get('links')['customer'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
-    assert_equal(response.links.organisation,
-                 body.get('links')['organisation'])
     assert_equal(response.links.payments,
                  body.get('links')['payments'])
 

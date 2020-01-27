@@ -84,10 +84,6 @@ class InstalmentSchedule(object):
             return self.attributes.get('mandate')
     
         @property
-        def organisation(self):
-            return self.attributes.get('organisation')
-    
-        @property
         def payments(self):
             return self.attributes.get('payments')
     
