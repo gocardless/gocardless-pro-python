@@ -52,6 +52,8 @@ def test_payments_create():
                  body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.instalment_schedule,
+                 body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.payout,
@@ -216,6 +218,8 @@ def test_payments_get():
                  body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.instalment_schedule,
+                 body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.payout,
@@ -276,6 +280,8 @@ def test_payments_update():
                  body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.instalment_schedule,
+                 body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.payout,
@@ -336,6 +342,8 @@ def test_payments_cancel():
                  body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.instalment_schedule,
+                 body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.payout,
@@ -387,6 +395,8 @@ def test_payments_retry():
                  body.get('fx')['fx_currency'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.instalment_schedule,
+                 body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
     assert_equal(response.links.payout,
