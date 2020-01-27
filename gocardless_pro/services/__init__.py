@@ -10,6 +10,7 @@ from .customers_service import CustomersService
 from .customer_bank_accounts_service import CustomerBankAccountsService
 from .customer_notifications_service import CustomerNotificationsService
 from .events_service import EventsService
+from .instalment_schedules_service import InstalmentSchedulesService
 from .mandates_service import MandatesService
 from .mandate_imports_service import MandateImportsService
 from .mandate_import_entries_service import MandateImportEntriesService
