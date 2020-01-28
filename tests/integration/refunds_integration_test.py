@@ -38,6 +38,7 @@ def test_refunds_create():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.status, body.get('status'))
     assert_equal(response.fx.estimated_exchange_rate,
                  body.get('fx')['estimated_exchange_rate'])
     assert_equal(response.fx.exchange_rate,
@@ -118,6 +119,8 @@ def test_refunds_list():
                  [b.get('metadata') for b in body])
     assert_equal([r.reference for r in response.records],
                  [b.get('reference') for b in body])
+    assert_equal([r.status for r in response.records],
+                 [b.get('status') for b in body])
 
 @responses.activate
 def test_timeout_refunds_list_retries():
@@ -186,6 +189,7 @@ def test_refunds_get():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.status, body.get('status'))
     assert_equal(response.fx.estimated_exchange_rate,
                  body.get('fx')['estimated_exchange_rate'])
     assert_equal(response.fx.exchange_rate,
@@ -238,6 +242,7 @@ def test_refunds_update():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.status, body.get('status'))
     assert_equal(response.fx.estimated_exchange_rate,
                  body.get('fx')['estimated_exchange_rate'])
     assert_equal(response.fx.exchange_rate,

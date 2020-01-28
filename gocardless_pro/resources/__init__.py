@@ -17,6 +17,8 @@ from .customer_notification import CustomerNotification
 
 from .event import Event
 
+from .instalment_schedule import InstalmentSchedule
+
 from .mandate import Mandate
 
 from .mandate_import import MandateImport

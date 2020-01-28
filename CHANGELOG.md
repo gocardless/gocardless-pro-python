@@ -1,3 +1,8 @@
+# 1.12.0
+
+* Adds support for Instalment Schedules
+* Exposed 'bounced' status on payouts
+
 # 1.11.0
 
 * Add fx_payout_currency to creditor

@@ -64,6 +64,10 @@ class Client(object):
         return services.EventsService(self._api_client, 3, 0.5)
 
     @property
+    def instalment_schedules(self):
+        return services.InstalmentSchedulesService(self._api_client, 3, 0.5)
+
+    @property
     def mandates(self):
         return services.MandatesService(self._api_client, 3, 0.5)
 

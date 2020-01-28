@@ -184,6 +184,26 @@ Events
     # Get a single event
     client.events.get('EV123', params={...})
 
+Instalment schedules
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create an instalment schedule
+    client.instalment_schedules.create(params={...})
+
+    # List instalment schedules
+    client.instalment_schedules.list(params={...})
+
+    # Iterate through all instalment_schedules
+    client.instalment_schedules.all(params={...})
+
+    # Get a single instalment schedule
+    client.instalment_schedules.get('IS123', params={...})
+
+    # Cancel an instalment schedule
+    client.instalment_schedules.cancel('IS123', params={...})
+
 Mandates
 ''''''''''''''''''''''''''''''''''''''''''
 

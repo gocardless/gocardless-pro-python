@@ -61,6 +61,8 @@ def test_creditors_create():
                  body.get('links')['default_nzd_payout_account'])
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
+    assert_equal(response.links.default_usd_payout_account,
+                 body.get('links')['default_usd_payout_account'])
 
 @responses.activate
 def test_creditors_create_new_idempotency_key_for_each_call():
@@ -238,6 +240,8 @@ def test_creditors_get():
                  body.get('links')['default_nzd_payout_account'])
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
+    assert_equal(response.links.default_usd_payout_account,
+                 body.get('links')['default_usd_payout_account'])
 
 @responses.activate
 def test_timeout_creditors_get_retries():
@@ -301,6 +305,8 @@ def test_creditors_update():
                  body.get('links')['default_nzd_payout_account'])
     assert_equal(response.links.default_sek_payout_account,
                  body.get('links')['default_sek_payout_account'])
+    assert_equal(response.links.default_usd_payout_account,
+                 body.get('links')['default_usd_payout_account'])
 
 @responses.activate
 def test_timeout_creditors_update_retries():
