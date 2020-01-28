@@ -1,3 +1,7 @@
+# 1.12.1
+
+* Adds 3 additional fields on the creditors API
+
 # 1.12.0
 
 * Adds support for Instalment Schedules

@@ -52,6 +52,11 @@ class Creditor(object):
   
 
     @property
+    def custom_payment_pages_enabled(self):
+        return self.attributes.get('custom_payment_pages_enabled')
+  
+
+    @property
     def fx_payout_currency(self):
         return self.attributes.get('fx_payout_currency')
   
@@ -69,6 +74,16 @@ class Creditor(object):
     @property
     def logo_url(self):
         return self.attributes.get('logo_url')
+  
+
+    @property
+    def mandate_imports_enabled(self):
+        return self.attributes.get('mandate_imports_enabled')
+  
+
+    @property
+    def merchant_responsible_for_notifications(self):
+        return self.attributes.get('merchant_responsible_for_notifications')
   
 
     @property
@@ -96,6 +111,8 @@ class Creditor(object):
         return self.attributes.get('verification_status')
   
 
+
+  
 
   
 
@@ -154,6 +171,10 @@ class Creditor(object):
         def default_usd_payout_account(self):
             return self.attributes.get('default_usd_payout_account')
     
+  
+
+  
+
   
 
   
