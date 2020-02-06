@@ -87,6 +87,11 @@ class Subscription(object):
   
 
     @property
+    def retry_if_possible(self):
+        return self.attributes.get('retry_if_possible')
+  
+
+    @property
     def start_date(self):
         return self.attributes.get('start_date')
   
@@ -131,6 +136,8 @@ class Subscription(object):
         def mandate(self):
             return self.attributes.get('mandate')
     
+  
+
   
 
   
