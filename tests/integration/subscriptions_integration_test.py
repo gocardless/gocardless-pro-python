@@ -45,6 +45,7 @@ def test_subscriptions_create():
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.payment_reference, body.get('payment_reference'))
+    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
     assert_equal(response.start_date, body.get('start_date'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
@@ -132,6 +133,8 @@ def test_subscriptions_list():
                  [b.get('name') for b in body])
     assert_equal([r.payment_reference for r in response.records],
                  [b.get('payment_reference') for b in body])
+    assert_equal([r.retry_if_possible for r in response.records],
+                 [b.get('retry_if_possible') for b in body])
     assert_equal([r.start_date for r in response.records],
                  [b.get('start_date') for b in body])
     assert_equal([r.status for r in response.records],
@@ -213,6 +216,7 @@ def test_subscriptions_get():
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.payment_reference, body.get('payment_reference'))
+    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
     assert_equal(response.start_date, body.get('start_date'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
@@ -265,6 +269,7 @@ def test_subscriptions_update():
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.payment_reference, body.get('payment_reference'))
+    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
     assert_equal(response.start_date, body.get('start_date'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
@@ -317,6 +322,7 @@ def test_subscriptions_cancel():
     assert_equal(response.month, body.get('month'))
     assert_equal(response.name, body.get('name'))
     assert_equal(response.payment_reference, body.get('payment_reference'))
+    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
     assert_equal(response.start_date, body.get('start_date'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.upcoming_payments, body.get('upcoming_payments'))

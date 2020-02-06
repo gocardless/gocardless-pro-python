@@ -72,6 +72,11 @@ class Payment(object):
   
 
     @property
+    def retry_if_possible(self):
+        return self.attributes.get('retry_if_possible')
+  
+
+    @property
     def status(self):
         return self.attributes.get('status')
   
@@ -143,6 +148,8 @@ class Payment(object):
         def subscription(self):
             return self.attributes.get('subscription')
     
+  
+
   
 
   
