@@ -90,6 +90,10 @@ class Event(object):
         def scheme(self):
             return self.attributes.get('scheme')
     
+        @property
+        def will_attempt_retry(self):
+            return self.attributes.get('will_attempt_retry')
+    
   
 
   
