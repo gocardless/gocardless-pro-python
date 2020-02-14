@@ -128,6 +128,8 @@ def test_events_get():
                  body.get('details')['scheme'])
     assert_equal(response.details.will_attempt_retry,
                  body.get('details')['will_attempt_retry'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.instalment_schedule,
                  body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
