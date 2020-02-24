@@ -14,10 +14,11 @@ from ..errors import MalformedResponseError
 
 class BaseService(object):
     """Base class for API service classes."""
-    def __init__(self, api_client, max_network_retries=3, retry_delay_in_seconds=0.5):
+    def __init__(self, api_client, max_network_retries=3, retry_delay_in_seconds=0.5, raise_on_idempotency_conflict=False):
         self._api_client = api_client
         self.max_network_retries = max_network_retries
         self.retry_delay_in_seconds = retry_delay_in_seconds
+        self.raise_on_idempotency_conflict = raise_on_idempotency_conflict
 
     def _perform_request(self, method, path, params, headers=None, retry_failures=False):
         if method == 'POST':

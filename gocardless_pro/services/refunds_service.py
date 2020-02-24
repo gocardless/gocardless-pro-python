@@ -49,6 +49,8 @@ class RefundsService(base_service.BaseService):
           response = self._perform_request('POST', path, params, headers,
                                             retry_failures=True)
         except errors.IdempotentCreationConflictError as err:
+          if self.raise_on_idempotency_conflict:
+            raise err
           return self.get(identity=err.conflicting_resource_id,
                           params=params,
                           headers=headers)

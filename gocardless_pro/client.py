@@ -18,6 +18,7 @@ class Client(object):
       environment (str): Either 'sandbox' or 'live'.
       base_url (str): Manually set a base URL. Most people should use
         `environment` instead.
+      raise_on_idempotency_conflict (bool): Configure refetching of conflicting resource
 
     Example:
       client = Client(access_token=ACCESS_TOKEN, environment='sandbox')
@@ -25,7 +26,7 @@ class Client(object):
           print '{} {}'.format(customer.family_name, customer.given_name)
     """
 
-    def __init__(self, access_token=None, environment=None, base_url=None):
+    def __init__(self, access_token=None, environment=None, base_url=None, raise_on_idempotency_conflict=False):
         if access_token is None:
             raise ValueError('No access_token provided')
 
@@ -34,78 +35,79 @@ class Client(object):
 
         base_url = base_url or self._environment_url(environment)
         self._api_client = ApiClient(base_url, access_token)
+        self._raise_on_idempotency_conflict = raise_on_idempotency_conflict
 
     @property
     def bank_details_lookups(self):
-        return services.BankDetailsLookupsService(self._api_client, 3, 0.5)
+        return services.BankDetailsLookupsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def creditors(self):
-        return services.CreditorsService(self._api_client, 3, 0.5)
+        return services.CreditorsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def creditor_bank_accounts(self):
-        return services.CreditorBankAccountsService(self._api_client, 3, 0.5)
+        return services.CreditorBankAccountsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def customers(self):
-        return services.CustomersService(self._api_client, 3, 0.5)
+        return services.CustomersService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def customer_bank_accounts(self):
-        return services.CustomerBankAccountsService(self._api_client, 3, 0.5)
+        return services.CustomerBankAccountsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def customer_notifications(self):
-        return services.CustomerNotificationsService(self._api_client, 3, 0.5)
+        return services.CustomerNotificationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def events(self):
-        return services.EventsService(self._api_client, 3, 0.5)
+        return services.EventsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def instalment_schedules(self):
-        return services.InstalmentSchedulesService(self._api_client, 3, 0.5)
+        return services.InstalmentSchedulesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def mandates(self):
-        return services.MandatesService(self._api_client, 3, 0.5)
+        return services.MandatesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def mandate_imports(self):
-        return services.MandateImportsService(self._api_client, 3, 0.5)
+        return services.MandateImportsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def mandate_import_entries(self):
-        return services.MandateImportEntriesService(self._api_client, 3, 0.5)
+        return services.MandateImportEntriesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def mandate_pdfs(self):
-        return services.MandatePdfsService(self._api_client, 3, 0.5)
+        return services.MandatePdfsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def payments(self):
-        return services.PaymentsService(self._api_client, 3, 0.5)
+        return services.PaymentsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def payouts(self):
-        return services.PayoutsService(self._api_client, 3, 0.5)
+        return services.PayoutsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def payout_items(self):
-        return services.PayoutItemsService(self._api_client, 3, 0.5)
+        return services.PayoutItemsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def redirect_flows(self):
-        return services.RedirectFlowsService(self._api_client, 3, 0.5)
+        return services.RedirectFlowsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def refunds(self):
-        return services.RefundsService(self._api_client, 3, 0.5)
+        return services.RefundsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def subscriptions(self):
-        return services.SubscriptionsService(self._api_client, 3, 0.5)
+        return services.SubscriptionsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     def _environment_url(self, environment):
         environment_urls = { 
