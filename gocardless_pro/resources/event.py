@@ -106,6 +106,10 @@ class Event(object):
             self.attributes = attributes
     
         @property
+        def creditor(self):
+            return self.attributes.get('creditor')
+    
+        @property
         def instalment_schedule(self):
             return self.attributes.get('instalment_schedule')
     
