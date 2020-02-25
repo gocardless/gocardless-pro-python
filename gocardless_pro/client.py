@@ -50,6 +50,10 @@ class Client(object):
         return services.CreditorBankAccountsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def currency_exchange_rates(self):
+        return services.CurrencyExchangeRatesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def customers(self):
         return services.CustomersService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 

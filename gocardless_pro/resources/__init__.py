@@ -9,6 +9,8 @@ from .creditor import Creditor
 
 from .creditor_bank_account import CreditorBankAccount
 
+from .currency_exchange_rate import CurrencyExchangeRate
+
 from .customer import Customer
 
 from .customer_bank_account import CustomerBankAccount

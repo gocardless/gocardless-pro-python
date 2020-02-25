@@ -25,6 +25,9 @@ def test_creditors_returns_service():
 def test_creditor_bank_accounts_returns_service():
     assert_is_instance(client.creditor_bank_accounts, services.CreditorBankAccountsService)
 
+def test_currency_exchange_rates_returns_service():
+    assert_is_instance(client.currency_exchange_rates, services.CurrencyExchangeRatesService)
+
 def test_customers_returns_service():
     assert_is_instance(client.customers, services.CustomersService)
 
