@@ -116,6 +116,17 @@ Creditor bank accounts
     # Disable a creditor bank account
     client.creditor_bank_accounts.disable('BA123', params={...})
 
+Currency exchange rates
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List exchange rates
+    client.currency_exchange_rates.list(params={...})
+
+    # Iterate through all currency_exchange_rates
+    client.currency_exchange_rates.all(params={...})
+
 Customers
 ''''''''''''''''''''''''''''''''''''''''''
 

@@ -6,6 +6,7 @@
 from .bank_details_lookups_service import BankDetailsLookupsService
 from .creditors_service import CreditorsService
 from .creditor_bank_accounts_service import CreditorBankAccountsService
+from .currency_exchange_rates_service import CurrencyExchangeRatesService
 from .customers_service import CustomersService
 from .customer_bank_accounts_service import CustomerBankAccountsService
 from .customer_notifications_service import CustomerNotificationsService
