@@ -3,6 +3,6 @@
     "method": "POST",
     "path_template": "/bank_details_lookups",
     "url_params": [],
-    "body": {"bank_details_lookups":{"available_debit_schemes":["bacs"],"bank_name":null,"bic":null}}
+    "body": {"bank_details_lookups":{"available_debit_schemes":["bacs"],"bank_name":"NATWEST BANK PLC","bic":"BARCGB22XXX"}}
   }
 }

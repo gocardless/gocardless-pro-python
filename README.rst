@@ -200,8 +200,11 @@ Instalment schedules
 
 .. code:: python
 
-    # Create an instalment schedule
-    client.instalment_schedules.create(params={...})
+    # Create (with dates)
+    client.instalment_schedules.create_with_dates(params={...})
+
+    # Create (with schedule)
+    client.instalment_schedules.create_with_schedule(params={...})
 
     # List instalment schedules
     client.instalment_schedules.list(params={...})
