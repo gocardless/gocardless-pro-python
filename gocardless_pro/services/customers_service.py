@@ -130,8 +130,7 @@ class CustomersService(base_service.BaseService):
         ID.
         
         <p class="restricted-notice"><strong>The action of removing a customer
-        cannot be
-        reversed, so please use with care.</strong></p>
+        cannot be reversed, so please use with care.</strong></p>
 
         Args:
               identity (string): Unique identifier, beginning with "CU".

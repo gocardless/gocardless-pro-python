@@ -145,6 +145,92 @@ class SubscriptionsService(base_service.BaseService):
         return self._resource_for(response)
   
 
+    def pause(self,identity,params=None, headers=None):
+        """Pause a subscription.
+
+        Pause a subscription object.
+        No payments will be created until it is resumed.
+        
+        This can only be used with subscriptions created with `count` or
+        subscriptions without `count` and `end_date`
+        If the subscription has `count` its `end_date` will be `null` after
+        pausing.
+        
+        This fails with:
+        
+        - `forbidden` if the subscription was created by an app and you are not
+        authenticated as that app, or if the subscription was not created by an
+        app and you are authenticated as an app
+        
+        - `validation_failed` if invalid data is provided when attempting to
+        pause a subscription.
+        
+        - `subscription_not_active` if the subscription is no longer active.
+        
+        - `subscription_already_ended` if the subscription has taken all
+        payments.
+        
+
+        Args:
+              identity (string): Unique identifier, beginning with "SB".
+              params (dict, optional): Request body.
+
+        Returns:
+              ListResponse of Subscription instances
+        """
+        path = self._sub_url_params('/subscriptions/:identity/actions/pause', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
+    def resume(self,identity,params=None, headers=None):
+        """Resume a subscription.
+
+        Resume a subscription object.
+        Payments will start to be created again based on the subscriptions
+        recurrence rules.
+        
+        This fails with:
+        
+        - `forbidden` if the subscription was created by an app and you are not
+        authenticated as that app, or if the subscription was not created by an
+        app and you are authenticated as an app
+        
+        - `validation_failed` if invalid data is provided when attempting to
+        resume a subscription.
+        
+        - `subscription_not_paused` if the subscription is not paused.
+        
+        - `subscription_already_scheduled_to_resume` if a subscription already
+        has a scheduled resume date.
+        
+
+        Args:
+              identity (string): Unique identifier, beginning with "SB".
+              params (dict, optional): Request body.
+
+        Returns:
+              ListResponse of Subscription instances
+        """
+        path = self._sub_url_params('/subscriptions/:identity/actions/resume', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
     def cancel(self,identity,params=None, headers=None):
         """Cancel a subscription.
 
