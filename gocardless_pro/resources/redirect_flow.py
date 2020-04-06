@@ -42,6 +42,11 @@ class RedirectFlow(object):
   
 
     @property
+    def metadata(self):
+        return self.attributes.get('metadata')
+  
+
+    @property
     def redirect_url(self):
         return self.attributes.get('redirect_url')
   
@@ -93,6 +98,8 @@ class RedirectFlow(object):
         def mandate(self):
             return self.attributes.get('mandate')
     
+  
+
   
 
   
