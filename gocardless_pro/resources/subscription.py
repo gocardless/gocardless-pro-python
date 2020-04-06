@@ -47,6 +47,11 @@ class Subscription(object):
   
 
     @property
+    def earliest_charge_date_after_resume(self):
+        return self.attributes.get('earliest_charge_date_after_resume')
+  
+
+    @property
     def end_date(self):
         return self.attributes.get('end_date')
   
@@ -111,6 +116,8 @@ class Subscription(object):
         return self.attributes.get('upcoming_payments')
   
 
+
+  
 
   
 

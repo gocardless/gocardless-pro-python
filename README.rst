@@ -388,6 +388,12 @@ Subscriptions
     # Update a subscription
     client.subscriptions.update('SB123', params={...})
 
+    # Pause a subscription
+    client.subscriptions.pause('SB123', params={...})
+
+    # Resume a subscription
+    client.subscriptions.resume('SB123', params={...})
+
     # Cancel a subscription
     client.subscriptions.cancel('SB123', params={...})
 

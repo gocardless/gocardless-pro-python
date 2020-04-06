@@ -38,6 +38,7 @@ def test_subscriptions_create():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
+    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
     assert_equal(response.end_date, body.get('end_date'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
@@ -120,6 +121,8 @@ def test_subscriptions_list():
                  [b.get('currency') for b in body])
     assert_equal([r.day_of_month for r in response.records],
                  [b.get('day_of_month') for b in body])
+    assert_equal([r.earliest_charge_date_after_resume for r in response.records],
+                 [b.get('earliest_charge_date_after_resume') for b in body])
     assert_equal([r.end_date for r in response.records],
                  [b.get('end_date') for b in body])
     assert_equal([r.id for r in response.records],
@@ -212,6 +215,7 @@ def test_subscriptions_get():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
+    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
     assert_equal(response.end_date, body.get('end_date'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
@@ -266,6 +270,7 @@ def test_subscriptions_update():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
+    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
     assert_equal(response.end_date, body.get('end_date'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
@@ -306,6 +311,98 @@ def test_502_subscriptions_update_retries():
   
 
 @responses.activate
+def test_subscriptions_pause():
+    fixture = helpers.load_fixture('subscriptions')['pause']
+    helpers.stub_response(fixture)
+    response = helpers.client.subscriptions.pause(*fixture['url_params'])
+    body = fixture['body']['subscriptions']
+
+    assert_is_instance(response, resources.Subscription)
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.amount, body.get('amount'))
+    assert_equal(response.app_fee, body.get('app_fee'))
+    assert_equal(response.count, body.get('count'))
+    assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.currency, body.get('currency'))
+    assert_equal(response.day_of_month, body.get('day_of_month'))
+    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
+    assert_equal(response.end_date, body.get('end_date'))
+    assert_equal(response.id, body.get('id'))
+    assert_equal(response.interval, body.get('interval'))
+    assert_equal(response.interval_unit, body.get('interval_unit'))
+    assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.month, body.get('month'))
+    assert_equal(response.name, body.get('name'))
+    assert_equal(response.payment_reference, body.get('payment_reference'))
+    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
+    assert_equal(response.start_date, body.get('start_date'))
+    assert_equal(response.status, body.get('status'))
+    assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+
+def test_timeout_subscriptions_pause_doesnt_retry():
+    fixture = helpers.load_fixture('subscriptions')['pause']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.subscriptions.pause(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_subscriptions_pause_doesnt_retry():
+    fixture = helpers.load_fixture('subscriptions')['pause']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.subscriptions.pause(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+  
+
+@responses.activate
+def test_subscriptions_resume():
+    fixture = helpers.load_fixture('subscriptions')['resume']
+    helpers.stub_response(fixture)
+    response = helpers.client.subscriptions.resume(*fixture['url_params'])
+    body = fixture['body']['subscriptions']
+
+    assert_is_instance(response, resources.Subscription)
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.amount, body.get('amount'))
+    assert_equal(response.app_fee, body.get('app_fee'))
+    assert_equal(response.count, body.get('count'))
+    assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.currency, body.get('currency'))
+    assert_equal(response.day_of_month, body.get('day_of_month'))
+    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
+    assert_equal(response.end_date, body.get('end_date'))
+    assert_equal(response.id, body.get('id'))
+    assert_equal(response.interval, body.get('interval'))
+    assert_equal(response.interval_unit, body.get('interval_unit'))
+    assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.month, body.get('month'))
+    assert_equal(response.name, body.get('name'))
+    assert_equal(response.payment_reference, body.get('payment_reference'))
+    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
+    assert_equal(response.start_date, body.get('start_date'))
+    assert_equal(response.status, body.get('status'))
+    assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+
+def test_timeout_subscriptions_resume_doesnt_retry():
+    fixture = helpers.load_fixture('subscriptions')['resume']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.subscriptions.resume(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_subscriptions_resume_doesnt_retry():
+    fixture = helpers.load_fixture('subscriptions')['resume']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.subscriptions.resume(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+  
+
+@responses.activate
 def test_subscriptions_cancel():
     fixture = helpers.load_fixture('subscriptions')['cancel']
     helpers.stub_response(fixture)
@@ -320,6 +417,7 @@ def test_subscriptions_cancel():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.day_of_month, body.get('day_of_month'))
+    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
     assert_equal(response.end_date, body.get('end_date'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.interval, body.get('interval'))
