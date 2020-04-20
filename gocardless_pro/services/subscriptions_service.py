@@ -151,10 +151,22 @@ class SubscriptionsService(base_service.BaseService):
         Pause a subscription object.
         No payments will be created until it is resumed.
         
-        This can only be used with subscriptions created with `count` or
-        subscriptions without `count` and `end_date`
-        If the subscription has `count` its `end_date` will be `null` after
-        pausing.
+        This can only be used when a subscription collecting a fixed number of
+        payments (created using `count`)
+        or when they continue forever (created without `count` or `end_date`)
+        
+        When `pause_cycles` is omitted the subscription is paused until the
+        [resume endpoint](#subscriptions-resume-a-subscription) is called.
+        If the subscription is collecting a fixed number of payments,
+        `end_date` will be set to `nil`.
+        When paused indefinitely, `upcoming_payments` will be empty.
+        
+        When `pause_cycles` is provided the subscription will be paused for the
+        number of cycles requested.
+        If the subscription is collecting a fixed number of payments,
+        `end_date` will be set to a new value.
+        When paused for a number of cycles, `upcoming_payments` will still
+        contain the upcoming charge dates.
         
         This fails with:
         
@@ -169,6 +181,9 @@ class SubscriptionsService(base_service.BaseService):
         
         - `subscription_already_ended` if the subscription has taken all
         payments.
+        
+        - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value
+        for `pause_cycles` cannot be satisfied.
         
 
         Args:
@@ -196,6 +211,8 @@ class SubscriptionsService(base_service.BaseService):
         Resume a subscription object.
         Payments will start to be created again based on the subscriptions
         recurrence rules.
+        The `charge_date` on the next payment will be the same as the
+        subscriptions `earliest_charge_date_after_resume`
         
         This fails with:
         
@@ -207,9 +224,6 @@ class SubscriptionsService(base_service.BaseService):
         resume a subscription.
         
         - `subscription_not_paused` if the subscription is not paused.
-        
-        - `subscription_already_scheduled_to_resume` if a subscription already
-        has a scheduled resume date.
         
 
         Args:
