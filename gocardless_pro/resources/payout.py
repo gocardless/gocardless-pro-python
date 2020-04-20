@@ -57,6 +57,11 @@ class Payout(object):
   
 
     @property
+    def metadata(self):
+        return self.attributes.get('metadata')
+  
+
+    @property
     def payout_type(self):
         return self.attributes.get('payout_type')
   
@@ -124,6 +129,8 @@ class Payout(object):
         def creditor_bank_account(self):
             return self.attributes.get('creditor_bank_account')
     
+  
+
   
 
   

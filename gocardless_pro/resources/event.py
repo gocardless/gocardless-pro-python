@@ -71,8 +71,16 @@ class Event(object):
             self.attributes = attributes
     
         @property
+        def bank_account_id(self):
+            return self.attributes.get('bank_account_id')
+    
+        @property
         def cause(self):
             return self.attributes.get('cause')
+    
+        @property
+        def currency(self):
+            return self.attributes.get('currency')
     
         @property
         def description(self):
@@ -81,6 +89,10 @@ class Event(object):
         @property
         def origin(self):
             return self.attributes.get('origin')
+    
+        @property
+        def _property(self):
+            return self.attributes.get('property')
     
         @property
         def reason_code(self):

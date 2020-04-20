@@ -323,6 +323,9 @@ Payouts
     # Get a single payout
     client.payouts.get('PO123', params={...})
 
+    # Update a payout
+    client.payouts.update('PO123', params={...})
+
 Payout items
 ''''''''''''''''''''''''''''''''''''''''''
 
