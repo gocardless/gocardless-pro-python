@@ -116,12 +116,18 @@ def test_events_get():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.resource_type, body.get('resource_type'))
+    assert_equal(response.details.bank_account_id,
+                 body.get('details')['bank_account_id'])
     assert_equal(response.details.cause,
                  body.get('details')['cause'])
+    assert_equal(response.details.currency,
+                 body.get('details')['currency'])
     assert_equal(response.details.description,
                  body.get('details')['description'])
     assert_equal(response.details.origin,
                  body.get('details')['origin'])
+    assert_equal(response.details._property,
+                 body.get('details')['property'])
     assert_equal(response.details.reason_code,
                  body.get('details')['reason_code'])
     assert_equal(response.details.scheme,
