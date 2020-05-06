@@ -286,6 +286,54 @@ def test_502_instalment_schedules_get_retries():
   
 
 @responses.activate
+def test_instalment_schedules_update():
+    fixture = helpers.load_fixture('instalment_schedules')['update']
+    helpers.stub_response(fixture)
+    response = helpers.client.instalment_schedules.update(*fixture['url_params'])
+    body = fixture['body']['instalment_schedules']
+
+    assert_is_instance(response, resources.InstalmentSchedule)
+    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.currency, body.get('currency'))
+    assert_equal(response.id, body.get('id'))
+    assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.name, body.get('name'))
+    assert_equal(response.payment_errors, body.get('payment_errors'))
+    assert_equal(response.status, body.get('status'))
+    assert_equal(response.total_amount, body.get('total_amount'))
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
+    assert_equal(response.links.mandate,
+                 body.get('links')['mandate'])
+    assert_equal(response.links.payments,
+                 body.get('links')['payments'])
+
+@responses.activate
+def test_timeout_instalment_schedules_update_retries():
+    fixture = helpers.load_fixture('instalment_schedules')['update']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.instalment_schedules.update(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+    body = fixture['body']['instalment_schedules']
+
+    assert_is_instance(response, resources.InstalmentSchedule)
+
+def test_502_instalment_schedules_update_retries():
+    fixture = helpers.load_fixture('instalment_schedules')['update']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.instalment_schedules.update(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+    body = fixture['body']['instalment_schedules']
+
+    assert_is_instance(response, resources.InstalmentSchedule)
+  
+
+@responses.activate
 def test_instalment_schedules_cancel():
     fixture = helpers.load_fixture('instalment_schedules')['cancel']
     helpers.stub_response(fixture)

@@ -215,6 +215,9 @@ Instalment schedules
     # Get a single instalment schedule
     client.instalment_schedules.get('IS123', params={...})
 
+    # Update an instalment schedule
+    client.instalment_schedules.update('IS123', params={...})
+
     # Cancel an instalment schedule
     client.instalment_schedules.cancel('IS123', params={...})
 

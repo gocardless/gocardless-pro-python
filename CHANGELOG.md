@@ -1,3 +1,41 @@
+# 1.18.0
+
+* support new update instalment schedules route
+
+# 1.17.0
+
+* fix: support new keys in creditor events
+* support payout metadata
+* support new update payouts route
+
+# 1.16.1
+
+* Adds metadata param to redirect flow creation endpoint
+* Adds the ability to pause and resume a subscription
+* Modify the earliest charge date for paused subscriptions
+
+# 1.16.0
+
+* uses new instalment schedules schema (with two different create methods)
+* adds 'count' field to subscriptions response
+
+# 1.15.1
+
+* Add support for `currency_exchange_rates`
+
+# 1.15.0
+
+* support for creditor webhooks
+* support for raising an error on Idempotency Key Conflicts
+
+# 1.14.0
+
+* add `will_attempt_retry` field to payment failed events
+
+# 1.13.0
+
+* add `retry_if_possible` field on payments, subscriptions and instalment_schedules
+
 # 1.12.1
 
 * Adds 3 additional fields on the creditors API
