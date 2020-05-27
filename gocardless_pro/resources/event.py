@@ -87,6 +87,10 @@ class Event(object):
             return self.attributes.get('description')
     
         @property
+        def not_retried_reason(self):
+            return self.attributes.get('not_retried_reason')
+    
+        @property
         def origin(self):
             return self.attributes.get('origin')
     

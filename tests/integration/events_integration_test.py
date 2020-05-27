@@ -124,6 +124,8 @@ def test_events_get():
                  body.get('details')['currency'])
     assert_equal(response.details.description,
                  body.get('details')['description'])
+    assert_equal(response.details.not_retried_reason,
+                 body.get('details')['not_retried_reason'])
     assert_equal(response.details.origin,
                  body.get('details')['origin'])
     assert_equal(response.details._property,
