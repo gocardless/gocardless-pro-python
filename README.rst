@@ -403,6 +403,20 @@ Subscriptions
     # Cancel a subscription
     client.subscriptions.cancel('SB123', params={...})
 
+Tax rates
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List tax rates
+    client.tax_rates.list(params={...})
+
+    # Iterate through all tax_rates
+    client.tax_rates.all(params={...})
+
+    # Get a single tax rate
+    client.tax_rates.get('GB_VAT_1', params={...})
+
 
 
 Running tests
