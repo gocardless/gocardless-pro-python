@@ -27,6 +27,11 @@ class PayoutItem(object):
   
 
     @property
+    def taxes(self):
+        return self.attributes.get('taxes')
+  
+
+    @property
     def type(self):
         return self.attributes.get('type')
   
@@ -49,6 +54,8 @@ class PayoutItem(object):
         def payment(self):
             return self.attributes.get('payment')
     
+  
+
   
 
   

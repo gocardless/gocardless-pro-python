@@ -56,6 +56,8 @@ def test_payouts_list():
                  [b.get('reference') for b in body])
     assert_equal([r.status for r in response.records],
                  [b.get('status') for b in body])
+    assert_equal([r.tax_currency for r in response.records],
+                 [b.get('tax_currency') for b in body])
 
 @responses.activate
 def test_timeout_payouts_list_retries():
@@ -128,6 +130,7 @@ def test_payouts_get():
     assert_equal(response.payout_type, body.get('payout_type'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.tax_currency, body.get('tax_currency'))
     assert_equal(response.fx.estimated_exchange_rate,
                  body.get('fx')['estimated_exchange_rate'])
     assert_equal(response.fx.exchange_rate,
@@ -184,6 +187,7 @@ def test_payouts_update():
     assert_equal(response.payout_type, body.get('payout_type'))
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.tax_currency, body.get('tax_currency'))
     assert_equal(response.fx.estimated_exchange_rate,
                  body.get('fx')['estimated_exchange_rate'])
     assert_equal(response.fx.exchange_rate,

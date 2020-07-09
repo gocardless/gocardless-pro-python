@@ -38,6 +38,8 @@ def test_payout_items_list():
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal([r.amount for r in response.records],
                  [b.get('amount') for b in body])
+    assert_equal([r.taxes for r in response.records],
+                 [b.get('taxes') for b in body])
     assert_equal([r.type for r in response.records],
                  [b.get('type') for b in body])
 

@@ -76,6 +76,11 @@ class Payout(object):
         return self.attributes.get('status')
   
 
+    @property
+    def tax_currency(self):
+        return self.attributes.get('tax_currency')
+  
+
 
   
 
@@ -129,6 +134,8 @@ class Payout(object):
         def creditor_bank_account(self):
             return self.attributes.get('creditor_bank_account')
     
+  
+
   
 
   
