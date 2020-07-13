@@ -43,21 +43,21 @@ class TaxRatesService(base_service.BaseService):
     
   
 
-    def get(self,id,params=None, headers=None):
+    def get(self,identity,params=None, headers=None):
         """Get a single tax rate.
 
         Retrieves the details of a tax rate.
 
         Args:
-              id (string): The unique identifier created by the jurisdiction, tax type and version
+              identity (string): The unique identifier created by the jurisdiction, tax type and version
               params (dict, optional): Query string parameters.
 
         Returns:
               ListResponse of TaxRate instances
         """
-        path = self._sub_url_params('/tax_rates/:id', {
+        path = self._sub_url_params('/tax_rates/:identity', {
           
-            'id': id,
+            'identity': identity,
           })
         
 
