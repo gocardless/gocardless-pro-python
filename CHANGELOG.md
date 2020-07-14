@@ -1,3 +1,17 @@
+<!-- @format -->
+
+# 1.20.0
+
+- Added support for applying tax to transaction and surcharge fees.
+  - Added `taxes` to payout_items.
+  - Added `tax_currency` to payout.
+  - Added `tax_rates` endpoint.
+  - Added a payout `tax_exchange_rates_confirmed` webhook to know when the exchange rate has been finalised for all fees in the payout.
+
+# 1.19.0
+
+- adds `not_retried_reason` to payment failed event
+
 # 1.18.0
 
 * support new update instalment schedules route
