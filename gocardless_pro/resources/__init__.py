@@ -41,3 +41,5 @@ from .refund import Refund
 
 from .subscription import Subscription
 
+from .tax_rate import TaxRate
+

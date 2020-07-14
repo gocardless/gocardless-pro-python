@@ -23,7 +23,8 @@ class RefundsService(base_service.BaseService):
         Creates a new refund object.
         
         This fails with:<a name="total_amount_confirmation_invalid"></a><a
-        name="number_of_refunds_exceeded"></a>
+        name="number_of_refunds_exceeded"></a><a
+        name="available_refund_amount_insufficient"></a>
         
         - `total_amount_confirmation_invalid` if the confirmation amount
         doesn't match the total amount refunded for the payment. This safeguard
@@ -32,6 +33,10 @@ class RefundsService(base_service.BaseService):
         
         - `number_of_refunds_exceeded` if five or more refunds have already
         been created against the payment.
+        
+        - `available_refund_amount_insufficient` if the creditor does not have
+        sufficient balance for refunds available to cover the cost of the
+        requested refund.
         
 
         Args:

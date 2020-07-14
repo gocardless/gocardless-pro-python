@@ -73,3 +73,6 @@ def test_refunds_returns_service():
 def test_subscriptions_returns_service():
     assert_is_instance(client.subscriptions, services.SubscriptionsService)
 
+def test_tax_rates_returns_service():
+    assert_is_instance(client.tax_rates, services.TaxRatesService)
+
