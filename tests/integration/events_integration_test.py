@@ -138,6 +138,10 @@ def test_events_get():
                  body.get('details')['will_attempt_retry'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
     assert_equal(response.links.instalment_schedule,
                  body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
@@ -150,6 +154,8 @@ def test_events_get():
                  body.get('links')['organisation'])
     assert_equal(response.links.parent_event,
                  body.get('links')['parent_event'])
+    assert_equal(response.links.payer_authorisation,
+                 body.get('links')['payer_authorisation'])
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
     assert_equal(response.links.payout,
