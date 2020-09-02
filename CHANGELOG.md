@@ -1,5 +1,9 @@
 <!-- @format -->
 
+# 1.21.0
+
+- Added a new event called `payer_authorisation_completed` for an upcoming resource type called `payer_authorisation` which provides `customer`, `customer_bank_account`, `mandate` and `payer_authorisation` links
+
 # 1.20.0
 
 - Added support for applying tax to transaction and surcharge fees.
