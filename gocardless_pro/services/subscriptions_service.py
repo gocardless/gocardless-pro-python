@@ -158,7 +158,7 @@ class SubscriptionsService(base_service.BaseService):
         When `pause_cycles` is omitted the subscription is paused until the
         [resume endpoint](#subscriptions-resume-a-subscription) is called.
         If the subscription is collecting a fixed number of payments,
-        `end_date` will be set to `nil`.
+        `end_date` will be set to `null`.
         When paused indefinitely, `upcoming_payments` will be empty.
         
         When `pause_cycles` is provided the subscription will be paused for the
