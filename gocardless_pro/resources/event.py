@@ -126,6 +126,14 @@ class Event(object):
             return self.attributes.get('creditor')
     
         @property
+        def customer(self):
+            return self.attributes.get('customer')
+    
+        @property
+        def customer_bank_account(self):
+            return self.attributes.get('customer_bank_account')
+    
+        @property
         def instalment_schedule(self):
             return self.attributes.get('instalment_schedule')
     
@@ -148,6 +156,10 @@ class Event(object):
         @property
         def parent_event(self):
             return self.attributes.get('parent_event')
+    
+        @property
+        def payer_authorisation(self):
+            return self.attributes.get('payer_authorisation')
     
         @property
         def payment(self):
