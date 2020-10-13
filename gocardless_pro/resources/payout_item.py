@@ -54,6 +54,10 @@ class PayoutItem(object):
         def payment(self):
             return self.attributes.get('payment')
     
+        @property
+        def refund(self):
+            return self.attributes.get('refund')
+    
   
 
   
