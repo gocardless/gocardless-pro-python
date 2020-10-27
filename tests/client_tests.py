@@ -55,6 +55,9 @@ def test_mandate_import_entries_returns_service():
 def test_mandate_pdfs_returns_service():
     assert_is_instance(client.mandate_pdfs, services.MandatePdfsService)
 
+def test_payer_authorisations_returns_service():
+    assert_is_instance(client.payer_authorisations, services.PayerAuthorisationsService)
+
 def test_payments_returns_service():
     assert_is_instance(client.payments, services.PaymentsService)
 
