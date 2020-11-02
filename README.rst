@@ -286,6 +286,26 @@ Mandate pdfs
     # Create a mandate PDF
     client.mandate_pdfs.create(params={...})
 
+Payer authorisations
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Get a single Payer Authorisation
+    client.payer_authorisations.get('PA123', params={...})
+
+    # Create a Payer Authorisation
+    client.payer_authorisations.create(params={...})
+
+    # Update a Payer Authorisation
+    client.payer_authorisations.update('PA123', params={...})
+
+    # Submit a Payer Authorisation
+    client.payer_authorisations.submit('PA123', params={...})
+
+    # Confirm a Payer Authorisation
+    client.payer_authorisations.confirm('PA123', params={...})
+
 Payments
 ''''''''''''''''''''''''''''''''''''''''''
 

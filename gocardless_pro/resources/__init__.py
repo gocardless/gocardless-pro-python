@@ -29,6 +29,8 @@ from .mandate_import_entry import MandateImportEntry
 
 from .mandate_pdf import MandatePdf
 
+from .payer_authorisation import PayerAuthorisation
+
 from .payment import Payment
 
 from .payout import Payout
