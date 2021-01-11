@@ -73,6 +73,10 @@ class PayerAuthorisation(object):
             return self.attributes.get('account_number')
     
         @property
+        def account_number_ending(self):
+            return self.attributes.get('account_number_ending')
+    
+        @property
         def account_number_suffix(self):
             return self.attributes.get('account_number_suffix')
     

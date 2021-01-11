@@ -40,6 +40,8 @@ def test_payer_authorisations_get():
                  body.get('bank_account')['account_holder_name'])
     assert_equal(response.bank_account.account_number,
                  body.get('bank_account')['account_number'])
+    assert_equal(response.bank_account.account_number_ending,
+                 body.get('bank_account')['account_number_ending'])
     assert_equal(response.bank_account.account_number_suffix,
                  body.get('bank_account')['account_number_suffix'])
     assert_equal(response.bank_account.account_type,
@@ -142,6 +144,8 @@ def test_payer_authorisations_create():
                  body.get('bank_account')['account_holder_name'])
     assert_equal(response.bank_account.account_number,
                  body.get('bank_account')['account_number'])
+    assert_equal(response.bank_account.account_number_ending,
+                 body.get('bank_account')['account_number_ending'])
     assert_equal(response.bank_account.account_number_suffix,
                  body.get('bank_account')['account_number_suffix'])
     assert_equal(response.bank_account.account_type,
@@ -262,6 +266,8 @@ def test_payer_authorisations_update():
                  body.get('bank_account')['account_holder_name'])
     assert_equal(response.bank_account.account_number,
                  body.get('bank_account')['account_number'])
+    assert_equal(response.bank_account.account_number_ending,
+                 body.get('bank_account')['account_number_ending'])
     assert_equal(response.bank_account.account_number_suffix,
                  body.get('bank_account')['account_number_suffix'])
     assert_equal(response.bank_account.account_type,
@@ -364,6 +370,8 @@ def test_payer_authorisations_submit():
                  body.get('bank_account')['account_holder_name'])
     assert_equal(response.bank_account.account_number,
                  body.get('bank_account')['account_number'])
+    assert_equal(response.bank_account.account_number_ending,
+                 body.get('bank_account')['account_number_ending'])
     assert_equal(response.bank_account.account_number_suffix,
                  body.get('bank_account')['account_number_suffix'])
     assert_equal(response.bank_account.account_type,
@@ -457,6 +465,8 @@ def test_payer_authorisations_confirm():
                  body.get('bank_account')['account_holder_name'])
     assert_equal(response.bank_account.account_number,
                  body.get('bank_account')['account_number'])
+    assert_equal(response.bank_account.account_number_ending,
+                 body.get('bank_account')['account_number_ending'])
     assert_equal(response.bank_account.account_number_suffix,
                  body.get('bank_account')['account_number_suffix'])
     assert_equal(response.bank_account.account_type,
