@@ -79,3 +79,6 @@ def test_subscriptions_returns_service():
 def test_tax_rates_returns_service():
     assert_is_instance(client.tax_rates, services.TaxRatesService)
 
+def test_webhooks_returns_service():
+    assert_is_instance(client.webhooks, services.WebhooksService)
+

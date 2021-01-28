@@ -437,6 +437,23 @@ Tax rates
     # Get a single tax rate
     client.tax_rates.get('GB_VAT_1', params={...})
 
+Webhooks
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List webhooks
+    client.webhooks.list(params={...})
+
+    # Iterate through all webhooks
+    client.webhooks.all(params={...})
+
+    # Get a single webhook
+    client.webhooks.get('WB123', params={...})
+
+    # Retry a webhook
+    client.webhooks.retry('WB123', params={...})
+
 
 
 Running tests
