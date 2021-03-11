@@ -152,8 +152,9 @@ class SubscriptionsService(base_service.BaseService):
         No payments will be created until it is resumed.
         
         This can only be used when a subscription collecting a fixed number of
-        payments (created using `count`)
-        or when they continue forever (created without `count` or `end_date`)
+        payments (created using `count`),
+        when they continue forever (created without `count` or `end_date`) or
+        the subscription is paused for a number of cycles.
         
         When `pause_cycles` is omitted the subscription is paused until the
         [resume endpoint](#subscriptions-resume-a-subscription) is called.
@@ -177,7 +178,11 @@ class SubscriptionsService(base_service.BaseService):
         - `validation_failed` if invalid data is provided when attempting to
         pause a subscription.
         
-        - `subscription_not_active` if the subscription is no longer active.
+        - `subscription_paused_cannot_update_cycles` if the subscription is
+        already paused for a number of cycles and the request provides a value
+        for `pause_cycle`.
+        
+        - `subscription_cannot_be_paused` if the subscription cannot be paused.
         
         - `subscription_already_ended` if the subscription has taken all
         payments.
