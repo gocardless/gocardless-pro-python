@@ -114,6 +114,10 @@ class Client(object):
         return services.RefundsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def scenario_simulators(self):
+        return services.ScenarioSimulatorsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def subscriptions(self):
         return services.SubscriptionsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 

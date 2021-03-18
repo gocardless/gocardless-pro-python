@@ -41,6 +41,8 @@ from .redirect_flow import RedirectFlow
 
 from .refund import Refund
 
+from .scenario_simulator import ScenarioSimulator
+
 from .subscription import Subscription
 
 from .tax_rate import TaxRate

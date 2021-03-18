@@ -394,6 +394,14 @@ Refunds
     # Update a refund
     client.refunds.update('RF123', params={...})
 
+Scenario simulators
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Simulate a scenario
+    client.scenario_simulators.run('payment_failed', params={...})
+
 Subscriptions
 ''''''''''''''''''''''''''''''''''''''''''
 
