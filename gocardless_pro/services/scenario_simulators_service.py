@@ -31,6 +31,7 @@ class ScenarioSimulatorsService(base_service.BaseService):
 <li>`payment_paid_out`</li>
 <li>`payment_failed`</li>
 <li>`payment_charged_back`</li>
+<li>`payment_chargeback_settled`</li>
 <li>`payment_late_failure`</li>
 <li>`payment_late_failure_settled`</li>
 <li>`payment_submitted`</li>
