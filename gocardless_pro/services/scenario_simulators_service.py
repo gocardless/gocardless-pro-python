@@ -39,6 +39,7 @@ class ScenarioSimulatorsService(base_service.BaseService):
 <li>`mandate_failed`</li>
 <li>`mandate_expired`</li>
 <li>`mandate_transferred`</li>
+<li>`mandate_transferred_with_resubmission`</li>
 <li>`refund_paid`</li>
 <li>`payout_bounced`</li>
 </ul>
