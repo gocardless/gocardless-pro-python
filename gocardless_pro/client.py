@@ -38,8 +38,20 @@ class Client(object):
         self._raise_on_idempotency_conflict = raise_on_idempotency_conflict
 
     @property
+    def bank_authorisations(self):
+        return services.BankAuthorisationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def bank_details_lookups(self):
         return services.BankDetailsLookupsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
+    def billing_requests(self):
+        return services.BillingRequestsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
+    def billing_request_flows(self):
+        return services.BillingRequestFlowsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def creditors(self):
@@ -72,6 +84,10 @@ class Client(object):
     @property
     def instalment_schedules(self):
         return services.InstalmentSchedulesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
+    def institutions(self):
+        return services.InstitutionsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def mandates(self):

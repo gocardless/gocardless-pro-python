@@ -68,6 +68,17 @@ For full documentation, see our `API reference`_.
 Available resources
 ```````````````````
 
+Bank authorisations
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Get a Bank Authorisation.
+    client.bank_authorisations.get('BAU123', params={...})
+
+    # Create a Bank Authorisation
+    client.bank_authorisations.create(params={...})
+
 Bank details lookups
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -75,6 +86,46 @@ Bank details lookups
 
     # Perform a bank details lookup
     client.bank_details_lookups.create(params={...})
+
+Billing requests
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List Billing Requests
+    client.billing_requests.list(params={...})
+
+    # Iterate through all billing_requests
+    client.billing_requests.all(params={...})
+
+    # Create a billing_request
+    client.billing_requests.create(params={...})
+
+    # Get a single billing request
+    client.billing_requests.get('PY123', params={...})
+
+    # Collect customer details for the billing request
+    client.billing_requests.collect_customer_details('PY123', params={...})
+
+    # Collect bank account details for the billing request
+    client.billing_requests.collect_bank_account_details('PY123', params={...})
+
+    # Fulfil a billing request
+    client.billing_requests.fulfil('PY123', params={...})
+
+    # Cancel a billing request
+    client.billing_requests.cancel('PY123', params={...})
+
+    # Notify the customer of a billing request
+    client.billing_requests.notify('PY123', params={...})
+
+Billing request flows
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a billing request flow
+    client.billing_request_flows.create(params={...})
 
 Creditors
 ''''''''''''''''''''''''''''''''''''''''''
@@ -220,6 +271,17 @@ Instalment schedules
 
     # Cancel an instalment schedule
     client.instalment_schedules.cancel('IS123', params={...})
+
+Institutions
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List institutions
+    client.institutions.list(params={...})
+
+    # Iterate through all institutions
+    client.institutions.all(params={...})
 
 Mandates
 ''''''''''''''''''''''''''''''''''''''''''

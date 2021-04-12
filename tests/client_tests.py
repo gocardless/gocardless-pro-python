@@ -16,8 +16,17 @@ client = Client(access_token=access_token, base_url='http://example.com')
 def test_requires_valid_environment():
     assert_raises(ValueError, Client, access_token=access_token, environment='invalid')
 
+def test_bank_authorisations_returns_service():
+    assert_is_instance(client.bank_authorisations, services.BankAuthorisationsService)
+
 def test_bank_details_lookups_returns_service():
     assert_is_instance(client.bank_details_lookups, services.BankDetailsLookupsService)
+
+def test_billing_requests_returns_service():
+    assert_is_instance(client.billing_requests, services.BillingRequestsService)
+
+def test_billing_request_flows_returns_service():
+    assert_is_instance(client.billing_request_flows, services.BillingRequestFlowsService)
 
 def test_creditors_returns_service():
     assert_is_instance(client.creditors, services.CreditorsService)
@@ -42,6 +51,9 @@ def test_events_returns_service():
 
 def test_instalment_schedules_returns_service():
     assert_is_instance(client.instalment_schedules, services.InstalmentSchedulesService)
+
+def test_institutions_returns_service():
+    assert_is_instance(client.institutions, services.InstitutionsService)
 
 def test_mandates_returns_service():
     assert_is_instance(client.mandates, services.MandatesService)
