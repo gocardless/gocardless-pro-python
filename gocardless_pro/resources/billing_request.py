@@ -83,6 +83,10 @@ class BillingRequest(object):
             self.attributes = attributes
     
         @property
+        def bank_authorisation(self):
+            return self.attributes.get('bank_authorisation')
+    
+        @property
         def customer(self):
             return self.attributes.get('customer')
     
@@ -93,14 +97,6 @@ class BillingRequest(object):
         @property
         def customer_billing_detail(self):
             return self.attributes.get('customer_billing_detail')
-    
-        @property
-        def mandate_bank_authorisation(self):
-            return self.attributes.get('mandate_bank_authorisation')
-    
-        @property
-        def payment_bank_authorisation(self):
-            return self.attributes.get('payment_bank_authorisation')
     
   
 
