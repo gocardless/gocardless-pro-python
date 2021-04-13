@@ -3,7 +3,10 @@
 #   https://github.com/gocardless/crank
 #
 
+from .bank_authorisations_service import BankAuthorisationsService
 from .bank_details_lookups_service import BankDetailsLookupsService
+from .billing_requests_service import BillingRequestsService
+from .billing_request_flows_service import BillingRequestFlowsService
 from .creditors_service import CreditorsService
 from .creditor_bank_accounts_service import CreditorBankAccountsService
 from .currency_exchange_rates_service import CurrencyExchangeRatesService
@@ -12,6 +15,7 @@ from .customer_bank_accounts_service import CustomerBankAccountsService
 from .customer_notifications_service import CustomerNotificationsService
 from .events_service import EventsService
 from .instalment_schedules_service import InstalmentSchedulesService
+from .institutions_service import InstitutionsService
 from .mandates_service import MandatesService
 from .mandate_imports_service import MandateImportsService
 from .mandate_import_entries_service import MandateImportEntriesService
@@ -22,6 +26,7 @@ from .payouts_service import PayoutsService
 from .payout_items_service import PayoutItemsService
 from .redirect_flows_service import RedirectFlowsService
 from .refunds_service import RefundsService
+from .scenario_simulators_service import ScenarioSimulatorsService
 from .subscriptions_service import SubscriptionsService
 from .tax_rates_service import TaxRatesService
 from .webhooks_service import WebhooksService

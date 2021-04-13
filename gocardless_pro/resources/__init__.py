@@ -3,7 +3,13 @@
 #   https://github.com/gocardless/crank
 #
 
+from .bank_authorisation import BankAuthorisation
+
 from .bank_details_lookup import BankDetailsLookup
+
+from .billing_request import BillingRequest
+
+from .billing_request_flow import BillingRequestFlow
 
 from .creditor import Creditor
 
@@ -20,6 +26,8 @@ from .customer_notification import CustomerNotification
 from .event import Event
 
 from .instalment_schedule import InstalmentSchedule
+
+from .institution import Institution
 
 from .mandate import Mandate
 
@@ -40,6 +48,8 @@ from .payout_item import PayoutItem
 from .redirect_flow import RedirectFlow
 
 from .refund import Refund
+
+from .scenario_simulator import ScenarioSimulator
 
 from .subscription import Subscription
 
