@@ -77,7 +77,7 @@ class BillingRequestsService(base_service.BaseService):
         Fetches a billing request
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Query string parameters.
 
         Returns:
@@ -110,7 +110,7 @@ class BillingRequestsService(base_service.BaseService):
         successful.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:
@@ -142,7 +142,7 @@ class BillingRequestsService(base_service.BaseService):
         and attaching it.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:
@@ -168,7 +168,7 @@ class BillingRequestsService(base_service.BaseService):
         it to fulfil, executing the payment.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:
@@ -194,7 +194,7 @@ class BillingRequestsService(base_service.BaseService):
         to expire.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:
@@ -220,7 +220,7 @@ class BillingRequestsService(base_service.BaseService):
         Currently, the customer can only be notified by email.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:

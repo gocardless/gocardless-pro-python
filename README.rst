@@ -102,22 +102,22 @@ Billing requests
     client.billing_requests.create(params={...})
 
     # Get a single billing request
-    client.billing_requests.get('PY123', params={...})
+    client.billing_requests.get('BRQ123', params={...})
 
     # Collect customer details for the billing request
-    client.billing_requests.collect_customer_details('PY123', params={...})
+    client.billing_requests.collect_customer_details('BRQ123', params={...})
 
     # Collect bank account details for the billing request
-    client.billing_requests.collect_bank_account_details('PY123', params={...})
+    client.billing_requests.collect_bank_account_details('BRQ123', params={...})
 
     # Fulfil a billing request
-    client.billing_requests.fulfil('PY123', params={...})
+    client.billing_requests.fulfil('BRQ123', params={...})
 
     # Cancel a billing request
-    client.billing_requests.cancel('PY123', params={...})
+    client.billing_requests.cancel('BRQ123', params={...})
 
     # Notify the customer of a billing request
-    client.billing_requests.notify('PY123', params={...})
+    client.billing_requests.notify('BRQ123', params={...})
 
 Billing request flows
 ''''''''''''''''''''''''''''''''''''''''''
