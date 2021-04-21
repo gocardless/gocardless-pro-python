@@ -22,6 +22,11 @@ class BillingRequestFlow(object):
   
 
     @property
+    def auto_fulfil(self):
+        return self.attributes.get('auto_fulfil')
+  
+
+    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -39,6 +44,16 @@ class BillingRequestFlow(object):
     @property
     def links(self):
         return self.Links(self.attributes.get('links'))
+  
+
+    @property
+    def lock_bank_account_details(self):
+        return self.attributes.get('lock_bank_account_details')
+  
+
+    @property
+    def lock_customer_details(self):
+        return self.attributes.get('lock_customer_details')
   
 
     @property
@@ -61,6 +76,8 @@ class BillingRequestFlow(object):
   
 
   
+
+  
     class Links(object):
         """Wrapper for the response's 'links' attribute."""
 
@@ -71,6 +88,10 @@ class BillingRequestFlow(object):
         def billing_request(self):
             return self.attributes.get('billing_request')
     
+  
+
+  
+
   
 
   
