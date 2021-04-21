@@ -127,6 +127,9 @@ Billing request flows
     # Create a billing request flow
     client.billing_request_flows.create(params={...})
 
+    # Initialise a billing request flow
+    client.billing_request_flows.initialise('BRQ123', params={...})
+
 Creditors
 ''''''''''''''''''''''''''''''''''''''''''
 

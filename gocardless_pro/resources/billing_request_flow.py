@@ -32,6 +32,11 @@ class BillingRequestFlow(object):
   
 
     @property
+    def id(self):
+        return self.attributes.get('id')
+  
+
+    @property
     def links(self):
         return self.Links(self.attributes.get('links'))
   
@@ -41,6 +46,13 @@ class BillingRequestFlow(object):
         return self.attributes.get('redirect_uri')
   
 
+    @property
+    def session_token(self):
+        return self.attributes.get('session_token')
+  
+
+
+  
 
   
 
@@ -59,6 +71,8 @@ class BillingRequestFlow(object):
         def billing_request(self):
             return self.attributes.get('billing_request')
     
+  
+
   
 
   

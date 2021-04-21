@@ -35,7 +35,9 @@ def test_billing_request_flows_create():
     assert_equal(response.authorisation_url, body.get('authorisation_url'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.expires_at, body.get('expires_at'))
+    assert_equal(response.id, body.get('id'))
     assert_equal(response.redirect_uri, body.get('redirect_uri'))
+    assert_equal(response.session_token, body.get('session_token'))
     assert_equal(response.links.billing_request,
                  body.get('links')['billing_request'])
 
@@ -61,4 +63,37 @@ def test_502_billing_request_flows_create_retries():
     body = fixture['body']['billing_request_flows']
 
     assert_is_instance(response, resources.BillingRequestFlow)
+  
+
+@responses.activate
+def test_billing_request_flows_initialise():
+    fixture = helpers.load_fixture('billing_request_flows')['initialise']
+    helpers.stub_response(fixture)
+    response = helpers.client.billing_request_flows.initialise(*fixture['url_params'])
+    body = fixture['body']['billing_request_flows']
+
+    assert_is_instance(response, resources.BillingRequestFlow)
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.authorisation_url, body.get('authorisation_url'))
+    assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.expires_at, body.get('expires_at'))
+    assert_equal(response.id, body.get('id'))
+    assert_equal(response.redirect_uri, body.get('redirect_uri'))
+    assert_equal(response.session_token, body.get('session_token'))
+    assert_equal(response.links.billing_request,
+                 body.get('links')['billing_request'])
+
+def test_timeout_billing_request_flows_initialise_doesnt_retry():
+    fixture = helpers.load_fixture('billing_request_flows')['initialise']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.billing_request_flows.initialise(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_billing_request_flows_initialise_doesnt_retry():
+    fixture = helpers.load_fixture('billing_request_flows')['initialise']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.billing_request_flows.initialise(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
   

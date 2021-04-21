@@ -37,3 +37,29 @@ class BillingRequestFlowsService(base_service.BaseService):
                                          retry_failures=True)
         return self._resource_for(response)
   
+
+    def initialise(self,identity,params=None, headers=None):
+        """Initialise a billing request flow.
+
+        Returns the flow having generated a fresh session token which can be
+        used to power
+        integrations that manipulate the flow.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              ListResponse of BillingRequestFlow instances
+        """
+        path = self._sub_url_params('/billing_request_flows/:identity/actions/initialise', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
