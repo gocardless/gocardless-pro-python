@@ -128,11 +128,11 @@ class BillingRequestsService(base_service.BaseService):
         return self._resource_for(response)
   
 
-    def collect_bank_account_details(self,identity,params=None, headers=None):
+    def collect_bank_account(self,identity,params=None, headers=None):
         """Collect bank account details for the billing request.
 
         If the billing request has a pending
-        <code>collect_bank_account_details</code> action, this endpoint can be
+        <code>collect_bank_account</code> action, this endpoint can be
         used to collect the details in order to complete it.
         
         The endpoint takes the same payload as Customer Bank Accounts, but
@@ -148,7 +148,7 @@ class BillingRequestsService(base_service.BaseService):
         Returns:
               ListResponse of BillingRequest instances
         """
-        path = self._sub_url_params('/billing_requests/:identity/actions/collect_bank_account_details', {
+        path = self._sub_url_params('/billing_requests/:identity/actions/collect_bank_account', {
           
             'identity': identity,
           })

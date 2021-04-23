@@ -108,7 +108,7 @@ Billing requests
     client.billing_requests.collect_customer_details('BRQ123', params={...})
 
     # Collect bank account details for the billing request
-    client.billing_requests.collect_bank_account_details('BRQ123', params={...})
+    client.billing_requests.collect_bank_account('BRQ123', params={...})
 
     # Fulfil a billing request
     client.billing_requests.fulfil('BRQ123', params={...})

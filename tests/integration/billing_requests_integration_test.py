@@ -38,8 +38,6 @@ def test_billing_requests_list():
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal([r.actions for r in response.records],
                  [b.get('actions') for b in body])
-    assert_equal([r.auto_fulfil for r in response.records],
-                 [b.get('auto_fulfil') for b in body])
     assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
     assert_equal([r.id for r in response.records],
@@ -111,7 +109,6 @@ def test_billing_requests_create():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -199,7 +196,6 @@ def test_billing_requests_get():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -269,7 +265,6 @@ def test_billing_requests_collect_customer_details():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -321,16 +316,15 @@ def test_502_billing_requests_collect_customer_details_doesnt_retry():
   
 
 @responses.activate
-def test_billing_requests_collect_bank_account_details():
-    fixture = helpers.load_fixture('billing_requests')['collect_bank_account_details']
+def test_billing_requests_collect_bank_account():
+    fixture = helpers.load_fixture('billing_requests')['collect_bank_account']
     helpers.stub_response(fixture)
-    response = helpers.client.billing_requests.collect_bank_account_details(*fixture['url_params'])
+    response = helpers.client.billing_requests.collect_bank_account(*fixture['url_params'])
     body = fixture['body']['billing_requests']
 
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -366,18 +360,18 @@ def test_billing_requests_collect_bank_account_details():
     assert_equal(response.resources.customer_billing_detail,
                  body.get('resources')['customer_billing_detail'])
 
-def test_timeout_billing_requests_collect_bank_account_details_doesnt_retry():
-    fixture = helpers.load_fixture('billing_requests')['collect_bank_account_details']
+def test_timeout_billing_requests_collect_bank_account_doesnt_retry():
+    fixture = helpers.load_fixture('billing_requests')['collect_bank_account']
     with helpers.stub_timeout(fixture) as rsps:
       with assert_raises(requests.ConnectTimeout):
-        response = helpers.client.billing_requests.collect_bank_account_details(*fixture['url_params'])
+        response = helpers.client.billing_requests.collect_bank_account(*fixture['url_params'])
       assert_equal(1, len(rsps.calls))
 
-def test_502_billing_requests_collect_bank_account_details_doesnt_retry():
-    fixture = helpers.load_fixture('billing_requests')['collect_bank_account_details']
+def test_502_billing_requests_collect_bank_account_doesnt_retry():
+    fixture = helpers.load_fixture('billing_requests')['collect_bank_account']
     with helpers.stub_502(fixture) as rsps:
       with assert_raises(MalformedResponseError):
-        response = helpers.client.billing_requests.collect_bank_account_details(*fixture['url_params'])
+        response = helpers.client.billing_requests.collect_bank_account(*fixture['url_params'])
       assert_equal(1, len(rsps.calls))
   
 
@@ -391,7 +385,6 @@ def test_billing_requests_fulfil():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -452,7 +445,6 @@ def test_billing_requests_cancel():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -513,7 +505,6 @@ def test_billing_requests_notify():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
