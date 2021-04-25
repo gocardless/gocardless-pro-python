@@ -47,8 +47,8 @@ class BillingRequestFlow(object):
   
 
     @property
-    def lock_bank_account_details(self):
-        return self.attributes.get('lock_bank_account_details')
+    def lock_bank_account(self):
+        return self.attributes.get('lock_bank_account')
   
 
     @property
