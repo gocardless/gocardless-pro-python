@@ -45,6 +45,7 @@ class ScenarioSimulatorsService(base_service.BaseService):
 <li>`refund_paid`: Transitions a refund to `paid`. It must start in either the `pending_submission` or `submitted` state.</li>
 <li>`refund_settled`: Transitions a refund to `paid`, if it's not already, then generates a payout that includes the refund, thereby settling the funds. It must start in one of `pending_submission`, `submitted` or `paid` states.</li>
 <li>`refund_bounced`: Transitions a refund to `bounced`. It must start in either the `pending_submission`, `submitted`, or `paid` state.</li>
+<li>`refund_returned`: Transitions a refund to `refund_returned`. The refund must start in `pending_submission`.</li>
 <li>`payout_bounced`: Transitions a payout to `bounced`. It must start in the `paid` state.</li>
 <li>`billing_request_fulfilled`: Authorises the billing request, fulfils it, and moves the associated payment to `failed`. The billing request must be in the `pending` state, with all actions completed except for `bank_authorisation`. Only billing requests with a `payment_request` are supported.</li>
 <li>`billing_request_fulfilled_and_payment_failed`: Authorises the billing request, fulfils it, and moves the associated payment to `failed`. The billing request must be in the `pending` state, with all actions completed except for `bank_authorisation`. Only billing requests with a `payment_request` are supported.</li>
