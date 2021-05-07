@@ -115,6 +115,8 @@ def test_billing_requests_create():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
@@ -202,6 +204,8 @@ def test_billing_requests_get():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
@@ -271,6 +275,8 @@ def test_billing_requests_collect_customer_details():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
@@ -331,6 +337,8 @@ def test_billing_requests_collect_bank_account():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
@@ -391,6 +399,8 @@ def test_billing_requests_fulfil():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
@@ -451,6 +461,8 @@ def test_billing_requests_cancel():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
@@ -511,6 +523,8 @@ def test_billing_requests_notify():
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
