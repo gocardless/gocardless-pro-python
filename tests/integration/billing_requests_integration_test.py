@@ -139,6 +139,8 @@ def test_billing_requests_create():
                  body.get('mandate_request')['scheme'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -236,6 +238,8 @@ def test_billing_requests_get():
                  body.get('mandate_request')['scheme'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -315,6 +319,8 @@ def test_billing_requests_collect_customer_details():
                  body.get('mandate_request')['scheme'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -385,6 +391,8 @@ def test_billing_requests_collect_bank_account():
                  body.get('mandate_request')['scheme'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -455,6 +463,8 @@ def test_billing_requests_fulfil():
                  body.get('mandate_request')['scheme'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -525,6 +535,8 @@ def test_billing_requests_cancel():
                  body.get('mandate_request')['scheme'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -595,6 +607,8 @@ def test_billing_requests_notify():
                  body.get('mandate_request')['scheme'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,

@@ -148,6 +148,10 @@ class BillingRequest(object):
             return self.attributes.get('amount')
     
         @property
+        def app_fee(self):
+            return self.attributes.get('app_fee')
+    
+        @property
         def currency(self):
             return self.attributes.get('currency')
     
