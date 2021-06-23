@@ -22,6 +22,11 @@ class BankAuthorisation(object):
   
 
     @property
+    def authorised_at(self):
+        return self.attributes.get('authorised_at')
+  
+
+    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -56,6 +61,8 @@ class BankAuthorisation(object):
         return self.attributes.get('url')
   
 
+
+  
 
   
 
