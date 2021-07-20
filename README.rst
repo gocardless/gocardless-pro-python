@@ -113,6 +113,9 @@ Billing requests
     # Fulfil a billing request
     client.billing_requests.fulfil('BRQ123', params={...})
 
+    # Confirm the customer and bank_account details
+    client.billing_requests.confirm_payer_details('BRQ123', params={...})
+
     # Cancel a billing request
     client.billing_requests.cancel('BRQ123', params={...})
 

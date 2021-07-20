@@ -186,6 +186,33 @@ class BillingRequestsService(base_service.BaseService):
         return self._resource_for(response)
   
 
+    def confirm_payer_details(self,identity,params=None, headers=None):
+        """Confirm the customer and bank_account details.
+
+        This is needed when you have mandate_request. As a scheme compliance
+        rule we are required to
+        allow the payer to crosscheck the details entered by them and confirm
+        it.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              ListResponse of BillingRequest instances
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/confirm_payer_details', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
     def cancel(self,identity,params=None, headers=None):
         """Cancel a billing request.
 
