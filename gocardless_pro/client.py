@@ -54,6 +54,10 @@ class Client(object):
         return services.BillingRequestFlowsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def billing_request_templates(self):
+        return services.BillingRequestTemplatesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def creditors(self):
         return services.CreditorsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 

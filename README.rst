@@ -133,6 +133,26 @@ Billing request flows
     # Initialise a billing request flow
     client.billing_request_flows.initialise('BRQ123', params={...})
 
+Billing request templates
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List Billing Request Templates
+    client.billing_request_templates.list(params={...})
+
+    # Iterate through all billing_request_templates
+    client.billing_request_templates.all(params={...})
+
+    # Get a single Billing Request Template
+    client.billing_request_templates.get('BRT123', params={...})
+
+    # Create a Billing Request Template
+    client.billing_request_templates.create(params={...})
+
+    # Update a Billing Request Template
+    client.billing_request_templates.update('BRQ123', params={...})
+
 Creditors
 ''''''''''''''''''''''''''''''''''''''''''
 

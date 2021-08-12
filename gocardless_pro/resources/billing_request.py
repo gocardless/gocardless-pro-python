@@ -132,6 +132,10 @@ class BillingRequest(object):
         def scheme(self):
             return self.attributes.get('scheme')
     
+        @property
+        def verify(self):
+            return self.attributes.get('verify')
+    
   
 
   
