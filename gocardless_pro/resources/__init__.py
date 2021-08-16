@@ -11,6 +11,8 @@ from .billing_request import BillingRequest
 
 from .billing_request_flow import BillingRequestFlow
 
+from .billing_request_template import BillingRequestTemplate
+
 from .creditor import Creditor
 
 from .creditor_bank_account import CreditorBankAccount

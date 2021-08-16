@@ -22,11 +22,6 @@ class BillingRequest(object):
   
 
     @property
-    def auto_fulfil(self):
-        return self.attributes.get('auto_fulfil')
-  
-
-    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -74,13 +69,19 @@ class BillingRequest(object):
   
 
   
-
-  
     class Links(object):
         """Wrapper for the response's 'links' attribute."""
 
         def __init__(self, attributes):
             self.attributes = attributes
+    
+        @property
+        def bank_authorisation(self):
+            return self.attributes.get('bank_authorisation')
+    
+        @property
+        def creditor(self):
+            return self.attributes.get('creditor')
     
         @property
         def customer(self):
@@ -95,12 +96,20 @@ class BillingRequest(object):
             return self.attributes.get('customer_billing_detail')
     
         @property
-        def mandate_bank_authorisation(self):
-            return self.attributes.get('mandate_bank_authorisation')
+        def mandate_request(self):
+            return self.attributes.get('mandate_request')
     
         @property
-        def payment_bank_authorisation(self):
-            return self.attributes.get('payment_bank_authorisation')
+        def mandate_request_mandate(self):
+            return self.attributes.get('mandate_request_mandate')
+    
+        @property
+        def payment_request(self):
+            return self.attributes.get('payment_request')
+    
+        @property
+        def payment_request_payment(self):
+            return self.attributes.get('payment_request_payment')
     
   
 
@@ -123,6 +132,10 @@ class BillingRequest(object):
         def scheme(self):
             return self.attributes.get('scheme')
     
+        @property
+        def verify(self):
+            return self.attributes.get('verify')
+    
   
 
   
@@ -137,6 +150,10 @@ class BillingRequest(object):
         @property
         def amount(self):
             return self.attributes.get('amount')
+    
+        @property
+        def app_fee(self):
+            return self.attributes.get('app_fee')
     
         @property
         def currency(self):

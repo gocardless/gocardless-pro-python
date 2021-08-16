@@ -77,7 +77,7 @@ class BillingRequestsService(base_service.BaseService):
         Fetches a billing request
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Query string parameters.
 
         Returns:
@@ -110,7 +110,7 @@ class BillingRequestsService(base_service.BaseService):
         successful.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:
@@ -128,11 +128,11 @@ class BillingRequestsService(base_service.BaseService):
         return self._resource_for(response)
   
 
-    def collect_bank_account_details(self,identity,params=None, headers=None):
+    def collect_bank_account(self,identity,params=None, headers=None):
         """Collect bank account details for the billing request.
 
         If the billing request has a pending
-        <code>collect_bank_account_details</code> action, this endpoint can be
+        <code>collect_bank_account</code> action, this endpoint can be
         used to collect the details in order to complete it.
         
         The endpoint takes the same payload as Customer Bank Accounts, but
@@ -142,13 +142,13 @@ class BillingRequestsService(base_service.BaseService):
         and attaching it.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:
               ListResponse of BillingRequest instances
         """
-        path = self._sub_url_params('/billing_requests/:identity/actions/collect_bank_account_details', {
+        path = self._sub_url_params('/billing_requests/:identity/actions/collect_bank_account', {
           
             'identity': identity,
           })
@@ -168,13 +168,40 @@ class BillingRequestsService(base_service.BaseService):
         it to fulfil, executing the payment.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:
               ListResponse of BillingRequest instances
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/fulfil', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
+    def confirm_payer_details(self,identity,params=None, headers=None):
+        """Confirm the customer and bank_account details.
+
+        This is needed when you have mandate_request. As a scheme compliance
+        rule we are required to
+        allow the payer to crosscheck the details entered by them and confirm
+        it.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              ListResponse of BillingRequest instances
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/confirm_payer_details', {
           
             'identity': identity,
           })
@@ -194,7 +221,7 @@ class BillingRequestsService(base_service.BaseService):
         to expire.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:
@@ -220,7 +247,7 @@ class BillingRequestsService(base_service.BaseService):
         Currently, the customer can only be notified by email.
 
         Args:
-              identity (string): Unique identifier, beginning with "PY".
+              identity (string): Unique identifier, beginning with "BRQ".
               params (dict, optional): Request body.
 
         Returns:

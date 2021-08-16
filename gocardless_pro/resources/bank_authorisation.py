@@ -22,6 +22,11 @@ class BankAuthorisation(object):
   
 
     @property
+    def authorised_at(self):
+        return self.attributes.get('authorised_at')
+  
+
+    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -52,15 +57,12 @@ class BankAuthorisation(object):
   
 
     @property
-    def short_url(self):
-        return self.attributes.get('short_url')
-  
-
-    @property
     def url(self):
         return self.attributes.get('url')
   
 
+
+  
 
   
 
@@ -91,8 +93,6 @@ class BankAuthorisation(object):
         def payment_request(self):
             return self.attributes.get('payment_request')
     
-  
-
   
 
   

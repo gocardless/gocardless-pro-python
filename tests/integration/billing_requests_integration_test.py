@@ -38,8 +38,6 @@ def test_billing_requests_list():
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal([r.actions for r in response.records],
                  [b.get('actions') for b in body])
-    assert_equal([r.auto_fulfil for r in response.records],
-                 [b.get('auto_fulfil') for b in body])
     assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
     assert_equal([r.id for r in response.records],
@@ -111,29 +109,40 @@ def test_billing_requests_create():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.customer_billing_detail,
                  body.get('links')['customer_billing_detail'])
-    assert_equal(response.links.mandate_bank_authorisation,
-                 body.get('links')['mandate_bank_authorisation'])
-    assert_equal(response.links.payment_bank_authorisation,
-                 body.get('links')['payment_bank_authorisation'])
+    assert_equal(response.links.mandate_request,
+                 body.get('links')['mandate_request'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.payment_request,
+                 body.get('links')['payment_request'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
     assert_equal(response.mandate_request.currency,
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
+    assert_equal(response.mandate_request.verify,
+                 body.get('mandate_request')['verify'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -201,29 +210,40 @@ def test_billing_requests_get():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.customer_billing_detail,
                  body.get('links')['customer_billing_detail'])
-    assert_equal(response.links.mandate_bank_authorisation,
-                 body.get('links')['mandate_bank_authorisation'])
-    assert_equal(response.links.payment_bank_authorisation,
-                 body.get('links')['payment_bank_authorisation'])
+    assert_equal(response.links.mandate_request,
+                 body.get('links')['mandate_request'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.payment_request,
+                 body.get('links')['payment_request'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
     assert_equal(response.mandate_request.currency,
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
+    assert_equal(response.mandate_request.verify,
+                 body.get('mandate_request')['verify'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -273,29 +293,40 @@ def test_billing_requests_collect_customer_details():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.customer_billing_detail,
                  body.get('links')['customer_billing_detail'])
-    assert_equal(response.links.mandate_bank_authorisation,
-                 body.get('links')['mandate_bank_authorisation'])
-    assert_equal(response.links.payment_bank_authorisation,
-                 body.get('links')['payment_bank_authorisation'])
+    assert_equal(response.links.mandate_request,
+                 body.get('links')['mandate_request'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.payment_request,
+                 body.get('links')['payment_request'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
     assert_equal(response.mandate_request.currency,
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
+    assert_equal(response.mandate_request.verify,
+                 body.get('mandate_request')['verify'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -327,38 +358,49 @@ def test_502_billing_requests_collect_customer_details_doesnt_retry():
   
 
 @responses.activate
-def test_billing_requests_collect_bank_account_details():
-    fixture = helpers.load_fixture('billing_requests')['collect_bank_account_details']
+def test_billing_requests_collect_bank_account():
+    fixture = helpers.load_fixture('billing_requests')['collect_bank_account']
     helpers.stub_response(fixture)
-    response = helpers.client.billing_requests.collect_bank_account_details(*fixture['url_params'])
+    response = helpers.client.billing_requests.collect_bank_account(*fixture['url_params'])
     body = fixture['body']['billing_requests']
 
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.customer_billing_detail,
                  body.get('links')['customer_billing_detail'])
-    assert_equal(response.links.mandate_bank_authorisation,
-                 body.get('links')['mandate_bank_authorisation'])
-    assert_equal(response.links.payment_bank_authorisation,
-                 body.get('links')['payment_bank_authorisation'])
+    assert_equal(response.links.mandate_request,
+                 body.get('links')['mandate_request'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.payment_request,
+                 body.get('links')['payment_request'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
     assert_equal(response.mandate_request.currency,
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
+    assert_equal(response.mandate_request.verify,
+                 body.get('mandate_request')['verify'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -374,18 +416,18 @@ def test_billing_requests_collect_bank_account_details():
     assert_equal(response.resources.customer_billing_detail,
                  body.get('resources')['customer_billing_detail'])
 
-def test_timeout_billing_requests_collect_bank_account_details_doesnt_retry():
-    fixture = helpers.load_fixture('billing_requests')['collect_bank_account_details']
+def test_timeout_billing_requests_collect_bank_account_doesnt_retry():
+    fixture = helpers.load_fixture('billing_requests')['collect_bank_account']
     with helpers.stub_timeout(fixture) as rsps:
       with assert_raises(requests.ConnectTimeout):
-        response = helpers.client.billing_requests.collect_bank_account_details(*fixture['url_params'])
+        response = helpers.client.billing_requests.collect_bank_account(*fixture['url_params'])
       assert_equal(1, len(rsps.calls))
 
-def test_502_billing_requests_collect_bank_account_details_doesnt_retry():
-    fixture = helpers.load_fixture('billing_requests')['collect_bank_account_details']
+def test_502_billing_requests_collect_bank_account_doesnt_retry():
+    fixture = helpers.load_fixture('billing_requests')['collect_bank_account']
     with helpers.stub_502(fixture) as rsps:
       with assert_raises(MalformedResponseError):
-        response = helpers.client.billing_requests.collect_bank_account_details(*fixture['url_params'])
+        response = helpers.client.billing_requests.collect_bank_account(*fixture['url_params'])
       assert_equal(1, len(rsps.calls))
   
 
@@ -399,29 +441,40 @@ def test_billing_requests_fulfil():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.customer_billing_detail,
                  body.get('links')['customer_billing_detail'])
-    assert_equal(response.links.mandate_bank_authorisation,
-                 body.get('links')['mandate_bank_authorisation'])
-    assert_equal(response.links.payment_bank_authorisation,
-                 body.get('links')['payment_bank_authorisation'])
+    assert_equal(response.links.mandate_request,
+                 body.get('links')['mandate_request'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.payment_request,
+                 body.get('links')['payment_request'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
     assert_equal(response.mandate_request.currency,
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
+    assert_equal(response.mandate_request.verify,
+                 body.get('mandate_request')['verify'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -453,6 +506,80 @@ def test_502_billing_requests_fulfil_doesnt_retry():
   
 
 @responses.activate
+def test_billing_requests_confirm_payer_details():
+    fixture = helpers.load_fixture('billing_requests')['confirm_payer_details']
+    helpers.stub_response(fixture)
+    response = helpers.client.billing_requests.confirm_payer_details(*fixture['url_params'])
+    body = fixture['body']['billing_requests']
+
+    assert_is_instance(response, resources.BillingRequest)
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.actions, body.get('actions'))
+    assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.id, body.get('id'))
+    assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+    assert_equal(response.links.customer,
+                 body.get('links')['customer'])
+    assert_equal(response.links.customer_bank_account,
+                 body.get('links')['customer_bank_account'])
+    assert_equal(response.links.customer_billing_detail,
+                 body.get('links')['customer_billing_detail'])
+    assert_equal(response.links.mandate_request,
+                 body.get('links')['mandate_request'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.payment_request,
+                 body.get('links')['payment_request'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
+    assert_equal(response.mandate_request.currency,
+                 body.get('mandate_request')['currency'])
+    assert_equal(response.mandate_request.links,
+                 body.get('mandate_request')['links'])
+    assert_equal(response.mandate_request.scheme,
+                 body.get('mandate_request')['scheme'])
+    assert_equal(response.mandate_request.verify,
+                 body.get('mandate_request')['verify'])
+    assert_equal(response.payment_request.amount,
+                 body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
+    assert_equal(response.payment_request.currency,
+                 body.get('payment_request')['currency'])
+    assert_equal(response.payment_request.description,
+                 body.get('payment_request')['description'])
+    assert_equal(response.payment_request.links,
+                 body.get('payment_request')['links'])
+    assert_equal(response.payment_request.scheme,
+                 body.get('payment_request')['scheme'])
+    assert_equal(response.resources.customer,
+                 body.get('resources')['customer'])
+    assert_equal(response.resources.customer_bank_account,
+                 body.get('resources')['customer_bank_account'])
+    assert_equal(response.resources.customer_billing_detail,
+                 body.get('resources')['customer_billing_detail'])
+
+def test_timeout_billing_requests_confirm_payer_details_doesnt_retry():
+    fixture = helpers.load_fixture('billing_requests')['confirm_payer_details']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.billing_requests.confirm_payer_details(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_billing_requests_confirm_payer_details_doesnt_retry():
+    fixture = helpers.load_fixture('billing_requests')['confirm_payer_details']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.billing_requests.confirm_payer_details(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+  
+
+@responses.activate
 def test_billing_requests_cancel():
     fixture = helpers.load_fixture('billing_requests')['cancel']
     helpers.stub_response(fixture)
@@ -462,29 +589,40 @@ def test_billing_requests_cancel():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.customer_billing_detail,
                  body.get('links')['customer_billing_detail'])
-    assert_equal(response.links.mandate_bank_authorisation,
-                 body.get('links')['mandate_bank_authorisation'])
-    assert_equal(response.links.payment_bank_authorisation,
-                 body.get('links')['payment_bank_authorisation'])
+    assert_equal(response.links.mandate_request,
+                 body.get('links')['mandate_request'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.payment_request,
+                 body.get('links')['payment_request'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
     assert_equal(response.mandate_request.currency,
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
+    assert_equal(response.mandate_request.verify,
+                 body.get('mandate_request')['verify'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,
@@ -525,29 +663,40 @@ def test_billing_requests_notify():
     assert_is_instance(response, resources.BillingRequest)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.actions, body.get('actions'))
-    assert_equal(response.auto_fulfil, body.get('auto_fulfil'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
     assert_equal(response.links.customer,
                  body.get('links')['customer'])
     assert_equal(response.links.customer_bank_account,
                  body.get('links')['customer_bank_account'])
     assert_equal(response.links.customer_billing_detail,
                  body.get('links')['customer_billing_detail'])
-    assert_equal(response.links.mandate_bank_authorisation,
-                 body.get('links')['mandate_bank_authorisation'])
-    assert_equal(response.links.payment_bank_authorisation,
-                 body.get('links')['payment_bank_authorisation'])
+    assert_equal(response.links.mandate_request,
+                 body.get('links')['mandate_request'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.payment_request,
+                 body.get('links')['payment_request'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
     assert_equal(response.mandate_request.currency,
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
+    assert_equal(response.mandate_request.verify,
+                 body.get('mandate_request')['verify'])
     assert_equal(response.payment_request.amount,
                  body.get('payment_request')['amount'])
+    assert_equal(response.payment_request.app_fee,
+                 body.get('payment_request')['app_fee'])
     assert_equal(response.payment_request.currency,
                  body.get('payment_request')['currency'])
     assert_equal(response.payment_request.description,

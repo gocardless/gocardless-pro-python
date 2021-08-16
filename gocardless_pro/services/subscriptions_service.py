@@ -151,10 +151,10 @@ class SubscriptionsService(base_service.BaseService):
         Pause a subscription object.
         No payments will be created until it is resumed.
         
-        This can only be used when a subscription collecting a fixed number of
-        payments (created using `count`),
+        This can only be used when a subscription is collecting a fixed number
+        of payments (created using `count`),
         when they continue forever (created without `count` or `end_date`) or
-        the subscription is paused for a number of cycles.
+        the subscription is already paused for a number of cycles.
         
         When `pause_cycles` is omitted the subscription is paused until the
         [resume endpoint](#subscriptions-resume-a-subscription) is called.

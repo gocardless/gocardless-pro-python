@@ -102,22 +102,25 @@ Billing requests
     client.billing_requests.create(params={...})
 
     # Get a single billing request
-    client.billing_requests.get('PY123', params={...})
+    client.billing_requests.get('BRQ123', params={...})
 
     # Collect customer details for the billing request
-    client.billing_requests.collect_customer_details('PY123', params={...})
+    client.billing_requests.collect_customer_details('BRQ123', params={...})
 
     # Collect bank account details for the billing request
-    client.billing_requests.collect_bank_account_details('PY123', params={...})
+    client.billing_requests.collect_bank_account('BRQ123', params={...})
 
     # Fulfil a billing request
-    client.billing_requests.fulfil('PY123', params={...})
+    client.billing_requests.fulfil('BRQ123', params={...})
+
+    # Confirm the customer and bank_account details
+    client.billing_requests.confirm_payer_details('BRQ123', params={...})
 
     # Cancel a billing request
-    client.billing_requests.cancel('PY123', params={...})
+    client.billing_requests.cancel('BRQ123', params={...})
 
     # Notify the customer of a billing request
-    client.billing_requests.notify('PY123', params={...})
+    client.billing_requests.notify('BRQ123', params={...})
 
 Billing request flows
 ''''''''''''''''''''''''''''''''''''''''''
@@ -126,6 +129,29 @@ Billing request flows
 
     # Create a billing request flow
     client.billing_request_flows.create(params={...})
+
+    # Initialise a billing request flow
+    client.billing_request_flows.initialise('BRQ123', params={...})
+
+Billing request templates
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List Billing Request Templates
+    client.billing_request_templates.list(params={...})
+
+    # Iterate through all billing_request_templates
+    client.billing_request_templates.all(params={...})
+
+    # Get a single Billing Request Template
+    client.billing_request_templates.get('BRT123', params={...})
+
+    # Create a Billing Request Template
+    client.billing_request_templates.create(params={...})
+
+    # Update a Billing Request Template
+    client.billing_request_templates.update('BRQ123', params={...})
 
 Creditors
 ''''''''''''''''''''''''''''''''''''''''''
