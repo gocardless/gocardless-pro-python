@@ -5,6 +5,7 @@
 
 import json
 
+
 class GoCardlessProError(Exception):
     """Base exception class for gocardless_pro errors."""
 
@@ -50,18 +51,38 @@ class ApiError(GoCardlessProError):
         return self.error.get('request_id')
 
     @classmethod
-    def exception_for(cls, error_type, errors=[]):
+    def _exception_for_status(cls, status):
+        if status == 401:
+            return AuthenticationError
+        elif status == 403:
+            return PermissionsError
+        elif status == 429:
+            return RateLimitError
+        else:
+            return None
+
+    @classmethod
+    def _exception_for_error_type(cls, error_type, errors=[]):
         if error_type == 'validation_failed':
             return ValidationFailedError
-        if error_type == 'invalid_api_usage':
+        elif error_type == 'invalid_api_usage':
             return InvalidApiUsageError
-        if error_type == 'invalid_state':
+        elif error_type == 'invalid_state':
             for error in errors:
                 if error['reason'] == 'idempotent_creation_conflict':
                     return IdempotentCreationConflictError
             return InvalidStateError
-        if error_type == 'gocardless':
+        elif error_type == 'gocardless':
             return GoCardlessInternalError
+        else:
+            return None
+
+
+    @classmethod
+    def exception_for(cls, status, error_type, errors=[]):
+        exception = cls._exception_for_status(status) or cls._exception_for_error_type(error_type, errors)
+        if exception is not None:
+            return exception
         raise GoCardlessProError('Invalid error type "{}"'.format(error_type))
 
 
@@ -80,7 +101,7 @@ class IdempotentCreationConflictError(ApiError):
     def conflicting_resource_id(self):
         for error in self.error['errors']:
             if 'conflicting_resource_id' in error.get('links', {}) and \
-                    bool(error['links']['conflicting_resource_id']): # Neither None nor ""
+                    bool(error['links']['conflicting_resource_id']):  # Neither None nor ""
                 return error['links']['conflicting_resource_id']
         else:
             raise ApiError("Idempotent Creation Conflict Error missing conflicting_resource_id")
@@ -98,6 +119,18 @@ class GoCardlessInternalError(ApiError):
     pass
 
 
+class AuthenticationError(ApiError):
+    pass
+
+
+class PermissionsError(ApiError):
+    pass
+
+
+class RateLimitError(ApiError):
+    pass
+
+
 class MalformedResponseError(GoCardlessProError):
 
     def __init__(self, message, response):
@@ -107,5 +140,3 @@ class MalformedResponseError(GoCardlessProError):
 
 class InvalidSignatureError(GoCardlessProError):
     pass
-
-
