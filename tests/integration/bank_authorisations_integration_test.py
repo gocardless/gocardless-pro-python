@@ -44,8 +44,6 @@ def test_bank_authorisations_get():
                  body.get('links')['billing_request'])
     assert_equal(response.links.institution,
                  body.get('links')['institution'])
-    assert_equal(response.links.payment_request,
-                 body.get('links')['payment_request'])
 
 @responses.activate
 def test_timeout_bank_authorisations_get_retries():
@@ -92,8 +90,6 @@ def test_bank_authorisations_create():
                  body.get('links')['billing_request'])
     assert_equal(response.links.institution,
                  body.get('links')['institution'])
-    assert_equal(response.links.payment_request,
-                 body.get('links')['payment_request'])
 
 @responses.activate
 def test_bank_authorisations_create_new_idempotency_key_for_each_call():
