@@ -42,6 +42,11 @@ class RedirectFlow(object):
   
 
     @property
+    def mandate_reference(self):
+        return self.attributes.get('mandate_reference')
+  
+
+    @property
     def metadata(self):
         return self.attributes.get('metadata')
   
@@ -98,6 +103,8 @@ class RedirectFlow(object):
         def mandate(self):
             return self.attributes.get('mandate')
     
+  
+
   
 
   
