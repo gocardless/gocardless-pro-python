@@ -17,6 +17,11 @@ class Institution(object):
         self.api_response = api_response
 
     @property
+    def country_code(self):
+        return self.attributes.get('country_code')
+  
+
+    @property
     def icon_url(self):
         return self.attributes.get('icon_url')
   
@@ -36,6 +41,8 @@ class Institution(object):
         return self.attributes.get('name')
   
 
+
+  
 
   
 
