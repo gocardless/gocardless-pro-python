@@ -136,6 +136,12 @@ def test_events_get():
                  body.get('details')['scheme'])
     assert_equal(response.details.will_attempt_retry,
                  body.get('details')['will_attempt_retry'])
+    assert_equal(response.links.bank_authorisation,
+                 body.get('links')['bank_authorisation'])
+    assert_equal(response.links.billing_request,
+                 body.get('links')['billing_request'])
+    assert_equal(response.links.billing_request_flow,
+                 body.get('links')['billing_request_flow'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,
@@ -146,6 +152,8 @@ def test_events_get():
                  body.get('links')['instalment_schedule'])
     assert_equal(response.links.mandate,
                  body.get('links')['mandate'])
+    assert_equal(response.links.mandate_request_mandate,
+                 body.get('links')['mandate_request_mandate'])
     assert_equal(response.links.new_customer_bank_account,
                  body.get('links')['new_customer_bank_account'])
     assert_equal(response.links.new_mandate,
@@ -158,6 +166,8 @@ def test_events_get():
                  body.get('links')['payer_authorisation'])
     assert_equal(response.links.payment,
                  body.get('links')['payment'])
+    assert_equal(response.links.payment_request_payment,
+                 body.get('links')['payment_request_payment'])
     assert_equal(response.links.payout,
                  body.get('links')['payout'])
     assert_equal(response.links.previous_customer_bank_account,
