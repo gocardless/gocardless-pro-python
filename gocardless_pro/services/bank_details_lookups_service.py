@@ -44,7 +44,7 @@ class BankDetailsLookupsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BankDetailsLookup instances
+              BankDetailsLookup
         """
         path = '/bank_details_lookups'
         

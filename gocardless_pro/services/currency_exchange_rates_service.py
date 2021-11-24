@@ -27,7 +27,7 @@ class CurrencyExchangeRatesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              CurrencyExchangeRate
+              ListResponse of CurrencyExchangeRate instances
         """
         path = '/currency_exchange_rates'
         

@@ -26,7 +26,7 @@ class BlocksService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Block instances
+              Block
         """
         path = '/blocks'
         
@@ -55,7 +55,7 @@ class BlocksService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Block instances
+              Block
         """
         path = self._sub_url_params('/blocks/:identity', {
           
@@ -78,7 +78,7 @@ class BlocksService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Block
+              ListResponse of Block instances
         """
         path = '/blocks'
         
@@ -104,7 +104,7 @@ class BlocksService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Block instances
+              Block
         """
         path = self._sub_url_params('/blocks/:identity/actions/disable', {
           
@@ -129,12 +129,36 @@ class BlocksService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Block instances
+              Block
         """
         path = self._sub_url_params('/blocks/:identity/actions/enable', {
           
             'identity': identity,
           })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
+    def block_by_ref(self,params=None, headers=None):
+        """Create blocks by reference.
+
+        Creates new blocks for a given reference. By default blocks will be
+        active.
+        Returns 201 if at least one block was created. Returns 200 if there
+        were no new
+        blocks created.
+
+        Args:
+              params (dict, optional): Request body.
+
+        Returns:
+              ListResponse of Block instances
+        """
+        path = '/block_by_ref'
         
         if params is not None:
             params = {'data': params}

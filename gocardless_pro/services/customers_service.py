@@ -26,7 +26,7 @@ class CustomersService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Customer instances
+              Customer
         """
         path = '/customers'
         
@@ -55,7 +55,7 @@ class CustomersService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Customer
+              ListResponse of Customer instances
         """
         path = '/customers'
         
@@ -81,7 +81,7 @@ class CustomersService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Customer instances
+              Customer
         """
         path = self._sub_url_params('/customers/:identity', {
           
@@ -105,7 +105,7 @@ class CustomersService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Customer instances
+              Customer
         """
         path = self._sub_url_params('/customers/:identity', {
           
@@ -137,7 +137,7 @@ class CustomersService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Customer instances
+              Customer
         """
         path = self._sub_url_params('/customers/:identity', {
           

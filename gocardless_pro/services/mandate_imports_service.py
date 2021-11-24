@@ -31,7 +31,7 @@ class MandateImportsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of MandateImport instances
+              MandateImport
         """
         path = '/mandate_imports'
         
@@ -60,7 +60,7 @@ class MandateImportsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of MandateImport instances
+              MandateImport
         """
         path = self._sub_url_params('/mandate_imports/:identity', {
           
@@ -95,7 +95,7 @@ class MandateImportsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of MandateImport instances
+              MandateImport
         """
         path = self._sub_url_params('/mandate_imports/:identity/actions/submit', {
           
@@ -125,7 +125,7 @@ class MandateImportsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of MandateImport instances
+              MandateImport
         """
         path = self._sub_url_params('/mandate_imports/:identity/actions/cancel', {
           

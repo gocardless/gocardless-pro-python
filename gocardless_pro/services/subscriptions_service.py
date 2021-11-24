@@ -26,7 +26,7 @@ class SubscriptionsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Subscription instances
+              Subscription
         """
         path = '/subscriptions'
         
@@ -55,7 +55,7 @@ class SubscriptionsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Subscription
+              ListResponse of Subscription instances
         """
         path = '/subscriptions'
         
@@ -81,7 +81,7 @@ class SubscriptionsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Subscription instances
+              Subscription
         """
         path = self._sub_url_params('/subscriptions/:identity', {
           
@@ -130,7 +130,7 @@ class SubscriptionsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Subscription instances
+              Subscription
         """
         path = self._sub_url_params('/subscriptions/:identity', {
           
@@ -196,7 +196,7 @@ class SubscriptionsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Subscription instances
+              Subscription
         """
         path = self._sub_url_params('/subscriptions/:identity/actions/pause', {
           
@@ -236,7 +236,7 @@ class SubscriptionsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Subscription instances
+              Subscription
         """
         path = self._sub_url_params('/subscriptions/:identity/actions/resume', {
           
@@ -265,7 +265,7 @@ class SubscriptionsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Subscription instances
+              Subscription
         """
         path = self._sub_url_params('/subscriptions/:identity/actions/cancel', {
           

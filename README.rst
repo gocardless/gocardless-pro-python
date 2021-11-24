@@ -176,6 +176,9 @@ Blocks
     # Enable a block
     client.blocks.enable('BLC123', params={...})
 
+    # Create blocks by reference
+    client.blocks.block_by_ref(params={...})
+
 Creditors
 ''''''''''''''''''''''''''''''''''''''''''
 

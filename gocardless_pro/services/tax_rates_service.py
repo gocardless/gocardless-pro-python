@@ -27,7 +27,7 @@ class TaxRatesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              TaxRate
+              ListResponse of TaxRate instances
         """
         path = '/tax_rates'
         
@@ -53,7 +53,7 @@ class TaxRatesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of TaxRate instances
+              TaxRate
         """
         path = self._sub_url_params('/tax_rates/:identity', {
           

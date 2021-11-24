@@ -35,7 +35,7 @@ class CustomerNotificationsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of CustomerNotification instances
+              CustomerNotification
         """
         path = self._sub_url_params('/customer_notifications/:identity/actions/handle', {
           

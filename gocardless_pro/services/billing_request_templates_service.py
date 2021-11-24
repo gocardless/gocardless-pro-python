@@ -27,7 +27,7 @@ class BillingRequestTemplatesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              BillingRequestTemplate
+              ListResponse of BillingRequestTemplate instances
         """
         path = '/billing_request_templates'
         
@@ -53,7 +53,7 @@ class BillingRequestTemplatesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of BillingRequestTemplate instances
+              BillingRequestTemplate
         """
         path = self._sub_url_params('/billing_request_templates/:identity', {
           
@@ -75,7 +75,7 @@ class BillingRequestTemplatesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequestTemplate instances
+              BillingRequestTemplate
         """
         path = '/billing_request_templates'
         
@@ -105,7 +105,7 @@ class BillingRequestTemplatesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequestTemplate instances
+              BillingRequestTemplate
         """
         path = self._sub_url_params('/billing_request_templates/:identity', {
           

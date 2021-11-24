@@ -272,3 +272,48 @@ def test_502_blocks_enable_doesnt_retry():
         response = helpers.client.blocks.enable(*fixture['url_params'])
       assert_equal(1, len(rsps.calls))
   
+
+@responses.activate
+def test_blocks_block_by_ref():
+    fixture = helpers.load_fixture('blocks')['block_by_ref']
+    helpers.stub_response(fixture)
+    response = helpers.client.blocks.block_by_ref(*fixture['url_params'])
+    body = fixture['body']['blocks']
+
+    assert_is_instance(response, list_response.ListResponse)
+    assert_is_instance(response.records[0], resources.Block)
+
+    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
+    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal([r.active for r in response.records],
+                 [b.get('active') for b in body])
+    assert_equal([r.block_type for r in response.records],
+                 [b.get('block_type') for b in body])
+    assert_equal([r.created_at for r in response.records],
+                 [b.get('created_at') for b in body])
+    assert_equal([r.id for r in response.records],
+                 [b.get('id') for b in body])
+    assert_equal([r.reason_description for r in response.records],
+                 [b.get('reason_description') for b in body])
+    assert_equal([r.reason_type for r in response.records],
+                 [b.get('reason_type') for b in body])
+    assert_equal([r.resource_reference for r in response.records],
+                 [b.get('resource_reference') for b in body])
+    assert_equal([r.updated_at for r in response.records],
+                 [b.get('updated_at') for b in body])
+
+def test_timeout_blocks_block_by_ref_doesnt_retry():
+    fixture = helpers.load_fixture('blocks')['block_by_ref']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.blocks.block_by_ref(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_blocks_block_by_ref_doesnt_retry():
+    fixture = helpers.load_fixture('blocks')['block_by_ref']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.blocks.block_by_ref(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+  

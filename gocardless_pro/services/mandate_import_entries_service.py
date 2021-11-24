@@ -32,7 +32,7 @@ class MandateImportEntriesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of MandateImportEntry instances
+              MandateImportEntry
         """
         path = '/mandate_import_entries'
         
@@ -61,7 +61,7 @@ class MandateImportEntriesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              MandateImportEntry
+              ListResponse of MandateImportEntry instances
         """
         path = '/mandate_import_entries'
         

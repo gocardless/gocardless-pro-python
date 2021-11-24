@@ -68,7 +68,7 @@ class MandatePdfsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of MandatePdf instances
+              MandatePdf
         """
         path = '/mandate_pdfs'
         

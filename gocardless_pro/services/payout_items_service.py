@@ -28,7 +28,7 @@ class PayoutItemsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              PayoutItem
+              ListResponse of PayoutItem instances
         """
         path = '/payout_items'
         

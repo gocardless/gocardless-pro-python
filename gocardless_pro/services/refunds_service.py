@@ -43,7 +43,7 @@ class RefundsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Refund instances
+              Refund
         """
         path = '/refunds'
         
@@ -72,7 +72,7 @@ class RefundsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Refund
+              ListResponse of Refund instances
         """
         path = '/refunds'
         
@@ -98,7 +98,7 @@ class RefundsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Refund instances
+              Refund
         """
         path = self._sub_url_params('/refunds/:identity', {
           
@@ -121,7 +121,7 @@ class RefundsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Refund instances
+              Refund
         """
         path = self._sub_url_params('/refunds/:identity', {
           

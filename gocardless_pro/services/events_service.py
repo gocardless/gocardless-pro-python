@@ -27,7 +27,7 @@ class EventsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Event
+              ListResponse of Event instances
         """
         path = '/events'
         
@@ -53,7 +53,7 @@ class EventsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Event instances
+              Event
         """
         path = self._sub_url_params('/events/:identity', {
           
