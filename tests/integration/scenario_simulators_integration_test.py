@@ -22,3 +22,29 @@ from gocardless_pro import list_response
 
 from .. import helpers
   
+
+@responses.activate
+def test_scenario_simulators_run():
+    fixture = helpers.load_fixture('scenario_simulators')['run']
+    helpers.stub_response(fixture)
+    response = helpers.client.scenario_simulators.run(*fixture['url_params'])
+    body = fixture['body']['scenario_simulators']
+
+    assert_is_instance(response, resources.ScenarioSimulator)
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.id, body.get('id'))
+
+def test_timeout_scenario_simulators_run_doesnt_retry():
+    fixture = helpers.load_fixture('scenario_simulators')['run']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.scenario_simulators.run(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_scenario_simulators_run_doesnt_retry():
+    fixture = helpers.load_fixture('scenario_simulators')['run']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.scenario_simulators.run(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+  
