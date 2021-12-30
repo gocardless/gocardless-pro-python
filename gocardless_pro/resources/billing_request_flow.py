@@ -32,6 +32,11 @@ class BillingRequestFlow(object):
   
 
     @property
+    def exit_uri(self):
+        return self.attributes.get('exit_uri')
+  
+
+    @property
     def expires_at(self):
         return self.attributes.get('expires_at')
   
@@ -66,6 +71,8 @@ class BillingRequestFlow(object):
         return self.attributes.get('session_token')
   
 
+
+  
 
   
 

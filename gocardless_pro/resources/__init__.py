@@ -13,6 +13,8 @@ from .billing_request_flow import BillingRequestFlow
 
 from .billing_request_template import BillingRequestTemplate
 
+from .block import Block
+
 from .creditor import Creditor
 
 from .creditor_bank_account import CreditorBankAccount

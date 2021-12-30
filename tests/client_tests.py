@@ -31,6 +31,9 @@ def test_billing_request_flows_returns_service():
 def test_billing_request_templates_returns_service():
     assert_is_instance(client.billing_request_templates, services.BillingRequestTemplatesService)
 
+def test_blocks_returns_service():
+    assert_is_instance(client.blocks, services.BlocksService)
+
 def test_creditors_returns_service():
     assert_is_instance(client.creditors, services.CreditorsService)
 

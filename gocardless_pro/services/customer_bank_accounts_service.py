@@ -38,7 +38,7 @@ class CustomerBankAccountsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of CustomerBankAccount instances
+              CustomerBankAccount
         """
         path = '/customer_bank_accounts'
         
@@ -67,7 +67,7 @@ class CustomerBankAccountsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              CustomerBankAccount
+              ListResponse of CustomerBankAccount instances
         """
         path = '/customer_bank_accounts'
         
@@ -93,7 +93,7 @@ class CustomerBankAccountsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of CustomerBankAccount instances
+              CustomerBankAccount
         """
         path = self._sub_url_params('/customer_bank_accounts/:identity', {
           
@@ -117,7 +117,7 @@ class CustomerBankAccountsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of CustomerBankAccount instances
+              CustomerBankAccount
         """
         path = self._sub_url_params('/customer_bank_accounts/:identity', {
           
@@ -148,7 +148,7 @@ class CustomerBankAccountsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of CustomerBankAccount instances
+              CustomerBankAccount
         """
         path = self._sub_url_params('/customer_bank_accounts/:identity/actions/disable', {
           

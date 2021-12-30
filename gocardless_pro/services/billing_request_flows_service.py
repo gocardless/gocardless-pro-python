@@ -26,7 +26,7 @@ class BillingRequestFlowsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequestFlow instances
+              BillingRequestFlow
         """
         path = '/billing_request_flows'
         
@@ -50,7 +50,7 @@ class BillingRequestFlowsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequestFlow instances
+              BillingRequestFlow
         """
         path = self._sub_url_params('/billing_request_flows/:identity/actions/initialise', {
           

@@ -27,7 +27,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              BillingRequest
+              ListResponse of BillingRequest instances
         """
         path = '/billing_requests'
         
@@ -52,7 +52,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequest instances
+              BillingRequest
         """
         path = '/billing_requests'
         
@@ -81,7 +81,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of BillingRequest instances
+              BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity', {
           
@@ -114,7 +114,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequest instances
+              BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/collect_customer_details', {
           
@@ -146,7 +146,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequest instances
+              BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/collect_bank_account', {
           
@@ -172,7 +172,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequest instances
+              BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/fulfil', {
           
@@ -199,7 +199,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequest instances
+              BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/confirm_payer_details', {
           
@@ -225,7 +225,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequest instances
+              BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/cancel', {
           
@@ -251,7 +251,7 @@ class BillingRequestsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BillingRequest instances
+              BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/notify', {
           

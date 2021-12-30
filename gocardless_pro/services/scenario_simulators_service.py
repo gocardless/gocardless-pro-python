@@ -55,7 +55,7 @@ class ScenarioSimulatorsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of ScenarioSimulator instances
+              ScenarioSimulator
         """
         path = self._sub_url_params('/scenario_simulators/:identity/actions/run', {
           

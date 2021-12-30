@@ -26,7 +26,7 @@ class CreditorsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Creditor instances
+              Creditor
         """
         path = '/creditors'
         
@@ -55,7 +55,7 @@ class CreditorsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Creditor
+              ListResponse of Creditor instances
         """
         path = '/creditors'
         
@@ -81,7 +81,7 @@ class CreditorsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Creditor instances
+              Creditor
         """
         path = self._sub_url_params('/creditors/:identity', {
           
@@ -105,7 +105,7 @@ class CreditorsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Creditor instances
+              Creditor
         """
         path = self._sub_url_params('/creditors/:identity', {
           

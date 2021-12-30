@@ -27,7 +27,7 @@ class RedirectFlowsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of RedirectFlow instances
+              RedirectFlow
         """
         path = '/redirect_flows'
         
@@ -56,7 +56,7 @@ class RedirectFlowsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of RedirectFlow instances
+              RedirectFlow
         """
         path = self._sub_url_params('/redirect_flows/:identity', {
           
@@ -89,7 +89,7 @@ class RedirectFlowsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of RedirectFlow instances
+              RedirectFlow
         """
         path = self._sub_url_params('/redirect_flows/:identity/actions/complete', {
           

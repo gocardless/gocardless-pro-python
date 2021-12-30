@@ -8,6 +8,7 @@ from .bank_details_lookups_service import BankDetailsLookupsService
 from .billing_requests_service import BillingRequestsService
 from .billing_request_flows_service import BillingRequestFlowsService
 from .billing_request_templates_service import BillingRequestTemplatesService
+from .blocks_service import BlocksService
 from .creditors_service import CreditorsService
 from .creditor_bank_accounts_service import CreditorBankAccountsService
 from .currency_exchange_rates_service import CurrencyExchangeRatesService

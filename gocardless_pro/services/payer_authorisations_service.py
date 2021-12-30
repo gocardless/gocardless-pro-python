@@ -28,7 +28,7 @@ class PayerAuthorisationsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of PayerAuthorisation instances
+              PayerAuthorisation
         """
         path = self._sub_url_params('/payer_authorisations/:identity', {
           
@@ -55,7 +55,7 @@ class PayerAuthorisationsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of PayerAuthorisation instances
+              PayerAuthorisation
         """
         path = '/payer_authorisations'
         
@@ -92,7 +92,7 @@ class PayerAuthorisationsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of PayerAuthorisation instances
+              PayerAuthorisation
         """
         path = self._sub_url_params('/payer_authorisations/:identity', {
           
@@ -121,7 +121,7 @@ class PayerAuthorisationsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of PayerAuthorisation instances
+              PayerAuthorisation
         """
         path = self._sub_url_params('/payer_authorisations/:identity/actions/submit', {
           
@@ -156,7 +156,7 @@ class PayerAuthorisationsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of PayerAuthorisation instances
+              PayerAuthorisation
         """
         path = self._sub_url_params('/payer_authorisations/:identity/actions/confirm', {
           

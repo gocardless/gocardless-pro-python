@@ -153,6 +153,32 @@ Billing request templates
     # Update a Billing Request Template
     client.billing_request_templates.update('BRQ123', params={...})
 
+Blocks
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a block
+    client.blocks.create(params={...})
+
+    # Get a single block
+    client.blocks.get('BLC123', params={...})
+
+    # List multiple blocks
+    client.blocks.list(params={...})
+
+    # Iterate through all blocks
+    client.blocks.all(params={...})
+
+    # Disable a block
+    client.blocks.disable('BLC123', params={...})
+
+    # Enable a block
+    client.blocks.enable('BLC123', params={...})
+
+    # Create blocks by reference
+    client.blocks.block_by_ref(params={...})
+
 Creditors
 ''''''''''''''''''''''''''''''''''''''''''
 

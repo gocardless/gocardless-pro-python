@@ -27,7 +27,7 @@ class WebhooksService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Webhook
+              ListResponse of Webhook instances
         """
         path = '/webhooks'
         
@@ -53,7 +53,7 @@ class WebhooksService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Webhook instances
+              Webhook
         """
         path = self._sub_url_params('/webhooks/:identity', {
           
@@ -76,7 +76,7 @@ class WebhooksService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Webhook instances
+              Webhook
         """
         path = self._sub_url_params('/webhooks/:identity/actions/retry', {
           

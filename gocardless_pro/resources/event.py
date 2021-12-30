@@ -122,6 +122,18 @@ class Event(object):
             self.attributes = attributes
     
         @property
+        def bank_authorisation(self):
+            return self.attributes.get('bank_authorisation')
+    
+        @property
+        def billing_request(self):
+            return self.attributes.get('billing_request')
+    
+        @property
+        def billing_request_flow(self):
+            return self.attributes.get('billing_request_flow')
+    
+        @property
         def creditor(self):
             return self.attributes.get('creditor')
     
@@ -140,6 +152,10 @@ class Event(object):
         @property
         def mandate(self):
             return self.attributes.get('mandate')
+    
+        @property
+        def mandate_request_mandate(self):
+            return self.attributes.get('mandate_request_mandate')
     
         @property
         def new_customer_bank_account(self):
@@ -164,6 +180,10 @@ class Event(object):
         @property
         def payment(self):
             return self.attributes.get('payment')
+    
+        @property
+        def payment_request_payment(self):
+            return self.attributes.get('payment_request_payment')
     
         @property
         def payout(self):

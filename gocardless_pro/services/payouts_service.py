@@ -27,7 +27,7 @@ class PayoutsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Payout
+              ListResponse of Payout instances
         """
         path = '/payouts'
         
@@ -55,7 +55,7 @@ class PayoutsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Payout instances
+              Payout
         """
         path = self._sub_url_params('/payouts/:identity', {
           
@@ -78,7 +78,7 @@ class PayoutsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Payout instances
+              Payout
         """
         path = self._sub_url_params('/payouts/:identity', {
           

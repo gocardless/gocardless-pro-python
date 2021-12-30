@@ -26,7 +26,7 @@ class MandatesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Mandate instances
+              Mandate
         """
         path = '/mandates'
         
@@ -55,7 +55,7 @@ class MandatesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Mandate
+              ListResponse of Mandate instances
         """
         path = '/mandates'
         
@@ -81,7 +81,7 @@ class MandatesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Mandate instances
+              Mandate
         """
         path = self._sub_url_params('/mandates/:identity', {
           
@@ -104,7 +104,7 @@ class MandatesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Mandate instances
+              Mandate
         """
         path = self._sub_url_params('/mandates/:identity', {
           
@@ -134,7 +134,7 @@ class MandatesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Mandate instances
+              Mandate
         """
         path = self._sub_url_params('/mandates/:identity/actions/cancel', {
           
@@ -169,7 +169,7 @@ class MandatesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Mandate instances
+              Mandate
         """
         path = self._sub_url_params('/mandates/:identity/actions/reinstate', {
           

@@ -45,7 +45,7 @@ class InstalmentSchedulesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of InstalmentSchedule instances
+              InstalmentSchedule
         """
         path = '/instalment_schedules'
         
@@ -88,7 +88,7 @@ class InstalmentSchedulesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of InstalmentSchedule instances
+              InstalmentSchedule
         """
         path = '/instalment_schedules'
         
@@ -117,7 +117,7 @@ class InstalmentSchedulesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              InstalmentSchedule
+              ListResponse of InstalmentSchedule instances
         """
         path = '/instalment_schedules'
         
@@ -143,7 +143,7 @@ class InstalmentSchedulesService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of InstalmentSchedule instances
+              InstalmentSchedule
         """
         path = self._sub_url_params('/instalment_schedules/:identity', {
           
@@ -167,7 +167,7 @@ class InstalmentSchedulesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of InstalmentSchedule instances
+              InstalmentSchedule
         """
         path = self._sub_url_params('/instalment_schedules/:identity', {
           
@@ -196,7 +196,7 @@ class InstalmentSchedulesService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of InstalmentSchedule instances
+              InstalmentSchedule
         """
         path = self._sub_url_params('/instalment_schedules/:identity/actions/cancel', {
           

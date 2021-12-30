@@ -27,7 +27,7 @@ class BankAuthorisationsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of BankAuthorisation instances
+              BankAuthorisation
         """
         path = self._sub_url_params('/bank_authorisations/:identity', {
           
@@ -49,7 +49,7 @@ class BankAuthorisationsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of BankAuthorisation instances
+              BankAuthorisation
         """
         path = '/bank_authorisations'
         

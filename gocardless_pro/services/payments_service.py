@@ -32,7 +32,7 @@ class PaymentsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Payment instances
+              Payment
         """
         path = '/payments'
         
@@ -61,7 +61,7 @@ class PaymentsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Payment
+              ListResponse of Payment instances
         """
         path = '/payments'
         
@@ -87,7 +87,7 @@ class PaymentsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              ListResponse of Payment instances
+              Payment
         """
         path = self._sub_url_params('/payments/:identity', {
           
@@ -110,7 +110,7 @@ class PaymentsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Payment instances
+              Payment
         """
         path = self._sub_url_params('/payments/:identity', {
           
@@ -140,7 +140,7 @@ class PaymentsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Payment instances
+              Payment
         """
         path = self._sub_url_params('/payments/:identity/actions/cancel', {
           
@@ -173,7 +173,7 @@ class PaymentsService(base_service.BaseService):
               params (dict, optional): Request body.
 
         Returns:
-              ListResponse of Payment instances
+              Payment
         """
         path = self._sub_url_params('/payments/:identity/actions/retry', {
           

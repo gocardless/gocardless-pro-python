@@ -26,7 +26,7 @@ class InstitutionsService(base_service.BaseService):
               params (dict, optional): Query string parameters.
 
         Returns:
-              Institution
+              ListResponse of Institution instances
         """
         path = '/institutions'
         

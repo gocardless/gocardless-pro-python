@@ -89,10 +89,6 @@ class BankAuthorisation(object):
         def institution(self):
             return self.attributes.get('institution')
     
-        @property
-        def payment_request(self):
-            return self.attributes.get('payment_request')
-    
   
 
   
