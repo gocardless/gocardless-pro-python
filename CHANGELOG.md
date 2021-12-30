@@ -1,4 +1,7 @@
 <!-- @format -->
+# 1.27.0
+
+- Release Block API
 
 # 1.21.0
 
