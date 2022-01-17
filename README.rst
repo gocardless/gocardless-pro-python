@@ -131,7 +131,7 @@ Billing request flows
     client.billing_request_flows.create(params={...})
 
     # Initialise a billing request flow
-    client.billing_request_flows.initialise('BRQ123', params={...})
+    client.billing_request_flows.initialise('BRF123', params={...})
 
 Billing request templates
 ''''''''''''''''''''''''''''''''''''''''''

@@ -46,7 +46,7 @@ class BillingRequestFlowsService(base_service.BaseService):
         integrations that manipulate the flow.
 
         Args:
-              identity (string): Unique identifier, beginning with "BRQ".
+              identity (string): Unique identifier, beginning with "BRF".
               params (dict, optional): Request body.
 
         Returns:
