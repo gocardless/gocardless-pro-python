@@ -135,8 +135,6 @@ def test_billing_requests_create():
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
-    assert_equal(response.mandate_request.metadata,
-                 body.get('mandate_request')['metadata'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
     assert_equal(response.mandate_request.verify,
@@ -151,8 +149,6 @@ def test_billing_requests_create():
                  body.get('payment_request')['description'])
     assert_equal(response.payment_request.links,
                  body.get('payment_request')['links'])
-    assert_equal(response.payment_request.metadata,
-                 body.get('payment_request')['metadata'])
     assert_equal(response.payment_request.scheme,
                  body.get('payment_request')['scheme'])
     assert_equal(response.resources.customer,
@@ -240,8 +236,6 @@ def test_billing_requests_get():
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
-    assert_equal(response.mandate_request.metadata,
-                 body.get('mandate_request')['metadata'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
     assert_equal(response.mandate_request.verify,
@@ -256,8 +250,6 @@ def test_billing_requests_get():
                  body.get('payment_request')['description'])
     assert_equal(response.payment_request.links,
                  body.get('payment_request')['links'])
-    assert_equal(response.payment_request.metadata,
-                 body.get('payment_request')['metadata'])
     assert_equal(response.payment_request.scheme,
                  body.get('payment_request')['scheme'])
     assert_equal(response.resources.customer,
@@ -327,8 +319,6 @@ def test_billing_requests_collect_customer_details():
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
-    assert_equal(response.mandate_request.metadata,
-                 body.get('mandate_request')['metadata'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
     assert_equal(response.mandate_request.verify,
@@ -343,8 +333,6 @@ def test_billing_requests_collect_customer_details():
                  body.get('payment_request')['description'])
     assert_equal(response.payment_request.links,
                  body.get('payment_request')['links'])
-    assert_equal(response.payment_request.metadata,
-                 body.get('payment_request')['metadata'])
     assert_equal(response.payment_request.scheme,
                  body.get('payment_request')['scheme'])
     assert_equal(response.resources.customer,
@@ -405,8 +393,6 @@ def test_billing_requests_collect_bank_account():
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
-    assert_equal(response.mandate_request.metadata,
-                 body.get('mandate_request')['metadata'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
     assert_equal(response.mandate_request.verify,
@@ -421,8 +407,6 @@ def test_billing_requests_collect_bank_account():
                  body.get('payment_request')['description'])
     assert_equal(response.payment_request.links,
                  body.get('payment_request')['links'])
-    assert_equal(response.payment_request.metadata,
-                 body.get('payment_request')['metadata'])
     assert_equal(response.payment_request.scheme,
                  body.get('payment_request')['scheme'])
     assert_equal(response.resources.customer,
@@ -483,8 +467,6 @@ def test_billing_requests_fulfil():
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
-    assert_equal(response.mandate_request.metadata,
-                 body.get('mandate_request')['metadata'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
     assert_equal(response.mandate_request.verify,
@@ -499,8 +481,6 @@ def test_billing_requests_fulfil():
                  body.get('payment_request')['description'])
     assert_equal(response.payment_request.links,
                  body.get('payment_request')['links'])
-    assert_equal(response.payment_request.metadata,
-                 body.get('payment_request')['metadata'])
     assert_equal(response.payment_request.scheme,
                  body.get('payment_request')['scheme'])
     assert_equal(response.resources.customer,
@@ -561,8 +541,6 @@ def test_billing_requests_confirm_payer_details():
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
-    assert_equal(response.mandate_request.metadata,
-                 body.get('mandate_request')['metadata'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
     assert_equal(response.mandate_request.verify,
@@ -577,8 +555,6 @@ def test_billing_requests_confirm_payer_details():
                  body.get('payment_request')['description'])
     assert_equal(response.payment_request.links,
                  body.get('payment_request')['links'])
-    assert_equal(response.payment_request.metadata,
-                 body.get('payment_request')['metadata'])
     assert_equal(response.payment_request.scheme,
                  body.get('payment_request')['scheme'])
     assert_equal(response.resources.customer,
@@ -639,8 +615,6 @@ def test_billing_requests_cancel():
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
-    assert_equal(response.mandate_request.metadata,
-                 body.get('mandate_request')['metadata'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
     assert_equal(response.mandate_request.verify,
@@ -655,8 +629,6 @@ def test_billing_requests_cancel():
                  body.get('payment_request')['description'])
     assert_equal(response.payment_request.links,
                  body.get('payment_request')['links'])
-    assert_equal(response.payment_request.metadata,
-                 body.get('payment_request')['metadata'])
     assert_equal(response.payment_request.scheme,
                  body.get('payment_request')['scheme'])
     assert_equal(response.resources.customer,
@@ -717,8 +689,6 @@ def test_billing_requests_notify():
                  body.get('mandate_request')['currency'])
     assert_equal(response.mandate_request.links,
                  body.get('mandate_request')['links'])
-    assert_equal(response.mandate_request.metadata,
-                 body.get('mandate_request')['metadata'])
     assert_equal(response.mandate_request.scheme,
                  body.get('mandate_request')['scheme'])
     assert_equal(response.mandate_request.verify,
@@ -733,8 +703,6 @@ def test_billing_requests_notify():
                  body.get('payment_request')['description'])
     assert_equal(response.payment_request.links,
                  body.get('payment_request')['links'])
-    assert_equal(response.payment_request.metadata,
-                 body.get('payment_request')['metadata'])
     assert_equal(response.payment_request.scheme,
                  body.get('payment_request')['scheme'])
     assert_equal(response.resources.customer,
