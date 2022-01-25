@@ -129,6 +129,10 @@ class BillingRequest(object):
             return self.attributes.get('links')
     
         @property
+        def metadata(self):
+            return self.attributes.get('metadata')
+    
+        @property
         def scheme(self):
             return self.attributes.get('scheme')
     
@@ -166,6 +170,10 @@ class BillingRequest(object):
         @property
         def links(self):
             return self.attributes.get('links')
+    
+        @property
+        def metadata(self):
+            return self.attributes.get('metadata')
     
         @property
         def scheme(self):
