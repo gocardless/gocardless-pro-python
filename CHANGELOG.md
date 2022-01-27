@@ -3,6 +3,17 @@
 
 - Release Block API
 
+# 1.26.0
+
+- Adds support for recent Billing Request Changes:
+  - Allows the payer to confirm the details provided before creating the mandate as per the scheme compliance rules
+  - Adds BillingRequestTemplate which can be used to create many child Billing Request and Flows
+
+# 1.22.0
+
+- Added a new resource called payer_authorisatons
+  - This is our new API dedicated to building custom payment pages. It encapsulates the creation of customer, bank account and mandate under this single resource.
+
 # 1.21.0
 
 - Added a new event called `payer_authorisation_completed` for an upcoming resource type called `payer_authorisation` which provides `customer`, `customer_bank_account`, `mandate` and `payer_authorisation` links
