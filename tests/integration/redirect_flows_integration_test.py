@@ -42,6 +42,8 @@ def test_redirect_flows_create():
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.session_token, body.get('session_token'))
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
+    assert_equal(response.links.billing_request,
+                 body.get('links')['billing_request'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,
@@ -112,6 +114,8 @@ def test_redirect_flows_get():
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.session_token, body.get('session_token'))
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
+    assert_equal(response.links.billing_request,
+                 body.get('links')['billing_request'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,
@@ -164,6 +168,8 @@ def test_redirect_flows_complete():
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.session_token, body.get('session_token'))
     assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
+    assert_equal(response.links.billing_request,
+                 body.get('links')['billing_request'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,

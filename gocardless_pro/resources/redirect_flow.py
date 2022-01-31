@@ -88,6 +88,10 @@ class RedirectFlow(object):
             self.attributes = attributes
     
         @property
+        def billing_request(self):
+            return self.attributes.get('billing_request')
+    
+        @property
         def creditor(self):
             return self.attributes.get('creditor')
     
