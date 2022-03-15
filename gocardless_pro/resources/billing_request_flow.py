@@ -71,6 +71,11 @@ class BillingRequestFlow(object):
         return self.attributes.get('session_token')
   
 
+    @property
+    def show_redirect_buttons(self):
+        return self.attributes.get('show_redirect_buttons')
+  
+
 
   
 
@@ -95,6 +100,8 @@ class BillingRequestFlow(object):
         def billing_request(self):
             return self.attributes.get('billing_request')
     
+  
+
   
 
   
