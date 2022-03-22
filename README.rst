@@ -98,28 +98,28 @@ Billing requests
     # Iterate through all billing_requests
     client.billing_requests.all(params={...})
 
-    # Create a billing_request
+    # Create a Billing Request
     client.billing_requests.create(params={...})
 
-    # Get a single billing request
+    # Get a single Billing Request
     client.billing_requests.get('BRQ123', params={...})
 
-    # Collect customer details for the billing request
+    # Collect customer details for a Billing Request
     client.billing_requests.collect_customer_details('BRQ123', params={...})
 
-    # Collect bank account details for the billing request
+    # Collect bank account details for a Billing Request
     client.billing_requests.collect_bank_account('BRQ123', params={...})
 
-    # Fulfil a billing request
+    # Fulfil a Billing Request
     client.billing_requests.fulfil('BRQ123', params={...})
 
-    # Confirm the customer and bank_account details
+    # Confirm the customer and bank account details
     client.billing_requests.confirm_payer_details('BRQ123', params={...})
 
-    # Cancel a billing request
+    # Cancel a Billing Request
     client.billing_requests.cancel('BRQ123', params={...})
 
-    # Notify the customer of a billing request
+    # Notify the customer of a Billing Request
     client.billing_requests.notify('BRQ123', params={...})
 
 Billing request flows
@@ -127,10 +127,10 @@ Billing request flows
 
 .. code:: python
 
-    # Create a billing request flow
+    # Create a Billing Request Flow
     client.billing_request_flows.create(params={...})
 
-    # Initialise a billing request flow
+    # Initialise a Billing Request Flow
     client.billing_request_flows.initialise('BRF123', params={...})
 
 Billing request templates
@@ -329,7 +329,7 @@ Institutions
 
 .. code:: python
 
-    # List institutions
+    # List Institutions
     client.institutions.list(params={...})
 
     # Iterate through all institutions

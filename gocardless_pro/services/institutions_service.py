@@ -18,9 +18,9 @@ class InstitutionsService(base_service.BaseService):
 
 
     def list(self,params=None, headers=None):
-        """List institutions.
+        """List Institutions.
 
-        Returns a list of all supported institutions.
+        Returns a list of supported institutions.
 
         Args:
               params (dict, optional): Query string parameters.

@@ -18,7 +18,7 @@ class BillingRequestFlowsService(base_service.BaseService):
 
 
     def create(self,params=None, headers=None):
-        """Create a billing request flow.
+        """Create a Billing Request Flow.
 
         Creates a new billing request flow.
 
@@ -39,7 +39,7 @@ class BillingRequestFlowsService(base_service.BaseService):
   
 
     def initialise(self,identity,params=None, headers=None):
-        """Initialise a billing request flow.
+        """Initialise a Billing Request Flow.
 
         Returns the flow having generated a fresh session token which can be
         used to power
