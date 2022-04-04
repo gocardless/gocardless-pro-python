@@ -46,8 +46,6 @@ def test_institutions_list():
                  [b.get('logo_url') for b in body])
     assert_equal([r.name for r in response.records],
                  [b.get('name') for b in body])
-    assert_equal([r.roles for r in response.records],
-                 [b.get('roles') for b in body])
 
 @responses.activate
 def test_timeout_institutions_list_retries():

@@ -41,13 +41,6 @@ class Institution(object):
         return self.attributes.get('name')
   
 
-    @property
-    def roles(self):
-        return self.attributes.get('roles')
-  
-
-
-  
 
   
 
