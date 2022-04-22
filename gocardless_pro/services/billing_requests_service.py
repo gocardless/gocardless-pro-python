@@ -21,7 +21,7 @@ class BillingRequestsService(base_service.BaseService):
         """List Billing Requests.
 
         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        billing_requests.
+        billing requests.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -44,7 +44,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def create(self,params=None, headers=None):
-        """Create a billing_request.
+        """Create a Billing Request.
 
         
 
@@ -72,7 +72,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def get(self,identity,params=None, headers=None):
-        """Get a single billing request.
+        """Get a single Billing Request.
 
         Fetches a billing request
 
@@ -95,7 +95,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def collect_customer_details(self,identity,params=None, headers=None):
-        """Collect customer details for the billing request.
+        """Collect customer details for a Billing Request.
 
         If the billing request has a pending
         <code>collect_customer_details</code>
@@ -129,7 +129,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def collect_bank_account(self,identity,params=None, headers=None):
-        """Collect bank account details for the billing request.
+        """Collect bank account details for a Billing Request.
 
         If the billing request has a pending
         <code>collect_bank_account</code> action, this endpoint can be
@@ -161,7 +161,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def fulfil(self,identity,params=None, headers=None):
-        """Fulfil a billing request.
+        """Fulfil a Billing Request.
 
         If a billing request is ready to be fulfilled, call this endpoint to
         cause
@@ -187,9 +187,9 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def confirm_payer_details(self,identity,params=None, headers=None):
-        """Confirm the customer and bank_account details.
+        """Confirm the customer and bank account details.
 
-        This is needed when you have mandate_request. As a scheme compliance
+        This is needed when you have a mandate request. As a scheme compliance
         rule we are required to
         allow the payer to crosscheck the details entered by them and confirm
         it.
@@ -214,7 +214,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def cancel(self,identity,params=None, headers=None):
-        """Cancel a billing request.
+        """Cancel a Billing Request.
 
         Immediately cancels a billing request, causing all billing request
         flows
@@ -240,7 +240,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def notify(self,identity,params=None, headers=None):
-        """Notify the customer of a billing request.
+        """Notify the customer of a Billing Request.
 
         Notifies the customer linked to the billing request, asking them to
         authorise it.
@@ -254,6 +254,31 @@ class BillingRequestsService(base_service.BaseService):
               BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/notify', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
+    def fallback(self,identity,params=None, headers=None):
+        """Trigger fallback for a Billing Request.
+
+        Triggers a fallback from the open-banking flow to direct debit. Note,
+        the billing request must have fallback enabled.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/fallback', {
           
             'identity': identity,
           })

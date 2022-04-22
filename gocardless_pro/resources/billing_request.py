@@ -27,6 +27,11 @@ class BillingRequest(object):
   
 
     @property
+    def fallback_enabled(self):
+        return self.attributes.get('fallback_enabled')
+  
+
+    @property
     def id(self):
         return self.attributes.get('id')
   
@@ -61,6 +66,8 @@ class BillingRequest(object):
         return self.attributes.get('status')
   
 
+
+  
 
   
 
@@ -129,6 +136,10 @@ class BillingRequest(object):
             return self.attributes.get('links')
     
         @property
+        def metadata(self):
+            return self.attributes.get('metadata')
+    
+        @property
         def scheme(self):
             return self.attributes.get('scheme')
     
@@ -166,6 +177,10 @@ class BillingRequest(object):
         @property
         def links(self):
             return self.attributes.get('links')
+    
+        @property
+        def metadata(self):
+            return self.attributes.get('metadata')
     
         @property
         def scheme(self):
