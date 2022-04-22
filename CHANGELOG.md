@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.28.0
+
+- Added support for billing request fallbacks
+
 # 1.27.0
 
 - Release Block API
