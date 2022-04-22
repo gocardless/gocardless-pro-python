@@ -264,3 +264,28 @@ class BillingRequestsService(base_service.BaseService):
                                          retry_failures=False)
         return self._resource_for(response)
   
+
+    def fallback(self,identity,params=None, headers=None):
+        """Trigger fallback for a Billing Request.
+
+        Triggers a fallback from the open-banking flow to direct debit. Note,
+        the billing request must have fallback enabled.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/fallback', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  

@@ -122,6 +122,9 @@ Billing requests
     # Notify the customer of a Billing Request
     client.billing_requests.notify('BRQ123', params={...})
 
+    # Trigger fallback for a Billing Request
+    client.billing_requests.fallback('BRQ123', params={...})
+
 Billing request flows
 ''''''''''''''''''''''''''''''''''''''''''
 
