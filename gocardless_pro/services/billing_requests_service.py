@@ -140,6 +140,15 @@ class BillingRequestsService(base_service.BaseService):
         the bank account is valid for the billing request scheme before
         creating
         and attaching it.
+        
+        _ACH scheme_ For compliance reasons, an extra validation step is done
+        using
+        a third-party provider to make sure the customer's bank account can
+        accept
+        Direct Debit. If a bank account is discovered to be closed or invalid,
+        the
+        customer is requested to adjust the account number/routing number and
+        succeed in this check to continue with the flow.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
