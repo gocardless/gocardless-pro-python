@@ -3,6 +3,6 @@
     "method": "POST",
     "path_template": "/customer_notifications/:identity/actions/handle",
     "url_params": ["PCN123"],
-    "body": {"customer_notifications":{"action_taken":"example action_taken 5320","action_taken_at":"2022-06-06T12:50:29.379Z","action_taken_by":"example action_taken_by 5399","id":"PCN123","links":{"customer":"CU123","event":"EV123","mandate":"MD123","payment":"PM123","refund":"RF123","subscription":"SB123"},"type":"payment_created"}}
+    "body": {"customer_notifications":{"action_taken":"example action_taken 6157","action_taken_at":"2022-06-07T22:31:00.371Z","action_taken_by":"example action_taken_by 8652","id":"PCN123","links":{"customer":"CU123","event":"EV123","mandate":"MD123","payment":"PM123","refund":"RF123","subscription":"SB123"},"type":"payment_created"}}
   }
 }

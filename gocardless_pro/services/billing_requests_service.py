@@ -195,6 +195,33 @@ class BillingRequestsService(base_service.BaseService):
         return self._resource_for(response)
   
 
+    def choose_currency(self,identity,params=None, headers=None):
+        """Change currency for a Billing Request.
+
+        This will allow for the updating of the currency and subsequently the
+        scheme if needed for a billing request
+        this will only be available for mandate only flows, it will not support
+        payments requests or plans
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/choose_currency', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
     def confirm_payer_details(self,identity,params=None, headers=None):
         """Confirm the customer and bank account details.
 
