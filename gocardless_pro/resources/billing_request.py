@@ -111,6 +111,10 @@ class BillingRequest(object):
             return self.attributes.get('mandate_request_mandate')
     
         @property
+        def organisation(self):
+            return self.attributes.get('organisation')
+    
+        @property
         def payment_request(self):
             return self.attributes.get('payment_request')
     

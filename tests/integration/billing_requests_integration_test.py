@@ -130,6 +130,8 @@ def test_billing_requests_create():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -236,6 +238,8 @@ def test_billing_requests_get():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -324,6 +328,8 @@ def test_billing_requests_collect_customer_details():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -403,6 +409,8 @@ def test_billing_requests_collect_bank_account():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -482,6 +490,8 @@ def test_billing_requests_fulfil():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -561,6 +571,8 @@ def test_billing_requests_choose_currency():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -640,6 +652,8 @@ def test_billing_requests_confirm_payer_details():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -719,6 +733,8 @@ def test_billing_requests_cancel():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -798,6 +814,8 @@ def test_billing_requests_notify():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
@@ -877,6 +895,8 @@ def test_billing_requests_fallback():
                  body.get('links')['mandate_request'])
     assert_equal(response.links.mandate_request_mandate,
                  body.get('links')['mandate_request_mandate'])
+    assert_equal(response.links.organisation,
+                 body.get('links')['organisation'])
     assert_equal(response.links.payment_request,
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
