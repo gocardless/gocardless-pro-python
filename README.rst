@@ -113,6 +113,9 @@ Billing requests
     # Fulfil a Billing Request
     client.billing_requests.fulfil('BRQ123', params={...})
 
+    # Change currency for a Billing Request
+    client.billing_requests.choose_currency('BRQ123', params={...})
+
     # Confirm the customer and bank account details
     client.billing_requests.confirm_payer_details('BRQ123', params={...})
 

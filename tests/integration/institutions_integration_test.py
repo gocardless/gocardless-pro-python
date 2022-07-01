@@ -36,6 +36,8 @@ def test_institutions_list():
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal([r.bank_redirect for r in response.records],
+                 [b.get('bank_redirect') for b in body])
     assert_equal([r.country_code for r in response.records],
                  [b.get('country_code') for b in body])
     assert_equal([r.icon_url for r in response.records],

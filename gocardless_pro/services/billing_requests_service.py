@@ -140,6 +140,15 @@ class BillingRequestsService(base_service.BaseService):
         the bank account is valid for the billing request scheme before
         creating
         and attaching it.
+        
+        _ACH scheme_ For compliance reasons, an extra validation step is done
+        using
+        a third-party provider to make sure the customer's bank account can
+        accept
+        Direct Debit. If a bank account is discovered to be closed or invalid,
+        the
+        customer is requested to adjust the account number/routing number and
+        succeed in this check to continue with the flow.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -175,6 +184,33 @@ class BillingRequestsService(base_service.BaseService):
               BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/fulfil', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
+    def choose_currency(self,identity,params=None, headers=None):
+        """Change currency for a Billing Request.
+
+        This will allow for the updating of the currency and subsequently the
+        scheme if needed for a billing request
+        this will only be available for mandate only flows, it will not support
+        payments requests or plans
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/choose_currency', {
           
             'identity': identity,
           })

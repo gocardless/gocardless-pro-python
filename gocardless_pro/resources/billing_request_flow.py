@@ -57,6 +57,11 @@ class BillingRequestFlow(object):
   
 
     @property
+    def lock_currency(self):
+        return self.attributes.get('lock_currency')
+  
+
+    @property
     def lock_customer_details(self):
         return self.attributes.get('lock_customer_details')
   
@@ -100,6 +105,8 @@ class BillingRequestFlow(object):
         def billing_request(self):
             return self.attributes.get('billing_request')
     
+  
+
   
 
   

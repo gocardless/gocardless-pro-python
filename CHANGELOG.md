@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.29.0
+
+- Added `ip_address` to `customer_billing_detail` property in Billing Request.
+
 # 1.28.0
 
 - Added support for billing request fallbacks

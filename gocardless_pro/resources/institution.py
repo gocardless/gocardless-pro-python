@@ -17,6 +17,11 @@ class Institution(object):
         self.api_response = api_response
 
     @property
+    def bank_redirect(self):
+        return self.attributes.get('bank_redirect')
+  
+
+    @property
     def country_code(self):
         return self.attributes.get('country_code')
   
@@ -41,6 +46,8 @@ class Institution(object):
         return self.attributes.get('name')
   
 
+
+  
 
   
 
