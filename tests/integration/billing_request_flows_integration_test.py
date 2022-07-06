@@ -46,6 +46,38 @@ def test_billing_request_flows_create():
     assert_equal(response.show_redirect_buttons, body.get('show_redirect_buttons'))
     assert_equal(response.links.billing_request,
                  body.get('links')['billing_request'])
+    assert_equal(response.prefilled_bank_account.account_type,
+                 body.get('prefilled_bank_account')['account_type'])
+    assert_equal(response.prefilled_customer.address_line1,
+                 body.get('prefilled_customer')['address_line1'])
+    assert_equal(response.prefilled_customer.address_line2,
+                 body.get('prefilled_customer')['address_line2'])
+    assert_equal(response.prefilled_customer.address_line3,
+                 body.get('prefilled_customer')['address_line3'])
+    assert_equal(response.prefilled_customer.city,
+                 body.get('prefilled_customer')['city'])
+    assert_equal(response.prefilled_customer.company_name,
+                 body.get('prefilled_customer')['company_name'])
+    assert_equal(response.prefilled_customer.country_code,
+                 body.get('prefilled_customer')['country_code'])
+    assert_equal(response.prefilled_customer.danish_identity_number,
+                 body.get('prefilled_customer')['danish_identity_number'])
+    assert_equal(response.prefilled_customer.email,
+                 body.get('prefilled_customer')['email'])
+    assert_equal(response.prefilled_customer.family_name,
+                 body.get('prefilled_customer')['family_name'])
+    assert_equal(response.prefilled_customer.given_name,
+                 body.get('prefilled_customer')['given_name'])
+    assert_equal(response.prefilled_customer.language,
+                 body.get('prefilled_customer')['language'])
+    assert_equal(response.prefilled_customer.phone_number,
+                 body.get('prefilled_customer')['phone_number'])
+    assert_equal(response.prefilled_customer.postal_code,
+                 body.get('prefilled_customer')['postal_code'])
+    assert_equal(response.prefilled_customer.region,
+                 body.get('prefilled_customer')['region'])
+    assert_equal(response.prefilled_customer.swedish_identity_number,
+                 body.get('prefilled_customer')['swedish_identity_number'])
 
 @responses.activate
 def test_timeout_billing_request_flows_create_retries():
@@ -94,6 +126,38 @@ def test_billing_request_flows_initialise():
     assert_equal(response.show_redirect_buttons, body.get('show_redirect_buttons'))
     assert_equal(response.links.billing_request,
                  body.get('links')['billing_request'])
+    assert_equal(response.prefilled_bank_account.account_type,
+                 body.get('prefilled_bank_account')['account_type'])
+    assert_equal(response.prefilled_customer.address_line1,
+                 body.get('prefilled_customer')['address_line1'])
+    assert_equal(response.prefilled_customer.address_line2,
+                 body.get('prefilled_customer')['address_line2'])
+    assert_equal(response.prefilled_customer.address_line3,
+                 body.get('prefilled_customer')['address_line3'])
+    assert_equal(response.prefilled_customer.city,
+                 body.get('prefilled_customer')['city'])
+    assert_equal(response.prefilled_customer.company_name,
+                 body.get('prefilled_customer')['company_name'])
+    assert_equal(response.prefilled_customer.country_code,
+                 body.get('prefilled_customer')['country_code'])
+    assert_equal(response.prefilled_customer.danish_identity_number,
+                 body.get('prefilled_customer')['danish_identity_number'])
+    assert_equal(response.prefilled_customer.email,
+                 body.get('prefilled_customer')['email'])
+    assert_equal(response.prefilled_customer.family_name,
+                 body.get('prefilled_customer')['family_name'])
+    assert_equal(response.prefilled_customer.given_name,
+                 body.get('prefilled_customer')['given_name'])
+    assert_equal(response.prefilled_customer.language,
+                 body.get('prefilled_customer')['language'])
+    assert_equal(response.prefilled_customer.phone_number,
+                 body.get('prefilled_customer')['phone_number'])
+    assert_equal(response.prefilled_customer.postal_code,
+                 body.get('prefilled_customer')['postal_code'])
+    assert_equal(response.prefilled_customer.region,
+                 body.get('prefilled_customer')['region'])
+    assert_equal(response.prefilled_customer.swedish_identity_number,
+                 body.get('prefilled_customer')['swedish_identity_number'])
 
 def test_timeout_billing_request_flows_initialise_doesnt_retry():
     fixture = helpers.load_fixture('billing_request_flows')['initialise']
