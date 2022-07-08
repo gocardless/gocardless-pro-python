@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.30.0
+
+- Initial support for PayTo
+
 # 1.29.0
 
 - Added `ip_address` to `customer_billing_detail` property in Billing Request.
