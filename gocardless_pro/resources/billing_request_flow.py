@@ -67,6 +67,16 @@ class BillingRequestFlow(object):
   
 
     @property
+    def prefilled_bank_account(self):
+        return self.PrefilledBankAccount(self.attributes.get('prefilled_bank_account'))
+  
+
+    @property
+    def prefilled_customer(self):
+        return self.PrefilledCustomer(self.attributes.get('prefilled_customer'))
+  
+
+    @property
     def redirect_uri(self):
         return self.attributes.get('redirect_uri')
   
@@ -111,6 +121,88 @@ class BillingRequestFlow(object):
 
   
 
+  
+
+  
+    class PrefilledBankAccount(object):
+        """Wrapper for the response's 'prefilled_bank_account' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def account_type(self):
+            return self.attributes.get('account_type')
+    
+  
+
+  
+    class PrefilledCustomer(object):
+        """Wrapper for the response's 'prefilled_customer' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def address_line1(self):
+            return self.attributes.get('address_line1')
+    
+        @property
+        def address_line2(self):
+            return self.attributes.get('address_line2')
+    
+        @property
+        def address_line3(self):
+            return self.attributes.get('address_line3')
+    
+        @property
+        def city(self):
+            return self.attributes.get('city')
+    
+        @property
+        def company_name(self):
+            return self.attributes.get('company_name')
+    
+        @property
+        def country_code(self):
+            return self.attributes.get('country_code')
+    
+        @property
+        def danish_identity_number(self):
+            return self.attributes.get('danish_identity_number')
+    
+        @property
+        def email(self):
+            return self.attributes.get('email')
+    
+        @property
+        def family_name(self):
+            return self.attributes.get('family_name')
+    
+        @property
+        def given_name(self):
+            return self.attributes.get('given_name')
+    
+        @property
+        def language(self):
+            return self.attributes.get('language')
+    
+        @property
+        def phone_number(self):
+            return self.attributes.get('phone_number')
+    
+        @property
+        def postal_code(self):
+            return self.attributes.get('postal_code')
+    
+        @property
+        def region(self):
+            return self.attributes.get('region')
+    
+        @property
+        def swedish_identity_number(self):
+            return self.attributes.get('swedish_identity_number')
+    
   
 
   
