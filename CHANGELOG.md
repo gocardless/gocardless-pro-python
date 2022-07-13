@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.31.0
+
+- Added `reference` field to Mandate Request in Billing Request
+
 # 1.30.0
 
 - Initial support for PayTo
