@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.32.0
+
+- Added support for `prefilled_customer` and `prefilled_bank_account` in Billing Request Flow
+
 # 1.31.0
 
 - Added `reference` field to Mandate Request in Billing Request
