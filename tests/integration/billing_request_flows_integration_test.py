@@ -70,8 +70,6 @@ def test_billing_request_flows_create():
                  body.get('prefilled_customer')['given_name'])
     assert_equal(response.prefilled_customer.language,
                  body.get('prefilled_customer')['language'])
-    assert_equal(response.prefilled_customer.phone_number,
-                 body.get('prefilled_customer')['phone_number'])
     assert_equal(response.prefilled_customer.postal_code,
                  body.get('prefilled_customer')['postal_code'])
     assert_equal(response.prefilled_customer.region,
@@ -150,8 +148,6 @@ def test_billing_request_flows_initialise():
                  body.get('prefilled_customer')['given_name'])
     assert_equal(response.prefilled_customer.language,
                  body.get('prefilled_customer')['language'])
-    assert_equal(response.prefilled_customer.phone_number,
-                 body.get('prefilled_customer')['phone_number'])
     assert_equal(response.prefilled_customer.postal_code,
                  body.get('prefilled_customer')['postal_code'])
     assert_equal(response.prefilled_customer.region,
