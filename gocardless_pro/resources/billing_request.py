@@ -132,6 +132,10 @@ class BillingRequest(object):
             self.attributes = attributes
     
         @property
+        def consent_parameters(self):
+            return self.attributes.get('consent_parameters')
+    
+        @property
         def currency(self):
             return self.attributes.get('currency')
     
