@@ -46,12 +46,8 @@ def test_mandates_create():
                  body.get('consent_parameters')['mandate_purpose_code'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
                  body.get('consent_parameters')['max_amount_per_payment'])
-    assert_equal(response.consent_parameters.max_amount_per_period,
-                 body.get('consent_parameters')['max_amount_per_period'])
-    assert_equal(response.consent_parameters.max_payments_per_period,
-                 body.get('consent_parameters')['max_payments_per_period'])
-    assert_equal(response.consent_parameters.period,
-                 body.get('consent_parameters')['period'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
     assert_equal(response.consent_parameters.start_date,
                  body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
@@ -210,12 +206,8 @@ def test_mandates_get():
                  body.get('consent_parameters')['mandate_purpose_code'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
                  body.get('consent_parameters')['max_amount_per_payment'])
-    assert_equal(response.consent_parameters.max_amount_per_period,
-                 body.get('consent_parameters')['max_amount_per_period'])
-    assert_equal(response.consent_parameters.max_payments_per_period,
-                 body.get('consent_parameters')['max_payments_per_period'])
-    assert_equal(response.consent_parameters.period,
-                 body.get('consent_parameters')['period'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
     assert_equal(response.consent_parameters.start_date,
                  body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
@@ -274,12 +266,8 @@ def test_mandates_update():
                  body.get('consent_parameters')['mandate_purpose_code'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
                  body.get('consent_parameters')['max_amount_per_payment'])
-    assert_equal(response.consent_parameters.max_amount_per_period,
-                 body.get('consent_parameters')['max_amount_per_period'])
-    assert_equal(response.consent_parameters.max_payments_per_period,
-                 body.get('consent_parameters')['max_payments_per_period'])
-    assert_equal(response.consent_parameters.period,
-                 body.get('consent_parameters')['period'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
     assert_equal(response.consent_parameters.start_date,
                  body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
@@ -338,12 +326,8 @@ def test_mandates_cancel():
                  body.get('consent_parameters')['mandate_purpose_code'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
                  body.get('consent_parameters')['max_amount_per_payment'])
-    assert_equal(response.consent_parameters.max_amount_per_period,
-                 body.get('consent_parameters')['max_amount_per_period'])
-    assert_equal(response.consent_parameters.max_payments_per_period,
-                 body.get('consent_parameters')['max_payments_per_period'])
-    assert_equal(response.consent_parameters.period,
-                 body.get('consent_parameters')['period'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
     assert_equal(response.consent_parameters.start_date,
                  body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
@@ -393,12 +377,8 @@ def test_mandates_reinstate():
                  body.get('consent_parameters')['mandate_purpose_code'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
                  body.get('consent_parameters')['max_amount_per_payment'])
-    assert_equal(response.consent_parameters.max_amount_per_period,
-                 body.get('consent_parameters')['max_amount_per_period'])
-    assert_equal(response.consent_parameters.max_payments_per_period,
-                 body.get('consent_parameters')['max_payments_per_period'])
-    assert_equal(response.consent_parameters.period,
-                 body.get('consent_parameters')['period'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
     assert_equal(response.consent_parameters.start_date,
                  body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
