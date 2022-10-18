@@ -79,10 +79,6 @@ class Mandate(object):
             return self.attributes.get('end_date')
     
         @property
-        def mandate_purpose_code(self):
-            return self.attributes.get('mandate_purpose_code')
-    
-        @property
         def max_amount_per_payment(self):
             return self.attributes.get('max_amount_per_payment')
     
