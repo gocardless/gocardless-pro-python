@@ -24,17 +24,9 @@ class PayoutItemsService(base_service.BaseService):
         items in the payout.
         
         <div class="notice notice--warning u-block">
-          <p><strong>Note</strong>: This endpoint is changing:</p>
-        
-          <ul>
-            <li>For payouts created from 1 November 2022, the payout items will
-        be sorted by payout item ID. For more details, see <a
-        href="https://hub.gocardless.com/s/article/FAQ-page-about-payout-items-API-change">this
-        FAQ page on the customer hub</a>.</li>
-            <li>From 1 March 2023 onwards, we will only serve requests for
-        payout items created in the last 6 months. Requests for older payouts
-        will return an HTTP status <code>410 Gone</code>.</li>
-          </ul>
+          <strong>Note</strong>: From 1 March 2023 onwards, we will only serve
+        requests for payout items created in the last 6 months. Requests for
+        older payouts will return an HTTP status <code>410 Gone</code>.
         </div>
         
 
