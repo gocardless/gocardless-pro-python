@@ -1,0 +1,66 @@
+name: gocardless/gocardless-pro-python/build
+on:
+  push:
+    branches:
+    - master
+jobs:
+  test_python37:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.7
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        pip install -r requirements-dev.txt
+        nosetests
+  test_python36:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.6
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        pip install -r requirements-dev.txt
+        nosetests
+  test_python35:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.5
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        pip install -r requirements-dev.txt
+        nosetests
+  test_python34:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.4
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        pip install -r requirements-dev.txt
+        nosetests
+  test_python33:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.3
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        pip install -r requirements-dev.txt
+        nosetests
+  test_python27:
+    runs-on: ubuntu-latest
+    container:
+      image: python:2.7
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |-
+        pip install -r requirements-dev.txt
+        nosetests
