@@ -1,66 +1,20 @@
-name: gocardless/gocardless-pro-python/build
-on:
-  push:
-    branches:
-    - master
+name: build
+on: push
+
 jobs:
-  test_python37:
-    runs-on: ubuntu-latest
-    container:
-      image: python:3.7
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        python_version: [3.7, 3.6, 3.5, 3.4, 3.3, 2.7]
+    runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        pip install -r requirements-dev.txt
-        nosetests
-  test_python36:
-    runs-on: ubuntu-latest
-    container:
-      image: python:3.6
-    steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        pip install -r requirements-dev.txt
-        nosetests
-  test_python35:
-    runs-on: ubuntu-latest
-    container:
-      image: python:3.5
-    steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        pip install -r requirements-dev.txt
-        nosetests
-  test_python34:
-    runs-on: ubuntu-latest
-    container:
-      image: python:3.4
-    steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        pip install -r requirements-dev.txt
-        nosetests
-  test_python33:
-    runs-on: ubuntu-latest
-    container:
-      image: python:3.3
-    steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        pip install -r requirements-dev.txt
-        nosetests
-  test_python27:
-    runs-on: ubuntu-latest
-    container:
-      image: python:2.7
-    steps:
-    - uses: actions/checkout@v2
-    - name: Test
-      run: |-
-        pip install -r requirements-dev.txt
-        nosetests
+      - uses: actions/checkout@v3.1.0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python_version }}
+          cache-dependency-path: "**/requirements-dev.txt"
+      - name: Test
+        run: |-
+          pip install -r requirements-dev.txt
+          nosetests
