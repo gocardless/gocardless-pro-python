@@ -140,6 +140,10 @@ class BillingRequest(object):
             return self.attributes.get('currency')
     
         @property
+        def description(self):
+            return self.attributes.get('description')
+    
+        @property
         def links(self):
             return self.attributes.get('links')
     
