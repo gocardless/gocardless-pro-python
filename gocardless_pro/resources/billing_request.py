@@ -136,6 +136,10 @@ class BillingRequest(object):
             return self.attributes.get('consent_parameters')
     
         @property
+        def constraints(self):
+            return self.attributes.get('constraints')
+    
+        @property
         def currency(self):
             return self.attributes.get('currency')
     
