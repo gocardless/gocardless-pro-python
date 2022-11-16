@@ -136,8 +136,6 @@ def test_billing_requests_create():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -250,8 +248,6 @@ def test_billing_requests_get():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -346,8 +342,6 @@ def test_billing_requests_collect_customer_details():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -433,8 +427,6 @@ def test_billing_requests_collect_bank_account():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -520,8 +512,6 @@ def test_billing_requests_fulfil():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -607,8 +597,6 @@ def test_billing_requests_choose_currency():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -694,8 +682,6 @@ def test_billing_requests_confirm_payer_details():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -781,8 +767,6 @@ def test_billing_requests_cancel():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -868,8 +852,6 @@ def test_billing_requests_notify():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
@@ -955,8 +937,6 @@ def test_billing_requests_fallback():
                  body.get('links')['payment_request'])
     assert_equal(response.links.payment_request_payment,
                  body.get('links')['payment_request_payment'])
-    assert_equal(response.mandate_request.consent_parameters,
-                 body.get('mandate_request')['consent_parameters'])
     assert_equal(response.mandate_request.constraints,
                  body.get('mandate_request')['constraints'])
     assert_equal(response.mandate_request.currency,
