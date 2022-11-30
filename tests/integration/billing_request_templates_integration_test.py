@@ -44,6 +44,8 @@ def test_billing_request_templates_list():
                  [b.get('id') for b in body])
     assert_equal([r.mandate_request_currency for r in response.records],
                  [b.get('mandate_request_currency') for b in body])
+    assert_equal([r.mandate_request_description for r in response.records],
+                 [b.get('mandate_request_description') for b in body])
     assert_equal([r.mandate_request_metadata for r in response.records],
                  [b.get('mandate_request_metadata') for b in body])
     assert_equal([r.mandate_request_scheme for r in response.records],
@@ -134,6 +136,7 @@ def test_billing_request_templates_get():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.mandate_request_currency, body.get('mandate_request_currency'))
+    assert_equal(response.mandate_request_description, body.get('mandate_request_description'))
     assert_equal(response.mandate_request_metadata, body.get('mandate_request_metadata'))
     assert_equal(response.mandate_request_scheme, body.get('mandate_request_scheme'))
     assert_equal(response.mandate_request_verify, body.get('mandate_request_verify'))
@@ -184,6 +187,7 @@ def test_billing_request_templates_create():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.mandate_request_currency, body.get('mandate_request_currency'))
+    assert_equal(response.mandate_request_description, body.get('mandate_request_description'))
     assert_equal(response.mandate_request_metadata, body.get('mandate_request_metadata'))
     assert_equal(response.mandate_request_scheme, body.get('mandate_request_scheme'))
     assert_equal(response.mandate_request_verify, body.get('mandate_request_verify'))
@@ -252,6 +256,7 @@ def test_billing_request_templates_update():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.mandate_request_currency, body.get('mandate_request_currency'))
+    assert_equal(response.mandate_request_description, body.get('mandate_request_description'))
     assert_equal(response.mandate_request_metadata, body.get('mandate_request_metadata'))
     assert_equal(response.mandate_request_scheme, body.get('mandate_request_scheme'))
     assert_equal(response.mandate_request_verify, body.get('mandate_request_verify'))

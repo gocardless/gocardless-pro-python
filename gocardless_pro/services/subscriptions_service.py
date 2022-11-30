@@ -49,7 +49,9 @@ class SubscriptionsService(base_service.BaseService):
         """List subscriptions.
 
         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        subscriptions.
+        subscriptions. Please note if the subscriptions are related to
+        customers who have been removed, they will not be shown in the
+        response.
 
         Args:
               params (dict, optional): Query string parameters.

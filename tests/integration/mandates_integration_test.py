@@ -40,6 +40,14 @@ def test_mandates_create():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.consent_parameters.end_date,
+                 body.get('consent_parameters')['end_date'])
+    assert_equal(response.consent_parameters.max_amount_per_payment,
+                 body.get('consent_parameters')['max_amount_per_payment'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
+    assert_equal(response.consent_parameters.start_date,
+                 body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,
@@ -190,6 +198,14 @@ def test_mandates_get():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.consent_parameters.end_date,
+                 body.get('consent_parameters')['end_date'])
+    assert_equal(response.consent_parameters.max_amount_per_payment,
+                 body.get('consent_parameters')['max_amount_per_payment'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
+    assert_equal(response.consent_parameters.start_date,
+                 body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,
@@ -240,6 +256,14 @@ def test_mandates_update():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.consent_parameters.end_date,
+                 body.get('consent_parameters')['end_date'])
+    assert_equal(response.consent_parameters.max_amount_per_payment,
+                 body.get('consent_parameters')['max_amount_per_payment'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
+    assert_equal(response.consent_parameters.start_date,
+                 body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,
@@ -290,6 +314,14 @@ def test_mandates_cancel():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.consent_parameters.end_date,
+                 body.get('consent_parameters')['end_date'])
+    assert_equal(response.consent_parameters.max_amount_per_payment,
+                 body.get('consent_parameters')['max_amount_per_payment'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
+    assert_equal(response.consent_parameters.start_date,
+                 body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,
@@ -331,6 +363,14 @@ def test_mandates_reinstate():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.consent_parameters.end_date,
+                 body.get('consent_parameters')['end_date'])
+    assert_equal(response.consent_parameters.max_amount_per_payment,
+                 body.get('consent_parameters')['max_amount_per_payment'])
+    assert_equal(response.consent_parameters.periods,
+                 body.get('consent_parameters')['periods'])
+    assert_equal(response.consent_parameters.start_date,
+                 body.get('consent_parameters')['start_date'])
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])
     assert_equal(response.links.customer,

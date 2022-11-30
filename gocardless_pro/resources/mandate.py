@@ -17,6 +17,11 @@ class Mandate(object):
         self.api_response = api_response
 
     @property
+    def consent_parameters(self):
+        return self.ConsentParameters(self.attributes.get('consent_parameters'))
+  
+
+    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -61,6 +66,31 @@ class Mandate(object):
         return self.attributes.get('status')
   
 
+
+  
+    class ConsentParameters(object):
+        """Wrapper for the response's 'consent_parameters' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def end_date(self):
+            return self.attributes.get('end_date')
+    
+        @property
+        def max_amount_per_payment(self):
+            return self.attributes.get('max_amount_per_payment')
+    
+        @property
+        def periods(self):
+            return self.attributes.get('periods')
+    
+        @property
+        def start_date(self):
+            return self.attributes.get('start_date')
+    
+  
 
   
 

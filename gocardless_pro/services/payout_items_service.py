@@ -23,6 +23,12 @@ class PayoutItemsService(base_service.BaseService):
         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         items in the payout.
         
+        <div class="notice notice--warning u-block">
+          <strong>Note</strong>: From 1 March 2023 onwards, we will only serve
+        requests for payout items created in the last 6 months. Requests for
+        older payouts will return an HTTP status <code>410 Gone</code>.
+        </div>
+        
 
         Args:
               params (dict, optional): Query string parameters.

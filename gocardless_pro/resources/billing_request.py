@@ -132,8 +132,16 @@ class BillingRequest(object):
             self.attributes = attributes
     
         @property
+        def constraints(self):
+            return self.attributes.get('constraints')
+    
+        @property
         def currency(self):
             return self.attributes.get('currency')
+    
+        @property
+        def description(self):
+            return self.attributes.get('description')
     
         @property
         def links(self):

@@ -1,4 +1,9 @@
 <!-- @format -->
+# 1.33.0
+
+- Added `mandate_request[description]` and `mandate_request[constraints]` parameters to Billing Request creation
+- Added `consent_parameters` to mandate
+
 # 1.32.0
 
 - Added support for `prefilled_customer` and `prefilled_bank_account` in Billing Request Flow

@@ -37,6 +37,11 @@ class BillingRequestTemplate(object):
   
 
     @property
+    def mandate_request_description(self):
+        return self.attributes.get('mandate_request_description')
+  
+
+    @property
     def mandate_request_metadata(self):
         return self.attributes.get('mandate_request_metadata')
   
@@ -96,6 +101,8 @@ class BillingRequestTemplate(object):
         return self.attributes.get('updated_at')
   
 
+
+  
 
   
 
