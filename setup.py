@@ -13,6 +13,7 @@ setup(
     author_email = 'engineering@gocardless.com',
     description = 'A client library for the GoCardless Pro API.',
     long_description = long_description,
+    long_description_content_type='text/markdown',
     license = 'MIT',
     keywords = 'gocardless directdebit payments sepa bacs',
     url = 'https://github.com/gocardless/gocardless-pro-python',
