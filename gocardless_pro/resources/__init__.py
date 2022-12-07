@@ -41,8 +41,6 @@ from .mandate_import_entry import MandateImportEntry
 
 from .mandate_pdf import MandatePdf
 
-from .mandate_request_constraints import MandateRequestConstraints
-
 from .payer_authorisation import PayerAuthorisation
 
 from .payment import Payment

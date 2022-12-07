@@ -73,9 +73,6 @@ def test_mandate_import_entries_returns_service():
 def test_mandate_pdfs_returns_service():
     assert_is_instance(client.mandate_pdfs, services.MandatePdfsService)
 
-def test_mandate_request_constraints_returns_service():
-    assert_is_instance(client.mandate_request_constraints, services.MandateRequestConstraintsService)
-
 def test_payer_authorisations_returns_service():
     assert_is_instance(client.payer_authorisations, services.PayerAuthorisationsService)
 

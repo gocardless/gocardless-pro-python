@@ -406,11 +406,6 @@ Mandate pdfs
     # Create a mandate PDF
     client.mandate_pdfs.create(params={...})
 
-Mandate request constraints
-''''''''''''''''''''''''''''''''''''''''''
-
-.. code:: python
-
 Payer authorisations
 ''''''''''''''''''''''''''''''''''''''''''
 
