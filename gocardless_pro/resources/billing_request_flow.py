@@ -47,6 +47,11 @@ class BillingRequestFlow(object):
   
 
     @property
+    def language(self):
+        return self.attributes.get('language')
+  
+
+    @property
     def links(self):
         return self.Links(self.attributes.get('links'))
   
@@ -91,6 +96,8 @@ class BillingRequestFlow(object):
         return self.attributes.get('show_redirect_buttons')
   
 
+
+  
 
   
 
@@ -182,10 +189,6 @@ class BillingRequestFlow(object):
         @property
         def given_name(self):
             return self.attributes.get('given_name')
-    
-        @property
-        def language(self):
-            return self.attributes.get('language')
     
         @property
         def postal_code(self):
