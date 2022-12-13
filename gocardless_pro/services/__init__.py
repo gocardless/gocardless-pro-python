@@ -22,7 +22,6 @@ from .mandates_service import MandatesService
 from .mandate_imports_service import MandateImportsService
 from .mandate_import_entries_service import MandateImportEntriesService
 from .mandate_pdfs_service import MandatePdfsService
-from .mandate_request_constraints_service import MandateRequestConstraintsService
 from .payer_authorisations_service import PayerAuthorisationsService
 from .payments_service import PaymentsService
 from .payouts_service import PayoutsService

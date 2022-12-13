@@ -40,6 +40,7 @@ def test_creditors_create():
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.creditor_type, body.get('creditor_type'))
     assert_equal(response.custom_payment_pages_enabled, body.get('custom_payment_pages_enabled'))
     assert_equal(response.fx_payout_currency, body.get('fx_payout_currency'))
     assert_equal(response.id, body.get('id'))
@@ -139,6 +140,8 @@ def test_creditors_list():
                  [b.get('country_code') for b in body])
     assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
+    assert_equal([r.creditor_type for r in response.records],
+                 [b.get('creditor_type') for b in body])
     assert_equal([r.custom_payment_pages_enabled for r in response.records],
                  [b.get('custom_payment_pages_enabled') for b in body])
     assert_equal([r.fx_payout_currency for r in response.records],
@@ -231,6 +234,7 @@ def test_creditors_get():
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.creditor_type, body.get('creditor_type'))
     assert_equal(response.custom_payment_pages_enabled, body.get('custom_payment_pages_enabled'))
     assert_equal(response.fx_payout_currency, body.get('fx_payout_currency'))
     assert_equal(response.id, body.get('id'))
@@ -300,6 +304,7 @@ def test_creditors_update():
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.creditor_type, body.get('creditor_type'))
     assert_equal(response.custom_payment_pages_enabled, body.get('custom_payment_pages_enabled'))
     assert_equal(response.fx_payout_currency, body.get('fx_payout_currency'))
     assert_equal(response.id, body.get('id'))

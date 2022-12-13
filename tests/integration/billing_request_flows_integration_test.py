@@ -38,6 +38,7 @@ def test_billing_request_flows_create():
     assert_equal(response.exit_uri, body.get('exit_uri'))
     assert_equal(response.expires_at, body.get('expires_at'))
     assert_equal(response.id, body.get('id'))
+    assert_equal(response.language, body.get('language'))
     assert_equal(response.lock_bank_account, body.get('lock_bank_account'))
     assert_equal(response.lock_currency, body.get('lock_currency'))
     assert_equal(response.lock_customer_details, body.get('lock_customer_details'))
@@ -68,8 +69,6 @@ def test_billing_request_flows_create():
                  body.get('prefilled_customer')['family_name'])
     assert_equal(response.prefilled_customer.given_name,
                  body.get('prefilled_customer')['given_name'])
-    assert_equal(response.prefilled_customer.language,
-                 body.get('prefilled_customer')['language'])
     assert_equal(response.prefilled_customer.postal_code,
                  body.get('prefilled_customer')['postal_code'])
     assert_equal(response.prefilled_customer.region,
@@ -116,6 +115,7 @@ def test_billing_request_flows_initialise():
     assert_equal(response.exit_uri, body.get('exit_uri'))
     assert_equal(response.expires_at, body.get('expires_at'))
     assert_equal(response.id, body.get('id'))
+    assert_equal(response.language, body.get('language'))
     assert_equal(response.lock_bank_account, body.get('lock_bank_account'))
     assert_equal(response.lock_currency, body.get('lock_currency'))
     assert_equal(response.lock_customer_details, body.get('lock_customer_details'))
@@ -146,8 +146,6 @@ def test_billing_request_flows_initialise():
                  body.get('prefilled_customer')['family_name'])
     assert_equal(response.prefilled_customer.given_name,
                  body.get('prefilled_customer')['given_name'])
-    assert_equal(response.prefilled_customer.language,
-                 body.get('prefilled_customer')['language'])
     assert_equal(response.prefilled_customer.postal_code,
                  body.get('prefilled_customer')['postal_code'])
     assert_equal(response.prefilled_customer.region,
