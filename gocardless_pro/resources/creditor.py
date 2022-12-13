@@ -57,6 +57,11 @@ class Creditor(object):
   
 
     @property
+    def creditor_type(self):
+        return self.attributes.get('creditor_type')
+  
+
+    @property
     def custom_payment_pages_enabled(self):
         return self.attributes.get('custom_payment_pages_enabled')
   
@@ -116,6 +121,8 @@ class Creditor(object):
         return self.attributes.get('verification_status')
   
 
+
+  
 
   
 
