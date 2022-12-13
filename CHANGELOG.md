@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.34.0
+
+- Added `language` parameter to [Billing Request Flow](https://developer.gocardless.com/api-reference#billing-request-flows-create-a-billing-request-flow) creation.
+
 # 1.33.0
 
 - Added `mandate_request[description]` and `mandate_request[constraints]` parameters to Billing Request creation
