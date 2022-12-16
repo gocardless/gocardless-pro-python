@@ -158,7 +158,7 @@ class BlocksService(base_service.BaseService):
         Returns:
               ListResponse of Block instances
         """
-        path = '/block_by_ref'
+        path = '/blocks/block_by_ref'
         
         if params is not None:
             params = {'data': params}
