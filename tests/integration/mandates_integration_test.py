@@ -32,6 +32,7 @@ def test_mandates_create():
 
     assert_is_instance(response, resources.Mandate)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -112,6 +113,8 @@ def test_mandates_list():
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal([r.authorisation_source for r in response.records],
+                 [b.get('authorisation_source') for b in body])
     assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
     assert_equal([r.id for r in response.records],
@@ -190,6 +193,7 @@ def test_mandates_get():
 
     assert_is_instance(response, resources.Mandate)
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -248,6 +252,7 @@ def test_mandates_update():
 
     assert_is_instance(response, resources.Mandate)
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -306,6 +311,7 @@ def test_mandates_cancel():
 
     assert_is_instance(response, resources.Mandate)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
@@ -355,6 +361,7 @@ def test_mandates_reinstate():
 
     assert_is_instance(response, resources.Mandate)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
