@@ -132,6 +132,10 @@ class BillingRequest(object):
             self.attributes = attributes
     
         @property
+        def authorisation_source(self):
+            return self.attributes.get('authorisation_source')
+    
+        @property
         def constraints(self):
             return self.attributes.get('constraints')
     

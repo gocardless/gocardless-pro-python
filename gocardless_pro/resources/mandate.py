@@ -17,6 +17,11 @@ class Mandate(object):
         self.api_response = api_response
 
     @property
+    def authorisation_source(self):
+        return self.attributes.get('authorisation_source')
+  
+
+    @property
     def consent_parameters(self):
         return self.ConsentParameters(self.attributes.get('consent_parameters'))
   
@@ -66,6 +71,8 @@ class Mandate(object):
         return self.attributes.get('status')
   
 
+
+  
 
   
     class ConsentParameters(object):
