@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.36.0
+
+- Added `authorisation_source` parameter to the Mandate creation API and `mandate_request[authourisation_source]` parameter to the BillingRequest creation API. This field is required for offline mandates.
+
 # 1.34.0
 
 - Added `language` parameter to [Billing Request Flow](https://developer.gocardless.com/api-reference#billing-request-flows-create-a-billing-request-flow) creation.
