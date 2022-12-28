@@ -1,0 +1,20 @@
+name: build
+on: push
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        python_version: [3.7, 3.6, 3.5, 3.4, 3.3, 2.7]
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python_version }}
+          cache-dependency-path: "**/requirements-dev.txt"
+      - name: Test
+        run: |-
+          pip install -r requirements-dev.txt
+          nosetests
