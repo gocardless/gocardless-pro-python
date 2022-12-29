@@ -2,7 +2,7 @@
   "list": {
     "method": "GET",
     "path_template": "/webhooks",
-    "url_params": [],
+    "url_params": {"successful" : true},
     "body": {"meta":{"cursors":{"after":"example after 2474","before":"example before 1406"},"limit":50},"webhooks":[{"created_at":"2014-01-01T12:00:00.000Z","id":"WB123","is_test":true,"request_body":"example request_body 1723","request_headers":{},"response_body":"example response_body 894","response_body_truncated":true,"response_code":30,"response_headers":{},"response_headers_content_truncated":false,"response_headers_count_truncated":false,"successful":false,"url":"https://example.com/webhooks"},{"created_at":"2014-01-01T12:00:00.000Z","id":"WB123","is_test":true,"request_body":"example request_body 2523","request_headers":{},"response_body":"example response_body 7650","response_body_truncated":true,"response_code":9914,"response_headers":{},"response_headers_content_truncated":true,"response_headers_count_truncated":false,"successful":false,"url":"https://example.com/webhooks"}]}
   },
   "get": {

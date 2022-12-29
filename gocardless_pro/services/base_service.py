@@ -21,6 +21,8 @@ class BaseService(object):
         self.raise_on_idempotency_conflict = raise_on_idempotency_conflict
 
     def _perform_request(self, method, path, params, headers=None, retry_failures=False):
+        params = self._cast_boolean_values_to_string(params)
+
         if method == 'POST':
             headers = self._inject_idempotency_key(headers)
 
@@ -35,6 +37,27 @@ class BaseService(object):
                         raise err
         else:
             return self._attempt_request(method, path, params, headers)
+
+    def _cast_boolean_values_to_string(self, params):
+        print(params)
+
+        if params is None:
+            return params
+
+        if type(params) != dict:
+            return params
+
+        for key in params:
+            if type(params[key]) is dict:
+                params[key] = self._cast_boolean_values_to_string(params[key])
+            elif params[key] == True:
+                params[key] = "true"
+            elif params[key] == False:
+                params[key] = "false"
+        
+        print(params)
+        return params
+            
 
     def _attempt_request(self, method, path, params, headers):
         if method == 'GET':
