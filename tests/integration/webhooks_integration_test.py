@@ -33,6 +33,8 @@ def test_webhooks_list():
     assert_is_instance(response, list_response.ListResponse)
     assert_is_instance(response.records[0], resources.Webhook)
 
+    assert_in('?successful=true', responses.calls[-1].request.url)
+
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
