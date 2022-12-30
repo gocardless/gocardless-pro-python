@@ -8,6 +8,7 @@ import json
 import requests
 import responses
 from nose.tools import (
+  assert_in,
   assert_equal,
   assert_is_instance,
   assert_is_none,
