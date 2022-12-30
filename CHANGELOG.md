@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.37.0
+
+- Added background conversion of boolean values to string values in GET requests
+
 # 1.36.1
 
 - Added `authorisation_source` parameter to the Mandate creation API and `mandate_request[authourisation_source]` parameter to the BillingRequest creation API. This field is required for offline mandates.
