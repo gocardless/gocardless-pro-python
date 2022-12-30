@@ -39,7 +39,7 @@ class BaseService(object):
         else:
             return self._attempt_request(method, path, params, headers)
     
-     def _cast_boolean_values_to_string(self, params):
+    def _cast_boolean_values_to_string(self, params):
         if params is None:
             return params
 
