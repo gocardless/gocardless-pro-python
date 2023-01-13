@@ -41,6 +41,7 @@ def test_mandates_create():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.verified_at, body.get('verified_at'))
     assert_equal(response.consent_parameters.end_date,
                  body.get('consent_parameters')['end_date'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
@@ -131,6 +132,8 @@ def test_mandates_list():
                  [b.get('scheme') for b in body])
     assert_equal([r.status for r in response.records],
                  [b.get('status') for b in body])
+    assert_equal([r.verified_at for r in response.records],
+                 [b.get('verified_at') for b in body])
 
 @responses.activate
 def test_timeout_mandates_list_retries():
@@ -202,6 +205,7 @@ def test_mandates_get():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.verified_at, body.get('verified_at'))
     assert_equal(response.consent_parameters.end_date,
                  body.get('consent_parameters')['end_date'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
@@ -261,6 +265,7 @@ def test_mandates_update():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.verified_at, body.get('verified_at'))
     assert_equal(response.consent_parameters.end_date,
                  body.get('consent_parameters')['end_date'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
@@ -320,6 +325,7 @@ def test_mandates_cancel():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.verified_at, body.get('verified_at'))
     assert_equal(response.consent_parameters.end_date,
                  body.get('consent_parameters')['end_date'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
@@ -370,6 +376,7 @@ def test_mandates_reinstate():
     assert_equal(response.reference, body.get('reference'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.verified_at, body.get('verified_at'))
     assert_equal(response.consent_parameters.end_date,
                  body.get('consent_parameters')['end_date'])
     assert_equal(response.consent_parameters.max_amount_per_payment,
