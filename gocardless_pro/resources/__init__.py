@@ -55,6 +55,8 @@ from .refund import Refund
 
 from .scenario_simulator import ScenarioSimulator
 
+from .scheme_identifier import SchemeIdentifier
+
 from .subscription import Subscription
 
 from .tax_rate import TaxRate

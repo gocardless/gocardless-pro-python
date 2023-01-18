@@ -522,6 +522,20 @@ Scenario simulators
     # Simulate a scenario
     client.scenario_simulators.run('payment_failed', params={...})
 
+Schemeentifiers
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List scheme_identifiers
+    client.scheme_identifiers.list(params={...})
+
+    # Iterate through all scheme_identifiers
+    client.scheme_identifiers.all(params={...})
+
+    # Get a single scheme_identifier
+    client.scheme_identifiers.get('SU123', params={...})
+
 Subscriptions
 ''''''''''''''''''''''''''''''''''''''''''
 
