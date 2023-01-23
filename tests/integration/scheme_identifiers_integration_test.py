@@ -24,6 +24,76 @@ from .. import helpers
   
 
 @responses.activate
+def test_scheme_identifiers_create():
+    fixture = helpers.load_fixture('scheme_identifiers')['create']
+    helpers.stub_response(fixture)
+    response = helpers.client.scheme_identifiers.create(*fixture['url_params'])
+    body = fixture['body']['scheme_identifiers']
+
+    assert_is_instance(response, resources.SchemeIdentifier)
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.address_line1, body.get('address_line1'))
+    assert_equal(response.address_line2, body.get('address_line2'))
+    assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.can_specify_mandate_reference, body.get('can_specify_mandate_reference'))
+    assert_equal(response.city, body.get('city'))
+    assert_equal(response.country_code, body.get('country_code'))
+    assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.currency, body.get('currency'))
+    assert_equal(response.email, body.get('email'))
+    assert_equal(response.id, body.get('id'))
+    assert_equal(response.minimum_advance_notice, body.get('minimum_advance_notice'))
+    assert_equal(response.name, body.get('name'))
+    assert_equal(response.phone_number, body.get('phone_number'))
+    assert_equal(response.postal_code, body.get('postal_code'))
+    assert_equal(response.reference, body.get('reference'))
+    assert_equal(response.region, body.get('region'))
+    assert_equal(response.scheme, body.get('scheme'))
+    assert_equal(response.status, body.get('status'))
+
+@responses.activate
+def test_scheme_identifiers_create_new_idempotency_key_for_each_call():
+    fixture = helpers.load_fixture('scheme_identifiers')['create']
+    helpers.stub_response(fixture)
+    helpers.client.scheme_identifiers.create(*fixture['url_params'])
+    helpers.client.scheme_identifiers.create(*fixture['url_params'])
+    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
+                     responses.calls[1].request.headers.get('Idempotency-Key'))
+
+def test_timeout_scheme_identifiers_create_idempotency_conflict():
+    create_fixture = helpers.load_fixture('scheme_identifiers')['create']
+    get_fixture = helpers.load_fixture('scheme_identifiers')['get']
+    with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
+      response = helpers.client.scheme_identifiers.create(*create_fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+
+    assert_is_instance(response, resources.SchemeIdentifier)
+
+@responses.activate
+def test_timeout_scheme_identifiers_create_retries():
+    fixture = helpers.load_fixture('scheme_identifiers')['create']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.scheme_identifiers.create(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+    body = fixture['body']['scheme_identifiers']
+
+    assert_is_instance(response, resources.SchemeIdentifier)
+
+def test_502_scheme_identifiers_create_retries():
+    fixture = helpers.load_fixture('scheme_identifiers')['create']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.scheme_identifiers.create(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+    body = fixture['body']['scheme_identifiers']
+
+    assert_is_instance(response, resources.SchemeIdentifier)
+  
+
+@responses.activate
 def test_scheme_identifiers_list():
     fixture = helpers.load_fixture('scheme_identifiers')['list']
     helpers.stub_response(fixture)

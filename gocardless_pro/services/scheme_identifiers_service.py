@@ -17,8 +17,42 @@ class SchemeIdentifiersService(base_service.BaseService):
     RESOURCE_NAME = 'scheme_identifiers'
 
 
+    def create(self,params=None, headers=None):
+        """Create a scheme identifier.
+
+        Creates a new scheme identifier. The scheme identifier must be [applied
+        to a creditor](#creditors-apply-a-scheme-identifier) before payments
+        are taken using it. The scheme identifier must also have the `status`
+        of active before it can be used. For some schemes e.g. faster_payments
+        this will happen instantly. For other schemes e.g. bacs this can take
+        several days.
+        
+
+        Args:
+              params (dict, optional): Request body.
+
+        Returns:
+              SchemeIdentifier
+        """
+        path = '/scheme_identifiers'
+        
+        if params is not None:
+            params = {self._envelope_key(): params}
+
+        try:
+          response = self._perform_request('POST', path, params, headers,
+                                            retry_failures=True)
+        except errors.IdempotentCreationConflictError as err:
+          if self.raise_on_idempotency_conflict:
+            raise err
+          return self.get(identity=err.conflicting_resource_id,
+                          params=params,
+                          headers=headers)
+        return self._resource_for(response)
+  
+
     def list(self,params=None, headers=None):
-        """List scheme_identifiers.
+        """List scheme identifiers.
 
         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
         scheme identifiers.
@@ -44,7 +78,7 @@ class SchemeIdentifiersService(base_service.BaseService):
   
 
     def get(self,identity,params=None, headers=None):
-        """Get a single scheme_identifier.
+        """Get a single scheme identifier.
 
         Retrieves the details of an existing scheme identifier.
 

@@ -205,6 +205,9 @@ Creditors
     # Update a creditor
     client.creditors.update('CR123', params={...})
 
+    # Apply a scheme identifier
+    client.creditors.apply_scheme_identifier('CR123', params={...})
+
 Creditor bank accounts
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -527,13 +530,16 @@ Schemeentifiers
 
 .. code:: python
 
-    # List scheme_identifiers
+    # Create a scheme identifier
+    client.scheme_identifiers.create(params={...})
+
+    # List scheme identifiers
     client.scheme_identifiers.list(params={...})
 
     # Iterate through all scheme_identifiers
     client.scheme_identifiers.all(params={...})
 
-    # Get a single scheme_identifier
+    # Get a single scheme identifier
     client.scheme_identifiers.get('SU123', params={...})
 
 Subscriptions
