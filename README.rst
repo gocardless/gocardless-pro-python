@@ -591,7 +591,7 @@ Verification details
 .. code:: python
 
     # Create a verification detail
-    client.verification_details.create('CR123', params={...})
+    client.verification_details.create(params={...})
 
 Webhooks
 ''''''''''''''''''''''''''''''''''''''''''

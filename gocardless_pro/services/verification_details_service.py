@@ -17,7 +17,7 @@ class VerificationDetailsService(base_service.BaseService):
     RESOURCE_NAME = 'verification_details'
 
 
-    def create(self,identity,params=None, headers=None):
+    def create(self,params=None, headers=None):
         """Create a verification detail.
 
         Verification details represent any information needed by GoCardless to
@@ -27,17 +27,12 @@ class VerificationDetailsService(base_service.BaseService):
         creditor_type must be company and their country_code must be GB.
 
         Args:
-              identity (string): Unique identifier of the creditor these details are being stored against,
-beginning with "CR".
               params (dict, optional): Request body.
 
         Returns:
               VerificationDetail
         """
-        path = self._sub_url_params('/verification_details/:identity', {
-          
-            'identity': identity,
-          })
+        path = '/verification_details'
         
         if params is not None:
             params = {self._envelope_key(): params}
