@@ -61,5 +61,7 @@ from .subscription import Subscription
 
 from .tax_rate import TaxRate
 
+from .verification_detail import VerificationDetail
+
 from .webhook import Webhook
 

@@ -585,6 +585,14 @@ Tax rates
     # Get a single tax rate
     client.tax_rates.get('GB_VAT_1', params={...})
 
+Verification details
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a verification detail
+    client.verification_details.create('CR123', params={...})
+
 Webhooks
 ''''''''''''''''''''''''''''''''''''''''''
 
