@@ -22,7 +22,7 @@ class VerificationDetailsService(base_service.BaseService):
 
         Verification details represent any information needed by GoCardless to
         verify a creditor.
-        Currently, only UK-based companies are supported. 
+        Currently, only UK-based companies are supported.
         In other words, to submit verification details for a creditor, their
         creditor_type must be company and their country_code must be GB.
 
