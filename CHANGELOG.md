@@ -1,4 +1,10 @@
 <!-- @format -->
+# 1.38.0
+
+- Adding POST `/verification_details` endpoint to allow integrators to submit information against creditors for KYC checks
+
+- Expose scheme identifiers for CREATE/GET/LIST via the API and allow them to be applied to creditors via the `/creditors/:identity/actions/apply_scheme_identifier` route added
+
 # 1.37.0
 
 - Added background conversion of boolean values to string values in GET requests
