@@ -23,9 +23,6 @@ class BaseService(object):
     def _perform_request(self, method, path, params, headers=None, retry_failures=False):
         if method == 'POST':
             headers = self._inject_idempotency_key(headers)
-        
-        if method == 'GET':
-            params = self._cast_boolean_values_to_string(params)
 
         if retry_failures:
             for retries_left in range(self.max_network_retries-1, -1, -1):
@@ -38,23 +35,6 @@ class BaseService(object):
                         raise err
         else:
             return self._attempt_request(method, path, params, headers)
-    
-    def _cast_boolean_values_to_string(self, params):
-        if params is None:
-            return params
-
-        if type(params) != dict:
-            return params
-
-        for key in params:
-            if type(params[key]) is dict:
-                params[key] = self._cast_boolean_values_to_string(params[key])
-            elif params[key] == True:
-                params[key] = "true"
-            elif params[key] == False:
-                params[key] = "false"
-
-        return params
 
     def _attempt_request(self, method, path, params, headers):
         if method == 'GET':

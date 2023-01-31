@@ -71,6 +71,11 @@ class Mandate(object):
         return self.attributes.get('status')
   
 
+    @property
+    def verified_at(self):
+        return self.attributes.get('verified_at')
+  
+
 
   
 
@@ -126,6 +131,8 @@ class Mandate(object):
         def new_mandate(self):
             return self.attributes.get('new_mandate')
     
+  
+
   
 
   

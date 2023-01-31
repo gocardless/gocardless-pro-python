@@ -142,12 +142,20 @@ class Client(object):
         return services.ScenarioSimulatorsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def scheme_identifiers(self):
+        return services.SchemeIdentifiersService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def subscriptions(self):
         return services.SubscriptionsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def tax_rates(self):
         return services.TaxRatesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
+    def verification_details(self):
+        return services.VerificationDetailsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def webhooks(self):

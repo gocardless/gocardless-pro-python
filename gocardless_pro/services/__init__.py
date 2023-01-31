@@ -29,6 +29,8 @@ from .payout_items_service import PayoutItemsService
 from .redirect_flows_service import RedirectFlowsService
 from .refunds_service import RefundsService
 from .scenario_simulators_service import ScenarioSimulatorsService
+from .scheme_identifiers_service import SchemeIdentifiersService
 from .subscriptions_service import SubscriptionsService
 from .tax_rates_service import TaxRatesService
+from .verification_details_service import VerificationDetailsService
 from .webhooks_service import WebhooksService

@@ -119,3 +119,34 @@ class CreditorsService(base_service.BaseService):
                                          retry_failures=True)
         return self._resource_for(response)
   
+
+    def apply_scheme_identifier(self,identity,params=None, headers=None):
+        """Apply a scheme identifier.
+
+        Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a
+        creditor.
+        If the creditor already has a scheme identifier for the scheme, it will
+        be replaced,
+        and any mandates attached to it transferred asynchronously.
+        For some schemes, the application of the scheme identifier will be
+        performed asynchronously.
+        
+
+        Args:
+              identity (string): Unique identifier, beginning with "CR".
+              params (dict, optional): Request body.
+
+        Returns:
+              Creditor
+        """
+        path = self._sub_url_params('/creditors/:identity/actions/apply_scheme_identifier', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  

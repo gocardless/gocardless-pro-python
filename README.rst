@@ -205,6 +205,9 @@ Creditors
     # Update a creditor
     client.creditors.update('CR123', params={...})
 
+    # Apply a scheme identifier
+    client.creditors.apply_scheme_identifier('CR123', params={...})
+
 Creditor bank accounts
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -522,6 +525,23 @@ Scenario simulators
     # Simulate a scenario
     client.scenario_simulators.run('payment_failed', params={...})
 
+Schemeentifiers
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a scheme identifier
+    client.scheme_identifiers.create(params={...})
+
+    # List scheme identifiers
+    client.scheme_identifiers.list(params={...})
+
+    # Iterate through all scheme_identifiers
+    client.scheme_identifiers.all(params={...})
+
+    # Get a single scheme identifier
+    client.scheme_identifiers.get('SU123', params={...})
+
 Subscriptions
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -564,6 +584,14 @@ Tax rates
 
     # Get a single tax rate
     client.tax_rates.get('GB_VAT_1', params={...})
+
+Verification details
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a verification detail
+    client.verification_details.create(params={...})
 
 Webhooks
 ''''''''''''''''''''''''''''''''''''''''''
