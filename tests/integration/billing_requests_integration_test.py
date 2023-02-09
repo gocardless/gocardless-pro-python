@@ -46,6 +46,8 @@ def test_billing_requests_list():
                  [b.get('id') for b in body])
     assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
+    assert_equal([r.purpose_code for r in response.records],
+                 [b.get('purpose_code') for b in body])
     assert_equal([r.status for r in response.records],
                  [b.get('status') for b in body])
 
@@ -115,6 +117,7 @@ def test_billing_requests_create():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -229,6 +232,7 @@ def test_billing_requests_get():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -325,6 +329,7 @@ def test_billing_requests_collect_customer_details():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -412,6 +417,7 @@ def test_billing_requests_collect_bank_account():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -499,6 +505,7 @@ def test_billing_requests_fulfil():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -586,6 +593,7 @@ def test_billing_requests_choose_currency():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -673,6 +681,7 @@ def test_billing_requests_confirm_payer_details():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -760,6 +769,7 @@ def test_billing_requests_cancel():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -847,6 +857,7 @@ def test_billing_requests_notify():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])
@@ -934,6 +945,7 @@ def test_billing_requests_fallback():
     assert_equal(response.fallback_enabled, body.get('fallback_enabled'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.purpose_code, body.get('purpose_code'))
     assert_equal(response.status, body.get('status'))
     assert_equal(response.links.bank_authorisation,
                  body.get('links')['bank_authorisation'])

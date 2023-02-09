@@ -590,6 +590,12 @@ Verification details
 
 .. code:: python
 
+    # List verification details
+    client.verification_details.list(params={...})
+
+    # Iterate through all verification_details
+    client.verification_details.all(params={...})
+
     # Create a verification detail
     client.verification_details.create(params={...})
 

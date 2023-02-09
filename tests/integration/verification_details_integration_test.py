@@ -24,6 +24,88 @@ from .. import helpers
   
 
 @responses.activate
+def test_verification_details_list():
+    fixture = helpers.load_fixture('verification_details')['list']
+    helpers.stub_response(fixture)
+    response = helpers.client.verification_details.list(*fixture['url_params'])
+    body = fixture['body']['verification_details']
+
+    assert_is_instance(response, list_response.ListResponse)
+    assert_is_instance(response.records[0], resources.VerificationDetail)
+
+    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
+    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal([r.address_line1 for r in response.records],
+                 [b.get('address_line1') for b in body])
+    assert_equal([r.address_line2 for r in response.records],
+                 [b.get('address_line2') for b in body])
+    assert_equal([r.address_line3 for r in response.records],
+                 [b.get('address_line3') for b in body])
+    assert_equal([r.city for r in response.records],
+                 [b.get('city') for b in body])
+    assert_equal([r.company_number for r in response.records],
+                 [b.get('company_number') for b in body])
+    assert_equal([r.description for r in response.records],
+                 [b.get('description') for b in body])
+    assert_equal([r.directors for r in response.records],
+                 [b.get('directors') for b in body])
+    assert_equal([r.postal_code for r in response.records],
+                 [b.get('postal_code') for b in body])
+
+@responses.activate
+def test_timeout_verification_details_list_retries():
+    fixture = helpers.load_fixture('verification_details')['list']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.verification_details.list(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+    body = fixture['body']['verification_details']
+
+    assert_is_instance(response, list_response.ListResponse)
+    assert_is_instance(response.records[0], resources.VerificationDetail)
+
+    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
+    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+
+def test_502_verification_details_list_retries():
+    fixture = helpers.load_fixture('verification_details')['list']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.verification_details.list(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+    body = fixture['body']['verification_details']
+
+    assert_is_instance(response, list_response.ListResponse)
+    assert_is_instance(response.records[0], resources.VerificationDetail)
+
+    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
+    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+
+@responses.activate
+def test_verification_details_all():
+    fixture = helpers.load_fixture('verification_details')['list']
+
+    def callback(request):
+        if 'after=123' in request.url:
+          fixture['body']['meta']['cursors']['after'] = None
+        else:
+          fixture['body']['meta']['cursors']['after'] = '123'
+        return [200, {}, json.dumps(fixture['body'])]
+
+    url = 'http://example.com' + fixture['path_template']
+    responses.add_callback(fixture['method'], url, callback)
+
+    all_records = list(helpers.client.verification_details.all())
+    assert_equal(len(all_records), len(fixture['body']['verification_details']) * 2)
+    for record in all_records:
+      assert_is_instance(record, resources.VerificationDetail)
+    
+  
+
+@responses.activate
 def test_verification_details_create():
     fixture = helpers.load_fixture('verification_details')['create']
     helpers.stub_response(fixture)

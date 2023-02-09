@@ -57,6 +57,11 @@ class BillingRequest(object):
   
 
     @property
+    def purpose_code(self):
+        return self.attributes.get('purpose_code')
+  
+
+    @property
     def resources(self):
         return self.Resources(self.attributes.get('resources'))
   
@@ -202,6 +207,8 @@ class BillingRequest(object):
         def scheme(self):
             return self.attributes.get('scheme')
     
+  
+
   
 
   
