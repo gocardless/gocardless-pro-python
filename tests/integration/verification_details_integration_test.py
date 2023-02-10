@@ -50,6 +50,8 @@ def test_verification_details_list():
                  [b.get('description') for b in body])
     assert_equal([r.directors for r in response.records],
                  [b.get('directors') for b in body])
+    assert_equal([r.name for r in response.records],
+                 [b.get('name') for b in body])
     assert_equal([r.postal_code for r in response.records],
                  [b.get('postal_code') for b in body])
 
@@ -121,6 +123,7 @@ def test_verification_details_create():
     assert_equal(response.company_number, body.get('company_number'))
     assert_equal(response.description, body.get('description'))
     assert_equal(response.directors, body.get('directors'))
+    assert_equal(response.name, body.get('name'))
     assert_equal(response.postal_code, body.get('postal_code'))
     assert_equal(response.links.creditor,
                  body.get('links')['creditor'])

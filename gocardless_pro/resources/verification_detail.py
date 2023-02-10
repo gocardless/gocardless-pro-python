@@ -57,6 +57,11 @@ class VerificationDetail(object):
   
 
     @property
+    def name(self):
+        return self.attributes.get('name')
+  
+
+    @property
     def postal_code(self):
         return self.attributes.get('postal_code')
   
@@ -87,6 +92,8 @@ class VerificationDetail(object):
         def creditor(self):
             return self.attributes.get('creditor')
     
+  
+
   
 
   
