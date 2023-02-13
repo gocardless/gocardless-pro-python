@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.39.0
+
+- Adding GET `/verification_details` endpoint to allow integrators to list verification details for a creditor
+
 # 1.38.0
 
 - Adding POST `/verification_details` endpoint to allow integrators to submit information against creditors for KYC checks
