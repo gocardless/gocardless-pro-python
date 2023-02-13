@@ -17,14 +17,35 @@ class VerificationDetailsService(base_service.BaseService):
     RESOURCE_NAME = 'verification_details'
 
 
+    def list(self,params=None, headers=None):
+        """List verification details.
+
+        Returns a list of verification details belonging to a creditor.
+
+        Args:
+              params (dict, optional): Query string parameters.
+
+        Returns:
+              ListResponse of VerificationDetail instances
+        """
+        path = '/verification_details'
+        
+
+        response = self._perform_request('GET', path, params, headers,
+                                         retry_failures=True)
+        return self._resource_for(response)
+
+    def all(self, params=None):
+        if params is None:
+            params = {}
+        return Paginator(self, params)
+    
+  
+
     def create(self,params=None, headers=None):
         """Create a verification detail.
 
-        Verification details represent any information needed by GoCardless to
-        verify a creditor.
-        Currently, only UK-based companies are supported.
-        In other words, to submit verification details for a creditor, their
-        creditor_type must be company and their country_code must be GB.
+        Creates a new verification detail
 
         Args:
               params (dict, optional): Request body.
