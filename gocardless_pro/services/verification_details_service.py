@@ -17,6 +17,27 @@ class VerificationDetailsService(base_service.BaseService):
     RESOURCE_NAME = 'verification_details'
 
 
+    def create(self,params=None, headers=None):
+        """Create a verification detail.
+
+        Creates a new verification detail
+
+        Args:
+              params (dict, optional): Request body.
+
+        Returns:
+              VerificationDetail
+        """
+        path = '/verification_details'
+        
+        if params is not None:
+            params = {self._envelope_key(): params}
+
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=True)
+        return self._resource_for(response)
+  
+
     def list(self,params=None, headers=None):
         """List verification details.
 
@@ -40,25 +61,4 @@ class VerificationDetailsService(base_service.BaseService):
             params = {}
         return Paginator(self, params)
     
-  
-
-    def create(self,params=None, headers=None):
-        """Create a verification detail.
-
-        Creates a new verification detail
-
-        Args:
-              params (dict, optional): Request body.
-
-        Returns:
-              VerificationDetail
-        """
-        path = '/verification_details'
-        
-        if params is not None:
-            params = {self._envelope_key(): params}
-
-        response = self._perform_request('POST', path, params, headers,
-                                         retry_failures=True)
-        return self._resource_for(response)
   
