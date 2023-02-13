@@ -17,32 +17,6 @@ class BillingRequestsService(base_service.BaseService):
     RESOURCE_NAME = 'billing_requests'
 
 
-    def list(self,params=None, headers=None):
-        """List Billing Requests.
-
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        billing requests.
-
-        Args:
-              params (dict, optional): Query string parameters.
-
-        Returns:
-              ListResponse of BillingRequest instances
-        """
-        path = '/billing_requests'
-        
-
-        response = self._perform_request('GET', path, params, headers,
-                                         retry_failures=True)
-        return self._resource_for(response)
-
-    def all(self, params=None):
-        if params is None:
-            params = {}
-        return Paginator(self, params)
-    
-  
-
     def create(self,params=None, headers=None):
         """Create a Billing Request.
 
@@ -71,31 +45,8 @@ class BillingRequestsService(base_service.BaseService):
         return self._resource_for(response)
   
 
-    def get(self,identity,params=None, headers=None):
-        """Get a single Billing Request.
-
-        Fetches a billing request
-
-        Args:
-              identity (string): Unique identifier, beginning with "BRQ".
-              params (dict, optional): Query string parameters.
-
-        Returns:
-              BillingRequest
-        """
-        path = self._sub_url_params('/billing_requests/:identity', {
-          
-            'identity': identity,
-          })
-        
-
-        response = self._perform_request('GET', path, params, headers,
-                                         retry_failures=True)
-        return self._resource_for(response)
-  
-
     def collect_customer_details(self,identity,params=None, headers=None):
-        """Collect customer details for a Billing Request.
+        """Collect customer details.
 
         If the billing request has a pending
         <code>collect_customer_details</code>
@@ -129,7 +80,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def collect_bank_account(self,identity,params=None, headers=None):
-        """Collect bank account details for a Billing Request.
+        """Collect bank account details.
 
         If the billing request has a pending
         <code>collect_bank_account</code> action, this endpoint can be
@@ -169,6 +120,33 @@ class BillingRequestsService(base_service.BaseService):
         return self._resource_for(response)
   
 
+    def confirm_payer_details(self,identity,params=None, headers=None):
+        """Confirm the payer details.
+
+        This is needed when you have a mandate request. As a scheme compliance
+        rule we are required to
+        allow the payer to crosscheck the details entered by them and confirm
+        it.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/confirm_payer_details', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
     def fulfil(self,identity,params=None, headers=None):
         """Fulfil a Billing Request.
 
@@ -184,63 +162,6 @@ class BillingRequestsService(base_service.BaseService):
               BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/fulfil', {
-          
-            'identity': identity,
-          })
-        
-        if params is not None:
-            params = {'data': params}
-        response = self._perform_request('POST', path, params, headers,
-                                         retry_failures=False)
-        return self._resource_for(response)
-  
-
-    def choose_currency(self,identity,params=None, headers=None):
-        """Change currency for a Billing Request.
-
-        This will allow for the updating of the currency and subsequently the
-        scheme if
-        needed for a Billing Request. This will only be available for mandate
-        only flows
-        which do not have the lock_currency flag set to true on the Billing
-        Request Flow. It
-        will also not support any request which has a payments request.
-
-        Args:
-              identity (string): Unique identifier, beginning with "BRQ".
-              params (dict, optional): Request body.
-
-        Returns:
-              BillingRequest
-        """
-        path = self._sub_url_params('/billing_requests/:identity/actions/choose_currency', {
-          
-            'identity': identity,
-          })
-        
-        if params is not None:
-            params = {'data': params}
-        response = self._perform_request('POST', path, params, headers,
-                                         retry_failures=False)
-        return self._resource_for(response)
-  
-
-    def confirm_payer_details(self,identity,params=None, headers=None):
-        """Confirm the customer and bank account details.
-
-        This is needed when you have a mandate request. As a scheme compliance
-        rule we are required to
-        allow the payer to crosscheck the details entered by them and confirm
-        it.
-
-        Args:
-              identity (string): Unique identifier, beginning with "BRQ".
-              params (dict, optional): Request body.
-
-        Returns:
-              BillingRequest
-        """
-        path = self._sub_url_params('/billing_requests/:identity/actions/confirm_payer_details', {
           
             'identity': identity,
           })
@@ -278,8 +199,57 @@ class BillingRequestsService(base_service.BaseService):
         return self._resource_for(response)
   
 
+    def list(self,params=None, headers=None):
+        """List Billing Requests.
+
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        billing requests.
+
+        Args:
+              params (dict, optional): Query string parameters.
+
+        Returns:
+              ListResponse of BillingRequest instances
+        """
+        path = '/billing_requests'
+        
+
+        response = self._perform_request('GET', path, params, headers,
+                                         retry_failures=True)
+        return self._resource_for(response)
+
+    def all(self, params=None):
+        if params is None:
+            params = {}
+        return Paginator(self, params)
+    
+  
+
+    def get(self,identity,params=None, headers=None):
+        """Get a single Billing Request.
+
+        Fetches a billing request
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Query string parameters.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity', {
+          
+            'identity': identity,
+          })
+        
+
+        response = self._perform_request('GET', path, params, headers,
+                                         retry_failures=True)
+        return self._resource_for(response)
+  
+
     def notify(self,identity,params=None, headers=None):
-        """Notify the customer of a Billing Request.
+        """Notify the customer.
 
         Notifies the customer linked to the billing request, asking them to
         authorise it.
@@ -305,7 +275,7 @@ class BillingRequestsService(base_service.BaseService):
   
 
     def fallback(self,identity,params=None, headers=None):
-        """Trigger fallback for a Billing Request.
+        """Trigger fallback.
 
         Triggers a fallback from the open-banking flow to direct debit. Note,
         the billing request must have fallback enabled.
@@ -318,6 +288,36 @@ class BillingRequestsService(base_service.BaseService):
               BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/fallback', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
+    def choose_currency(self,identity,params=None, headers=None):
+        """Change currency.
+
+        This will allow for the updating of the currency and subsequently the
+        scheme if
+        needed for a Billing Request. This will only be available for mandate
+        only flows
+        which do not have the lock_currency flag set to true on the Billing
+        Request Flow. It
+        will also not support any request which has a payments request.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/choose_currency', {
           
             'identity': identity,
           })

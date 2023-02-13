@@ -17,29 +17,6 @@ class BankAuthorisationsService(base_service.BaseService):
     RESOURCE_NAME = 'bank_authorisations'
 
 
-    def get(self,identity,params=None, headers=None):
-        """Get a Bank Authorisation..
-
-        Fetches a bank authorisation
-
-        Args:
-              identity (string): Unique identifier, beginning with "BAU".
-              params (dict, optional): Query string parameters.
-
-        Returns:
-              BankAuthorisation
-        """
-        path = self._sub_url_params('/bank_authorisations/:identity', {
-          
-            'identity': identity,
-          })
-        
-
-        response = self._perform_request('GET', path, params, headers,
-                                         retry_failures=True)
-        return self._resource_for(response)
-  
-
     def create(self,params=None, headers=None):
         """Create a Bank Authorisation.
 
@@ -65,5 +42,28 @@ class BankAuthorisationsService(base_service.BaseService):
           return self.get(identity=err.conflicting_resource_id,
                           params=params,
                           headers=headers)
+        return self._resource_for(response)
+  
+
+    def get(self,identity,params=None, headers=None):
+        """Get a Bank Authorisation.
+
+        Get a single bank authorisation.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BAU".
+              params (dict, optional): Query string parameters.
+
+        Returns:
+              BankAuthorisation
+        """
+        path = self._sub_url_params('/bank_authorisations/:identity', {
+          
+            'identity': identity,
+          })
+        
+
+        response = self._perform_request('GET', path, params, headers,
+                                         retry_failures=True)
         return self._resource_for(response)
   

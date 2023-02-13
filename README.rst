@@ -73,11 +73,11 @@ Bank authorisations
 
 .. code:: python
 
-    # Get a Bank Authorisation.
-    client.bank_authorisations.get('BAU123', params={...})
-
     # Create a Bank Authorisation
     client.bank_authorisations.create(params={...})
+
+    # Get a Bank Authorisation
+    client.bank_authorisations.get('BAU123', params={...})
 
 Bank details lookups
 ''''''''''''''''''''''''''''''''''''''''''
@@ -92,41 +92,41 @@ Billing requests
 
 .. code:: python
 
+    # Create a Billing Request
+    client.billing_requests.create(params={...})
+
+    # Collect customer details
+    client.billing_requests.collect_customer_details('BRQ123', params={...})
+
+    # Collect bank account details
+    client.billing_requests.collect_bank_account('BRQ123', params={...})
+
+    # Confirm the payer details
+    client.billing_requests.confirm_payer_details('BRQ123', params={...})
+
+    # Fulfil a Billing Request
+    client.billing_requests.fulfil('BRQ123', params={...})
+
+    # Cancel a Billing Request
+    client.billing_requests.cancel('BRQ123', params={...})
+
     # List Billing Requests
     client.billing_requests.list(params={...})
 
     # Iterate through all billing_requests
     client.billing_requests.all(params={...})
 
-    # Create a Billing Request
-    client.billing_requests.create(params={...})
-
     # Get a single Billing Request
     client.billing_requests.get('BRQ123', params={...})
 
-    # Collect customer details for a Billing Request
-    client.billing_requests.collect_customer_details('BRQ123', params={...})
-
-    # Collect bank account details for a Billing Request
-    client.billing_requests.collect_bank_account('BRQ123', params={...})
-
-    # Fulfil a Billing Request
-    client.billing_requests.fulfil('BRQ123', params={...})
-
-    # Change currency for a Billing Request
-    client.billing_requests.choose_currency('BRQ123', params={...})
-
-    # Confirm the customer and bank account details
-    client.billing_requests.confirm_payer_details('BRQ123', params={...})
-
-    # Cancel a Billing Request
-    client.billing_requests.cancel('BRQ123', params={...})
-
-    # Notify the customer of a Billing Request
+    # Notify the customer
     client.billing_requests.notify('BRQ123', params={...})
 
-    # Trigger fallback for a Billing Request
+    # Trigger fallback
     client.billing_requests.fallback('BRQ123', params={...})
+
+    # Change currency
+    client.billing_requests.choose_currency('BRQ123', params={...})
 
 Billing request flows
 ''''''''''''''''''''''''''''''''''''''''''
