@@ -20,12 +20,33 @@ class SchemeIdentifiersService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a scheme identifier.
 
-        Creates a new scheme identifier. The scheme identifier must be [applied
-        to a creditor](#creditors-apply-a-scheme-identifier) before payments
-        are taken using it. The scheme identifier must also have the `status`
-        of active before it can be used. For some schemes e.g. faster_payments
-        this will happen instantly. For other schemes e.g. bacs this can take
-        several days.
+        Creates a new scheme identifier. The scheme identifier must be
+        [applied to a creditor](#creditors-apply-a-scheme-identifier) before
+        payments are taken
+        using it. The scheme identifier must also have the `status` of active
+        before it can be
+        used. For some schemes e.g. faster_payments this will happen instantly.
+        For other schemes
+        e.g. bacs this can take several days.
+        
+        ### Scheme identifier name validations
+        
+        Each scheme has different rules for the length and permitted characters
+        in the scheme identifier
+        name field. The rules are:
+        
+        | __scheme__      | __maximum length__ | __allowed characters__   |
+        __spaces__ |
+        | :-------------- | :----------------- | :----------------------- |
+        :--------- |
+        | bacs            | 18 characters      | `a-zA-Z0-9/.&-`          | yes
+               |
+        | sepa_core       | 70 characters      | `a-zA-Z0-9/?:().,+&<>'"` | yes
+               |
+        | ach             | 16 characters      | `a-zA-Z0-9/?:().,'+-`    | yes
+               |
+        | faster_payments | 18 characters      | `a-zA-Z0-9/?:().,'+-`    | yes
+               |
         
 
         Args:
