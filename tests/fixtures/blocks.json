@@ -3,7 +3,7 @@
     "method": "POST",
     "path_template": "/blocks",
     "url_params": [],
-    "body": {"blocks":{"active":true,"block_type":"example block_type 235","created_at":"2014-01-01T12:00:00.000Z","id":"BLC123","reason_description":"example reason_description 421","reason_type":"example reason_type 6443","resource_reference":"example@example.com","updated_at":"2014-01-01T12:00:00.000Z"}}
+    "body": {"blocks":{"active":true,"block_type":"example block_type 421","created_at":"2014-01-01T12:00:00.000Z","id":"BLC123","reason_description":"example reason_description 6443","reason_type":"example reason_type 235","resource_reference":"example@example.com","updated_at":"2014-01-01T12:00:00.000Z"}}
   },
   "get": {
     "method": "GET",
