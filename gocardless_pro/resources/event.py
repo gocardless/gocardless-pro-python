@@ -198,6 +198,10 @@ class Event(object):
             return self.attributes.get('refund')
     
         @property
+        def scheme_identifier(self):
+            return self.attributes.get('scheme_identifier')
+    
+        @property
         def subscription(self):
             return self.attributes.get('subscription')
     
