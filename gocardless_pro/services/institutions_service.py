@@ -41,3 +41,27 @@ class InstitutionsService(base_service.BaseService):
         return Paginator(self, params)
     
   
+
+    def list_for_billing_request(self,identity,params=None, headers=None):
+        """List institutions for Billing Request.
+
+        Returns all institutions valid for a Billing Request.
+        
+        This endpoint is currently supported only for FasterPayments.
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Query string parameters.
+
+        Returns:
+              ListResponse of Institution instances
+        """
+        path = self._sub_url_params('/billing_requests/:identity/institutions', {
+          
+            'identity': identity,
+          })
+        
+        response = self._perform_request('GET', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  

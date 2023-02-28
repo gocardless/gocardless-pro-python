@@ -344,6 +344,9 @@ Institutions
     # Iterate through all institutions
     client.institutions.all(params={...})
 
+    # List institutions for Billing Request
+    client.institutions.list_for_billing_request('BRQ123', params={...})
+
 Mandates
 ''''''''''''''''''''''''''''''''''''''''''
 

@@ -100,3 +100,44 @@ def test_institutions_all():
       assert_is_instance(record, resources.Institution)
     
   
+
+@responses.activate
+def test_institutions_list_for_billing_request():
+    fixture = helpers.load_fixture('institutions')['list_for_billing_request']
+    helpers.stub_response(fixture)
+    response = helpers.client.institutions.list_for_billing_request(*fixture['url_params'])
+    body = fixture['body']['institutions']
+
+    assert_is_instance(response, list_response.ListResponse)
+    assert_is_instance(response.records[0], resources.Institution)
+
+    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
+    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal([r.bank_redirect for r in response.records],
+                 [b.get('bank_redirect') for b in body])
+    assert_equal([r.country_code for r in response.records],
+                 [b.get('country_code') for b in body])
+    assert_equal([r.icon_url for r in response.records],
+                 [b.get('icon_url') for b in body])
+    assert_equal([r.id for r in response.records],
+                 [b.get('id') for b in body])
+    assert_equal([r.logo_url for r in response.records],
+                 [b.get('logo_url') for b in body])
+    assert_equal([r.name for r in response.records],
+                 [b.get('name') for b in body])
+
+def test_timeout_institutions_list_for_billing_request_doesnt_retry():
+    fixture = helpers.load_fixture('institutions')['list_for_billing_request']
+    with helpers.stub_timeout(fixture) as rsps:
+      with assert_raises(requests.ConnectTimeout):
+        response = helpers.client.institutions.list_for_billing_request(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+
+def test_502_institutions_list_for_billing_request_doesnt_retry():
+    fixture = helpers.load_fixture('institutions')['list_for_billing_request']
+    with helpers.stub_502(fixture) as rsps:
+      with assert_raises(MalformedResponseError):
+        response = helpers.client.institutions.list_for_billing_request(*fixture['url_params'])
+      assert_equal(1, len(rsps.calls))
+  
