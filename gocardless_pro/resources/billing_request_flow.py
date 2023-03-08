@@ -72,6 +72,11 @@ class BillingRequestFlow(object):
   
 
     @property
+    def options(self):
+        return self.Options(self.attributes.get('options'))
+  
+
+    @property
     def prefilled_bank_account(self):
         return self.PrefilledBankAccount(self.attributes.get('prefilled_bank_account'))
   
@@ -128,6 +133,19 @@ class BillingRequestFlow(object):
 
   
 
+  
+
+  
+    class Options(object):
+        """Wrapper for the response's 'options' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def show_success_redirect_button(self):
+            return self.attributes.get('show_success_redirect_button')
+    
   
 
   

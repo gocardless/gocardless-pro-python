@@ -47,6 +47,8 @@ def test_billing_request_flows_create():
     assert_equal(response.show_redirect_buttons, body.get('show_redirect_buttons'))
     assert_equal(response.links.billing_request,
                  body.get('links')['billing_request'])
+    assert_equal(response.options.show_success_redirect_button,
+                 body.get('options')['show_success_redirect_button'])
     assert_equal(response.prefilled_bank_account.account_type,
                  body.get('prefilled_bank_account')['account_type'])
     assert_equal(response.prefilled_customer.address_line1,
@@ -124,6 +126,8 @@ def test_billing_request_flows_initialise():
     assert_equal(response.show_redirect_buttons, body.get('show_redirect_buttons'))
     assert_equal(response.links.billing_request,
                  body.get('links')['billing_request'])
+    assert_equal(response.options.show_success_redirect_button,
+                 body.get('options')['show_success_redirect_button'])
     assert_equal(response.prefilled_bank_account.account_type,
                  body.get('prefilled_bank_account')['account_type'])
     assert_equal(response.prefilled_customer.address_line1,
