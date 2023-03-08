@@ -331,3 +331,27 @@ class BillingRequestsService(base_service.BaseService):
                                          retry_failures=False)
         return self._resource_for(response)
   
+
+    def select_institution(self,identity,params=None, headers=None):
+        """Select institution for a Billing Request.
+
+        Creates an Institution object and attaches it to the Billing Request
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/select_institution', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  

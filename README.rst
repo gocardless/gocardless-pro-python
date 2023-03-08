@@ -128,6 +128,9 @@ Billing requests
     # Change currency
     client.billing_requests.choose_currency('BRQ123', params={...})
 
+    # Select institution for a Billing Request
+    client.billing_requests.select_institution('BRQ123', params={...})
+
 Billing request flows
 ''''''''''''''''''''''''''''''''''''''''''
 
