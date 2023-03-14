@@ -145,7 +145,7 @@ class PayerAuthorisationsService(base_service.BaseService):
         
         <p class="notice">
           The main use of the confirm endpoint is to enable integrators to
-        acknowledge the end of the setup process. 
+        acknowledge the end of the setup process.
           They might want to make the payers go through some other steps after
         they go through our flow or make them go through the necessary
         verification mechanism (upcoming feature).
