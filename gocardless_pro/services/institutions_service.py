@@ -21,6 +21,13 @@ class InstitutionsService(base_service.BaseService):
         """List Institutions.
 
         Returns a list of supported institutions.
+        
+        <p class="deprecated-notice"><strong>Deprecated</strong>: This list
+        institutions endpoint
+        is no longer supported. We strongly recommend using the
+        [List Institutions For Billing
+        Request](#institutions-list-institutions-for-billing-request)
+        instead.</p>
 
         Args:
               params (dict, optional): Query string parameters.
