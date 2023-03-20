@@ -24,6 +24,51 @@ from .. import helpers
   
 
 @responses.activate
+def test_verification_details_create():
+    fixture = helpers.load_fixture('verification_details')['create']
+    helpers.stub_response(fixture)
+    response = helpers.client.verification_details.create(*fixture['url_params'])
+    body = fixture['body']['verification_details']
+
+    assert_is_instance(response, resources.VerificationDetail)
+    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
+    assert_equal(response.address_line1, body.get('address_line1'))
+    assert_equal(response.address_line2, body.get('address_line2'))
+    assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.city, body.get('city'))
+    assert_equal(response.company_number, body.get('company_number'))
+    assert_equal(response.description, body.get('description'))
+    assert_equal(response.directors, body.get('directors'))
+    assert_equal(response.name, body.get('name'))
+    assert_equal(response.postal_code, body.get('postal_code'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
+
+@responses.activate
+def test_timeout_verification_details_create_retries():
+    fixture = helpers.load_fixture('verification_details')['create']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.verification_details.create(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+    body = fixture['body']['verification_details']
+
+    assert_is_instance(response, resources.VerificationDetail)
+
+def test_502_verification_details_create_retries():
+    fixture = helpers.load_fixture('verification_details')['create']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.verification_details.create(*fixture['url_params'])
+      assert_equal(2, len(rsps.calls))
+      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
+                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+    body = fixture['body']['verification_details']
+
+    assert_is_instance(response, resources.VerificationDetail)
+  
+
+@responses.activate
 def test_verification_details_list():
     fixture = helpers.load_fixture('verification_details')['list']
     helpers.stub_response(fixture)
@@ -105,49 +150,4 @@ def test_verification_details_all():
     for record in all_records:
       assert_is_instance(record, resources.VerificationDetail)
     
-  
-
-@responses.activate
-def test_verification_details_create():
-    fixture = helpers.load_fixture('verification_details')['create']
-    helpers.stub_response(fixture)
-    response = helpers.client.verification_details.create(*fixture['url_params'])
-    body = fixture['body']['verification_details']
-
-    assert_is_instance(response, resources.VerificationDetail)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.address_line1, body.get('address_line1'))
-    assert_equal(response.address_line2, body.get('address_line2'))
-    assert_equal(response.address_line3, body.get('address_line3'))
-    assert_equal(response.city, body.get('city'))
-    assert_equal(response.company_number, body.get('company_number'))
-    assert_equal(response.description, body.get('description'))
-    assert_equal(response.directors, body.get('directors'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.postal_code, body.get('postal_code'))
-    assert_equal(response.links.creditor,
-                 body.get('links')['creditor'])
-
-@responses.activate
-def test_timeout_verification_details_create_retries():
-    fixture = helpers.load_fixture('verification_details')['create']
-    with helpers.stub_timeout_then_response(fixture) as rsps:
-      response = helpers.client.verification_details.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
-    body = fixture['body']['verification_details']
-
-    assert_is_instance(response, resources.VerificationDetail)
-
-def test_502_verification_details_create_retries():
-    fixture = helpers.load_fixture('verification_details')['create']
-    with helpers.stub_502_then_response(fixture) as rsps:
-      response = helpers.client.verification_details.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
-    body = fixture['body']['verification_details']
-
-    assert_is_instance(response, resources.VerificationDetail)
   

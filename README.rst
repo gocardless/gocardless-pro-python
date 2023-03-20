@@ -128,6 +128,9 @@ Billing requests
     # Change currency
     client.billing_requests.choose_currency('BRQ123', params={...})
 
+    # Select institution for a Billing Request
+    client.billing_requests.select_institution('BRQ123', params={...})
+
 Billing request flows
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -343,6 +346,9 @@ Institutions
 
     # Iterate through all institutions
     client.institutions.all(params={...})
+
+    # List institutions for Billing Request
+    client.institutions.list_for_billing_request('BRQ123', params={...})
 
 Mandates
 ''''''''''''''''''''''''''''''''''''''''''
@@ -590,14 +596,14 @@ Verification details
 
 .. code:: python
 
+    # Create a verification detail
+    client.verification_details.create(params={...})
+
     # List verification details
     client.verification_details.list(params={...})
 
     # Iterate through all verification_details
     client.verification_details.all(params={...})
-
-    # Create a verification detail
-    client.verification_details.create(params={...})
 
 Webhooks
 ''''''''''''''''''''''''''''''''''''''''''

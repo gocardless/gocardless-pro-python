@@ -174,6 +174,8 @@ def test_events_get():
                  body.get('links')['previous_customer_bank_account'])
     assert_equal(response.links.refund,
                  body.get('links')['refund'])
+    assert_equal(response.links.scheme_identifier,
+                 body.get('links')['scheme_identifier'])
     assert_equal(response.links.subscription,
                  body.get('links')['subscription'])
 

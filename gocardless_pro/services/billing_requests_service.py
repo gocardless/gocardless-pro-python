@@ -254,6 +254,9 @@ class BillingRequestsService(base_service.BaseService):
         Notifies the customer linked to the billing request, asking them to
         authorise it.
         Currently, the customer can only be notified by email.
+        
+        This endpoint is currently supported only for Instant Bank Pay Billing
+        Requests.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -318,6 +321,30 @@ class BillingRequestsService(base_service.BaseService):
               BillingRequest
         """
         path = self._sub_url_params('/billing_requests/:identity/actions/choose_currency', {
+          
+            'identity': identity,
+          })
+        
+        if params is not None:
+            params = {'data': params}
+        response = self._perform_request('POST', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  
+
+    def select_institution(self,identity,params=None, headers=None):
+        """Select institution for a Billing Request.
+
+        Creates an Institution object and attaches it to the Billing Request
+
+        Args:
+              identity (string): Unique identifier, beginning with "BRQ".
+              params (dict, optional): Request body.
+
+        Returns:
+              BillingRequest
+        """
+        path = self._sub_url_params('/billing_requests/:identity/actions/select_institution', {
           
             'identity': identity,
           })

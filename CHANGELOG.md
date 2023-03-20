@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.40.0
+
+- Added `show_success_redirect_button` in the Billing Request Flow model.
+
 # 1.39.0
 
 - Adding GET `/verification_details` endpoint to allow integrators to list verification details for a creditor

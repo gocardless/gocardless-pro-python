@@ -96,6 +96,11 @@ class BillingRequestFlow(object):
         return self.attributes.get('show_redirect_buttons')
   
 
+    @property
+    def show_success_redirect_button(self):
+        return self.attributes.get('show_success_redirect_button')
+  
+
 
   
 
@@ -202,6 +207,8 @@ class BillingRequestFlow(object):
         def swedish_identity_number(self):
             return self.attributes.get('swedish_identity_number')
     
+  
+
   
 
   
