@@ -10,7 +10,7 @@ A Python client for interacting with the GoCardless Pro API.
 
 |circle-badge| |pypi-badge|
 
-Tested against Python 2.7, 3.5, 3.6, 3.7, 3.8, 3.9 and 3.10.
+Tested against Python 3.7, 3.8, 3.9, 3.10 and 3.11.
 
 - `"Getting Started" guide <https://developer.gocardless.com/getting-started/api/introduction/?lang=python>`_ with copy and paste Python code samples
 - `API reference`_
