@@ -22,6 +22,11 @@ class BillingRequest(object):
   
 
     @property
+    def auto_fulfil(self):
+        return self.attributes.get('auto_fulfil')
+  
+
+    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -71,6 +76,8 @@ class BillingRequest(object):
         return self.attributes.get('status')
   
 
+
+  
 
   
 
