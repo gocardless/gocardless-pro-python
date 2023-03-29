@@ -17,11 +17,6 @@ class Creditor(object):
         self.api_response = api_response
 
     @property
-    def activated(self):
-        return self.attributes.get('activated')
-  
-
-    @property
     def address_line1(self):
         return self.attributes.get('address_line1')
   
@@ -121,8 +116,6 @@ class Creditor(object):
         return self.attributes.get('verification_status')
   
 
-
-  
 
   
 
