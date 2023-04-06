@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.42.0
+
+- Added `country_code` as a required parameter to the List Institutions for Billing Request API.
+
 # 1.40.0
 
 - Added `show_success_redirect_button` in the Billing Request Flow model.
