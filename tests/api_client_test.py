@@ -54,10 +54,42 @@ def test_put_includes_json_body():
     assert_equals(responses.calls[0].request.body, '{"name": "Billy Jean"}')
 
 @responses.activate
-def test_delete_includes_json_body():
-    responses.add(responses.DELETE, 'http://example.com/test', body='{}')
-    client.delete('/test', body={'name': 'Billy Jean'})
-    assert_equals(responses.calls[0].request.body, '{"name": "Billy Jean"}')
+def test_delete_customer_successful():
+    responses.add(
+        responses.DELETE,
+        'http://example.com/customers/foobar',
+        status=204)
+
+    # No parameters or body are specified in the documentation
+    client.delete('/customers/foobar', body={})
+
+    # No assertions - request is expected to raise no exceptions
+
+
+@responses.activate
+def test_delete_customer_already_removed():
+
+    fixture = helpers.load_fixture('customer_gone')
+
+    responses.add(
+        responses.DELETE,
+        'http://example.com/customers/foobar',
+        status=fixture['error']['code'],
+        json=fixture)
+
+    # InvalidApiUsageError raise is expected
+    with assert_raises(errors.InvalidApiUsageError) as assertion:
+        # No parameters or body are specified in the documentation
+        client.delete('/customers/foobar', body={})
+
+    assert_equals(
+        assertion.exception.documentation_url,
+        fixture['error']['documentation_url'])
+
+    assert_equals(
+        assertion.exception.errors,
+        fixture['error']['errors'])
+
 
 @responses.activate
 def test_handles_validation_failed_error():

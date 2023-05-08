@@ -113,12 +113,18 @@ class ApiClient(object):
         return response
 
     def _handle_errors(self, response):
+
+        # HTTP 204 No Content - is a valid response with no payload
+        if response.status_code == 204:
+            return
+
         try:
             response_body = response.json()
         except ValueError:
             msg = 'Malformed response received from server'
             raise errors.MalformedResponseError(msg, response.text)
 
+        # Perform further inspection only for Client or Server error responses
         if response.status_code < 400:
             return
 

@@ -1,0 +1,15 @@
+{
+  "error": {
+    "documentation_url": "https://developer.gocardless.com/api-reference#customer_data_removed",
+    "message": "This customer data has been removed",
+    "type": "invalid_api_usage",
+    "errors": [
+      {
+        "reason": "customer_removed",
+        "message": "This customer data has been removed"
+      }
+    ],
+    "code": 410,
+    "request_id": "deadbeef-0000-4000-0000-444400004444"
+  }
+}
