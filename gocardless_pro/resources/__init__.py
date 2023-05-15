@@ -41,6 +41,8 @@ from .mandate_import_entry import MandateImportEntry
 
 from .mandate_pdf import MandatePdf
 
+from .negative_balance_limit import NegativeBalanceLimit
+
 from .payer_authorisation import PayerAuthorisation
 
 from .payment import Payment

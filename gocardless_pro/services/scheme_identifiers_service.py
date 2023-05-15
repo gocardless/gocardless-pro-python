@@ -43,7 +43,7 @@ class SchemeIdentifiersService(base_service.BaseService):
         :-------------------------------------------------- |
         | `bacs`            | 18 characters      | `/` `.` `&` `-`             
                                |
-        | `sepa_core`       | 70 characters      | `/` `?` `:` `(` `)` `.` `,`
+        | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.` `,`
         `+` `&` `<` `>` `'` `"` |
         | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.` `,`
         `'` `+` `-`             |

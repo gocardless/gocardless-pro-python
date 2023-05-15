@@ -208,9 +208,6 @@ Creditors
     # Update a creditor
     client.creditors.update('CR123', params={...})
 
-    # Apply a scheme identifier
-    client.creditors.apply_scheme_identifier('CR123', params={...})
-
 Creditor bank accounts
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -414,6 +411,20 @@ Mandate pdfs
 
     # Create a mandate PDF
     client.mandate_pdfs.create(params={...})
+
+Negative balance limits
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List negative balance limits
+    client.negative_balance_limits.list(params={...})
+
+    # Iterate through all negative_balance_limits
+    client.negative_balance_limits.all(params={...})
+
+    # Create a negative balance limit
+    client.negative_balance_limits.create(params={...})
 
 Payer authorisations
 ''''''''''''''''''''''''''''''''''''''''''

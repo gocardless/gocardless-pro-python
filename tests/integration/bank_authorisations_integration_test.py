@@ -38,6 +38,7 @@ def test_bank_authorisations_create():
     assert_equal(response.expires_at, body.get('expires_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.last_visited_at, body.get('last_visited_at'))
+    assert_equal(response.qr_code_url, body.get('qr_code_url'))
     assert_equal(response.redirect_uri, body.get('redirect_uri'))
     assert_equal(response.url, body.get('url'))
     assert_equal(response.links.billing_request,
@@ -102,6 +103,7 @@ def test_bank_authorisations_get():
     assert_equal(response.expires_at, body.get('expires_at'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.last_visited_at, body.get('last_visited_at'))
+    assert_equal(response.qr_code_url, body.get('qr_code_url'))
     assert_equal(response.redirect_uri, body.get('redirect_uri'))
     assert_equal(response.url, body.get('url'))
     assert_equal(response.links.billing_request,
