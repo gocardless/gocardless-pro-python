@@ -1,4 +1,16 @@
 <!-- @format -->
+
+# 1.44.0
+- Update pagination definition (non-functional change)
+# 1.43.0
+
+- Added a new field, links[creditor] to the scheme identifier create API
+- Added a new API to set and retrieve negative balances
+- Added a new bank_reference_prefix to the creditor API
+- Removed the bank_redirect field from the institutions API
+- Added an autocompletes_collect_bank_account field to the institutions API
+- Removed the creditor API endpoint to apply scheme identifiers
+
 # 1.42.0
 
 - Added `country_code` as a required parameter to the List Institutions for Billing Request API.

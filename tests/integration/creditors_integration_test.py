@@ -35,6 +35,7 @@ def test_creditors_create():
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.bank_reference_prefix, body.get('bank_reference_prefix'))
     assert_equal(response.can_create_refunds, body.get('can_create_refunds'))
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
@@ -129,6 +130,8 @@ def test_creditors_list():
                  [b.get('address_line2') for b in body])
     assert_equal([r.address_line3 for r in response.records],
                  [b.get('address_line3') for b in body])
+    assert_equal([r.bank_reference_prefix for r in response.records],
+                 [b.get('bank_reference_prefix') for b in body])
     assert_equal([r.can_create_refunds for r in response.records],
                  [b.get('can_create_refunds') for b in body])
     assert_equal([r.city for r in response.records],
@@ -226,6 +229,7 @@ def test_creditors_get():
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.bank_reference_prefix, body.get('bank_reference_prefix'))
     assert_equal(response.can_create_refunds, body.get('can_create_refunds'))
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
@@ -295,6 +299,7 @@ def test_creditors_update():
     assert_equal(response.address_line1, body.get('address_line1'))
     assert_equal(response.address_line2, body.get('address_line2'))
     assert_equal(response.address_line3, body.get('address_line3'))
+    assert_equal(response.bank_reference_prefix, body.get('bank_reference_prefix'))
     assert_equal(response.can_create_refunds, body.get('can_create_refunds'))
     assert_equal(response.city, body.get('city'))
     assert_equal(response.country_code, body.get('country_code'))
@@ -350,64 +355,4 @@ def test_502_creditors_update_retries():
     body = fixture['body']['creditors']
 
     assert_is_instance(response, resources.Creditor)
-  
-
-@responses.activate
-def test_creditors_apply_scheme_identifier():
-    fixture = helpers.load_fixture('creditors')['apply_scheme_identifier']
-    helpers.stub_response(fixture)
-    response = helpers.client.creditors.apply_scheme_identifier(*fixture['url_params'])
-    body = fixture['body']['creditors']
-
-    assert_is_instance(response, resources.Creditor)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.address_line1, body.get('address_line1'))
-    assert_equal(response.address_line2, body.get('address_line2'))
-    assert_equal(response.address_line3, body.get('address_line3'))
-    assert_equal(response.can_create_refunds, body.get('can_create_refunds'))
-    assert_equal(response.city, body.get('city'))
-    assert_equal(response.country_code, body.get('country_code'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.creditor_type, body.get('creditor_type'))
-    assert_equal(response.custom_payment_pages_enabled, body.get('custom_payment_pages_enabled'))
-    assert_equal(response.fx_payout_currency, body.get('fx_payout_currency'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.logo_url, body.get('logo_url'))
-    assert_equal(response.mandate_imports_enabled, body.get('mandate_imports_enabled'))
-    assert_equal(response.merchant_responsible_for_notifications, body.get('merchant_responsible_for_notifications'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.postal_code, body.get('postal_code'))
-    assert_equal(response.region, body.get('region'))
-    assert_equal(response.scheme_identifiers, body.get('scheme_identifiers'))
-    assert_equal(response.verification_status, body.get('verification_status'))
-    assert_equal(response.links.default_aud_payout_account,
-                 body.get('links')['default_aud_payout_account'])
-    assert_equal(response.links.default_cad_payout_account,
-                 body.get('links')['default_cad_payout_account'])
-    assert_equal(response.links.default_dkk_payout_account,
-                 body.get('links')['default_dkk_payout_account'])
-    assert_equal(response.links.default_eur_payout_account,
-                 body.get('links')['default_eur_payout_account'])
-    assert_equal(response.links.default_gbp_payout_account,
-                 body.get('links')['default_gbp_payout_account'])
-    assert_equal(response.links.default_nzd_payout_account,
-                 body.get('links')['default_nzd_payout_account'])
-    assert_equal(response.links.default_sek_payout_account,
-                 body.get('links')['default_sek_payout_account'])
-    assert_equal(response.links.default_usd_payout_account,
-                 body.get('links')['default_usd_payout_account'])
-
-def test_timeout_creditors_apply_scheme_identifier_doesnt_retry():
-    fixture = helpers.load_fixture('creditors')['apply_scheme_identifier']
-    with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
-        response = helpers.client.creditors.apply_scheme_identifier(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
-
-def test_502_creditors_apply_scheme_identifier_doesnt_retry():
-    fixture = helpers.load_fixture('creditors')['apply_scheme_identifier']
-    with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
-        response = helpers.client.creditors.apply_scheme_identifier(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
   

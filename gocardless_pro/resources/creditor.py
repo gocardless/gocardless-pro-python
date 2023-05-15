@@ -32,6 +32,11 @@ class Creditor(object):
   
 
     @property
+    def bank_reference_prefix(self):
+        return self.attributes.get('bank_reference_prefix')
+  
+
+    @property
     def can_create_refunds(self):
         return self.attributes.get('can_create_refunds')
   
@@ -116,6 +121,8 @@ class Creditor(object):
         return self.attributes.get('verification_status')
   
 
+
+  
 
   
 

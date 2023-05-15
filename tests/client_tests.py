@@ -73,6 +73,9 @@ def test_mandate_import_entries_returns_service():
 def test_mandate_pdfs_returns_service():
     assert_is_instance(client.mandate_pdfs, services.MandatePdfsService)
 
+def test_negative_balance_limits_returns_service():
+    assert_is_instance(client.negative_balance_limits, services.NegativeBalanceLimitsService)
+
 def test_payer_authorisations_returns_service():
     assert_is_instance(client.payer_authorisations, services.PayerAuthorisationsService)
 

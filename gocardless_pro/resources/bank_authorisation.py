@@ -52,6 +52,11 @@ class BankAuthorisation(object):
   
 
     @property
+    def qr_code_url(self):
+        return self.attributes.get('qr_code_url')
+  
+
+    @property
     def redirect_uri(self):
         return self.attributes.get('redirect_uri')
   
@@ -89,6 +94,8 @@ class BankAuthorisation(object):
         def institution(self):
             return self.attributes.get('institution')
     
+  
+
   
 
   

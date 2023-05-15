@@ -114,6 +114,10 @@ class Client(object):
         return services.MandatePdfsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def negative_balance_limits(self):
+        return services.NegativeBalanceLimitsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def payer_authorisations(self):
         return services.PayerAuthorisationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 

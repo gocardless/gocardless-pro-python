@@ -17,8 +17,8 @@ class Institution(object):
         self.api_response = api_response
 
     @property
-    def bank_redirect(self):
-        return self.attributes.get('bank_redirect')
+    def autocompletes_collect_bank_account(self):
+        return self.attributes.get('autocompletes_collect_bank_account')
   
 
     @property
