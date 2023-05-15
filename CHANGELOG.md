@@ -1,4 +1,7 @@
 <!-- @format -->
+
+# 1.44.0
+- Update pagination definition (non-functional change)
 # 1.43.0
 
 - Added a new field, links[creditor] to the scheme identifier create API
