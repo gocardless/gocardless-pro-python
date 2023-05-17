@@ -47,11 +47,6 @@ class NegativeBalanceLimit(object):
   
 
     @property
-    def reason(self):
-        return self.attributes.get('reason')
-  
-
-    @property
     def updated_at(self):
         return self.attributes.get('updated_at')
   
@@ -82,8 +77,6 @@ class NegativeBalanceLimit(object):
         def creditor(self):
             return self.attributes.get('creditor')
     
-  
-
   
 
   
