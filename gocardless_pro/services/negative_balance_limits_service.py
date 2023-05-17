@@ -46,8 +46,9 @@ class NegativeBalanceLimitsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a negative balance limit.
 
-        Creates a new negative balance limit, which also deactivates the
-        existing limit (if present) for that currency and creditor combination.
+        Creates a new negative balance limit, which replaces the existing limit
+        (if present) for that currency and creditor combination.
+        
 
         Args:
               params (dict, optional): Request body.

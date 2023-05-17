@@ -17,11 +17,6 @@ class NegativeBalanceLimit(object):
         self.api_response = api_response
 
     @property
-    def active(self):
-        return self.attributes.get('active')
-  
-
-    @property
     def balance_limit(self):
         return self.attributes.get('balance_limit')
   
@@ -51,8 +46,6 @@ class NegativeBalanceLimit(object):
         return self.attributes.get('updated_at')
   
 
-
-  
 
   
 
