@@ -44,8 +44,6 @@ def test_negative_balance_limits_list():
                  [b.get('currency') for b in body])
     assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.updated_at for r in response.records],
-                 [b.get('updated_at') for b in body])
 
 @responses.activate
 def test_timeout_negative_balance_limits_list_retries():
@@ -112,7 +110,6 @@ def test_negative_balance_limits_create():
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.updated_at, body.get('updated_at'))
     assert_equal(response.links.creator_user,
                  body.get('links')['creator_user'])
     assert_equal(response.links.creditor,
