@@ -20,13 +20,15 @@ class SchemeIdentifiersService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a scheme identifier.
 
-        Creates a new scheme identifier. The scheme identifier must be
-        [applied to a creditor](#creditors-apply-a-scheme-identifier) before
-        payments are taken
-        using it. The scheme identifier must also have the `status` of active
-        before it can be
-        used. On Bacs, this will take 5 working days. On other schemes, this
-        happens instantly.
+        Creates a new scheme identifier. The scheme identifier status will be
+        `pending` while GoCardless is
+        processing the request. Once the scheme identifier is ready to be used
+        the status will be updated to `active`.
+        At this point, GoCardless will emit a scheme identifier activated event
+        via webhook to notify you of this change.
+        In Bacs, it will take up to five working days for a scheme identifier
+        to become active. On other schemes, including SEPA,
+        this happens instantly.
         
         #### Scheme identifier name validations
         
