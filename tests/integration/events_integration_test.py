@@ -46,6 +46,8 @@ def test_events_list():
                  [b.get('id') for b in body])
     assert_equal([r.metadata for r in response.records],
                  [b.get('metadata') for b in body])
+    assert_equal([r.resource_metadata for r in response.records],
+                 [b.get('resource_metadata') for b in body])
     assert_equal([r.resource_type for r in response.records],
                  [b.get('resource_type') for b in body])
 
@@ -115,6 +117,7 @@ def test_events_get():
     assert_equal(response.customer_notifications, body.get('customer_notifications'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
+    assert_equal(response.resource_metadata, body.get('resource_metadata'))
     assert_equal(response.resource_type, body.get('resource_type'))
     assert_equal(response.details.bank_account_id,
                  body.get('details')['bank_account_id'])
