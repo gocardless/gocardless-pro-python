@@ -1,5 +1,9 @@
 <!-- @format -->
 
+# 1.45.0
+
+- Added request_pointer to validation errors
+
 # 1.44.0
 - Update pagination definition (non-functional change)
 # 1.43.0

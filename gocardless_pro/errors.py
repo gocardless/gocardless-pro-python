@@ -47,6 +47,10 @@ class ApiError(GoCardlessProError):
         return self.error.get('message')
 
     @property
+    def request_pointer(self):
+        return self.error.get('request_pointer')
+
+    @property
     def request_id(self):
         return self.error.get('request_id')
 
@@ -90,7 +94,7 @@ class ValidationFailedError(ApiError):
 
     def __str__(self):
         if self.errors and 'field' in self.errors[0]:
-            errors = ['{field} {message}'.format(**error) for error in self.errors]
+            errors = ['{field} {message} {request_pointer}'.format(**error) for error in self.errors]
             return '{} ({})'.format(self.message, ', '.join(errors))
         return super(ValidationFailedError, self).__str__()
 
