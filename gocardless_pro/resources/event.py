@@ -52,6 +52,11 @@ class Event(object):
   
 
     @property
+    def resource_metadata(self):
+        return self.attributes.get('resource_metadata')
+  
+
+    @property
     def resource_type(self):
         return self.attributes.get('resource_type')
   
@@ -205,6 +210,8 @@ class Event(object):
         def subscription(self):
             return self.attributes.get('subscription')
     
+  
+
   
 
   

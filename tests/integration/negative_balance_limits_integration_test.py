@@ -36,8 +36,6 @@ def test_negative_balance_limits_list():
     assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
     assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.active for r in response.records],
-                 [b.get('active') for b in body])
     assert_equal([r.balance_limit for r in response.records],
                  [b.get('balance_limit') for b in body])
     assert_equal([r.created_at for r in response.records],
@@ -46,10 +44,6 @@ def test_negative_balance_limits_list():
                  [b.get('currency') for b in body])
     assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
-    assert_equal([r.reason for r in response.records],
-                 [b.get('reason') for b in body])
-    assert_equal([r.updated_at for r in response.records],
-                 [b.get('updated_at') for b in body])
 
 @responses.activate
 def test_timeout_negative_balance_limits_list_retries():
@@ -112,13 +106,10 @@ def test_negative_balance_limits_create():
 
     assert_is_instance(response, resources.NegativeBalanceLimit)
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.active, body.get('active'))
     assert_equal(response.balance_limit, body.get('balance_limit'))
     assert_equal(response.created_at, body.get('created_at'))
     assert_equal(response.currency, body.get('currency'))
     assert_equal(response.id, body.get('id'))
-    assert_equal(response.reason, body.get('reason'))
-    assert_equal(response.updated_at, body.get('updated_at'))
     assert_equal(response.links.creator_user,
                  body.get('links')['creator_user'])
     assert_equal(response.links.creditor,
