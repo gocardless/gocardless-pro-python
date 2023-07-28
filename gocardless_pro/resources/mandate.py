@@ -32,6 +32,11 @@ class Mandate(object):
   
 
     @property
+    def funds_settlement(self):
+        return self.attributes.get('funds_settlement')
+  
+
+    @property
     def id(self):
         return self.attributes.get('id')
   
@@ -102,6 +107,8 @@ class Mandate(object):
         def start_date(self):
             return self.attributes.get('start_date')
     
+  
+
   
 
   

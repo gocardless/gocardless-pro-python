@@ -34,6 +34,7 @@ def test_mandates_create():
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.funds_settlement, body.get('funds_settlement'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
@@ -118,6 +119,8 @@ def test_mandates_list():
                  [b.get('authorisation_source') for b in body])
     assert_equal([r.created_at for r in response.records],
                  [b.get('created_at') for b in body])
+    assert_equal([r.funds_settlement for r in response.records],
+                 [b.get('funds_settlement') for b in body])
     assert_equal([r.id for r in response.records],
                  [b.get('id') for b in body])
     assert_equal([r.metadata for r in response.records],
@@ -198,6 +201,7 @@ def test_mandates_get():
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.funds_settlement, body.get('funds_settlement'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
@@ -258,6 +262,7 @@ def test_mandates_update():
     assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.funds_settlement, body.get('funds_settlement'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
@@ -318,6 +323,7 @@ def test_mandates_cancel():
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.funds_settlement, body.get('funds_settlement'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
@@ -369,6 +375,7 @@ def test_mandates_reinstate():
     assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
     assert_equal(response.authorisation_source, body.get('authorisation_source'))
     assert_equal(response.created_at, body.get('created_at'))
+    assert_equal(response.funds_settlement, body.get('funds_settlement'))
     assert_equal(response.id, body.get('id'))
     assert_equal(response.metadata, body.get('metadata'))
     assert_equal(response.next_possible_charge_date, body.get('next_possible_charge_date'))
