@@ -1,5 +1,10 @@
 <!-- @format -->
 
+# 1.46.0
+
+- Added refund_funds_returned to payout item types
+- Added funds_settlement to the mandate model
+
 # 1.45.0
 
 - Added request_pointer to validation errors
