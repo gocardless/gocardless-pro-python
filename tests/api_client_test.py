@@ -6,7 +6,6 @@
 import json
 
 import pytest
-import requests
 import responses
 
 from gocardless_pro import api_client

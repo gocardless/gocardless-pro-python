@@ -1,5 +1,9 @@
 <!-- @format -->
 
+# 1.47.0
+
+- Add rate limit response headers as properties on the client
+
 # 1.46.2
 
 - Remove nose in favour of pytest

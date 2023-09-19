@@ -14,6 +14,7 @@ import json
 import requests
 
 from . import errors
+from .rate_limit import RateLimit, update_rate_limit
 
 class ApiClient(object):
     """Client for interacting with a JSON HTTP API, using OAuth2-style auth.
@@ -26,7 +27,9 @@ class ApiClient(object):
     def __init__(self, base_url, access_token):
         self.base_url = base_url
         self.access_token = access_token
+        self.rate_limit = RateLimit()
 
+    @update_rate_limit
     def get(self, path, params=None, headers=None):
         """Perform a GET request, optionally providing query-string params.
 
@@ -48,6 +51,7 @@ class ApiClient(object):
         self._handle_errors(response)
         return response
 
+    @update_rate_limit
     def post(self, path, body, headers=None):
         """Perform a POST request, providing a body, which will be JSON-encoded.
 
@@ -70,6 +74,7 @@ class ApiClient(object):
         self._handle_errors(response)
         return response
 
+    @update_rate_limit
     def put(self, path, body, headers=None):
         """Perform a PUT request, providing a body, which will be JSON-encoded.
 
@@ -91,6 +96,7 @@ class ApiClient(object):
         self._handle_errors(response)
         return response
 
+    @update_rate_limit
     def delete(self, path, body, headers=None):
         """Perform a DELETE request, providing a body, which will be JSON-encoded.
 
@@ -144,7 +150,7 @@ class ApiClient(object):
             'Authorization': 'Bearer {0}'.format(self.access_token),
             'Content-Type': 'application/json',
             'GoCardless-Client-Library': 'gocardless-pro-python',
-            'GoCardless-Client-Version': '1.46.2',
+            'GoCardless-Client-Version': '1.47.0',
             'User-Agent': self._user_agent(),
             'GoCardless-Version': '2015-07-06',
         }
@@ -153,7 +159,7 @@ class ApiClient(object):
         python_version = '.'.join(platform.python_version_tuple()[0:2])
         vm_version = '{}.{}.{}-{}{}'.format(*sys.version_info)
         return ' '.join([
-            'gocardless-pro-python/1.46.2',
+            'gocardless-pro-python/1.47.0',
             'python/{0}'.format(python_version),
             '{0}/{1}'.format(platform.python_implementation(), vm_version),
             '{0}/{1}'.format(platform.system(), platform.release()),
