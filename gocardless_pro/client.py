@@ -165,6 +165,15 @@ class Client(object):
     def webhooks(self):
         return services.WebhooksService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
+
+    @property
+    def rate_limit(self):
+        return {
+            "ratelimit-limit": self._api_client.rate_limit.limit,
+            "ratelimit-remaining": self._api_client.rate_limit.remaining,
+            "ratelimit-reset": self._api_client.rate_limit.reset
+        }
+
     def _environment_url(self, environment):
         environment_urls = { 
             'live': 'https://api.gocardless.com',

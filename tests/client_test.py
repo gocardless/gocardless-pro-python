@@ -4,7 +4,6 @@
 #
 
 import pytest
-import requests
 import responses
 
 from gocardless_pro import Client

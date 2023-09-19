@@ -58,6 +58,16 @@ Access API endpoints using the corresponding methods on the client object:
         headers={'Accept-Language': 'fr'}
     )
 
+Rate limit response headers can be read:
+
+.. code:: python
+
+    # Note these properties will be None until you make an API request with the client
+    client.rate_limit.limit
+    client.rate_limit.remaining
+    client.rate_limit.reset
+
+
 For full documentation, see our `API reference`_.
 
 .. _API reference: https://developer.gocardless.com/api-reference
