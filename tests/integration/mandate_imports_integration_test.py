@@ -36,6 +36,8 @@ def test_mandate_imports_create():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
 
 @responses.activate
 def test_mandate_imports_create_new_idempotency_key_for_each_call():
@@ -92,6 +94,8 @@ def test_mandate_imports_get():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
 
 @responses.activate
 def test_timeout_mandate_imports_get_retries():
@@ -130,6 +134,8 @@ def test_mandate_imports_submit():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
 
 def test_timeout_mandate_imports_submit_doesnt_retry():
     fixture = helpers.load_fixture('mandate_imports')['submit']
@@ -159,6 +165,8 @@ def test_mandate_imports_cancel():
     assert_equal(response.id, body.get('id'))
     assert_equal(response.scheme, body.get('scheme'))
     assert_equal(response.status, body.get('status'))
+    assert_equal(response.links.creditor,
+                 body.get('links')['creditor'])
 
 def test_timeout_mandate_imports_cancel_doesnt_retry():
     fixture = helpers.load_fixture('mandate_imports')['cancel']

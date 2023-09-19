@@ -1,5 +1,9 @@
 <!-- @format -->
 
+# 1.46.1
+
+- Fix throwing error on empty 204 responses
+
 # 1.46.0
 
 - Added refund_funds_returned to payout item types

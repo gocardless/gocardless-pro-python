@@ -128,3 +128,17 @@ def test_handles_malformed_response():
 
     with assert_raises(errors.MalformedResponseError) as assertion:
         client.post('/test', body={'name': 'Billy Jean'})
+
+@responses.activate
+def test_handles_valid_empty_response():
+    responses.add(responses.DELETE, 'http://example.com/test', body='', status=204)
+    client.delete('/test', body={'name': 'Billy Jean'})
+    assert_equals(responses.calls[0].request.body, '{"name": "Billy Jean"}')
+
+
+@responses.activate
+def test_handles_invalid_empty_response():
+    responses.add(responses.POST, 'http://example.com/test', body='', status=201)
+
+    with assert_raises(errors.MalformedResponseError) as assertion:
+        client.post('/test', body={'name': 'Billy Jean'})

@@ -27,6 +27,11 @@ class MandateImport(object):
   
 
     @property
+    def links(self):
+        return self.Links(self.attributes.get('links'))
+  
+
+    @property
     def scheme(self):
         return self.attributes.get('scheme')
   
@@ -39,6 +44,19 @@ class MandateImport(object):
 
   
 
+  
+
+  
+    class Links(object):
+        """Wrapper for the response's 'links' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def creditor(self):
+            return self.attributes.get('creditor')
+    
   
 
   
