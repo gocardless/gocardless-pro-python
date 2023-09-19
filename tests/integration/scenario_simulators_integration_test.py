@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,21 +23,21 @@ def test_scenario_simulators_run():
     response = helpers.client.scenario_simulators.run(*fixture['url_params'])
     body = fixture['body']['scenario_simulators']
 
-    assert_is_instance(response, resources.ScenarioSimulator)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.id, body.get('id'))
+    assert isinstance(response, resources.ScenarioSimulator)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.id == body.get('id')
 
 def test_timeout_scenario_simulators_run_doesnt_retry():
     fixture = helpers.load_fixture('scenario_simulators')['run']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.scenario_simulators.run(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_scenario_simulators_run_doesnt_retry():
     fixture = helpers.load_fixture('scenario_simulators')['run']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.scenario_simulators.run(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   

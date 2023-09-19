@@ -1,5 +1,9 @@
 <!-- @format -->
 
+# 1.46.2
+
+- Remove nose in favour of pytest
+
 # 1.46.1
 
 - Fix throwing error on empty 204 responses

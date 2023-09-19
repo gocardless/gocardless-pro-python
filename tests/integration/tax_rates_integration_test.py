@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,55 +23,47 @@ def test_tax_rates_list():
     response = helpers.client.tax_rates.list(*fixture['url_params'])
     body = fixture['body']['tax_rates']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.TaxRate)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.TaxRate)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.end_date for r in response.records],
-                 [b.get('end_date') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.jurisdiction for r in response.records],
-                 [b.get('jurisdiction') for b in body])
-    assert_equal([r.percentage for r in response.records],
-                 [b.get('percentage') for b in body])
-    assert_equal([r.start_date for r in response.records],
-                 [b.get('start_date') for b in body])
-    assert_equal([r.type for r in response.records],
-                 [b.get('type') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.end_date for r in response.records] == [b.get('end_date') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.jurisdiction for r in response.records] == [b.get('jurisdiction') for b in body]
+    assert [r.percentage for r in response.records] == [b.get('percentage') for b in body]
+    assert [r.start_date for r in response.records] == [b.get('start_date') for b in body]
+    assert [r.type for r in response.records] == [b.get('type') for b in body]
 
 @responses.activate
 def test_timeout_tax_rates_list_retries():
     fixture = helpers.load_fixture('tax_rates')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.tax_rates.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['tax_rates']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.TaxRate)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.TaxRate)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_tax_rates_list_retries():
     fixture = helpers.load_fixture('tax_rates')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.tax_rates.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['tax_rates']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.TaxRate)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.TaxRate)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_tax_rates_all():
@@ -95,9 +80,9 @@ def test_tax_rates_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.tax_rates.all())
-    assert_equal(len(all_records), len(fixture['body']['tax_rates']) * 2)
+    assert len(all_records) == len(fixture['body']['tax_rates']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.TaxRate)
+      assert isinstance(record, resources.TaxRate)
     
   
 
@@ -108,35 +93,33 @@ def test_tax_rates_get():
     response = helpers.client.tax_rates.get(*fixture['url_params'])
     body = fixture['body']['tax_rates']
 
-    assert_is_instance(response, resources.TaxRate)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.end_date, body.get('end_date'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.jurisdiction, body.get('jurisdiction'))
-    assert_equal(response.percentage, body.get('percentage'))
-    assert_equal(response.start_date, body.get('start_date'))
-    assert_equal(response.type, body.get('type'))
+    assert isinstance(response, resources.TaxRate)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.end_date == body.get('end_date')
+    assert response.id == body.get('id')
+    assert response.jurisdiction == body.get('jurisdiction')
+    assert response.percentage == body.get('percentage')
+    assert response.start_date == body.get('start_date')
+    assert response.type == body.get('type')
 
 @responses.activate
 def test_timeout_tax_rates_get_retries():
     fixture = helpers.load_fixture('tax_rates')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.tax_rates.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['tax_rates']
 
-    assert_is_instance(response, resources.TaxRate)
+    assert isinstance(response, resources.TaxRate)
 
 def test_502_tax_rates_get_retries():
     fixture = helpers.load_fixture('tax_rates')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.tax_rates.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['tax_rates']
 
-    assert_is_instance(response, resources.TaxRate)
+    assert isinstance(response, resources.TaxRate)
   

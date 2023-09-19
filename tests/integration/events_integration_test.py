@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,57 +23,48 @@ def test_events_list():
     response = helpers.client.events.list(*fixture['url_params'])
     body = fixture['body']['events']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Event)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Event)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.action for r in response.records],
-                 [b.get('action') for b in body])
-    assert_equal([r.created_at for r in response.records],
-                 [b.get('created_at') for b in body])
-    assert_equal([r.customer_notifications for r in response.records],
-                 [b.get('customer_notifications') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.metadata for r in response.records],
-                 [b.get('metadata') for b in body])
-    assert_equal([r.resource_metadata for r in response.records],
-                 [b.get('resource_metadata') for b in body])
-    assert_equal([r.resource_type for r in response.records],
-                 [b.get('resource_type') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.action for r in response.records] == [b.get('action') for b in body]
+    assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.customer_notifications for r in response.records] == [b.get('customer_notifications') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
+    assert [r.resource_metadata for r in response.records] == [b.get('resource_metadata') for b in body]
+    assert [r.resource_type for r in response.records] == [b.get('resource_type') for b in body]
 
 @responses.activate
 def test_timeout_events_list_retries():
     fixture = helpers.load_fixture('events')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.events.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['events']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Event)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Event)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_events_list_retries():
     fixture = helpers.load_fixture('events')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.events.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['events']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Event)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Event)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_events_all():
@@ -97,9 +81,9 @@ def test_events_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.events.all())
-    assert_equal(len(all_records), len(fixture['body']['events']) * 2)
+    assert len(all_records) == len(fixture['body']['events']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.Event)
+      assert isinstance(record, resources.Event)
     
   
 
@@ -110,98 +94,65 @@ def test_events_get():
     response = helpers.client.events.get(*fixture['url_params'])
     body = fixture['body']['events']
 
-    assert_is_instance(response, resources.Event)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.action, body.get('action'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.customer_notifications, body.get('customer_notifications'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.resource_metadata, body.get('resource_metadata'))
-    assert_equal(response.resource_type, body.get('resource_type'))
-    assert_equal(response.details.bank_account_id,
-                 body.get('details')['bank_account_id'])
-    assert_equal(response.details.cause,
-                 body.get('details')['cause'])
-    assert_equal(response.details.currency,
-                 body.get('details')['currency'])
-    assert_equal(response.details.description,
-                 body.get('details')['description'])
-    assert_equal(response.details.not_retried_reason,
-                 body.get('details')['not_retried_reason'])
-    assert_equal(response.details.origin,
-                 body.get('details')['origin'])
-    assert_equal(response.details._property,
-                 body.get('details')['property'])
-    assert_equal(response.details.reason_code,
-                 body.get('details')['reason_code'])
-    assert_equal(response.details.scheme,
-                 body.get('details')['scheme'])
-    assert_equal(response.details.will_attempt_retry,
-                 body.get('details')['will_attempt_retry'])
-    assert_equal(response.links.bank_authorisation,
-                 body.get('links')['bank_authorisation'])
-    assert_equal(response.links.billing_request,
-                 body.get('links')['billing_request'])
-    assert_equal(response.links.billing_request_flow,
-                 body.get('links')['billing_request_flow'])
-    assert_equal(response.links.creditor,
-                 body.get('links')['creditor'])
-    assert_equal(response.links.customer,
-                 body.get('links')['customer'])
-    assert_equal(response.links.customer_bank_account,
-                 body.get('links')['customer_bank_account'])
-    assert_equal(response.links.instalment_schedule,
-                 body.get('links')['instalment_schedule'])
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
-    assert_equal(response.links.mandate_request_mandate,
-                 body.get('links')['mandate_request_mandate'])
-    assert_equal(response.links.new_customer_bank_account,
-                 body.get('links')['new_customer_bank_account'])
-    assert_equal(response.links.new_mandate,
-                 body.get('links')['new_mandate'])
-    assert_equal(response.links.organisation,
-                 body.get('links')['organisation'])
-    assert_equal(response.links.parent_event,
-                 body.get('links')['parent_event'])
-    assert_equal(response.links.payer_authorisation,
-                 body.get('links')['payer_authorisation'])
-    assert_equal(response.links.payment,
-                 body.get('links')['payment'])
-    assert_equal(response.links.payment_request_payment,
-                 body.get('links')['payment_request_payment'])
-    assert_equal(response.links.payout,
-                 body.get('links')['payout'])
-    assert_equal(response.links.previous_customer_bank_account,
-                 body.get('links')['previous_customer_bank_account'])
-    assert_equal(response.links.refund,
-                 body.get('links')['refund'])
-    assert_equal(response.links.scheme_identifier,
-                 body.get('links')['scheme_identifier'])
-    assert_equal(response.links.subscription,
-                 body.get('links')['subscription'])
+    assert isinstance(response, resources.Event)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.action == body.get('action')
+    assert response.created_at == body.get('created_at')
+    assert response.customer_notifications == body.get('customer_notifications')
+    assert response.id == body.get('id')
+    assert response.metadata == body.get('metadata')
+    assert response.resource_metadata == body.get('resource_metadata')
+    assert response.resource_type == body.get('resource_type')
+    assert response.details.bank_account_id == body.get('details')['bank_account_id']
+    assert response.details.cause == body.get('details')['cause']
+    assert response.details.currency == body.get('details')['currency']
+    assert response.details.description == body.get('details')['description']
+    assert response.details.not_retried_reason == body.get('details')['not_retried_reason']
+    assert response.details.origin == body.get('details')['origin']
+    assert response.details._property == body.get('details')['property']
+    assert response.details.reason_code == body.get('details')['reason_code']
+    assert response.details.scheme == body.get('details')['scheme']
+    assert response.details.will_attempt_retry == body.get('details')['will_attempt_retry']
+    assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
+    assert response.links.billing_request == body.get('links')['billing_request']
+    assert response.links.billing_request_flow == body.get('links')['billing_request_flow']
+    assert response.links.creditor == body.get('links')['creditor']
+    assert response.links.customer == body.get('links')['customer']
+    assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
+    assert response.links.instalment_schedule == body.get('links')['instalment_schedule']
+    assert response.links.mandate == body.get('links')['mandate']
+    assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
+    assert response.links.new_customer_bank_account == body.get('links')['new_customer_bank_account']
+    assert response.links.new_mandate == body.get('links')['new_mandate']
+    assert response.links.organisation == body.get('links')['organisation']
+    assert response.links.parent_event == body.get('links')['parent_event']
+    assert response.links.payer_authorisation == body.get('links')['payer_authorisation']
+    assert response.links.payment == body.get('links')['payment']
+    assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
+    assert response.links.payout == body.get('links')['payout']
+    assert response.links.previous_customer_bank_account == body.get('links')['previous_customer_bank_account']
+    assert response.links.refund == body.get('links')['refund']
+    assert response.links.scheme_identifier == body.get('links')['scheme_identifier']
+    assert response.links.subscription == body.get('links')['subscription']
 
 @responses.activate
 def test_timeout_events_get_retries():
     fixture = helpers.load_fixture('events')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.events.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['events']
 
-    assert_is_instance(response, resources.Event)
+    assert isinstance(response, resources.Event)
 
 def test_502_events_get_retries():
     fixture = helpers.load_fixture('events')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.events.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['events']
 
-    assert_is_instance(response, resources.Event)
+    assert isinstance(response, resources.Event)
   

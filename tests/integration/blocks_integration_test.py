@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,16 +23,16 @@ def test_blocks_create():
     response = helpers.client.blocks.create(*fixture['url_params'])
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, resources.Block)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.active, body.get('active'))
-    assert_equal(response.block_type, body.get('block_type'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.reason_description, body.get('reason_description'))
-    assert_equal(response.reason_type, body.get('reason_type'))
-    assert_equal(response.resource_reference, body.get('resource_reference'))
-    assert_equal(response.updated_at, body.get('updated_at'))
+    assert isinstance(response, resources.Block)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.active == body.get('active')
+    assert response.block_type == body.get('block_type')
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.reason_description == body.get('reason_description')
+    assert response.reason_type == body.get('reason_type')
+    assert response.resource_reference == body.get('resource_reference')
+    assert response.updated_at == body.get('updated_at')
 
 @responses.activate
 def test_blocks_create_new_idempotency_key_for_each_call():
@@ -47,40 +40,37 @@ def test_blocks_create_new_idempotency_key_for_each_call():
     helpers.stub_response(fixture)
     helpers.client.blocks.create(*fixture['url_params'])
     helpers.client.blocks.create(*fixture['url_params'])
-    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
-                     responses.calls[1].request.headers.get('Idempotency-Key'))
+    assert responses.calls[0].request.headers.get('Idempotency-Key') != responses.calls[1].request.headers.get('Idempotency-Key')
 
 def test_timeout_blocks_create_idempotency_conflict():
     create_fixture = helpers.load_fixture('blocks')['create']
     get_fixture = helpers.load_fixture('blocks')['get']
     with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
       response = helpers.client.blocks.create(*create_fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
+      assert len(rsps.calls) == 2
 
-    assert_is_instance(response, resources.Block)
+    assert isinstance(response, resources.Block)
 
 @responses.activate
 def test_timeout_blocks_create_retries():
     fixture = helpers.load_fixture('blocks')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.blocks.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, resources.Block)
+    assert isinstance(response, resources.Block)
 
 def test_502_blocks_create_retries():
     fixture = helpers.load_fixture('blocks')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.blocks.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, resources.Block)
+    assert isinstance(response, resources.Block)
   
 
 @responses.activate
@@ -90,39 +80,37 @@ def test_blocks_get():
     response = helpers.client.blocks.get(*fixture['url_params'])
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, resources.Block)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.active, body.get('active'))
-    assert_equal(response.block_type, body.get('block_type'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.reason_description, body.get('reason_description'))
-    assert_equal(response.reason_type, body.get('reason_type'))
-    assert_equal(response.resource_reference, body.get('resource_reference'))
-    assert_equal(response.updated_at, body.get('updated_at'))
+    assert isinstance(response, resources.Block)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.active == body.get('active')
+    assert response.block_type == body.get('block_type')
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.reason_description == body.get('reason_description')
+    assert response.reason_type == body.get('reason_type')
+    assert response.resource_reference == body.get('resource_reference')
+    assert response.updated_at == body.get('updated_at')
 
 @responses.activate
 def test_timeout_blocks_get_retries():
     fixture = helpers.load_fixture('blocks')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.blocks.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, resources.Block)
+    assert isinstance(response, resources.Block)
 
 def test_502_blocks_get_retries():
     fixture = helpers.load_fixture('blocks')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.blocks.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, resources.Block)
+    assert isinstance(response, resources.Block)
   
 
 @responses.activate
@@ -132,59 +120,49 @@ def test_blocks_list():
     response = helpers.client.blocks.list(*fixture['url_params'])
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Block)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Block)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.active for r in response.records],
-                 [b.get('active') for b in body])
-    assert_equal([r.block_type for r in response.records],
-                 [b.get('block_type') for b in body])
-    assert_equal([r.created_at for r in response.records],
-                 [b.get('created_at') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.reason_description for r in response.records],
-                 [b.get('reason_description') for b in body])
-    assert_equal([r.reason_type for r in response.records],
-                 [b.get('reason_type') for b in body])
-    assert_equal([r.resource_reference for r in response.records],
-                 [b.get('resource_reference') for b in body])
-    assert_equal([r.updated_at for r in response.records],
-                 [b.get('updated_at') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.active for r in response.records] == [b.get('active') for b in body]
+    assert [r.block_type for r in response.records] == [b.get('block_type') for b in body]
+    assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.reason_description for r in response.records] == [b.get('reason_description') for b in body]
+    assert [r.reason_type for r in response.records] == [b.get('reason_type') for b in body]
+    assert [r.resource_reference for r in response.records] == [b.get('resource_reference') for b in body]
+    assert [r.updated_at for r in response.records] == [b.get('updated_at') for b in body]
 
 @responses.activate
 def test_timeout_blocks_list_retries():
     fixture = helpers.load_fixture('blocks')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.blocks.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Block)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Block)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_blocks_list_retries():
     fixture = helpers.load_fixture('blocks')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.blocks.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Block)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Block)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_blocks_all():
@@ -201,9 +179,9 @@ def test_blocks_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.blocks.all())
-    assert_equal(len(all_records), len(fixture['body']['blocks']) * 2)
+    assert len(all_records) == len(fixture['body']['blocks']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.Block)
+      assert isinstance(record, resources.Block)
     
   
 
@@ -214,30 +192,30 @@ def test_blocks_disable():
     response = helpers.client.blocks.disable(*fixture['url_params'])
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, resources.Block)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.active, body.get('active'))
-    assert_equal(response.block_type, body.get('block_type'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.reason_description, body.get('reason_description'))
-    assert_equal(response.reason_type, body.get('reason_type'))
-    assert_equal(response.resource_reference, body.get('resource_reference'))
-    assert_equal(response.updated_at, body.get('updated_at'))
+    assert isinstance(response, resources.Block)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.active == body.get('active')
+    assert response.block_type == body.get('block_type')
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.reason_description == body.get('reason_description')
+    assert response.reason_type == body.get('reason_type')
+    assert response.resource_reference == body.get('resource_reference')
+    assert response.updated_at == body.get('updated_at')
 
 def test_timeout_blocks_disable_doesnt_retry():
     fixture = helpers.load_fixture('blocks')['disable']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.blocks.disable(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_blocks_disable_doesnt_retry():
     fixture = helpers.load_fixture('blocks')['disable']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.blocks.disable(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   
 
 @responses.activate
@@ -247,30 +225,30 @@ def test_blocks_enable():
     response = helpers.client.blocks.enable(*fixture['url_params'])
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, resources.Block)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.active, body.get('active'))
-    assert_equal(response.block_type, body.get('block_type'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.reason_description, body.get('reason_description'))
-    assert_equal(response.reason_type, body.get('reason_type'))
-    assert_equal(response.resource_reference, body.get('resource_reference'))
-    assert_equal(response.updated_at, body.get('updated_at'))
+    assert isinstance(response, resources.Block)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.active == body.get('active')
+    assert response.block_type == body.get('block_type')
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.reason_description == body.get('reason_description')
+    assert response.reason_type == body.get('reason_type')
+    assert response.resource_reference == body.get('resource_reference')
+    assert response.updated_at == body.get('updated_at')
 
 def test_timeout_blocks_enable_doesnt_retry():
     fixture = helpers.load_fixture('blocks')['enable']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.blocks.enable(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_blocks_enable_doesnt_retry():
     fixture = helpers.load_fixture('blocks')['enable']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.blocks.enable(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   
 
 @responses.activate
@@ -280,40 +258,32 @@ def test_blocks_block_by_ref():
     response = helpers.client.blocks.block_by_ref(*fixture['url_params'])
     body = fixture['body']['blocks']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Block)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Block)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.active for r in response.records],
-                 [b.get('active') for b in body])
-    assert_equal([r.block_type for r in response.records],
-                 [b.get('block_type') for b in body])
-    assert_equal([r.created_at for r in response.records],
-                 [b.get('created_at') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.reason_description for r in response.records],
-                 [b.get('reason_description') for b in body])
-    assert_equal([r.reason_type for r in response.records],
-                 [b.get('reason_type') for b in body])
-    assert_equal([r.resource_reference for r in response.records],
-                 [b.get('resource_reference') for b in body])
-    assert_equal([r.updated_at for r in response.records],
-                 [b.get('updated_at') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert [r.active for r in response.records] == [b.get('active') for b in body]
+    assert [r.block_type for r in response.records] == [b.get('block_type') for b in body]
+    assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.reason_description for r in response.records] == [b.get('reason_description') for b in body]
+    assert [r.reason_type for r in response.records] == [b.get('reason_type') for b in body]
+    assert [r.resource_reference for r in response.records] == [b.get('resource_reference') for b in body]
+    assert [r.updated_at for r in response.records] == [b.get('updated_at') for b in body]
 
 def test_timeout_blocks_block_by_ref_doesnt_retry():
     fixture = helpers.load_fixture('blocks')['block_by_ref']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.blocks.block_by_ref(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_blocks_block_by_ref_doesnt_retry():
     fixture = helpers.load_fixture('blocks')['block_by_ref']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.blocks.block_by_ref(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   
