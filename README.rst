@@ -642,7 +642,7 @@ First, install the development dependencies:
 
     $ pip install -r requirements-dev.txt
 
-To run the test suite against the current Python version, run ``nosetests``.
+To run the test suite against the current Python version, run ``pytest``.
 
 To run the test suite against multiple Python versions, run ``tox``.
 

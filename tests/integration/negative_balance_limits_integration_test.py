@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,51 +23,45 @@ def test_negative_balance_limits_list():
     response = helpers.client.negative_balance_limits.list(*fixture['url_params'])
     body = fixture['body']['negative_balance_limits']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.NegativeBalanceLimit)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.NegativeBalanceLimit)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.balance_limit for r in response.records],
-                 [b.get('balance_limit') for b in body])
-    assert_equal([r.created_at for r in response.records],
-                 [b.get('created_at') for b in body])
-    assert_equal([r.currency for r in response.records],
-                 [b.get('currency') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.balance_limit for r in response.records] == [b.get('balance_limit') for b in body]
+    assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.currency for r in response.records] == [b.get('currency') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
 
 @responses.activate
 def test_timeout_negative_balance_limits_list_retries():
     fixture = helpers.load_fixture('negative_balance_limits')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.negative_balance_limits.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['negative_balance_limits']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.NegativeBalanceLimit)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.NegativeBalanceLimit)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_negative_balance_limits_list_retries():
     fixture = helpers.load_fixture('negative_balance_limits')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.negative_balance_limits.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['negative_balance_limits']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.NegativeBalanceLimit)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.NegativeBalanceLimit)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_negative_balance_limits_all():
@@ -91,9 +78,9 @@ def test_negative_balance_limits_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.negative_balance_limits.all())
-    assert_equal(len(all_records), len(fixture['body']['negative_balance_limits']) * 2)
+    assert len(all_records) == len(fixture['body']['negative_balance_limits']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.NegativeBalanceLimit)
+      assert isinstance(record, resources.NegativeBalanceLimit)
     
   
 
@@ -104,37 +91,33 @@ def test_negative_balance_limits_create():
     response = helpers.client.negative_balance_limits.create(*fixture['url_params'])
     body = fixture['body']['negative_balance_limits']
 
-    assert_is_instance(response, resources.NegativeBalanceLimit)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.balance_limit, body.get('balance_limit'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.currency, body.get('currency'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.links.creator_user,
-                 body.get('links')['creator_user'])
-    assert_equal(response.links.creditor,
-                 body.get('links')['creditor'])
+    assert isinstance(response, resources.NegativeBalanceLimit)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.balance_limit == body.get('balance_limit')
+    assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
+    assert response.id == body.get('id')
+    assert response.links.creator_user == body.get('links')['creator_user']
+    assert response.links.creditor == body.get('links')['creditor']
 
 @responses.activate
 def test_timeout_negative_balance_limits_create_retries():
     fixture = helpers.load_fixture('negative_balance_limits')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.negative_balance_limits.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['negative_balance_limits']
 
-    assert_is_instance(response, resources.NegativeBalanceLimit)
+    assert isinstance(response, resources.NegativeBalanceLimit)
 
 def test_502_negative_balance_limits_create_retries():
     fixture = helpers.load_fixture('negative_balance_limits')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.negative_balance_limits.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['negative_balance_limits']
 
-    assert_is_instance(response, resources.NegativeBalanceLimit)
+    assert isinstance(response, resources.NegativeBalanceLimit)
   

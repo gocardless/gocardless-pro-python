@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,77 +23,58 @@ def test_billing_request_templates_list():
     response = helpers.client.billing_request_templates.list(*fixture['url_params'])
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.BillingRequestTemplate)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.BillingRequestTemplate)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.authorisation_url for r in response.records],
-                 [b.get('authorisation_url') for b in body])
-    assert_equal([r.created_at for r in response.records],
-                 [b.get('created_at') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.mandate_request_currency for r in response.records],
-                 [b.get('mandate_request_currency') for b in body])
-    assert_equal([r.mandate_request_description for r in response.records],
-                 [b.get('mandate_request_description') for b in body])
-    assert_equal([r.mandate_request_metadata for r in response.records],
-                 [b.get('mandate_request_metadata') for b in body])
-    assert_equal([r.mandate_request_scheme for r in response.records],
-                 [b.get('mandate_request_scheme') for b in body])
-    assert_equal([r.mandate_request_verify for r in response.records],
-                 [b.get('mandate_request_verify') for b in body])
-    assert_equal([r.metadata for r in response.records],
-                 [b.get('metadata') for b in body])
-    assert_equal([r.name for r in response.records],
-                 [b.get('name') for b in body])
-    assert_equal([r.payment_request_amount for r in response.records],
-                 [b.get('payment_request_amount') for b in body])
-    assert_equal([r.payment_request_currency for r in response.records],
-                 [b.get('payment_request_currency') for b in body])
-    assert_equal([r.payment_request_description for r in response.records],
-                 [b.get('payment_request_description') for b in body])
-    assert_equal([r.payment_request_metadata for r in response.records],
-                 [b.get('payment_request_metadata') for b in body])
-    assert_equal([r.payment_request_scheme for r in response.records],
-                 [b.get('payment_request_scheme') for b in body])
-    assert_equal([r.redirect_uri for r in response.records],
-                 [b.get('redirect_uri') for b in body])
-    assert_equal([r.updated_at for r in response.records],
-                 [b.get('updated_at') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.authorisation_url for r in response.records] == [b.get('authorisation_url') for b in body]
+    assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.mandate_request_currency for r in response.records] == [b.get('mandate_request_currency') for b in body]
+    assert [r.mandate_request_description for r in response.records] == [b.get('mandate_request_description') for b in body]
+    assert [r.mandate_request_metadata for r in response.records] == [b.get('mandate_request_metadata') for b in body]
+    assert [r.mandate_request_scheme for r in response.records] == [b.get('mandate_request_scheme') for b in body]
+    assert [r.mandate_request_verify for r in response.records] == [b.get('mandate_request_verify') for b in body]
+    assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
+    assert [r.name for r in response.records] == [b.get('name') for b in body]
+    assert [r.payment_request_amount for r in response.records] == [b.get('payment_request_amount') for b in body]
+    assert [r.payment_request_currency for r in response.records] == [b.get('payment_request_currency') for b in body]
+    assert [r.payment_request_description for r in response.records] == [b.get('payment_request_description') for b in body]
+    assert [r.payment_request_metadata for r in response.records] == [b.get('payment_request_metadata') for b in body]
+    assert [r.payment_request_scheme for r in response.records] == [b.get('payment_request_scheme') for b in body]
+    assert [r.redirect_uri for r in response.records] == [b.get('redirect_uri') for b in body]
+    assert [r.updated_at for r in response.records] == [b.get('updated_at') for b in body]
 
 @responses.activate
 def test_timeout_billing_request_templates_list_retries():
     fixture = helpers.load_fixture('billing_request_templates')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.billing_request_templates.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.BillingRequestTemplate)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.BillingRequestTemplate)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_billing_request_templates_list_retries():
     fixture = helpers.load_fixture('billing_request_templates')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.billing_request_templates.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.BillingRequestTemplate)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.BillingRequestTemplate)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_billing_request_templates_all():
@@ -117,9 +91,9 @@ def test_billing_request_templates_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.billing_request_templates.all())
-    assert_equal(len(all_records), len(fixture['body']['billing_request_templates']) * 2)
+    assert len(all_records) == len(fixture['body']['billing_request_templates']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.BillingRequestTemplate)
+      assert isinstance(record, resources.BillingRequestTemplate)
     
   
 
@@ -130,48 +104,46 @@ def test_billing_request_templates_get():
     response = helpers.client.billing_request_templates.get(*fixture['url_params'])
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.authorisation_url, body.get('authorisation_url'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.mandate_request_currency, body.get('mandate_request_currency'))
-    assert_equal(response.mandate_request_description, body.get('mandate_request_description'))
-    assert_equal(response.mandate_request_metadata, body.get('mandate_request_metadata'))
-    assert_equal(response.mandate_request_scheme, body.get('mandate_request_scheme'))
-    assert_equal(response.mandate_request_verify, body.get('mandate_request_verify'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_request_amount, body.get('payment_request_amount'))
-    assert_equal(response.payment_request_currency, body.get('payment_request_currency'))
-    assert_equal(response.payment_request_description, body.get('payment_request_description'))
-    assert_equal(response.payment_request_metadata, body.get('payment_request_metadata'))
-    assert_equal(response.payment_request_scheme, body.get('payment_request_scheme'))
-    assert_equal(response.redirect_uri, body.get('redirect_uri'))
-    assert_equal(response.updated_at, body.get('updated_at'))
+    assert isinstance(response, resources.BillingRequestTemplate)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.authorisation_url == body.get('authorisation_url')
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.mandate_request_currency == body.get('mandate_request_currency')
+    assert response.mandate_request_description == body.get('mandate_request_description')
+    assert response.mandate_request_metadata == body.get('mandate_request_metadata')
+    assert response.mandate_request_scheme == body.get('mandate_request_scheme')
+    assert response.mandate_request_verify == body.get('mandate_request_verify')
+    assert response.metadata == body.get('metadata')
+    assert response.name == body.get('name')
+    assert response.payment_request_amount == body.get('payment_request_amount')
+    assert response.payment_request_currency == body.get('payment_request_currency')
+    assert response.payment_request_description == body.get('payment_request_description')
+    assert response.payment_request_metadata == body.get('payment_request_metadata')
+    assert response.payment_request_scheme == body.get('payment_request_scheme')
+    assert response.redirect_uri == body.get('redirect_uri')
+    assert response.updated_at == body.get('updated_at')
 
 @responses.activate
 def test_timeout_billing_request_templates_get_retries():
     fixture = helpers.load_fixture('billing_request_templates')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.billing_request_templates.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
+    assert isinstance(response, resources.BillingRequestTemplate)
 
 def test_502_billing_request_templates_get_retries():
     fixture = helpers.load_fixture('billing_request_templates')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.billing_request_templates.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
+    assert isinstance(response, resources.BillingRequestTemplate)
   
 
 @responses.activate
@@ -181,25 +153,25 @@ def test_billing_request_templates_create():
     response = helpers.client.billing_request_templates.create(*fixture['url_params'])
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.authorisation_url, body.get('authorisation_url'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.mandate_request_currency, body.get('mandate_request_currency'))
-    assert_equal(response.mandate_request_description, body.get('mandate_request_description'))
-    assert_equal(response.mandate_request_metadata, body.get('mandate_request_metadata'))
-    assert_equal(response.mandate_request_scheme, body.get('mandate_request_scheme'))
-    assert_equal(response.mandate_request_verify, body.get('mandate_request_verify'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_request_amount, body.get('payment_request_amount'))
-    assert_equal(response.payment_request_currency, body.get('payment_request_currency'))
-    assert_equal(response.payment_request_description, body.get('payment_request_description'))
-    assert_equal(response.payment_request_metadata, body.get('payment_request_metadata'))
-    assert_equal(response.payment_request_scheme, body.get('payment_request_scheme'))
-    assert_equal(response.redirect_uri, body.get('redirect_uri'))
-    assert_equal(response.updated_at, body.get('updated_at'))
+    assert isinstance(response, resources.BillingRequestTemplate)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.authorisation_url == body.get('authorisation_url')
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.mandate_request_currency == body.get('mandate_request_currency')
+    assert response.mandate_request_description == body.get('mandate_request_description')
+    assert response.mandate_request_metadata == body.get('mandate_request_metadata')
+    assert response.mandate_request_scheme == body.get('mandate_request_scheme')
+    assert response.mandate_request_verify == body.get('mandate_request_verify')
+    assert response.metadata == body.get('metadata')
+    assert response.name == body.get('name')
+    assert response.payment_request_amount == body.get('payment_request_amount')
+    assert response.payment_request_currency == body.get('payment_request_currency')
+    assert response.payment_request_description == body.get('payment_request_description')
+    assert response.payment_request_metadata == body.get('payment_request_metadata')
+    assert response.payment_request_scheme == body.get('payment_request_scheme')
+    assert response.redirect_uri == body.get('redirect_uri')
+    assert response.updated_at == body.get('updated_at')
 
 @responses.activate
 def test_billing_request_templates_create_new_idempotency_key_for_each_call():
@@ -207,40 +179,37 @@ def test_billing_request_templates_create_new_idempotency_key_for_each_call():
     helpers.stub_response(fixture)
     helpers.client.billing_request_templates.create(*fixture['url_params'])
     helpers.client.billing_request_templates.create(*fixture['url_params'])
-    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
-                     responses.calls[1].request.headers.get('Idempotency-Key'))
+    assert responses.calls[0].request.headers.get('Idempotency-Key') != responses.calls[1].request.headers.get('Idempotency-Key')
 
 def test_timeout_billing_request_templates_create_idempotency_conflict():
     create_fixture = helpers.load_fixture('billing_request_templates')['create']
     get_fixture = helpers.load_fixture('billing_request_templates')['get']
     with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
       response = helpers.client.billing_request_templates.create(*create_fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
+      assert len(rsps.calls) == 2
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
+    assert isinstance(response, resources.BillingRequestTemplate)
 
 @responses.activate
 def test_timeout_billing_request_templates_create_retries():
     fixture = helpers.load_fixture('billing_request_templates')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.billing_request_templates.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
+    assert isinstance(response, resources.BillingRequestTemplate)
 
 def test_502_billing_request_templates_create_retries():
     fixture = helpers.load_fixture('billing_request_templates')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.billing_request_templates.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
+    assert isinstance(response, resources.BillingRequestTemplate)
   
 
 @responses.activate
@@ -250,46 +219,44 @@ def test_billing_request_templates_update():
     response = helpers.client.billing_request_templates.update(*fixture['url_params'])
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.authorisation_url, body.get('authorisation_url'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.mandate_request_currency, body.get('mandate_request_currency'))
-    assert_equal(response.mandate_request_description, body.get('mandate_request_description'))
-    assert_equal(response.mandate_request_metadata, body.get('mandate_request_metadata'))
-    assert_equal(response.mandate_request_scheme, body.get('mandate_request_scheme'))
-    assert_equal(response.mandate_request_verify, body.get('mandate_request_verify'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_request_amount, body.get('payment_request_amount'))
-    assert_equal(response.payment_request_currency, body.get('payment_request_currency'))
-    assert_equal(response.payment_request_description, body.get('payment_request_description'))
-    assert_equal(response.payment_request_metadata, body.get('payment_request_metadata'))
-    assert_equal(response.payment_request_scheme, body.get('payment_request_scheme'))
-    assert_equal(response.redirect_uri, body.get('redirect_uri'))
-    assert_equal(response.updated_at, body.get('updated_at'))
+    assert isinstance(response, resources.BillingRequestTemplate)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.authorisation_url == body.get('authorisation_url')
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.mandate_request_currency == body.get('mandate_request_currency')
+    assert response.mandate_request_description == body.get('mandate_request_description')
+    assert response.mandate_request_metadata == body.get('mandate_request_metadata')
+    assert response.mandate_request_scheme == body.get('mandate_request_scheme')
+    assert response.mandate_request_verify == body.get('mandate_request_verify')
+    assert response.metadata == body.get('metadata')
+    assert response.name == body.get('name')
+    assert response.payment_request_amount == body.get('payment_request_amount')
+    assert response.payment_request_currency == body.get('payment_request_currency')
+    assert response.payment_request_description == body.get('payment_request_description')
+    assert response.payment_request_metadata == body.get('payment_request_metadata')
+    assert response.payment_request_scheme == body.get('payment_request_scheme')
+    assert response.redirect_uri == body.get('redirect_uri')
+    assert response.updated_at == body.get('updated_at')
 
 @responses.activate
 def test_timeout_billing_request_templates_update_retries():
     fixture = helpers.load_fixture('billing_request_templates')['update']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.billing_request_templates.update(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
+    assert isinstance(response, resources.BillingRequestTemplate)
 
 def test_502_billing_request_templates_update_retries():
     fixture = helpers.load_fixture('billing_request_templates')['update']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.billing_request_templates.update(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['billing_request_templates']
 
-    assert_is_instance(response, resources.BillingRequestTemplate)
+    assert isinstance(response, resources.BillingRequestTemplate)
   

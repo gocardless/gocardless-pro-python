@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,55 +23,47 @@ def test_institutions_list():
     response = helpers.client.institutions.list(*fixture['url_params'])
     body = fixture['body']['institutions']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Institution)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Institution)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.autocompletes_collect_bank_account for r in response.records],
-                 [b.get('autocompletes_collect_bank_account') for b in body])
-    assert_equal([r.country_code for r in response.records],
-                 [b.get('country_code') for b in body])
-    assert_equal([r.icon_url for r in response.records],
-                 [b.get('icon_url') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.logo_url for r in response.records],
-                 [b.get('logo_url') for b in body])
-    assert_equal([r.name for r in response.records],
-                 [b.get('name') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.autocompletes_collect_bank_account for r in response.records] == [b.get('autocompletes_collect_bank_account') for b in body]
+    assert [r.country_code for r in response.records] == [b.get('country_code') for b in body]
+    assert [r.icon_url for r in response.records] == [b.get('icon_url') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.logo_url for r in response.records] == [b.get('logo_url') for b in body]
+    assert [r.name for r in response.records] == [b.get('name') for b in body]
 
 @responses.activate
 def test_timeout_institutions_list_retries():
     fixture = helpers.load_fixture('institutions')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.institutions.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['institutions']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Institution)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Institution)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_institutions_list_retries():
     fixture = helpers.load_fixture('institutions')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.institutions.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['institutions']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Institution)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Institution)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_institutions_all():
@@ -95,9 +80,9 @@ def test_institutions_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.institutions.all())
-    assert_equal(len(all_records), len(fixture['body']['institutions']) * 2)
+    assert len(all_records) == len(fixture['body']['institutions']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.Institution)
+      assert isinstance(record, resources.Institution)
     
   
 
@@ -108,36 +93,30 @@ def test_institutions_list_for_billing_request():
     response = helpers.client.institutions.list_for_billing_request(*fixture['url_params'])
     body = fixture['body']['institutions']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Institution)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Institution)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.autocompletes_collect_bank_account for r in response.records],
-                 [b.get('autocompletes_collect_bank_account') for b in body])
-    assert_equal([r.country_code for r in response.records],
-                 [b.get('country_code') for b in body])
-    assert_equal([r.icon_url for r in response.records],
-                 [b.get('icon_url') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.logo_url for r in response.records],
-                 [b.get('logo_url') for b in body])
-    assert_equal([r.name for r in response.records],
-                 [b.get('name') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.autocompletes_collect_bank_account for r in response.records] == [b.get('autocompletes_collect_bank_account') for b in body]
+    assert [r.country_code for r in response.records] == [b.get('country_code') for b in body]
+    assert [r.icon_url for r in response.records] == [b.get('icon_url') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.logo_url for r in response.records] == [b.get('logo_url') for b in body]
+    assert [r.name for r in response.records] == [b.get('name') for b in body]
 
 def test_timeout_institutions_list_for_billing_request_doesnt_retry():
     fixture = helpers.load_fixture('institutions')['list_for_billing_request']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.institutions.list_for_billing_request(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_institutions_list_for_billing_request_doesnt_retry():
     fixture = helpers.load_fixture('institutions')['list_for_billing_request']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.institutions.list_for_billing_request(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   

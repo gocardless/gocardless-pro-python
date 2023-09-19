@@ -8,10 +8,12 @@
     "errors": [
       {
         "message": "must be a number",
-        "field": "branch_code"
+        "field": "branch_code",
+        "request_pointer": "/customer_bank_accounts/branch_code"
       }, {
         "message": "is invalid",
-        "field": "country_code"
+        "field": "country_code",
+        "request_pointer": "/customer_bank_accounts/country_code"
       }
     ]
   }

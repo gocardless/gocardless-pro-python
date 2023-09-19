@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,69 +23,54 @@ def test_webhooks_list():
     response = helpers.client.webhooks.list(*fixture['url_params'])
     body = fixture['body']['webhooks']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Webhook)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Webhook)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.created_at for r in response.records],
-                 [b.get('created_at') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.is_test for r in response.records],
-                 [b.get('is_test') for b in body])
-    assert_equal([r.request_body for r in response.records],
-                 [b.get('request_body') for b in body])
-    assert_equal([r.request_headers for r in response.records],
-                 [b.get('request_headers') for b in body])
-    assert_equal([r.response_body for r in response.records],
-                 [b.get('response_body') for b in body])
-    assert_equal([r.response_body_truncated for r in response.records],
-                 [b.get('response_body_truncated') for b in body])
-    assert_equal([r.response_code for r in response.records],
-                 [b.get('response_code') for b in body])
-    assert_equal([r.response_headers for r in response.records],
-                 [b.get('response_headers') for b in body])
-    assert_equal([r.response_headers_content_truncated for r in response.records],
-                 [b.get('response_headers_content_truncated') for b in body])
-    assert_equal([r.response_headers_count_truncated for r in response.records],
-                 [b.get('response_headers_count_truncated') for b in body])
-    assert_equal([r.successful for r in response.records],
-                 [b.get('successful') for b in body])
-    assert_equal([r.url for r in response.records],
-                 [b.get('url') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.is_test for r in response.records] == [b.get('is_test') for b in body]
+    assert [r.request_body for r in response.records] == [b.get('request_body') for b in body]
+    assert [r.request_headers for r in response.records] == [b.get('request_headers') for b in body]
+    assert [r.response_body for r in response.records] == [b.get('response_body') for b in body]
+    assert [r.response_body_truncated for r in response.records] == [b.get('response_body_truncated') for b in body]
+    assert [r.response_code for r in response.records] == [b.get('response_code') for b in body]
+    assert [r.response_headers for r in response.records] == [b.get('response_headers') for b in body]
+    assert [r.response_headers_content_truncated for r in response.records] == [b.get('response_headers_content_truncated') for b in body]
+    assert [r.response_headers_count_truncated for r in response.records] == [b.get('response_headers_count_truncated') for b in body]
+    assert [r.successful for r in response.records] == [b.get('successful') for b in body]
+    assert [r.url for r in response.records] == [b.get('url') for b in body]
 
 @responses.activate
 def test_timeout_webhooks_list_retries():
     fixture = helpers.load_fixture('webhooks')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.webhooks.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['webhooks']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Webhook)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Webhook)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_webhooks_list_retries():
     fixture = helpers.load_fixture('webhooks')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.webhooks.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['webhooks']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Webhook)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Webhook)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_webhooks_all():
@@ -109,9 +87,9 @@ def test_webhooks_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.webhooks.all())
-    assert_equal(len(all_records), len(fixture['body']['webhooks']) * 2)
+    assert len(all_records) == len(fixture['body']['webhooks']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.Webhook)
+      assert isinstance(record, resources.Webhook)
     
   
 
@@ -122,44 +100,42 @@ def test_webhooks_get():
     response = helpers.client.webhooks.get(*fixture['url_params'])
     body = fixture['body']['webhooks']
 
-    assert_is_instance(response, resources.Webhook)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.is_test, body.get('is_test'))
-    assert_equal(response.request_body, body.get('request_body'))
-    assert_equal(response.request_headers, body.get('request_headers'))
-    assert_equal(response.response_body, body.get('response_body'))
-    assert_equal(response.response_body_truncated, body.get('response_body_truncated'))
-    assert_equal(response.response_code, body.get('response_code'))
-    assert_equal(response.response_headers, body.get('response_headers'))
-    assert_equal(response.response_headers_content_truncated, body.get('response_headers_content_truncated'))
-    assert_equal(response.response_headers_count_truncated, body.get('response_headers_count_truncated'))
-    assert_equal(response.successful, body.get('successful'))
-    assert_equal(response.url, body.get('url'))
+    assert isinstance(response, resources.Webhook)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.is_test == body.get('is_test')
+    assert response.request_body == body.get('request_body')
+    assert response.request_headers == body.get('request_headers')
+    assert response.response_body == body.get('response_body')
+    assert response.response_body_truncated == body.get('response_body_truncated')
+    assert response.response_code == body.get('response_code')
+    assert response.response_headers == body.get('response_headers')
+    assert response.response_headers_content_truncated == body.get('response_headers_content_truncated')
+    assert response.response_headers_count_truncated == body.get('response_headers_count_truncated')
+    assert response.successful == body.get('successful')
+    assert response.url == body.get('url')
 
 @responses.activate
 def test_timeout_webhooks_get_retries():
     fixture = helpers.load_fixture('webhooks')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.webhooks.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['webhooks']
 
-    assert_is_instance(response, resources.Webhook)
+    assert isinstance(response, resources.Webhook)
 
 def test_502_webhooks_get_retries():
     fixture = helpers.load_fixture('webhooks')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.webhooks.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['webhooks']
 
-    assert_is_instance(response, resources.Webhook)
+    assert isinstance(response, resources.Webhook)
   
 
 @responses.activate
@@ -169,33 +145,33 @@ def test_webhooks_retry():
     response = helpers.client.webhooks.retry(*fixture['url_params'])
     body = fixture['body']['webhooks']
 
-    assert_is_instance(response, resources.Webhook)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.is_test, body.get('is_test'))
-    assert_equal(response.request_body, body.get('request_body'))
-    assert_equal(response.request_headers, body.get('request_headers'))
-    assert_equal(response.response_body, body.get('response_body'))
-    assert_equal(response.response_body_truncated, body.get('response_body_truncated'))
-    assert_equal(response.response_code, body.get('response_code'))
-    assert_equal(response.response_headers, body.get('response_headers'))
-    assert_equal(response.response_headers_content_truncated, body.get('response_headers_content_truncated'))
-    assert_equal(response.response_headers_count_truncated, body.get('response_headers_count_truncated'))
-    assert_equal(response.successful, body.get('successful'))
-    assert_equal(response.url, body.get('url'))
+    assert isinstance(response, resources.Webhook)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.created_at == body.get('created_at')
+    assert response.id == body.get('id')
+    assert response.is_test == body.get('is_test')
+    assert response.request_body == body.get('request_body')
+    assert response.request_headers == body.get('request_headers')
+    assert response.response_body == body.get('response_body')
+    assert response.response_body_truncated == body.get('response_body_truncated')
+    assert response.response_code == body.get('response_code')
+    assert response.response_headers == body.get('response_headers')
+    assert response.response_headers_content_truncated == body.get('response_headers_content_truncated')
+    assert response.response_headers_count_truncated == body.get('response_headers_count_truncated')
+    assert response.successful == body.get('successful')
+    assert response.url == body.get('url')
 
 def test_timeout_webhooks_retry_doesnt_retry():
     fixture = helpers.load_fixture('webhooks')['retry']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.webhooks.retry(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_webhooks_retry_doesnt_retry():
     fixture = helpers.load_fixture('webhooks')['retry']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.webhooks.retry(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   

@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,28 +23,23 @@ def test_redirect_flows_create():
     response = helpers.client.redirect_flows.create(*fixture['url_params'])
     body = fixture['body']['redirect_flows']
 
-    assert_is_instance(response, resources.RedirectFlow)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.confirmation_url, body.get('confirmation_url'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.description, body.get('description'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.mandate_reference, body.get('mandate_reference'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.redirect_url, body.get('redirect_url'))
-    assert_equal(response.scheme, body.get('scheme'))
-    assert_equal(response.session_token, body.get('session_token'))
-    assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
-    assert_equal(response.links.billing_request,
-                 body.get('links')['billing_request'])
-    assert_equal(response.links.creditor,
-                 body.get('links')['creditor'])
-    assert_equal(response.links.customer,
-                 body.get('links')['customer'])
-    assert_equal(response.links.customer_bank_account,
-                 body.get('links')['customer_bank_account'])
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.RedirectFlow)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.confirmation_url == body.get('confirmation_url')
+    assert response.created_at == body.get('created_at')
+    assert response.description == body.get('description')
+    assert response.id == body.get('id')
+    assert response.mandate_reference == body.get('mandate_reference')
+    assert response.metadata == body.get('metadata')
+    assert response.redirect_url == body.get('redirect_url')
+    assert response.scheme == body.get('scheme')
+    assert response.session_token == body.get('session_token')
+    assert response.success_redirect_url == body.get('success_redirect_url')
+    assert response.links.billing_request == body.get('links')['billing_request']
+    assert response.links.creditor == body.get('links')['creditor']
+    assert response.links.customer == body.get('links')['customer']
+    assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
+    assert response.links.mandate == body.get('links')['mandate']
 
 @responses.activate
 def test_redirect_flows_create_new_idempotency_key_for_each_call():
@@ -59,40 +47,37 @@ def test_redirect_flows_create_new_idempotency_key_for_each_call():
     helpers.stub_response(fixture)
     helpers.client.redirect_flows.create(*fixture['url_params'])
     helpers.client.redirect_flows.create(*fixture['url_params'])
-    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
-                     responses.calls[1].request.headers.get('Idempotency-Key'))
+    assert responses.calls[0].request.headers.get('Idempotency-Key') != responses.calls[1].request.headers.get('Idempotency-Key')
 
 def test_timeout_redirect_flows_create_idempotency_conflict():
     create_fixture = helpers.load_fixture('redirect_flows')['create']
     get_fixture = helpers.load_fixture('redirect_flows')['get']
     with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
       response = helpers.client.redirect_flows.create(*create_fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
+      assert len(rsps.calls) == 2
 
-    assert_is_instance(response, resources.RedirectFlow)
+    assert isinstance(response, resources.RedirectFlow)
 
 @responses.activate
 def test_timeout_redirect_flows_create_retries():
     fixture = helpers.load_fixture('redirect_flows')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.redirect_flows.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['redirect_flows']
 
-    assert_is_instance(response, resources.RedirectFlow)
+    assert isinstance(response, resources.RedirectFlow)
 
 def test_502_redirect_flows_create_retries():
     fixture = helpers.load_fixture('redirect_flows')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.redirect_flows.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['redirect_flows']
 
-    assert_is_instance(response, resources.RedirectFlow)
+    assert isinstance(response, resources.RedirectFlow)
   
 
 @responses.activate
@@ -102,51 +87,44 @@ def test_redirect_flows_get():
     response = helpers.client.redirect_flows.get(*fixture['url_params'])
     body = fixture['body']['redirect_flows']
 
-    assert_is_instance(response, resources.RedirectFlow)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.confirmation_url, body.get('confirmation_url'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.description, body.get('description'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.mandate_reference, body.get('mandate_reference'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.redirect_url, body.get('redirect_url'))
-    assert_equal(response.scheme, body.get('scheme'))
-    assert_equal(response.session_token, body.get('session_token'))
-    assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
-    assert_equal(response.links.billing_request,
-                 body.get('links')['billing_request'])
-    assert_equal(response.links.creditor,
-                 body.get('links')['creditor'])
-    assert_equal(response.links.customer,
-                 body.get('links')['customer'])
-    assert_equal(response.links.customer_bank_account,
-                 body.get('links')['customer_bank_account'])
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.RedirectFlow)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.confirmation_url == body.get('confirmation_url')
+    assert response.created_at == body.get('created_at')
+    assert response.description == body.get('description')
+    assert response.id == body.get('id')
+    assert response.mandate_reference == body.get('mandate_reference')
+    assert response.metadata == body.get('metadata')
+    assert response.redirect_url == body.get('redirect_url')
+    assert response.scheme == body.get('scheme')
+    assert response.session_token == body.get('session_token')
+    assert response.success_redirect_url == body.get('success_redirect_url')
+    assert response.links.billing_request == body.get('links')['billing_request']
+    assert response.links.creditor == body.get('links')['creditor']
+    assert response.links.customer == body.get('links')['customer']
+    assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
+    assert response.links.mandate == body.get('links')['mandate']
 
 @responses.activate
 def test_timeout_redirect_flows_get_retries():
     fixture = helpers.load_fixture('redirect_flows')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.redirect_flows.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['redirect_flows']
 
-    assert_is_instance(response, resources.RedirectFlow)
+    assert isinstance(response, resources.RedirectFlow)
 
 def test_502_redirect_flows_get_retries():
     fixture = helpers.load_fixture('redirect_flows')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.redirect_flows.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['redirect_flows']
 
-    assert_is_instance(response, resources.RedirectFlow)
+    assert isinstance(response, resources.RedirectFlow)
   
 
 @responses.activate
@@ -156,40 +134,35 @@ def test_redirect_flows_complete():
     response = helpers.client.redirect_flows.complete(*fixture['url_params'])
     body = fixture['body']['redirect_flows']
 
-    assert_is_instance(response, resources.RedirectFlow)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.confirmation_url, body.get('confirmation_url'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.description, body.get('description'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.mandate_reference, body.get('mandate_reference'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.redirect_url, body.get('redirect_url'))
-    assert_equal(response.scheme, body.get('scheme'))
-    assert_equal(response.session_token, body.get('session_token'))
-    assert_equal(response.success_redirect_url, body.get('success_redirect_url'))
-    assert_equal(response.links.billing_request,
-                 body.get('links')['billing_request'])
-    assert_equal(response.links.creditor,
-                 body.get('links')['creditor'])
-    assert_equal(response.links.customer,
-                 body.get('links')['customer'])
-    assert_equal(response.links.customer_bank_account,
-                 body.get('links')['customer_bank_account'])
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.RedirectFlow)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.confirmation_url == body.get('confirmation_url')
+    assert response.created_at == body.get('created_at')
+    assert response.description == body.get('description')
+    assert response.id == body.get('id')
+    assert response.mandate_reference == body.get('mandate_reference')
+    assert response.metadata == body.get('metadata')
+    assert response.redirect_url == body.get('redirect_url')
+    assert response.scheme == body.get('scheme')
+    assert response.session_token == body.get('session_token')
+    assert response.success_redirect_url == body.get('success_redirect_url')
+    assert response.links.billing_request == body.get('links')['billing_request']
+    assert response.links.creditor == body.get('links')['creditor']
+    assert response.links.customer == body.get('links')['customer']
+    assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
+    assert response.links.mandate == body.get('links')['mandate']
 
 def test_timeout_redirect_flows_complete_doesnt_retry():
     fixture = helpers.load_fixture('redirect_flows')['complete']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.redirect_flows.complete(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_redirect_flows_complete_doesnt_retry():
     fixture = helpers.load_fixture('redirect_flows')['complete']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.redirect_flows.complete(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   

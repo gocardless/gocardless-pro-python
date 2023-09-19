@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,26 +23,26 @@ def test_customers_create():
     response = helpers.client.customers.create(*fixture['url_params'])
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.address_line1, body.get('address_line1'))
-    assert_equal(response.address_line2, body.get('address_line2'))
-    assert_equal(response.address_line3, body.get('address_line3'))
-    assert_equal(response.city, body.get('city'))
-    assert_equal(response.company_name, body.get('company_name'))
-    assert_equal(response.country_code, body.get('country_code'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.danish_identity_number, body.get('danish_identity_number'))
-    assert_equal(response.email, body.get('email'))
-    assert_equal(response.family_name, body.get('family_name'))
-    assert_equal(response.given_name, body.get('given_name'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.language, body.get('language'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.phone_number, body.get('phone_number'))
-    assert_equal(response.postal_code, body.get('postal_code'))
-    assert_equal(response.region, body.get('region'))
-    assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
+    assert isinstance(response, resources.Customer)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.address_line1 == body.get('address_line1')
+    assert response.address_line2 == body.get('address_line2')
+    assert response.address_line3 == body.get('address_line3')
+    assert response.city == body.get('city')
+    assert response.company_name == body.get('company_name')
+    assert response.country_code == body.get('country_code')
+    assert response.created_at == body.get('created_at')
+    assert response.danish_identity_number == body.get('danish_identity_number')
+    assert response.email == body.get('email')
+    assert response.family_name == body.get('family_name')
+    assert response.given_name == body.get('given_name')
+    assert response.id == body.get('id')
+    assert response.language == body.get('language')
+    assert response.metadata == body.get('metadata')
+    assert response.phone_number == body.get('phone_number')
+    assert response.postal_code == body.get('postal_code')
+    assert response.region == body.get('region')
+    assert response.swedish_identity_number == body.get('swedish_identity_number')
 
 @responses.activate
 def test_customers_create_new_idempotency_key_for_each_call():
@@ -57,40 +50,37 @@ def test_customers_create_new_idempotency_key_for_each_call():
     helpers.stub_response(fixture)
     helpers.client.customers.create(*fixture['url_params'])
     helpers.client.customers.create(*fixture['url_params'])
-    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
-                     responses.calls[1].request.headers.get('Idempotency-Key'))
+    assert responses.calls[0].request.headers.get('Idempotency-Key') != responses.calls[1].request.headers.get('Idempotency-Key')
 
 def test_timeout_customers_create_idempotency_conflict():
     create_fixture = helpers.load_fixture('customers')['create']
     get_fixture = helpers.load_fixture('customers')['get']
     with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
       response = helpers.client.customers.create(*create_fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
+      assert len(rsps.calls) == 2
 
-    assert_is_instance(response, resources.Customer)
+    assert isinstance(response, resources.Customer)
 
 @responses.activate
 def test_timeout_customers_create_retries():
     fixture = helpers.load_fixture('customers')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.customers.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
+    assert isinstance(response, resources.Customer)
 
 def test_502_customers_create_retries():
     fixture = helpers.load_fixture('customers')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.customers.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
+    assert isinstance(response, resources.Customer)
   
 
 @responses.activate
@@ -100,79 +90,59 @@ def test_customers_list():
     response = helpers.client.customers.list(*fixture['url_params'])
     body = fixture['body']['customers']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Customer)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Customer)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.address_line1 for r in response.records],
-                 [b.get('address_line1') for b in body])
-    assert_equal([r.address_line2 for r in response.records],
-                 [b.get('address_line2') for b in body])
-    assert_equal([r.address_line3 for r in response.records],
-                 [b.get('address_line3') for b in body])
-    assert_equal([r.city for r in response.records],
-                 [b.get('city') for b in body])
-    assert_equal([r.company_name for r in response.records],
-                 [b.get('company_name') for b in body])
-    assert_equal([r.country_code for r in response.records],
-                 [b.get('country_code') for b in body])
-    assert_equal([r.created_at for r in response.records],
-                 [b.get('created_at') for b in body])
-    assert_equal([r.danish_identity_number for r in response.records],
-                 [b.get('danish_identity_number') for b in body])
-    assert_equal([r.email for r in response.records],
-                 [b.get('email') for b in body])
-    assert_equal([r.family_name for r in response.records],
-                 [b.get('family_name') for b in body])
-    assert_equal([r.given_name for r in response.records],
-                 [b.get('given_name') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.language for r in response.records],
-                 [b.get('language') for b in body])
-    assert_equal([r.metadata for r in response.records],
-                 [b.get('metadata') for b in body])
-    assert_equal([r.phone_number for r in response.records],
-                 [b.get('phone_number') for b in body])
-    assert_equal([r.postal_code for r in response.records],
-                 [b.get('postal_code') for b in body])
-    assert_equal([r.region for r in response.records],
-                 [b.get('region') for b in body])
-    assert_equal([r.swedish_identity_number for r in response.records],
-                 [b.get('swedish_identity_number') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.address_line1 for r in response.records] == [b.get('address_line1') for b in body]
+    assert [r.address_line2 for r in response.records] == [b.get('address_line2') for b in body]
+    assert [r.address_line3 for r in response.records] == [b.get('address_line3') for b in body]
+    assert [r.city for r in response.records] == [b.get('city') for b in body]
+    assert [r.company_name for r in response.records] == [b.get('company_name') for b in body]
+    assert [r.country_code for r in response.records] == [b.get('country_code') for b in body]
+    assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.danish_identity_number for r in response.records] == [b.get('danish_identity_number') for b in body]
+    assert [r.email for r in response.records] == [b.get('email') for b in body]
+    assert [r.family_name for r in response.records] == [b.get('family_name') for b in body]
+    assert [r.given_name for r in response.records] == [b.get('given_name') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.language for r in response.records] == [b.get('language') for b in body]
+    assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
+    assert [r.phone_number for r in response.records] == [b.get('phone_number') for b in body]
+    assert [r.postal_code for r in response.records] == [b.get('postal_code') for b in body]
+    assert [r.region for r in response.records] == [b.get('region') for b in body]
+    assert [r.swedish_identity_number for r in response.records] == [b.get('swedish_identity_number') for b in body]
 
 @responses.activate
 def test_timeout_customers_list_retries():
     fixture = helpers.load_fixture('customers')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.customers.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['customers']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Customer)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Customer)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_customers_list_retries():
     fixture = helpers.load_fixture('customers')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.customers.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['customers']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Customer)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Customer)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_customers_all():
@@ -189,9 +159,9 @@ def test_customers_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.customers.all())
-    assert_equal(len(all_records), len(fixture['body']['customers']) * 2)
+    assert len(all_records) == len(fixture['body']['customers']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.Customer)
+      assert isinstance(record, resources.Customer)
     
   
 
@@ -202,49 +172,47 @@ def test_customers_get():
     response = helpers.client.customers.get(*fixture['url_params'])
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.address_line1, body.get('address_line1'))
-    assert_equal(response.address_line2, body.get('address_line2'))
-    assert_equal(response.address_line3, body.get('address_line3'))
-    assert_equal(response.city, body.get('city'))
-    assert_equal(response.company_name, body.get('company_name'))
-    assert_equal(response.country_code, body.get('country_code'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.danish_identity_number, body.get('danish_identity_number'))
-    assert_equal(response.email, body.get('email'))
-    assert_equal(response.family_name, body.get('family_name'))
-    assert_equal(response.given_name, body.get('given_name'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.language, body.get('language'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.phone_number, body.get('phone_number'))
-    assert_equal(response.postal_code, body.get('postal_code'))
-    assert_equal(response.region, body.get('region'))
-    assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
+    assert isinstance(response, resources.Customer)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.address_line1 == body.get('address_line1')
+    assert response.address_line2 == body.get('address_line2')
+    assert response.address_line3 == body.get('address_line3')
+    assert response.city == body.get('city')
+    assert response.company_name == body.get('company_name')
+    assert response.country_code == body.get('country_code')
+    assert response.created_at == body.get('created_at')
+    assert response.danish_identity_number == body.get('danish_identity_number')
+    assert response.email == body.get('email')
+    assert response.family_name == body.get('family_name')
+    assert response.given_name == body.get('given_name')
+    assert response.id == body.get('id')
+    assert response.language == body.get('language')
+    assert response.metadata == body.get('metadata')
+    assert response.phone_number == body.get('phone_number')
+    assert response.postal_code == body.get('postal_code')
+    assert response.region == body.get('region')
+    assert response.swedish_identity_number == body.get('swedish_identity_number')
 
 @responses.activate
 def test_timeout_customers_get_retries():
     fixture = helpers.load_fixture('customers')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.customers.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
+    assert isinstance(response, resources.Customer)
 
 def test_502_customers_get_retries():
     fixture = helpers.load_fixture('customers')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.customers.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
+    assert isinstance(response, resources.Customer)
   
 
 @responses.activate
@@ -254,49 +222,47 @@ def test_customers_update():
     response = helpers.client.customers.update(*fixture['url_params'])
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.address_line1, body.get('address_line1'))
-    assert_equal(response.address_line2, body.get('address_line2'))
-    assert_equal(response.address_line3, body.get('address_line3'))
-    assert_equal(response.city, body.get('city'))
-    assert_equal(response.company_name, body.get('company_name'))
-    assert_equal(response.country_code, body.get('country_code'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.danish_identity_number, body.get('danish_identity_number'))
-    assert_equal(response.email, body.get('email'))
-    assert_equal(response.family_name, body.get('family_name'))
-    assert_equal(response.given_name, body.get('given_name'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.language, body.get('language'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.phone_number, body.get('phone_number'))
-    assert_equal(response.postal_code, body.get('postal_code'))
-    assert_equal(response.region, body.get('region'))
-    assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
+    assert isinstance(response, resources.Customer)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.address_line1 == body.get('address_line1')
+    assert response.address_line2 == body.get('address_line2')
+    assert response.address_line3 == body.get('address_line3')
+    assert response.city == body.get('city')
+    assert response.company_name == body.get('company_name')
+    assert response.country_code == body.get('country_code')
+    assert response.created_at == body.get('created_at')
+    assert response.danish_identity_number == body.get('danish_identity_number')
+    assert response.email == body.get('email')
+    assert response.family_name == body.get('family_name')
+    assert response.given_name == body.get('given_name')
+    assert response.id == body.get('id')
+    assert response.language == body.get('language')
+    assert response.metadata == body.get('metadata')
+    assert response.phone_number == body.get('phone_number')
+    assert response.postal_code == body.get('postal_code')
+    assert response.region == body.get('region')
+    assert response.swedish_identity_number == body.get('swedish_identity_number')
 
 @responses.activate
 def test_timeout_customers_update_retries():
     fixture = helpers.load_fixture('customers')['update']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.customers.update(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
+    assert isinstance(response, resources.Customer)
 
 def test_502_customers_update_retries():
     fixture = helpers.load_fixture('customers')['update']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.customers.update(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
+    assert isinstance(response, resources.Customer)
   
 
 @responses.activate
@@ -306,38 +272,38 @@ def test_customers_remove():
     response = helpers.client.customers.remove(*fixture['url_params'])
     body = fixture['body']['customers']
 
-    assert_is_instance(response, resources.Customer)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.address_line1, body.get('address_line1'))
-    assert_equal(response.address_line2, body.get('address_line2'))
-    assert_equal(response.address_line3, body.get('address_line3'))
-    assert_equal(response.city, body.get('city'))
-    assert_equal(response.company_name, body.get('company_name'))
-    assert_equal(response.country_code, body.get('country_code'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.danish_identity_number, body.get('danish_identity_number'))
-    assert_equal(response.email, body.get('email'))
-    assert_equal(response.family_name, body.get('family_name'))
-    assert_equal(response.given_name, body.get('given_name'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.language, body.get('language'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.phone_number, body.get('phone_number'))
-    assert_equal(response.postal_code, body.get('postal_code'))
-    assert_equal(response.region, body.get('region'))
-    assert_equal(response.swedish_identity_number, body.get('swedish_identity_number'))
+    assert isinstance(response, resources.Customer)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.address_line1 == body.get('address_line1')
+    assert response.address_line2 == body.get('address_line2')
+    assert response.address_line3 == body.get('address_line3')
+    assert response.city == body.get('city')
+    assert response.company_name == body.get('company_name')
+    assert response.country_code == body.get('country_code')
+    assert response.created_at == body.get('created_at')
+    assert response.danish_identity_number == body.get('danish_identity_number')
+    assert response.email == body.get('email')
+    assert response.family_name == body.get('family_name')
+    assert response.given_name == body.get('given_name')
+    assert response.id == body.get('id')
+    assert response.language == body.get('language')
+    assert response.metadata == body.get('metadata')
+    assert response.phone_number == body.get('phone_number')
+    assert response.postal_code == body.get('postal_code')
+    assert response.region == body.get('region')
+    assert response.swedish_identity_number == body.get('swedish_identity_number')
 
 def test_timeout_customers_remove_doesnt_retry():
     fixture = helpers.load_fixture('customers')['remove']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.customers.remove(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_customers_remove_doesnt_retry():
     fixture = helpers.load_fixture('customers')['remove']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.customers.remove(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   

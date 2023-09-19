@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,29 +23,28 @@ def test_subscriptions_create():
     response = helpers.client.subscriptions.create(*fixture['url_params'])
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.app_fee, body.get('app_fee'))
-    assert_equal(response.count, body.get('count'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.currency, body.get('currency'))
-    assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
-    assert_equal(response.end_date, body.get('end_date'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.interval, body.get('interval'))
-    assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.month, body.get('month'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
-    assert_equal(response.start_date, body.get('start_date'))
-    assert_equal(response.status, body.get('status'))
-    assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.Subscription)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.amount == body.get('amount')
+    assert response.app_fee == body.get('app_fee')
+    assert response.count == body.get('count')
+    assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
+    assert response.day_of_month == body.get('day_of_month')
+    assert response.earliest_charge_date_after_resume == body.get('earliest_charge_date_after_resume')
+    assert response.end_date == body.get('end_date')
+    assert response.id == body.get('id')
+    assert response.interval == body.get('interval')
+    assert response.interval_unit == body.get('interval_unit')
+    assert response.metadata == body.get('metadata')
+    assert response.month == body.get('month')
+    assert response.name == body.get('name')
+    assert response.payment_reference == body.get('payment_reference')
+    assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.start_date == body.get('start_date')
+    assert response.status == body.get('status')
+    assert response.upcoming_payments == body.get('upcoming_payments')
+    assert response.links.mandate == body.get('links')['mandate']
 
 @responses.activate
 def test_subscriptions_create_new_idempotency_key_for_each_call():
@@ -60,40 +52,37 @@ def test_subscriptions_create_new_idempotency_key_for_each_call():
     helpers.stub_response(fixture)
     helpers.client.subscriptions.create(*fixture['url_params'])
     helpers.client.subscriptions.create(*fixture['url_params'])
-    assert_not_equal(responses.calls[0].request.headers.get('Idempotency-Key'),
-                     responses.calls[1].request.headers.get('Idempotency-Key'))
+    assert responses.calls[0].request.headers.get('Idempotency-Key') != responses.calls[1].request.headers.get('Idempotency-Key')
 
 def test_timeout_subscriptions_create_idempotency_conflict():
     create_fixture = helpers.load_fixture('subscriptions')['create']
     get_fixture = helpers.load_fixture('subscriptions')['get']
     with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
       response = helpers.client.subscriptions.create(*create_fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
+      assert len(rsps.calls) == 2
 
-    assert_is_instance(response, resources.Subscription)
+    assert isinstance(response, resources.Subscription)
 
 @responses.activate
 def test_timeout_subscriptions_create_retries():
     fixture = helpers.load_fixture('subscriptions')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
+    assert isinstance(response, resources.Subscription)
 
 def test_502_subscriptions_create_retries():
     fixture = helpers.load_fixture('subscriptions')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
+    assert isinstance(response, resources.Subscription)
   
 
 @responses.activate
@@ -103,81 +92,60 @@ def test_subscriptions_list():
     response = helpers.client.subscriptions.list(*fixture['url_params'])
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Subscription)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Subscription)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.amount for r in response.records],
-                 [b.get('amount') for b in body])
-    assert_equal([r.app_fee for r in response.records],
-                 [b.get('app_fee') for b in body])
-    assert_equal([r.count for r in response.records],
-                 [b.get('count') for b in body])
-    assert_equal([r.created_at for r in response.records],
-                 [b.get('created_at') for b in body])
-    assert_equal([r.currency for r in response.records],
-                 [b.get('currency') for b in body])
-    assert_equal([r.day_of_month for r in response.records],
-                 [b.get('day_of_month') for b in body])
-    assert_equal([r.earliest_charge_date_after_resume for r in response.records],
-                 [b.get('earliest_charge_date_after_resume') for b in body])
-    assert_equal([r.end_date for r in response.records],
-                 [b.get('end_date') for b in body])
-    assert_equal([r.id for r in response.records],
-                 [b.get('id') for b in body])
-    assert_equal([r.interval for r in response.records],
-                 [b.get('interval') for b in body])
-    assert_equal([r.interval_unit for r in response.records],
-                 [b.get('interval_unit') for b in body])
-    assert_equal([r.metadata for r in response.records],
-                 [b.get('metadata') for b in body])
-    assert_equal([r.month for r in response.records],
-                 [b.get('month') for b in body])
-    assert_equal([r.name for r in response.records],
-                 [b.get('name') for b in body])
-    assert_equal([r.payment_reference for r in response.records],
-                 [b.get('payment_reference') for b in body])
-    assert_equal([r.retry_if_possible for r in response.records],
-                 [b.get('retry_if_possible') for b in body])
-    assert_equal([r.start_date for r in response.records],
-                 [b.get('start_date') for b in body])
-    assert_equal([r.status for r in response.records],
-                 [b.get('status') for b in body])
-    assert_equal([r.upcoming_payments for r in response.records],
-                 [b.get('upcoming_payments') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.amount for r in response.records] == [b.get('amount') for b in body]
+    assert [r.app_fee for r in response.records] == [b.get('app_fee') for b in body]
+    assert [r.count for r in response.records] == [b.get('count') for b in body]
+    assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.currency for r in response.records] == [b.get('currency') for b in body]
+    assert [r.day_of_month for r in response.records] == [b.get('day_of_month') for b in body]
+    assert [r.earliest_charge_date_after_resume for r in response.records] == [b.get('earliest_charge_date_after_resume') for b in body]
+    assert [r.end_date for r in response.records] == [b.get('end_date') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.interval for r in response.records] == [b.get('interval') for b in body]
+    assert [r.interval_unit for r in response.records] == [b.get('interval_unit') for b in body]
+    assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
+    assert [r.month for r in response.records] == [b.get('month') for b in body]
+    assert [r.name for r in response.records] == [b.get('name') for b in body]
+    assert [r.payment_reference for r in response.records] == [b.get('payment_reference') for b in body]
+    assert [r.retry_if_possible for r in response.records] == [b.get('retry_if_possible') for b in body]
+    assert [r.start_date for r in response.records] == [b.get('start_date') for b in body]
+    assert [r.status for r in response.records] == [b.get('status') for b in body]
+    assert [r.upcoming_payments for r in response.records] == [b.get('upcoming_payments') for b in body]
 
 @responses.activate
 def test_timeout_subscriptions_list_retries():
     fixture = helpers.load_fixture('subscriptions')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Subscription)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Subscription)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_subscriptions_list_retries():
     fixture = helpers.load_fixture('subscriptions')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.Subscription)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.Subscription)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_subscriptions_all():
@@ -194,9 +162,9 @@ def test_subscriptions_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.subscriptions.all())
-    assert_equal(len(all_records), len(fixture['body']['subscriptions']) * 2)
+    assert len(all_records) == len(fixture['body']['subscriptions']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.Subscription)
+      assert isinstance(record, resources.Subscription)
     
   
 
@@ -207,52 +175,49 @@ def test_subscriptions_get():
     response = helpers.client.subscriptions.get(*fixture['url_params'])
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.app_fee, body.get('app_fee'))
-    assert_equal(response.count, body.get('count'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.currency, body.get('currency'))
-    assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
-    assert_equal(response.end_date, body.get('end_date'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.interval, body.get('interval'))
-    assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.month, body.get('month'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
-    assert_equal(response.start_date, body.get('start_date'))
-    assert_equal(response.status, body.get('status'))
-    assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.Subscription)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.amount == body.get('amount')
+    assert response.app_fee == body.get('app_fee')
+    assert response.count == body.get('count')
+    assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
+    assert response.day_of_month == body.get('day_of_month')
+    assert response.earliest_charge_date_after_resume == body.get('earliest_charge_date_after_resume')
+    assert response.end_date == body.get('end_date')
+    assert response.id == body.get('id')
+    assert response.interval == body.get('interval')
+    assert response.interval_unit == body.get('interval_unit')
+    assert response.metadata == body.get('metadata')
+    assert response.month == body.get('month')
+    assert response.name == body.get('name')
+    assert response.payment_reference == body.get('payment_reference')
+    assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.start_date == body.get('start_date')
+    assert response.status == body.get('status')
+    assert response.upcoming_payments == body.get('upcoming_payments')
+    assert response.links.mandate == body.get('links')['mandate']
 
 @responses.activate
 def test_timeout_subscriptions_get_retries():
     fixture = helpers.load_fixture('subscriptions')['get']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
+    assert isinstance(response, resources.Subscription)
 
 def test_502_subscriptions_get_retries():
     fixture = helpers.load_fixture('subscriptions')['get']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.get(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
+    assert isinstance(response, resources.Subscription)
   
 
 @responses.activate
@@ -262,52 +227,49 @@ def test_subscriptions_update():
     response = helpers.client.subscriptions.update(*fixture['url_params'])
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.app_fee, body.get('app_fee'))
-    assert_equal(response.count, body.get('count'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.currency, body.get('currency'))
-    assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
-    assert_equal(response.end_date, body.get('end_date'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.interval, body.get('interval'))
-    assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.month, body.get('month'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
-    assert_equal(response.start_date, body.get('start_date'))
-    assert_equal(response.status, body.get('status'))
-    assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.Subscription)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.amount == body.get('amount')
+    assert response.app_fee == body.get('app_fee')
+    assert response.count == body.get('count')
+    assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
+    assert response.day_of_month == body.get('day_of_month')
+    assert response.earliest_charge_date_after_resume == body.get('earliest_charge_date_after_resume')
+    assert response.end_date == body.get('end_date')
+    assert response.id == body.get('id')
+    assert response.interval == body.get('interval')
+    assert response.interval_unit == body.get('interval_unit')
+    assert response.metadata == body.get('metadata')
+    assert response.month == body.get('month')
+    assert response.name == body.get('name')
+    assert response.payment_reference == body.get('payment_reference')
+    assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.start_date == body.get('start_date')
+    assert response.status == body.get('status')
+    assert response.upcoming_payments == body.get('upcoming_payments')
+    assert response.links.mandate == body.get('links')['mandate']
 
 @responses.activate
 def test_timeout_subscriptions_update_retries():
     fixture = helpers.load_fixture('subscriptions')['update']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.update(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
+    assert isinstance(response, resources.Subscription)
 
 def test_502_subscriptions_update_retries():
     fixture = helpers.load_fixture('subscriptions')['update']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.subscriptions.update(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
+    assert isinstance(response, resources.Subscription)
   
 
 @responses.activate
@@ -317,43 +279,42 @@ def test_subscriptions_pause():
     response = helpers.client.subscriptions.pause(*fixture['url_params'])
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.app_fee, body.get('app_fee'))
-    assert_equal(response.count, body.get('count'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.currency, body.get('currency'))
-    assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
-    assert_equal(response.end_date, body.get('end_date'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.interval, body.get('interval'))
-    assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.month, body.get('month'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
-    assert_equal(response.start_date, body.get('start_date'))
-    assert_equal(response.status, body.get('status'))
-    assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.Subscription)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.amount == body.get('amount')
+    assert response.app_fee == body.get('app_fee')
+    assert response.count == body.get('count')
+    assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
+    assert response.day_of_month == body.get('day_of_month')
+    assert response.earliest_charge_date_after_resume == body.get('earliest_charge_date_after_resume')
+    assert response.end_date == body.get('end_date')
+    assert response.id == body.get('id')
+    assert response.interval == body.get('interval')
+    assert response.interval_unit == body.get('interval_unit')
+    assert response.metadata == body.get('metadata')
+    assert response.month == body.get('month')
+    assert response.name == body.get('name')
+    assert response.payment_reference == body.get('payment_reference')
+    assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.start_date == body.get('start_date')
+    assert response.status == body.get('status')
+    assert response.upcoming_payments == body.get('upcoming_payments')
+    assert response.links.mandate == body.get('links')['mandate']
 
 def test_timeout_subscriptions_pause_doesnt_retry():
     fixture = helpers.load_fixture('subscriptions')['pause']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.subscriptions.pause(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_subscriptions_pause_doesnt_retry():
     fixture = helpers.load_fixture('subscriptions')['pause']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.subscriptions.pause(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   
 
 @responses.activate
@@ -363,43 +324,42 @@ def test_subscriptions_resume():
     response = helpers.client.subscriptions.resume(*fixture['url_params'])
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.app_fee, body.get('app_fee'))
-    assert_equal(response.count, body.get('count'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.currency, body.get('currency'))
-    assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
-    assert_equal(response.end_date, body.get('end_date'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.interval, body.get('interval'))
-    assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.month, body.get('month'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
-    assert_equal(response.start_date, body.get('start_date'))
-    assert_equal(response.status, body.get('status'))
-    assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.Subscription)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.amount == body.get('amount')
+    assert response.app_fee == body.get('app_fee')
+    assert response.count == body.get('count')
+    assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
+    assert response.day_of_month == body.get('day_of_month')
+    assert response.earliest_charge_date_after_resume == body.get('earliest_charge_date_after_resume')
+    assert response.end_date == body.get('end_date')
+    assert response.id == body.get('id')
+    assert response.interval == body.get('interval')
+    assert response.interval_unit == body.get('interval_unit')
+    assert response.metadata == body.get('metadata')
+    assert response.month == body.get('month')
+    assert response.name == body.get('name')
+    assert response.payment_reference == body.get('payment_reference')
+    assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.start_date == body.get('start_date')
+    assert response.status == body.get('status')
+    assert response.upcoming_payments == body.get('upcoming_payments')
+    assert response.links.mandate == body.get('links')['mandate']
 
 def test_timeout_subscriptions_resume_doesnt_retry():
     fixture = helpers.load_fixture('subscriptions')['resume']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.subscriptions.resume(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_subscriptions_resume_doesnt_retry():
     fixture = helpers.load_fixture('subscriptions')['resume']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.subscriptions.resume(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   
 
 @responses.activate
@@ -409,41 +369,40 @@ def test_subscriptions_cancel():
     response = helpers.client.subscriptions.cancel(*fixture['url_params'])
     body = fixture['body']['subscriptions']
 
-    assert_is_instance(response, resources.Subscription)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.amount, body.get('amount'))
-    assert_equal(response.app_fee, body.get('app_fee'))
-    assert_equal(response.count, body.get('count'))
-    assert_equal(response.created_at, body.get('created_at'))
-    assert_equal(response.currency, body.get('currency'))
-    assert_equal(response.day_of_month, body.get('day_of_month'))
-    assert_equal(response.earliest_charge_date_after_resume, body.get('earliest_charge_date_after_resume'))
-    assert_equal(response.end_date, body.get('end_date'))
-    assert_equal(response.id, body.get('id'))
-    assert_equal(response.interval, body.get('interval'))
-    assert_equal(response.interval_unit, body.get('interval_unit'))
-    assert_equal(response.metadata, body.get('metadata'))
-    assert_equal(response.month, body.get('month'))
-    assert_equal(response.name, body.get('name'))
-    assert_equal(response.payment_reference, body.get('payment_reference'))
-    assert_equal(response.retry_if_possible, body.get('retry_if_possible'))
-    assert_equal(response.start_date, body.get('start_date'))
-    assert_equal(response.status, body.get('status'))
-    assert_equal(response.upcoming_payments, body.get('upcoming_payments'))
-    assert_equal(response.links.mandate,
-                 body.get('links')['mandate'])
+    assert isinstance(response, resources.Subscription)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.amount == body.get('amount')
+    assert response.app_fee == body.get('app_fee')
+    assert response.count == body.get('count')
+    assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
+    assert response.day_of_month == body.get('day_of_month')
+    assert response.earliest_charge_date_after_resume == body.get('earliest_charge_date_after_resume')
+    assert response.end_date == body.get('end_date')
+    assert response.id == body.get('id')
+    assert response.interval == body.get('interval')
+    assert response.interval_unit == body.get('interval_unit')
+    assert response.metadata == body.get('metadata')
+    assert response.month == body.get('month')
+    assert response.name == body.get('name')
+    assert response.payment_reference == body.get('payment_reference')
+    assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.start_date == body.get('start_date')
+    assert response.status == body.get('status')
+    assert response.upcoming_payments == body.get('upcoming_payments')
+    assert response.links.mandate == body.get('links')['mandate']
 
 def test_timeout_subscriptions_cancel_doesnt_retry():
     fixture = helpers.load_fixture('subscriptions')['cancel']
     with helpers.stub_timeout(fixture) as rsps:
-      with assert_raises(requests.ConnectTimeout):
+      with pytest.raises(requests.ConnectTimeout):
         response = helpers.client.subscriptions.cancel(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
 
 def test_502_subscriptions_cancel_doesnt_retry():
     fixture = helpers.load_fixture('subscriptions')['cancel']
     with helpers.stub_502(fixture) as rsps:
-      with assert_raises(MalformedResponseError):
+      with pytest.raises(MalformedResponseError):
         response = helpers.client.subscriptions.cancel(*fixture['url_params'])
-      assert_equal(1, len(rsps.calls))
+      assert len(rsps.calls) == 1
   

@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,31 +23,29 @@ def test_mandate_pdfs_create():
     response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
     body = fixture['body']['mandate_pdfs']
 
-    assert_is_instance(response, resources.MandatePdf)
-    assert_is_not_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal(response.expires_at, body.get('expires_at'))
-    assert_equal(response.url, body.get('url'))
+    assert isinstance(response, resources.MandatePdf)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
+    assert response.expires_at == body.get('expires_at')
+    assert response.url == body.get('url')
 
 @responses.activate
 def test_timeout_mandate_pdfs_create_retries():
     fixture = helpers.load_fixture('mandate_pdfs')['create']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['mandate_pdfs']
 
-    assert_is_instance(response, resources.MandatePdf)
+    assert isinstance(response, resources.MandatePdf)
 
 def test_502_mandate_pdfs_create_retries():
     fixture = helpers.load_fixture('mandate_pdfs')['create']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['mandate_pdfs']
 
-    assert_is_instance(response, resources.MandatePdf)
+    assert isinstance(response, resources.MandatePdf)
   

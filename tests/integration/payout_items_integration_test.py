@@ -5,16 +5,9 @@
 
 import json
 
+import pytest
 import requests
 import responses
-from nose.tools import (
-  assert_equal,
-  assert_is_instance,
-  assert_is_none,
-  assert_is_not_none,
-  assert_not_equal,
-  assert_raises
-)
 
 from gocardless_pro.errors import MalformedResponseError
 from gocardless_pro import resources
@@ -30,49 +23,44 @@ def test_payout_items_list():
     response = helpers.client.payout_items.list(*fixture['url_params'])
     body = fixture['body']['payout_items']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.PayoutItem)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.PayoutItem)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
-    assert_is_none(responses.calls[-1].request.headers.get('Idempotency-Key'))
-    assert_equal([r.amount for r in response.records],
-                 [b.get('amount') for b in body])
-    assert_equal([r.taxes for r in response.records],
-                 [b.get('taxes') for b in body])
-    assert_equal([r.type for r in response.records],
-                 [b.get('type') for b in body])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert [r.amount for r in response.records] == [b.get('amount') for b in body]
+    assert [r.taxes for r in response.records] == [b.get('taxes') for b in body]
+    assert [r.type for r in response.records] == [b.get('type') for b in body]
 
 @responses.activate
 def test_timeout_payout_items_list_retries():
     fixture = helpers.load_fixture('payout_items')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
       response = helpers.client.payout_items.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['payout_items']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.PayoutItem)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.PayoutItem)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 def test_502_payout_items_list_retries():
     fixture = helpers.load_fixture('payout_items')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
       response = helpers.client.payout_items.list(*fixture['url_params'])
-      assert_equal(2, len(rsps.calls))
-      assert_equal(rsps.calls[0].request.headers.get('Idempotency-Key'),
-                   rsps.calls[1].request.headers.get('Idempotency-Key'))
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
     body = fixture['body']['payout_items']
 
-    assert_is_instance(response, list_response.ListResponse)
-    assert_is_instance(response.records[0], resources.PayoutItem)
+    assert isinstance(response, list_response.ListResponse)
+    assert isinstance(response.records[0], resources.PayoutItem)
 
-    assert_equal(response.before, fixture['body']['meta']['cursors']['before'])
-    assert_equal(response.after, fixture['body']['meta']['cursors']['after'])
+    assert response.before == fixture['body']['meta']['cursors']['before']
+    assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
 def test_payout_items_all():
@@ -89,8 +77,8 @@ def test_payout_items_all():
     responses.add_callback(fixture['method'], url, callback)
 
     all_records = list(helpers.client.payout_items.all())
-    assert_equal(len(all_records), len(fixture['body']['payout_items']) * 2)
+    assert len(all_records) == len(fixture['body']['payout_items']) * 2
     for record in all_records:
-      assert_is_instance(record, resources.PayoutItem)
+      assert isinstance(record, resources.PayoutItem)
     
   
