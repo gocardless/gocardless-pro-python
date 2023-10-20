@@ -120,6 +120,10 @@ class BillingRequest(object):
             return self.attributes.get('organisation')
     
         @property
+        def payment_provider(self):
+            return self.attributes.get('payment_provider')
+    
+        @property
         def payment_request(self):
             return self.attributes.get('payment_request')
     
