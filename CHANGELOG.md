@@ -1,4 +1,7 @@
 <!-- @format -->
+# 1.48.0
+
+- Added a new field `verification_status` to creditor_bank_accounts API's response
 
 # 1.47.0
 

@@ -71,6 +71,11 @@ class CreditorBankAccount(object):
         return self.attributes.get('metadata')
   
 
+    @property
+    def verification_status(self):
+        return self.attributes.get('verification_status')
+  
+
 
   
 
@@ -101,6 +106,8 @@ class CreditorBankAccount(object):
         def creditor(self):
             return self.attributes.get('creditor')
     
+  
+
   
 
   
