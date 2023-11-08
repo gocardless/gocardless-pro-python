@@ -32,6 +32,11 @@ class BillingRequestFlow(object):
   
 
     @property
+    def customer_details_captured(self):
+        return self.attributes.get('customer_details_captured')
+  
+
+    @property
     def exit_uri(self):
         return self.attributes.get('exit_uri')
   
@@ -101,6 +106,8 @@ class BillingRequestFlow(object):
         return self.attributes.get('show_success_redirect_button')
   
 
+
+  
 
   
 
