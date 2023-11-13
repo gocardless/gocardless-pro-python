@@ -92,6 +92,10 @@ class BillingRequestsService(base_service.BaseService):
         creating
         and attaching it.
         
+        If the scheme is PayTo and the pay_id is available, this can be
+        included in the payload along with the
+        country_code.
+        
         _ACH scheme_ For compliance reasons, an extra validation step is done
         using
         a third-party provider to make sure the customer's bank account can
