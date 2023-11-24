@@ -107,6 +107,9 @@ def test_subscriptions_returns_service():
 def test_tax_rates_returns_service():
     assert isinstance(client.tax_rates, services.TaxRatesService)
 
+def test_transferred_mandates_returns_service():
+    assert isinstance(client.transferred_mandates, services.TransferredMandatesService)
+
 def test_verification_details_returns_service():
     assert isinstance(client.verification_details, services.VerificationDetailsService)
 

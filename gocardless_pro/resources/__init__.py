@@ -63,6 +63,8 @@ from .subscription import Subscription
 
 from .tax_rate import TaxRate
 
+from .transferred_mandate import TransferredMandate
+
 from .verification_detail import VerificationDetail
 
 from .webhook import Webhook
