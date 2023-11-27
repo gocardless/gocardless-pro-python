@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.49.0
+
+- Expose the GET `/transferred_mandates` endpoint
+
 # 1.48.0
 
 - Added a new field `verification_status` to creditor_bank_accounts API's response
