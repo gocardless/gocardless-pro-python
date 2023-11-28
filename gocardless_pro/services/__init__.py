@@ -33,5 +33,6 @@ from .scenario_simulators_service import ScenarioSimulatorsService
 from .scheme_identifiers_service import SchemeIdentifiersService
 from .subscriptions_service import SubscriptionsService
 from .tax_rates_service import TaxRatesService
+from .transferred_mandates_service import TransferredMandatesService
 from .verification_details_service import VerificationDetailsService
 from .webhooks_service import WebhooksService

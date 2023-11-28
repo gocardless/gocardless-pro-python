@@ -610,6 +610,14 @@ Tax rates
     # Get a single tax rate
     client.tax_rates.get('GB_VAT_1', params={...})
 
+Transferred mandates
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Get updated customer bank details
+    client.transferred_mandates.transferred_mandates('MD123', params={...})
+
 Verification details
 ''''''''''''''''''''''''''''''''''''''''''
 
