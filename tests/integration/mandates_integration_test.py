@@ -31,6 +31,7 @@ def test_mandates_create():
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
+    assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
     assert response.payments_require_approval == body.get('payments_require_approval')
     assert response.reference == body.get('reference')
     assert response.scheme == body.get('scheme')
@@ -103,6 +104,7 @@ def test_mandates_list():
     assert [r.id for r in response.records] == [b.get('id') for b in body]
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
     assert [r.next_possible_charge_date for r in response.records] == [b.get('next_possible_charge_date') for b in body]
+    assert [r.next_possible_standard_ach_charge_date for r in response.records] == [b.get('next_possible_standard_ach_charge_date') for b in body]
     assert [r.payments_require_approval for r in response.records] == [b.get('payments_require_approval') for b in body]
     assert [r.reference for r in response.records] == [b.get('reference') for b in body]
     assert [r.scheme for r in response.records] == [b.get('scheme') for b in body]
@@ -174,6 +176,7 @@ def test_mandates_get():
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
+    assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
     assert response.payments_require_approval == body.get('payments_require_approval')
     assert response.reference == body.get('reference')
     assert response.scheme == body.get('scheme')
@@ -225,6 +228,7 @@ def test_mandates_update():
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
+    assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
     assert response.payments_require_approval == body.get('payments_require_approval')
     assert response.reference == body.get('reference')
     assert response.scheme == body.get('scheme')
@@ -276,6 +280,7 @@ def test_mandates_cancel():
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
+    assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
     assert response.payments_require_approval == body.get('payments_require_approval')
     assert response.reference == body.get('reference')
     assert response.scheme == body.get('scheme')
@@ -320,6 +325,7 @@ def test_mandates_reinstate():
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
+    assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
     assert response.payments_require_approval == body.get('payments_require_approval')
     assert response.reference == body.get('reference')
     assert response.scheme == body.get('scheme')

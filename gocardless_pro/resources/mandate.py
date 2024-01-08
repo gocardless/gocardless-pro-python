@@ -57,6 +57,11 @@ class Mandate(object):
   
 
     @property
+    def next_possible_standard_ach_charge_date(self):
+        return self.attributes.get('next_possible_standard_ach_charge_date')
+  
+
+    @property
     def payments_require_approval(self):
         return self.attributes.get('payments_require_approval')
   
@@ -138,6 +143,8 @@ class Mandate(object):
         def new_mandate(self):
             return self.attributes.get('new_mandate')
     
+  
+
   
 
   
