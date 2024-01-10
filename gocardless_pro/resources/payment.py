@@ -47,6 +47,11 @@ class Payment(object):
   
 
     @property
+    def faster_ach(self):
+        return self.attributes.get('faster_ach')
+  
+
+    @property
     def fx(self):
         return self.Fx(self.attributes.get('fx'))
   
@@ -81,6 +86,8 @@ class Payment(object):
         return self.attributes.get('status')
   
 
+
+  
 
   
 

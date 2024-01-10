@@ -31,6 +31,7 @@ def test_payments_create():
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
     assert response.description == body.get('description')
+    assert response.faster_ach == body.get('faster_ach')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
@@ -104,6 +105,7 @@ def test_payments_list():
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
     assert [r.currency for r in response.records] == [b.get('currency') for b in body]
     assert [r.description for r in response.records] == [b.get('description') for b in body]
+    assert [r.faster_ach for r in response.records] == [b.get('faster_ach') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
     assert [r.reference for r in response.records] == [b.get('reference') for b in body]
@@ -175,6 +177,7 @@ def test_payments_get():
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
     assert response.description == body.get('description')
+    assert response.faster_ach == body.get('faster_ach')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
@@ -227,6 +230,7 @@ def test_payments_update():
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
     assert response.description == body.get('description')
+    assert response.faster_ach == body.get('faster_ach')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
@@ -279,6 +283,7 @@ def test_payments_cancel():
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
     assert response.description == body.get('description')
+    assert response.faster_ach == body.get('faster_ach')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
@@ -324,6 +329,7 @@ def test_payments_retry():
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
     assert response.description == body.get('description')
+    assert response.faster_ach == body.get('faster_ach')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
