@@ -1,4 +1,10 @@
 <!-- @format -->
+# 1.50.0
+
+- Added `payment[faster_ach]` parameter to Payment creation.
+- Added `payment[faster_ach]` response field to Payment responses.
+- Added `mandate[next_possible_standard_ach_charge_date]` response field to Mandate responses.
+
 # 1.49.0
 
 - Expose the GET `/transferred_mandates` endpoint
