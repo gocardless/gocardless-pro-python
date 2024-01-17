@@ -165,6 +165,10 @@ class BillingRequest(object):
             return self.attributes.get('metadata')
     
         @property
+        def payer_requested_dual_signature(self):
+            return self.attributes.get('payer_requested_dual_signature')
+    
+        @property
         def scheme(self):
             return self.attributes.get('scheme')
     
