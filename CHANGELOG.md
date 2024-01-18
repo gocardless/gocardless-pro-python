@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.51.0
+
+- Added `payer_requested_dual_signature` field for Billing Request Confirmation endpoint.
+  
 # 1.50.0
 
 - Added `payment[faster_ach]` parameter to Payment creation.
