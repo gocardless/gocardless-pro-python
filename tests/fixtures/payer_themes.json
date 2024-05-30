@@ -1,0 +1,8 @@
+{ 
+  "create_for_creditor": {
+    "method": "POST",
+    "path_template": "/branding/payer_themes",
+    "url_params": [],
+    "body": {"payer_themes":{"id":"PTH123"}}
+  }
+}

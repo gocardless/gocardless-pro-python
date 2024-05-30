@@ -355,6 +355,14 @@ Institutions
     # List institutions for Billing Request
     client.institutions.list_for_billing_request('BRQ123', params={...})
 
+Logos
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a logo associated with a creditor
+    client.logos.create_for_creditor(params={...})
+
 Mandates
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -453,6 +461,14 @@ Payer authorisations
 
     # Confirm a Payer Authorisation
     client.payer_authorisations.confirm('PA123', params={...})
+
+Payer themes
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a payer theme associated with a creditor
+    client.payer_themes.create_for_creditor(params={...})
 
 Payments
 ''''''''''''''''''''''''''''''''''''''''''

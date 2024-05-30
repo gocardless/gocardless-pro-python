@@ -104,6 +104,12 @@ class BillingRequestsService(base_service.BaseService):
         the
         customer is requested to adjust the account number/routing number and
         succeed in this check to continue with the flow.
+        
+        _BACS scheme_ [Payer Name
+        Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+        is enabled by default for UK based bank accounts, meaning we verify the
+        account holder name and bank account
+        number match the details held by the relevant bank.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".

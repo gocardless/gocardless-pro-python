@@ -191,7 +191,6 @@ class SubscriptionsService(base_service.BaseService):
         
         - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value
         for `pause_cycles` cannot be satisfied.
-        
 
         Args:
               identity (string): Unique identifier, beginning with "SB".

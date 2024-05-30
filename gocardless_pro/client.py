@@ -98,6 +98,10 @@ class Client(object):
         return services.InstitutionsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def logos(self):
+        return services.LogosService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def mandates(self):
         return services.MandatesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
@@ -120,6 +124,10 @@ class Client(object):
     @property
     def payer_authorisations(self):
         return services.PayerAuthorisationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
+    def payer_themes(self):
+        return services.PayerThemesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def payments(self):

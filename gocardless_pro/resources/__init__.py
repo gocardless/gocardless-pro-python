@@ -33,6 +33,8 @@ from .instalment_schedule import InstalmentSchedule
 
 from .institution import Institution
 
+from .logo import Logo
+
 from .mandate import Mandate
 
 from .mandate_import import MandateImport
@@ -44,6 +46,8 @@ from .mandate_pdf import MandatePdf
 from .negative_balance_limit import NegativeBalanceLimit
 
 from .payer_authorisation import PayerAuthorisation
+
+from .payer_theme import PayerTheme
 
 from .payment import Payment
 
