@@ -62,6 +62,9 @@ def test_instalment_schedules_returns_service():
 def test_institutions_returns_service():
     assert isinstance(client.institutions, services.InstitutionsService)
 
+def test_logos_returns_service():
+    assert isinstance(client.logos, services.LogosService)
+
 def test_mandates_returns_service():
     assert isinstance(client.mandates, services.MandatesService)
 
@@ -79,6 +82,9 @@ def test_negative_balance_limits_returns_service():
 
 def test_payer_authorisations_returns_service():
     assert isinstance(client.payer_authorisations, services.PayerAuthorisationsService)
+
+def test_payer_themes_returns_service():
+    assert isinstance(client.payer_themes, services.PayerThemesService)
 
 def test_payments_returns_service():
     assert isinstance(client.payments, services.PaymentsService)

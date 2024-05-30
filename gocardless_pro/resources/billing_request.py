@@ -204,6 +204,10 @@ class BillingRequest(object):
             return self.attributes.get('description')
     
         @property
+        def funds_settlement(self):
+            return self.attributes.get('funds_settlement')
+    
+        @property
         def links(self):
             return self.attributes.get('links')
     
