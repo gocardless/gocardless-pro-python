@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.52.0
+
+- Added new endpoints `/branding/logos` and `/branding/payer_themes` available for Embed merchants
+
 # 1.51.0
 
 - Added `payer_requested_dual_signature` field for Billing Request Confirmation endpoint.
