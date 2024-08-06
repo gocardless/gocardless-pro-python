@@ -92,6 +92,11 @@ class Subscription(object):
   
 
     @property
+    def parent_plan_paused(self):
+        return self.attributes.get('parent_plan_paused')
+  
+
+    @property
     def payment_reference(self):
         return self.attributes.get('payment_reference')
   
@@ -150,6 +155,8 @@ class Subscription(object):
         def mandate(self):
             return self.attributes.get('mandate')
     
+  
+
   
 
   

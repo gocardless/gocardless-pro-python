@@ -39,6 +39,7 @@ def test_subscriptions_create():
     assert response.metadata == body.get('metadata')
     assert response.month == body.get('month')
     assert response.name == body.get('name')
+    assert response.parent_plan_paused == body.get('parent_plan_paused')
     assert response.payment_reference == body.get('payment_reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
     assert response.start_date == body.get('start_date')
@@ -112,6 +113,7 @@ def test_subscriptions_list():
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
     assert [r.month for r in response.records] == [b.get('month') for b in body]
     assert [r.name for r in response.records] == [b.get('name') for b in body]
+    assert [r.parent_plan_paused for r in response.records] == [b.get('parent_plan_paused') for b in body]
     assert [r.payment_reference for r in response.records] == [b.get('payment_reference') for b in body]
     assert [r.retry_if_possible for r in response.records] == [b.get('retry_if_possible') for b in body]
     assert [r.start_date for r in response.records] == [b.get('start_date') for b in body]
@@ -191,6 +193,7 @@ def test_subscriptions_get():
     assert response.metadata == body.get('metadata')
     assert response.month == body.get('month')
     assert response.name == body.get('name')
+    assert response.parent_plan_paused == body.get('parent_plan_paused')
     assert response.payment_reference == body.get('payment_reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
     assert response.start_date == body.get('start_date')
@@ -243,6 +246,7 @@ def test_subscriptions_update():
     assert response.metadata == body.get('metadata')
     assert response.month == body.get('month')
     assert response.name == body.get('name')
+    assert response.parent_plan_paused == body.get('parent_plan_paused')
     assert response.payment_reference == body.get('payment_reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
     assert response.start_date == body.get('start_date')
@@ -295,6 +299,7 @@ def test_subscriptions_pause():
     assert response.metadata == body.get('metadata')
     assert response.month == body.get('month')
     assert response.name == body.get('name')
+    assert response.parent_plan_paused == body.get('parent_plan_paused')
     assert response.payment_reference == body.get('payment_reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
     assert response.start_date == body.get('start_date')
@@ -340,6 +345,7 @@ def test_subscriptions_resume():
     assert response.metadata == body.get('metadata')
     assert response.month == body.get('month')
     assert response.name == body.get('name')
+    assert response.parent_plan_paused == body.get('parent_plan_paused')
     assert response.payment_reference == body.get('payment_reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
     assert response.start_date == body.get('start_date')
@@ -385,6 +391,7 @@ def test_subscriptions_cancel():
     assert response.metadata == body.get('metadata')
     assert response.month == body.get('month')
     assert response.name == body.get('name')
+    assert response.parent_plan_paused == body.get('parent_plan_paused')
     assert response.payment_reference == body.get('payment_reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
     assert response.start_date == body.get('start_date')

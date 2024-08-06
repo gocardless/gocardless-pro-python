@@ -1,4 +1,8 @@
 <!-- @format -->
+# 1.53.0
+
+- Added `/exports` APIs and added `exports` as a new event type available for Embed merchants
+
 # 1.52.0
 
 - Added new endpoints `/branding/logos` and `/branding/payer_themes` available for Embed merchants
