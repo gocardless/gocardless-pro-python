@@ -29,6 +29,8 @@ from .customer_notification import CustomerNotification
 
 from .event import Event
 
+from .export import Export
+
 from .instalment_schedule import InstalmentSchedule
 
 from .institution import Institution

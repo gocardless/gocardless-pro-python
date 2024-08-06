@@ -216,6 +216,10 @@ class BillingRequest(object):
             return self.attributes.get('metadata')
     
         @property
+        def reference(self):
+            return self.attributes.get('reference')
+    
+        @property
         def scheme(self):
             return self.attributes.get('scheme')
     

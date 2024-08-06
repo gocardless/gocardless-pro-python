@@ -315,6 +315,20 @@ Events
     # Get a single event
     client.events.get('EV123', params={...})
 
+Exports
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Get a single export
+    client.exports.get('EX123', params={...})
+
+    # List exports
+    client.exports.list(params={...})
+
+    # Iterate through all exports
+    client.exports.all(params={...})
+
 Instalment schedules
 ''''''''''''''''''''''''''''''''''''''''''
 
