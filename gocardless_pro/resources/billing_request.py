@@ -145,10 +145,6 @@ class BillingRequest(object):
             return self.attributes.get('authorisation_source')
     
         @property
-        def consent_type(self):
-            return self.attributes.get('consent_type')
-    
-        @property
         def constraints(self):
             return self.attributes.get('constraints')
     
