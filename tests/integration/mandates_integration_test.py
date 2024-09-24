@@ -26,6 +26,7 @@ def test_mandates_create():
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.authorisation_source == body.get('authorisation_source')
+    assert response.consent_type == body.get('consent_type')
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
@@ -99,6 +100,7 @@ def test_mandates_list():
     assert response.after == fixture['body']['meta']['cursors']['after']
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert [r.authorisation_source for r in response.records] == [b.get('authorisation_source') for b in body]
+    assert [r.consent_type for r in response.records] == [b.get('consent_type') for b in body]
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
     assert [r.funds_settlement for r in response.records] == [b.get('funds_settlement') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
@@ -171,6 +173,7 @@ def test_mandates_get():
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert response.authorisation_source == body.get('authorisation_source')
+    assert response.consent_type == body.get('consent_type')
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
@@ -223,6 +226,7 @@ def test_mandates_update():
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert response.authorisation_source == body.get('authorisation_source')
+    assert response.consent_type == body.get('consent_type')
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
@@ -275,6 +279,7 @@ def test_mandates_cancel():
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.authorisation_source == body.get('authorisation_source')
+    assert response.consent_type == body.get('consent_type')
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
@@ -320,6 +325,7 @@ def test_mandates_reinstate():
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.authorisation_source == body.get('authorisation_source')
+    assert response.consent_type == body.get('consent_type')
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
