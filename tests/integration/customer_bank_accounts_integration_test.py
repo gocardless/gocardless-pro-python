@@ -28,7 +28,6 @@ def test_customer_bank_accounts_create():
     assert response.account_holder_name == body.get('account_holder_name')
     assert response.account_number_ending == body.get('account_number_ending')
     assert response.account_type == body.get('account_type')
-    assert response.bank_account_token == body.get('bank_account_token')
     assert response.bank_name == body.get('bank_name')
     assert response.country_code == body.get('country_code')
     assert response.created_at == body.get('created_at')
@@ -93,7 +92,6 @@ def test_customer_bank_accounts_list():
     assert [r.account_holder_name for r in response.records] == [b.get('account_holder_name') for b in body]
     assert [r.account_number_ending for r in response.records] == [b.get('account_number_ending') for b in body]
     assert [r.account_type for r in response.records] == [b.get('account_type') for b in body]
-    assert [r.bank_account_token for r in response.records] == [b.get('bank_account_token') for b in body]
     assert [r.bank_name for r in response.records] == [b.get('bank_name') for b in body]
     assert [r.country_code for r in response.records] == [b.get('country_code') for b in body]
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
@@ -164,7 +162,6 @@ def test_customer_bank_accounts_get():
     assert response.account_holder_name == body.get('account_holder_name')
     assert response.account_number_ending == body.get('account_number_ending')
     assert response.account_type == body.get('account_type')
-    assert response.bank_account_token == body.get('bank_account_token')
     assert response.bank_name == body.get('bank_name')
     assert response.country_code == body.get('country_code')
     assert response.created_at == body.get('created_at')
@@ -208,7 +205,6 @@ def test_customer_bank_accounts_update():
     assert response.account_holder_name == body.get('account_holder_name')
     assert response.account_number_ending == body.get('account_number_ending')
     assert response.account_type == body.get('account_type')
-    assert response.bank_account_token == body.get('bank_account_token')
     assert response.bank_name == body.get('bank_name')
     assert response.country_code == body.get('country_code')
     assert response.created_at == body.get('created_at')
@@ -252,7 +248,6 @@ def test_customer_bank_accounts_disable():
     assert response.account_holder_name == body.get('account_holder_name')
     assert response.account_number_ending == body.get('account_number_ending')
     assert response.account_type == body.get('account_type')
-    assert response.bank_account_token == body.get('bank_account_token')
     assert response.bank_name == body.get('bank_name')
     assert response.country_code == body.get('country_code')
     assert response.created_at == body.get('created_at')

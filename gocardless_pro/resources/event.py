@@ -92,10 +92,6 @@ class Event(object):
             return self.attributes.get('description')
     
         @property
-        def item_count(self):
-            return self.attributes.get('item_count')
-    
-        @property
         def not_retried_reason(self):
             return self.attributes.get('not_retried_reason')
     
