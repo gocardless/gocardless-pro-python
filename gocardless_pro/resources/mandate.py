@@ -27,11 +27,6 @@ class Mandate(object):
   
 
     @property
-    def consent_type(self):
-        return self.attributes.get('consent_type')
-  
-
-    @property
     def created_at(self):
         return self.attributes.get('created_at')
   
@@ -117,8 +112,6 @@ class Mandate(object):
         def start_date(self):
             return self.attributes.get('start_date')
     
-  
-
   
 
   

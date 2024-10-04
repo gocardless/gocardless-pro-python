@@ -32,11 +32,6 @@ class CustomerBankAccount(object):
   
 
     @property
-    def bank_account_token(self):
-        return self.attributes.get('bank_account_token')
-  
-
-    @property
     def bank_name(self):
         return self.attributes.get('bank_name')
   
@@ -76,8 +71,6 @@ class CustomerBankAccount(object):
         return self.attributes.get('metadata')
   
 
-
-  
 
   
 

@@ -107,7 +107,6 @@ def test_events_get():
     assert response.details.cause == body.get('details')['cause']
     assert response.details.currency == body.get('details')['currency']
     assert response.details.description == body.get('details')['description']
-    assert response.details.item_count == body.get('details')['item_count']
     assert response.details.not_retried_reason == body.get('details')['not_retried_reason']
     assert response.details.origin == body.get('details')['origin']
     assert response.details._property == body.get('details')['property']
