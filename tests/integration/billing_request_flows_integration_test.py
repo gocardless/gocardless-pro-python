@@ -40,6 +40,7 @@ def test_billing_request_flows_create():
     assert response.session_token == body.get('session_token')
     assert response.show_redirect_buttons == body.get('show_redirect_buttons')
     assert response.show_success_redirect_button == body.get('show_success_redirect_button')
+    assert response.skip_success_screen == body.get('skip_success_screen')
     assert response.links.billing_request == body.get('links')['billing_request']
     assert response.prefilled_bank_account.account_type == body.get('prefilled_bank_account')['account_type']
     assert response.prefilled_customer.address_line1 == body.get('prefilled_customer')['address_line1']
@@ -102,6 +103,7 @@ def test_billing_request_flows_initialise():
     assert response.session_token == body.get('session_token')
     assert response.show_redirect_buttons == body.get('show_redirect_buttons')
     assert response.show_success_redirect_button == body.get('show_success_redirect_button')
+    assert response.skip_success_screen == body.get('skip_success_screen')
     assert response.links.billing_request == body.get('links')['billing_request']
     assert response.prefilled_bank_account.account_type == body.get('prefilled_bank_account')['account_type']
     assert response.prefilled_customer.address_line1 == body.get('prefilled_customer')['address_line1']
