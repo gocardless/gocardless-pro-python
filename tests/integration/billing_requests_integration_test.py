@@ -28,6 +28,7 @@ def test_billing_requests_create():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -117,6 +118,7 @@ def test_billing_requests_collect_customer_details():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -182,6 +184,7 @@ def test_billing_requests_collect_bank_account():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -247,6 +250,7 @@ def test_billing_requests_confirm_payer_details():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -312,6 +316,7 @@ def test_billing_requests_fulfil():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -377,6 +382,7 @@ def test_billing_requests_cancel():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -446,6 +452,7 @@ def test_billing_requests_list():
     assert [r.actions for r in response.records] == [b.get('actions') for b in body]
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
     assert [r.fallback_enabled for r in response.records] == [b.get('fallback_enabled') for b in body]
+    assert [r.fallback_occurred for r in response.records] == [b.get('fallback_occurred') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
     assert [r.purpose_code for r in response.records] == [b.get('purpose_code') for b in body]
@@ -513,6 +520,7 @@ def test_billing_requests_get():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -585,6 +593,7 @@ def test_billing_requests_notify():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -650,6 +659,7 @@ def test_billing_requests_fallback():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -715,6 +725,7 @@ def test_billing_requests_choose_currency():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
@@ -780,6 +791,7 @@ def test_billing_requests_select_institution():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')

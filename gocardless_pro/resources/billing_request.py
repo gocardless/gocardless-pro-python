@@ -32,6 +32,11 @@ class BillingRequest(object):
   
 
     @property
+    def fallback_occurred(self):
+        return self.attributes.get('fallback_occurred')
+  
+
+    @property
     def id(self):
         return self.attributes.get('id')
   
@@ -71,6 +76,8 @@ class BillingRequest(object):
         return self.attributes.get('status')
   
 
+
+  
 
   
 
