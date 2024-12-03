@@ -1,4 +1,11 @@
 <!-- @format -->
+# 2.1.0
+
+- Added `mandate_request[consent_type]` parameter to Billing Request creation.
+- Added `constraints[payment_method]` parameter to Billing Request creation.
+- Added `subscription_request` parameter to Billing Request creation.
+- Added `instalment_schedule_request` parameter to Billing Request creation.
+
 # 1.53.0
 
 - Added `/exports` APIs and added `exports` as a new event type available for Embed merchants

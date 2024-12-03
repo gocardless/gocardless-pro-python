@@ -42,6 +42,11 @@ class BillingRequest(object):
   
 
     @property
+    def instalment_schedule_request(self):
+        return self.InstalmentScheduleRequest(self.attributes.get('instalment_schedule_request'))
+  
+
+    @property
     def links(self):
         return self.Links(self.attributes.get('links'))
   
@@ -76,6 +81,11 @@ class BillingRequest(object):
         return self.attributes.get('status')
   
 
+    @property
+    def subscription_request(self):
+        return self.SubscriptionRequest(self.attributes.get('subscription_request'))
+  
+
 
   
 
@@ -85,6 +95,51 @@ class BillingRequest(object):
 
   
 
+  
+
+  
+    class InstalmentScheduleRequest(object):
+        """Wrapper for the response's 'instalment_schedule_request' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def app_fee(self):
+            return self.attributes.get('app_fee')
+    
+        @property
+        def currency(self):
+            return self.attributes.get('currency')
+    
+        @property
+        def instalments(self):
+            return self.attributes.get('instalments')
+    
+        @property
+        def links(self):
+            return self.attributes.get('links')
+    
+        @property
+        def metadata(self):
+            return self.attributes.get('metadata')
+    
+        @property
+        def name(self):
+            return self.attributes.get('name')
+    
+        @property
+        def payment_reference(self):
+            return self.attributes.get('payment_reference')
+    
+        @property
+        def retry_if_possible(self):
+            return self.attributes.get('retry_if_possible')
+    
+        @property
+        def total_amount(self):
+            return self.attributes.get('total_amount')
+    
   
 
   
@@ -115,6 +170,14 @@ class BillingRequest(object):
             return self.attributes.get('customer_billing_detail')
     
         @property
+        def instalment_schedule_request(self):
+            return self.attributes.get('instalment_schedule_request')
+    
+        @property
+        def instalment_schedule_request_instalment_schedule(self):
+            return self.attributes.get('instalment_schedule_request_instalment_schedule')
+    
+        @property
         def mandate_request(self):
             return self.attributes.get('mandate_request')
     
@@ -137,6 +200,14 @@ class BillingRequest(object):
         @property
         def payment_request_payment(self):
             return self.attributes.get('payment_request_payment')
+    
+        @property
+        def subscription_request(self):
+            return self.attributes.get('subscription_request')
+    
+        @property
+        def subscription_request_subscription(self):
+            return self.attributes.get('subscription_request_subscription')
     
   
 
@@ -259,5 +330,70 @@ class BillingRequest(object):
     
   
 
+  
+
+  
+    class SubscriptionRequest(object):
+        """Wrapper for the response's 'subscription_request' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def amount(self):
+            return self.attributes.get('amount')
+    
+        @property
+        def app_fee(self):
+            return self.attributes.get('app_fee')
+    
+        @property
+        def count(self):
+            return self.attributes.get('count')
+    
+        @property
+        def currency(self):
+            return self.attributes.get('currency')
+    
+        @property
+        def day_of_month(self):
+            return self.attributes.get('day_of_month')
+    
+        @property
+        def interval(self):
+            return self.attributes.get('interval')
+    
+        @property
+        def interval_unit(self):
+            return self.attributes.get('interval_unit')
+    
+        @property
+        def links(self):
+            return self.attributes.get('links')
+    
+        @property
+        def metadata(self):
+            return self.attributes.get('metadata')
+    
+        @property
+        def month(self):
+            return self.attributes.get('month')
+    
+        @property
+        def name(self):
+            return self.attributes.get('name')
+    
+        @property
+        def payment_reference(self):
+            return self.attributes.get('payment_reference')
+    
+        @property
+        def retry_if_possible(self):
+            return self.attributes.get('retry_if_possible')
+    
+        @property
+        def start_date(self):
+            return self.attributes.get('start_date')
+    
   
 
