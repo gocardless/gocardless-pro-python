@@ -32,8 +32,18 @@ class BillingRequest(object):
   
 
     @property
+    def fallback_occurred(self):
+        return self.attributes.get('fallback_occurred')
+  
+
+    @property
     def id(self):
         return self.attributes.get('id')
+  
+
+    @property
+    def instalment_schedule_request(self):
+        return self.InstalmentScheduleRequest(self.attributes.get('instalment_schedule_request'))
   
 
     @property
@@ -86,6 +96,53 @@ class BillingRequest(object):
   
 
   
+
+  
+    class InstalmentScheduleRequest(object):
+        """Wrapper for the response's 'instalment_schedule_request' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def app_fee(self):
+            return self.attributes.get('app_fee')
+    
+        @property
+        def currency(self):
+            return self.attributes.get('currency')
+    
+        @property
+        def instalments(self):
+            return self.attributes.get('instalments')
+    
+        @property
+        def links(self):
+            return self.attributes.get('links')
+    
+        @property
+        def metadata(self):
+            return self.attributes.get('metadata')
+    
+        @property
+        def name(self):
+            return self.attributes.get('name')
+    
+        @property
+        def payment_reference(self):
+            return self.attributes.get('payment_reference')
+    
+        @property
+        def retry_if_possible(self):
+            return self.attributes.get('retry_if_possible')
+    
+        @property
+        def total_amount(self):
+            return self.attributes.get('total_amount')
+    
+  
+
+  
     class Links(object):
         """Wrapper for the response's 'links' attribute."""
 
@@ -111,6 +168,14 @@ class BillingRequest(object):
         @property
         def customer_billing_detail(self):
             return self.attributes.get('customer_billing_detail')
+    
+        @property
+        def instalment_schedule_request(self):
+            return self.attributes.get('instalment_schedule_request')
+    
+        @property
+        def instalment_schedule_request_instalment_schedule(self):
+            return self.attributes.get('instalment_schedule_request_instalment_schedule')
     
         @property
         def mandate_request(self):
@@ -139,6 +204,10 @@ class BillingRequest(object):
         @property
         def subscription_request(self):
             return self.attributes.get('subscription_request')
+    
+        @property
+        def subscription_request_subscription(self):
+            return self.attributes.get('subscription_request_subscription')
     
   
 
@@ -299,6 +368,10 @@ class BillingRequest(object):
             return self.attributes.get('interval_unit')
     
         @property
+        def links(self):
+            return self.attributes.get('links')
+    
+        @property
         def metadata(self):
             return self.attributes.get('metadata')
     
@@ -313,6 +386,10 @@ class BillingRequest(object):
         @property
         def payment_reference(self):
             return self.attributes.get('payment_reference')
+    
+        @property
+        def retry_if_possible(self):
+            return self.attributes.get('retry_if_possible')
     
         @property
         def start_date(self):

@@ -28,15 +28,27 @@ def test_billing_requests_create():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -44,6 +56,7 @@ def test_billing_requests_create():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -73,10 +86,12 @@ def test_billing_requests_create():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 @responses.activate
@@ -130,15 +145,27 @@ def test_billing_requests_collect_customer_details():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -146,6 +173,7 @@ def test_billing_requests_collect_customer_details():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -175,10 +203,12 @@ def test_billing_requests_collect_customer_details():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_collect_customer_details_doesnt_retry():
@@ -208,15 +238,27 @@ def test_billing_requests_collect_bank_account():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -224,6 +266,7 @@ def test_billing_requests_collect_bank_account():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -253,10 +296,12 @@ def test_billing_requests_collect_bank_account():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_collect_bank_account_doesnt_retry():
@@ -286,15 +331,27 @@ def test_billing_requests_confirm_payer_details():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -302,6 +359,7 @@ def test_billing_requests_confirm_payer_details():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -331,10 +389,12 @@ def test_billing_requests_confirm_payer_details():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_confirm_payer_details_doesnt_retry():
@@ -364,15 +424,27 @@ def test_billing_requests_fulfil():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -380,6 +452,7 @@ def test_billing_requests_fulfil():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -409,10 +482,12 @@ def test_billing_requests_fulfil():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_fulfil_doesnt_retry():
@@ -442,15 +517,27 @@ def test_billing_requests_cancel():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -458,6 +545,7 @@ def test_billing_requests_cancel():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -487,10 +575,12 @@ def test_billing_requests_cancel():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_cancel_doesnt_retry():
@@ -524,6 +614,7 @@ def test_billing_requests_list():
     assert [r.actions for r in response.records] == [b.get('actions') for b in body]
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
     assert [r.fallback_enabled for r in response.records] == [b.get('fallback_enabled') for b in body]
+    assert [r.fallback_occurred for r in response.records] == [b.get('fallback_occurred') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
     assert [r.purpose_code for r in response.records] == [b.get('purpose_code') for b in body]
@@ -591,15 +682,27 @@ def test_billing_requests_get():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -607,6 +710,7 @@ def test_billing_requests_get():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -636,10 +740,12 @@ def test_billing_requests_get():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 @responses.activate
@@ -676,15 +782,27 @@ def test_billing_requests_notify():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -692,6 +810,7 @@ def test_billing_requests_notify():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -721,10 +840,12 @@ def test_billing_requests_notify():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_notify_doesnt_retry():
@@ -754,15 +875,27 @@ def test_billing_requests_fallback():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -770,6 +903,7 @@ def test_billing_requests_fallback():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -799,10 +933,12 @@ def test_billing_requests_fallback():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_fallback_doesnt_retry():
@@ -832,15 +968,27 @@ def test_billing_requests_choose_currency():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -848,6 +996,7 @@ def test_billing_requests_choose_currency():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -877,10 +1026,12 @@ def test_billing_requests_choose_currency():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_choose_currency_doesnt_retry():
@@ -910,15 +1061,27 @@ def test_billing_requests_select_institution():
     assert response.actions == body.get('actions')
     assert response.created_at == body.get('created_at')
     assert response.fallback_enabled == body.get('fallback_enabled')
+    assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
+    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
+    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
+    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
+    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
+    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
+    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
+    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
+    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
+    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
+    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
     assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.organisation == body.get('links')['organisation']
@@ -926,6 +1089,7 @@ def test_billing_requests_select_institution():
     assert response.links.payment_request == body.get('links')['payment_request']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.subscription_request == body.get('links')['subscription_request']
+    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
     assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
     assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
@@ -955,10 +1119,12 @@ def test_billing_requests_select_institution():
     assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
     assert response.subscription_request.interval == body.get('subscription_request')['interval']
     assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
+    assert response.subscription_request.links == body.get('subscription_request')['links']
     assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
     assert response.subscription_request.month == body.get('subscription_request')['month']
     assert response.subscription_request.name == body.get('subscription_request')['name']
     assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
+    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
     assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
 
 def test_timeout_billing_requests_select_institution_doesnt_retry():
