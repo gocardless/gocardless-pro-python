@@ -26,6 +26,7 @@ def test_mandate_import_entries_create():
     assert isinstance(response, resources.MandateImportEntry)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.created_at == body.get('created_at')
+    assert response.processing_errors == body.get('processing_errors')
     assert response.record_identifier == body.get('record_identifier')
     assert response.links.customer == body.get('links')['customer']
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
@@ -68,6 +69,7 @@ def test_mandate_import_entries_list():
     assert response.after == fixture['body']['meta']['cursors']['after']
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.processing_errors for r in response.records] == [b.get('processing_errors') for b in body]
     assert [r.record_identifier for r in response.records] == [b.get('record_identifier') for b in body]
 
 @responses.activate
