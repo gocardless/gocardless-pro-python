@@ -1,4 +1,9 @@
 <!-- @format -->
+# 2.2.0
+
+- Added `status` filter parameter to Mandate Import Entries.
+- Added `processing_errors` response field to Mandate Import Entry.
+
 # 2.1.0
 
 - Added `mandate_request[consent_type]` parameter to Billing Request creation.
