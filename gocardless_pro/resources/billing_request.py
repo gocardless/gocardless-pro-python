@@ -255,6 +255,10 @@ class BillingRequest(object):
             return self.attributes.get('scheme')
     
         @property
+        def sweeping(self):
+            return self.attributes.get('sweeping')
+    
+        @property
         def verify(self):
             return self.attributes.get('verify')
     
