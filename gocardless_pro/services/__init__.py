@@ -3,6 +3,7 @@
 #   https://github.com/gocardless/crank
 #
 
+from .balances_service import BalancesService
 from .bank_authorisations_service import BankAuthorisationsService
 from .bank_details_lookups_service import BankDetailsLookupsService
 from .billing_requests_service import BillingRequestsService

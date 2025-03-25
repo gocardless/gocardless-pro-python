@@ -76,6 +76,17 @@ For full documentation, see our `API reference`_.
 Available resources
 ```````````````````
 
+Balances
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List balances
+    client.balances.list(params={...})
+
+    # Iterate through all balances
+    client.balances.all(params={...})
+
 Bank authorisations
 ''''''''''''''''''''''''''''''''''''''''''
 
