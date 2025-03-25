@@ -1,4 +1,8 @@
 <!-- @format -->
+# 2.3.0
+
+- Added new endpoint `/balance` that the balances for a creditor
+
 # 2.2.0
 
 - Added `status` filter parameter to Mandate Import Entries.
