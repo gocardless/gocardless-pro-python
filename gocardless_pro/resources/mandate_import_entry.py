@@ -27,6 +27,11 @@ class MandateImportEntry(object):
   
 
     @property
+    def processing_errors(self):
+        return self.attributes.get('processing_errors')
+  
+
+    @property
     def record_identifier(self):
         return self.attributes.get('record_identifier')
   
@@ -57,6 +62,8 @@ class MandateImportEntry(object):
         def mandate_import(self):
             return self.attributes.get('mandate_import')
     
+  
+
   
 
   

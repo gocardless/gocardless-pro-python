@@ -3,6 +3,8 @@
 #   https://github.com/gocardless/crank
 #
 
+from .balance import Balance
+
 from .bank_authorisation import BankAuthorisation
 
 from .bank_details_lookup import BankDetailsLookup

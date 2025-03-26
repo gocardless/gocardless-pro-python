@@ -17,6 +17,9 @@ def test_requires_valid_environment():
         Client(access_token=access_token, environment='invalid')
 
 
+def test_balances_returns_service():
+    assert isinstance(client.balances, services.BalancesService)
+
 def test_bank_authorisations_returns_service():
     assert isinstance(client.bank_authorisations, services.BankAuthorisationsService)
 
