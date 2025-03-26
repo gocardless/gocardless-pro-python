@@ -46,6 +46,13 @@ class Institution(object):
         return self.attributes.get('name')
   
 
+    @property
+    def status(self):
+        return self.attributes.get('status')
+  
+
+
+  
 
   
 
