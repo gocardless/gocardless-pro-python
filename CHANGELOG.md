@@ -1,4 +1,8 @@
 <!-- @format -->
+# 2.4.0
+
+- Added new field called "status" to GET /billing_requests/<billing_request_id>/institutions endpoint
+
 # 2.3.0
 
 - Added new endpoint `/balance` that the balances for a creditor
