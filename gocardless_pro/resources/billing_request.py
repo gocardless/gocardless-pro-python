@@ -113,10 +113,6 @@ class BillingRequest(object):
             return self.attributes.get('currency')
     
         @property
-        def instalments(self):
-            return self.attributes.get('instalments')
-    
-        @property
         def instalments_with_dates(self):
             return self.attributes.get('instalments_with_dates')
     

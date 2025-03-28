@@ -35,7 +35,6 @@ def test_billing_requests_create():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -137,246 +136,6 @@ def test_502_billing_requests_create_retries():
   
 
 @responses.activate
-def test_billing_requests_create_with_instalments_with_dates():
-    fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_dates']
-    helpers.stub_response(fixture)
-    response = helpers.client.billing_requests.create_with_instalments_with_dates(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
-
-    assert isinstance(response, resources.BillingRequest)
-    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
-    assert response.actions == body.get('actions')
-    assert response.created_at == body.get('created_at')
-    assert response.fallback_enabled == body.get('fallback_enabled')
-    assert response.fallback_occurred == body.get('fallback_occurred')
-    assert response.id == body.get('id')
-    assert response.metadata == body.get('metadata')
-    assert response.purpose_code == body.get('purpose_code')
-    assert response.status == body.get('status')
-    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
-    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
-    assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
-    assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
-    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
-    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
-    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
-    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
-    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
-    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
-    assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
-    assert response.links.creditor == body.get('links')['creditor']
-    assert response.links.customer == body.get('links')['customer']
-    assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
-    assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
-    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
-    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
-    assert response.links.mandate_request == body.get('links')['mandate_request']
-    assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
-    assert response.links.organisation == body.get('links')['organisation']
-    assert response.links.payment_provider == body.get('links')['payment_provider']
-    assert response.links.payment_request == body.get('links')['payment_request']
-    assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
-    assert response.links.subscription_request == body.get('links')['subscription_request']
-    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
-    assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
-    assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
-    assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
-    assert response.mandate_request.currency == body.get('mandate_request')['currency']
-    assert response.mandate_request.description == body.get('mandate_request')['description']
-    assert response.mandate_request.links == body.get('mandate_request')['links']
-    assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
-    assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
-    assert response.mandate_request.scheme == body.get('mandate_request')['scheme']
-    assert response.mandate_request.sweeping == body.get('mandate_request')['sweeping']
-    assert response.mandate_request.verify == body.get('mandate_request')['verify']
-    assert response.payment_request.amount == body.get('payment_request')['amount']
-    assert response.payment_request.app_fee == body.get('payment_request')['app_fee']
-    assert response.payment_request.currency == body.get('payment_request')['currency']
-    assert response.payment_request.description == body.get('payment_request')['description']
-    assert response.payment_request.funds_settlement == body.get('payment_request')['funds_settlement']
-    assert response.payment_request.links == body.get('payment_request')['links']
-    assert response.payment_request.metadata == body.get('payment_request')['metadata']
-    assert response.payment_request.reference == body.get('payment_request')['reference']
-    assert response.payment_request.scheme == body.get('payment_request')['scheme']
-    assert response.resources.customer == body.get('resources')['customer']
-    assert response.resources.customer_bank_account == body.get('resources')['customer_bank_account']
-    assert response.resources.customer_billing_detail == body.get('resources')['customer_billing_detail']
-    assert response.subscription_request.amount == body.get('subscription_request')['amount']
-    assert response.subscription_request.app_fee == body.get('subscription_request')['app_fee']
-    assert response.subscription_request.count == body.get('subscription_request')['count']
-    assert response.subscription_request.currency == body.get('subscription_request')['currency']
-    assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
-    assert response.subscription_request.interval == body.get('subscription_request')['interval']
-    assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
-    assert response.subscription_request.links == body.get('subscription_request')['links']
-    assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
-    assert response.subscription_request.month == body.get('subscription_request')['month']
-    assert response.subscription_request.name == body.get('subscription_request')['name']
-    assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
-    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
-    assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
-
-@responses.activate
-def test_billing_requests_create_with_instalments_with_dates_new_idempotency_key_for_each_call():
-    fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_dates']
-    helpers.stub_response(fixture)
-    helpers.client.billing_requests.create_with_instalments_with_dates(*fixture['url_params'])
-    helpers.client.billing_requests.create_with_instalments_with_dates(*fixture['url_params'])
-    assert responses.calls[0].request.headers.get('Idempotency-Key') != responses.calls[1].request.headers.get('Idempotency-Key')
-
-def test_timeout_billing_requests_create_with_instalments_with_dates_idempotency_conflict():
-    create_fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_dates']
-    get_fixture = helpers.load_fixture('billing_requests')['get']
-    with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
-      response = helpers.client.billing_requests.create_with_instalments_with_dates(*create_fixture['url_params'])
-      assert len(rsps.calls) == 2
-
-    assert isinstance(response, resources.BillingRequest)
-
-@responses.activate
-def test_timeout_billing_requests_create_with_instalments_with_dates_retries():
-    fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_dates']
-    with helpers.stub_timeout_then_response(fixture) as rsps:
-      response = helpers.client.billing_requests.create_with_instalments_with_dates(*fixture['url_params'])
-      assert len(rsps.calls) == 2
-      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
-
-    assert isinstance(response, resources.BillingRequest)
-
-def test_502_billing_requests_create_with_instalments_with_dates_retries():
-    fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_dates']
-    with helpers.stub_502_then_response(fixture) as rsps:
-      response = helpers.client.billing_requests.create_with_instalments_with_dates(*fixture['url_params'])
-      assert len(rsps.calls) == 2
-      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
-
-    assert isinstance(response, resources.BillingRequest)
-  
-
-@responses.activate
-def test_billing_requests_create_with_instalments_with_schedule():
-    fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_schedule']
-    helpers.stub_response(fixture)
-    response = helpers.client.billing_requests.create_with_instalments_with_schedule(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
-
-    assert isinstance(response, resources.BillingRequest)
-    assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
-    assert response.actions == body.get('actions')
-    assert response.created_at == body.get('created_at')
-    assert response.fallback_enabled == body.get('fallback_enabled')
-    assert response.fallback_occurred == body.get('fallback_occurred')
-    assert response.id == body.get('id')
-    assert response.metadata == body.get('metadata')
-    assert response.purpose_code == body.get('purpose_code')
-    assert response.status == body.get('status')
-    assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
-    assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
-    assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
-    assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
-    assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
-    assert response.instalment_schedule_request.metadata == body.get('instalment_schedule_request')['metadata']
-    assert response.instalment_schedule_request.name == body.get('instalment_schedule_request')['name']
-    assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
-    assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
-    assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
-    assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
-    assert response.links.creditor == body.get('links')['creditor']
-    assert response.links.customer == body.get('links')['customer']
-    assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
-    assert response.links.customer_billing_detail == body.get('links')['customer_billing_detail']
-    assert response.links.instalment_schedule_request == body.get('links')['instalment_schedule_request']
-    assert response.links.instalment_schedule_request_instalment_schedule == body.get('links')['instalment_schedule_request_instalment_schedule']
-    assert response.links.mandate_request == body.get('links')['mandate_request']
-    assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
-    assert response.links.organisation == body.get('links')['organisation']
-    assert response.links.payment_provider == body.get('links')['payment_provider']
-    assert response.links.payment_request == body.get('links')['payment_request']
-    assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
-    assert response.links.subscription_request == body.get('links')['subscription_request']
-    assert response.links.subscription_request_subscription == body.get('links')['subscription_request_subscription']
-    assert response.mandate_request.authorisation_source == body.get('mandate_request')['authorisation_source']
-    assert response.mandate_request.consent_type == body.get('mandate_request')['consent_type']
-    assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
-    assert response.mandate_request.currency == body.get('mandate_request')['currency']
-    assert response.mandate_request.description == body.get('mandate_request')['description']
-    assert response.mandate_request.links == body.get('mandate_request')['links']
-    assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
-    assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
-    assert response.mandate_request.scheme == body.get('mandate_request')['scheme']
-    assert response.mandate_request.sweeping == body.get('mandate_request')['sweeping']
-    assert response.mandate_request.verify == body.get('mandate_request')['verify']
-    assert response.payment_request.amount == body.get('payment_request')['amount']
-    assert response.payment_request.app_fee == body.get('payment_request')['app_fee']
-    assert response.payment_request.currency == body.get('payment_request')['currency']
-    assert response.payment_request.description == body.get('payment_request')['description']
-    assert response.payment_request.funds_settlement == body.get('payment_request')['funds_settlement']
-    assert response.payment_request.links == body.get('payment_request')['links']
-    assert response.payment_request.metadata == body.get('payment_request')['metadata']
-    assert response.payment_request.reference == body.get('payment_request')['reference']
-    assert response.payment_request.scheme == body.get('payment_request')['scheme']
-    assert response.resources.customer == body.get('resources')['customer']
-    assert response.resources.customer_bank_account == body.get('resources')['customer_bank_account']
-    assert response.resources.customer_billing_detail == body.get('resources')['customer_billing_detail']
-    assert response.subscription_request.amount == body.get('subscription_request')['amount']
-    assert response.subscription_request.app_fee == body.get('subscription_request')['app_fee']
-    assert response.subscription_request.count == body.get('subscription_request')['count']
-    assert response.subscription_request.currency == body.get('subscription_request')['currency']
-    assert response.subscription_request.day_of_month == body.get('subscription_request')['day_of_month']
-    assert response.subscription_request.interval == body.get('subscription_request')['interval']
-    assert response.subscription_request.interval_unit == body.get('subscription_request')['interval_unit']
-    assert response.subscription_request.links == body.get('subscription_request')['links']
-    assert response.subscription_request.metadata == body.get('subscription_request')['metadata']
-    assert response.subscription_request.month == body.get('subscription_request')['month']
-    assert response.subscription_request.name == body.get('subscription_request')['name']
-    assert response.subscription_request.payment_reference == body.get('subscription_request')['payment_reference']
-    assert response.subscription_request.retry_if_possible == body.get('subscription_request')['retry_if_possible']
-    assert response.subscription_request.start_date == body.get('subscription_request')['start_date']
-
-@responses.activate
-def test_billing_requests_create_with_instalments_with_schedule_new_idempotency_key_for_each_call():
-    fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_schedule']
-    helpers.stub_response(fixture)
-    helpers.client.billing_requests.create_with_instalments_with_schedule(*fixture['url_params'])
-    helpers.client.billing_requests.create_with_instalments_with_schedule(*fixture['url_params'])
-    assert responses.calls[0].request.headers.get('Idempotency-Key') != responses.calls[1].request.headers.get('Idempotency-Key')
-
-def test_timeout_billing_requests_create_with_instalments_with_schedule_idempotency_conflict():
-    create_fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_schedule']
-    get_fixture = helpers.load_fixture('billing_requests')['get']
-    with helpers.stub_timeout_then_idempotency_conflict(create_fixture, get_fixture) as rsps:
-      response = helpers.client.billing_requests.create_with_instalments_with_schedule(*create_fixture['url_params'])
-      assert len(rsps.calls) == 2
-
-    assert isinstance(response, resources.BillingRequest)
-
-@responses.activate
-def test_timeout_billing_requests_create_with_instalments_with_schedule_retries():
-    fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_schedule']
-    with helpers.stub_timeout_then_response(fixture) as rsps:
-      response = helpers.client.billing_requests.create_with_instalments_with_schedule(*fixture['url_params'])
-      assert len(rsps.calls) == 2
-      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
-
-    assert isinstance(response, resources.BillingRequest)
-
-def test_502_billing_requests_create_with_instalments_with_schedule_retries():
-    fixture = helpers.load_fixture('billing_requests')['create_with_instalments_with_schedule']
-    with helpers.stub_502_then_response(fixture) as rsps:
-      response = helpers.client.billing_requests.create_with_instalments_with_schedule(*fixture['url_params'])
-      assert len(rsps.calls) == 2
-      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
-
-    assert isinstance(response, resources.BillingRequest)
-  
-
-@responses.activate
 def test_billing_requests_collect_customer_details():
     fixture = helpers.load_fixture('billing_requests')['collect_customer_details']
     helpers.stub_response(fixture)
@@ -395,7 +154,6 @@ def test_billing_requests_collect_customer_details():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -491,7 +249,6 @@ def test_billing_requests_collect_bank_account():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -587,7 +344,6 @@ def test_billing_requests_confirm_payer_details():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -683,7 +439,6 @@ def test_billing_requests_fulfil():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -779,7 +534,6 @@ def test_billing_requests_cancel():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -947,7 +701,6 @@ def test_billing_requests_get():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -1050,7 +803,6 @@ def test_billing_requests_notify():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -1146,7 +898,6 @@ def test_billing_requests_fallback():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -1242,7 +993,6 @@ def test_billing_requests_choose_currency():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']
@@ -1338,7 +1088,6 @@ def test_billing_requests_select_institution():
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
-    assert response.instalment_schedule_request.instalments == body.get('instalment_schedule_request')['instalments']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
     assert response.instalment_schedule_request.instalments_with_schedule == body.get('instalment_schedule_request')['instalments_with_schedule']
     assert response.instalment_schedule_request.links == body.get('instalment_schedule_request')['links']

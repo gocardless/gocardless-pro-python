@@ -21,68 +21,8 @@ class BillingRequestsService(base_service.BaseService):
         """Create a Billing Request.
 
         <p class="notice"><strong>Important</strong>: All properties associated
-        with `subscription_request` are only supported for ACH and PAD
-        schemes.</p>
-
-        Args:
-              params (dict, optional): Request body.
-
-        Returns:
-              BillingRequest
-        """
-        path = '/billing_requests'
-        
-        if params is not None:
-            params = {self._envelope_key(): params}
-
-        try:
-          response = self._perform_request('POST', path, params, headers,
-                                            retry_failures=True)
-        except errors.IdempotentCreationConflictError as err:
-          if self.raise_on_idempotency_conflict:
-            raise err
-          return self.get(identity=err.conflicting_resource_id,
-                          params=params,
-                          headers=headers)
-        return self._resource_for(response)
-  
-
-    def create_with_instalments_with_dates(self,params=None, headers=None):
-        """[ACH/PAD only] Create a Billing Request with instalments (with dates).
-
-        <p class="notice"><strong>Important</strong>: All properties associated
-        with `instalment_schedule_request` are only supported for ACH and PAD
-        schemes.</p>
-
-        Args:
-              params (dict, optional): Request body.
-
-        Returns:
-              BillingRequest
-        """
-        path = '/billing_requests'
-        
-        if params is not None:
-            params = {self._envelope_key(): params}
-
-        try:
-          response = self._perform_request('POST', path, params, headers,
-                                            retry_failures=True)
-        except errors.IdempotentCreationConflictError as err:
-          if self.raise_on_idempotency_conflict:
-            raise err
-          return self.get(identity=err.conflicting_resource_id,
-                          params=params,
-                          headers=headers)
-        return self._resource_for(response)
-  
-
-    def create_with_instalments_with_schedule(self,params=None, headers=None):
-        """[ACH/PAD only] Create a Billing Request with instalments (with schedule).
-
-        <p class="notice"><strong>Important</strong>: All properties associated
-        with `instalment_schedule_request` are only supported for ACH and PAD
-        schemes.</p>
+        with `subscription_request` and `instalment_schedule_request` are only
+        supported for ACH and PAD schemes.</p>
 
         Args:
               params (dict, optional): Request body.

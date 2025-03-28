@@ -114,12 +114,6 @@ Billing requests
     # Create a Billing Request
     client.billing_requests.create(params={...})
 
-    # [ACH/PAD only] Create a Billing Request with instalments (with dates)
-    client.billing_requests.create_with_instalments_with_dates(params={...})
-
-    # [ACH/PAD only] Create a Billing Request with instalments (with schedule)
-    client.billing_requests.create_with_instalments_with_schedule(params={...})
-
     # Collect customer details
     client.billing_requests.collect_customer_details('BRQ123', params={...})
 
