@@ -5,6 +5,8 @@
 
 from .balance import Balance
 
+from .bank_account_detail import BankAccountDetail
+
 from .bank_authorisation import BankAuthorisation
 
 from .bank_details_lookup import BankDetailsLookup

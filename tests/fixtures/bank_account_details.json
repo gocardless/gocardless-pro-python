@@ -1,0 +1,8 @@
+{ 
+  "get": {
+    "method": "GET",
+    "path_template": "/bank_account_details/:identity",
+    "url_params": ["BA123"],
+    "body": {"bank_account_details":{"ciphertext":"example ciphertext 1318","encrypted_key":"example encrypted_key 456","iv":"example iv 2081","protected":"example protected 2540","tag":"example tag 4425"}}
+  }
+}
