@@ -87,6 +87,14 @@ Balances
     # Iterate through all balances
     client.balances.all(params={...})
 
+Bank account details
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Get encrypted bank details
+    client.bank_account_details.get('BA123', params={...})
+
 Bank authorisations
 ''''''''''''''''''''''''''''''''''''''''''
 
