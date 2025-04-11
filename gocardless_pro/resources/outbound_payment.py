@@ -101,6 +101,10 @@ class OutboundPayment(object):
             return self.attributes.get('creditor')
     
         @property
+        def customer(self):
+            return self.attributes.get('customer')
+    
+        @property
         def recipient_bank_account(self):
             return self.attributes.get('recipient_bank_account')
     
