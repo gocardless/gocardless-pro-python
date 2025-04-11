@@ -51,6 +51,8 @@ from .mandate_pdf import MandatePdf
 
 from .negative_balance_limit import NegativeBalanceLimit
 
+from .outbound_payment import OutboundPayment
+
 from .payer_authorisation import PayerAuthorisation
 
 from .payer_theme import PayerTheme
