@@ -89,6 +89,9 @@ def test_mandate_pdfs_returns_service():
 def test_negative_balance_limits_returns_service():
     assert isinstance(client.negative_balance_limits, services.NegativeBalanceLimitsService)
 
+def test_outbound_payments_returns_service():
+    assert isinstance(client.outbound_payments, services.OutboundPaymentsService)
+
 def test_payer_authorisations_returns_service():
     assert isinstance(client.payer_authorisations, services.PayerAuthorisationsService)
 
