@@ -134,6 +134,10 @@ class Client(object):
         return services.NegativeBalanceLimitsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def outbound_payments(self):
+        return services.OutboundPaymentsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def payer_authorisations(self):
         return services.PayerAuthorisationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
