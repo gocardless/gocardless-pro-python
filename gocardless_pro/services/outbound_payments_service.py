@@ -97,8 +97,8 @@ class OutboundPaymentsService(base_service.BaseService):
     def approve(self,identity,params=None, headers=None):
         """Approve an outbound payment.
 
-        Approves an outbound payment. Only outbound payments in the
-        “pending_approval” state can be approved.
+        Approves an outbound payment. Only outbound payments with the
+        “pending_approval” status can be approved.
 
         Args:
               identity (string): Unique identifier of the outbound payment.
