@@ -1,4 +1,8 @@
 <!-- @format -->
+
+# 2.5.0
+- Add endpoints for route `/outbound_payments`
+
 # 2.4.0
 
 - Added new field called "status" to GET /billing_requests/<billing_request_id>/institutions endpoint
