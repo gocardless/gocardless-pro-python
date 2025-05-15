@@ -27,6 +27,7 @@ def test_outbound_payments_create():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.amount == body.get('amount')
     assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
     assert response.description == body.get('description')
     assert response.execution_date == body.get('execution_date')
     assert response.id == body.get('id')
@@ -90,6 +91,7 @@ def test_outbound_payments_withdraw():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.amount == body.get('amount')
     assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
     assert response.description == body.get('description')
     assert response.execution_date == body.get('execution_date')
     assert response.id == body.get('id')
@@ -129,6 +131,7 @@ def test_outbound_payments_cancel():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.amount == body.get('amount')
     assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
     assert response.description == body.get('description')
     assert response.execution_date == body.get('execution_date')
     assert response.id == body.get('id')
@@ -168,6 +171,7 @@ def test_outbound_payments_approve():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.amount == body.get('amount')
     assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
     assert response.description == body.get('description')
     assert response.execution_date == body.get('execution_date')
     assert response.id == body.get('id')
@@ -207,6 +211,7 @@ def test_outbound_payments_get():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert response.amount == body.get('amount')
     assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
     assert response.description == body.get('description')
     assert response.execution_date == body.get('execution_date')
     assert response.id == body.get('id')
@@ -257,6 +262,7 @@ def test_outbound_payments_list():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert [r.amount for r in response.records] == [b.get('amount') for b in body]
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
+    assert [r.currency for r in response.records] == [b.get('currency') for b in body]
     assert [r.description for r in response.records] == [b.get('description') for b in body]
     assert [r.execution_date for r in response.records] == [b.get('execution_date') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
@@ -327,6 +333,7 @@ def test_outbound_payments_update():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert response.amount == body.get('amount')
     assert response.created_at == body.get('created_at')
+    assert response.currency == body.get('currency')
     assert response.description == body.get('description')
     assert response.execution_date == body.get('execution_date')
     assert response.id == body.get('id')
