@@ -27,6 +27,11 @@ class OutboundPayment(object):
   
 
     @property
+    def currency(self):
+        return self.attributes.get('currency')
+  
+
+    @property
     def description(self):
         return self.attributes.get('description')
   
@@ -76,6 +81,8 @@ class OutboundPayment(object):
         return self.Verifications(self.attributes.get('verifications'))
   
 
+
+  
 
   
 
