@@ -66,6 +66,10 @@ class Client(object):
         return services.BillingRequestTemplatesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def billing_request_with_actions(self):
+        return services.BillingRequestWithActionsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def blocks(self):
         return services.BlocksService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
