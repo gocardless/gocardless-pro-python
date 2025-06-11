@@ -123,6 +123,11 @@ def test_billing_request_templates_get():
     assert response.payment_request_scheme == body.get('payment_request_scheme')
     assert response.redirect_uri == body.get('redirect_uri')
     assert response.updated_at == body.get('updated_at')
+    assert response.mandate_request_constraints.end_date == body.get('mandate_request_constraints')['end_date']
+    assert response.mandate_request_constraints.max_amount_per_payment == body.get('mandate_request_constraints')['max_amount_per_payment']
+    assert response.mandate_request_constraints.payment_method == body.get('mandate_request_constraints')['payment_method']
+    assert response.mandate_request_constraints.periodic_limits == body.get('mandate_request_constraints')['periodic_limits']
+    assert response.mandate_request_constraints.start_date == body.get('mandate_request_constraints')['start_date']
 
 @responses.activate
 def test_timeout_billing_request_templates_get_retries():
@@ -172,6 +177,11 @@ def test_billing_request_templates_create():
     assert response.payment_request_scheme == body.get('payment_request_scheme')
     assert response.redirect_uri == body.get('redirect_uri')
     assert response.updated_at == body.get('updated_at')
+    assert response.mandate_request_constraints.end_date == body.get('mandate_request_constraints')['end_date']
+    assert response.mandate_request_constraints.max_amount_per_payment == body.get('mandate_request_constraints')['max_amount_per_payment']
+    assert response.mandate_request_constraints.payment_method == body.get('mandate_request_constraints')['payment_method']
+    assert response.mandate_request_constraints.periodic_limits == body.get('mandate_request_constraints')['periodic_limits']
+    assert response.mandate_request_constraints.start_date == body.get('mandate_request_constraints')['start_date']
 
 @responses.activate
 def test_billing_request_templates_create_new_idempotency_key_for_each_call():
@@ -238,6 +248,11 @@ def test_billing_request_templates_update():
     assert response.payment_request_scheme == body.get('payment_request_scheme')
     assert response.redirect_uri == body.get('redirect_uri')
     assert response.updated_at == body.get('updated_at')
+    assert response.mandate_request_constraints.end_date == body.get('mandate_request_constraints')['end_date']
+    assert response.mandate_request_constraints.max_amount_per_payment == body.get('mandate_request_constraints')['max_amount_per_payment']
+    assert response.mandate_request_constraints.payment_method == body.get('mandate_request_constraints')['payment_method']
+    assert response.mandate_request_constraints.periodic_limits == body.get('mandate_request_constraints')['periodic_limits']
+    assert response.mandate_request_constraints.start_date == body.get('mandate_request_constraints')['start_date']
 
 @responses.activate
 def test_timeout_billing_request_templates_update_retries():
