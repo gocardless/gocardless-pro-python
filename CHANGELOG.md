@@ -1,5 +1,9 @@
 <!-- @format -->
 
+# 3.1.0
+- Added `mandate_request_constraints` to Billing Request templates
+- `constraints[max_amount_per_payment]` is required for Billing Requests Creation, if they contain PayTo `mandate_request`
+
 # 2.5.0
 - Add endpoints for route `/outbound_payments`
 

@@ -32,6 +32,11 @@ class BillingRequestTemplate(object):
   
 
     @property
+    def mandate_request_constraints(self):
+        return self.MandateRequestConstraints(self.attributes.get('mandate_request_constraints'))
+  
+
+    @property
     def mandate_request_currency(self):
         return self.attributes.get('mandate_request_currency')
   
@@ -106,6 +111,35 @@ class BillingRequestTemplate(object):
 
   
 
+  
+
+  
+    class MandateRequestConstraints(object):
+        """Wrapper for the response's 'mandate_request_constraints' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def end_date(self):
+            return self.attributes.get('end_date')
+    
+        @property
+        def max_amount_per_payment(self):
+            return self.attributes.get('max_amount_per_payment')
+    
+        @property
+        def payment_method(self):
+            return self.attributes.get('payment_method')
+    
+        @property
+        def periodic_limits(self):
+            return self.attributes.get('periodic_limits')
+    
+        @property
+        def start_date(self):
+            return self.attributes.get('start_date')
+    
   
 
   
