@@ -42,26 +42,3 @@ class NegativeBalanceLimitsService(base_service.BaseService):
         return Paginator(self, params)
     
   
-
-    def create(self,params=None, headers=None):
-        """Create a negative balance limit.
-
-        Creates a new negative balance limit, which replaces the existing limit
-        (if present) for that currency and creditor combination.
-        
-
-        Args:
-              params (dict, optional): Request body.
-
-        Returns:
-              NegativeBalanceLimit
-        """
-        path = '/negative_balance_limits'
-        
-        if params is not None:
-            params = {self._envelope_key(): params}
-
-        response = self._perform_request('POST', path, params, headers,
-                                         retry_failures=True)
-        return self._resource_for(response)
-  
