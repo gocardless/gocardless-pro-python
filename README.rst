@@ -480,9 +480,6 @@ Negative balance limits
     # Iterate through all negative_balance_limits
     client.negative_balance_limits.all(params={...})
 
-    # Create a negative balance limit
-    client.negative_balance_limits.create(params={...})
-
 Outbound payments
 ''''''''''''''''''''''''''''''''''''''''''
 
