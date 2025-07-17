@@ -8,7 +8,7 @@ setup(
     name = 'gocardless_pro',
     version = '3.2.0',
     packages = find_packages(exclude=['tests']),
-    install_requires = ['requests>=2.6', 'six'],
+    install_requires = ['requests>=2.6'],
     author = 'GoCardless',
     author_email = 'engineering@gocardless.com',
     description = 'A client library for the GoCardless Pro API.',
