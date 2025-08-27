@@ -439,13 +439,13 @@ Mandate imports
     client.mandate_imports.create(params={...})
 
     # Get a mandate import
-    client.mandate_imports.get('IM000010790WX1', params={...})
+    client.mandate_imports.get('IM123', params={...})
 
     # Submit a mandate import
-    client.mandate_imports.submit('IM000010790WX1', params={...})
+    client.mandate_imports.submit('IM123', params={...})
 
     # Cancel a mandate import
-    client.mandate_imports.cancel('IM000010790WX1', params={...})
+    client.mandate_imports.cancel('IM123', params={...})
 
 Mandate import entries
 ''''''''''''''''''''''''''''''''''''''''''
@@ -492,13 +492,13 @@ Outbound payments
     client.outbound_payments.withdraw(params={...})
 
     # Cancel an outbound payment
-    client.outbound_payments.cancel('OUT01JR7P5PKW3K7Q34CJAWC03E82', params={...})
+    client.outbound_payments.cancel('OUT123', params={...})
 
     # Approve an outbound payment
-    client.outbound_payments.approve('OUT01JR7P5PKW3K7Q34CJAWC03E82', params={...})
+    client.outbound_payments.approve('OUT123', params={...})
 
     # Get an outbound payment
-    client.outbound_payments.get('OUT01JR7P5PKW3K7Q34CJAWC03E82', params={...})
+    client.outbound_payments.get('OUT123', params={...})
 
     # List outbound payments
     client.outbound_payments.list(params={...})
@@ -507,7 +507,7 @@ Outbound payments
     client.outbound_payments.all(params={...})
 
     # Update an outbound payment
-    client.outbound_payments.update('OUT01JR7P5PKW3K7Q34CJAWC03E82', params={...})
+    client.outbound_payments.update('OUT123', params={...})
 
 Payer authorisations
 ''''''''''''''''''''''''''''''''''''''''''

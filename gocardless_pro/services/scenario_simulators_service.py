@@ -51,6 +51,7 @@ class ScenarioSimulatorsService(base_service.BaseService):
 <li>`payout_bounced`: Transitions a payout to `bounced`. It must start in the `paid` state.</li>
 <li>`billing_request_fulfilled`: Authorises the billing request, and then fulfils it. The billing request must be in the `pending` state, with all actions completed except for `bank_authorisation`. Only billing requests with a `payment_request` are supported.</li>
 <li>`billing_request_fulfilled_and_payment_failed`: Authorises the billing request, fulfils it, and moves the associated payment to `failed`. The billing request must be in the `pending` state, with all actions completed except for `bank_authorisation`. Only billing requests with a `payment_request` are supported.</li>
+<li>`billing_request_fulfilled_and_payment_confirmed_to_failed`: Authorises the billing request, fulfils it, moves the associated payment to `confirmed` and then moves it to `failed`. The billing request must be in the `pending` state, with all actions completed except for `bank_authorisation`. Only billing requests with a `payment_request` are supported.</li>
 <li>`billing_request_fulfilled_and_payment_paid_out`: Authorises the billing request, fulfils it, and moves the associated payment to `paid_out`. The billing request must be in the `pending` state, with all actions completed except for `bank_authorisation`. Only billing requests with a `payment_request` are supported.</li>
 </ul>
               params (dict, optional): Request body.

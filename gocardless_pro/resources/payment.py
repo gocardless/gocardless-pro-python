@@ -82,6 +82,11 @@ class Payment(object):
   
 
     @property
+    def scheme(self):
+        return self.attributes.get('scheme')
+  
+
+    @property
     def status(self):
         return self.attributes.get('status')
   
@@ -155,6 +160,8 @@ class Payment(object):
         def subscription(self):
             return self.attributes.get('subscription')
     
+  
+
   
 
   

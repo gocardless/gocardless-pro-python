@@ -36,6 +36,7 @@ def test_payments_create():
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.fx.estimated_exchange_rate == body.get('fx')['estimated_exchange_rate']
     assert response.fx.exchange_rate == body.get('fx')['exchange_rate']
@@ -110,6 +111,7 @@ def test_payments_list():
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
     assert [r.reference for r in response.records] == [b.get('reference') for b in body]
     assert [r.retry_if_possible for r in response.records] == [b.get('retry_if_possible') for b in body]
+    assert [r.scheme for r in response.records] == [b.get('scheme') for b in body]
     assert [r.status for r in response.records] == [b.get('status') for b in body]
 
 @responses.activate
@@ -182,6 +184,7 @@ def test_payments_get():
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.fx.estimated_exchange_rate == body.get('fx')['estimated_exchange_rate']
     assert response.fx.exchange_rate == body.get('fx')['exchange_rate']
@@ -235,6 +238,7 @@ def test_payments_update():
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.fx.estimated_exchange_rate == body.get('fx')['estimated_exchange_rate']
     assert response.fx.exchange_rate == body.get('fx')['exchange_rate']
@@ -288,6 +292,7 @@ def test_payments_cancel():
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.fx.estimated_exchange_rate == body.get('fx')['estimated_exchange_rate']
     assert response.fx.exchange_rate == body.get('fx')['exchange_rate']
@@ -334,6 +339,7 @@ def test_payments_retry():
     assert response.metadata == body.get('metadata')
     assert response.reference == body.get('reference')
     assert response.retry_if_possible == body.get('retry_if_possible')
+    assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.fx.estimated_exchange_rate == body.get('fx')['estimated_exchange_rate']
     assert response.fx.exchange_rate == body.get('fx')['exchange_rate']
