@@ -163,6 +163,10 @@ class Event(object):
             return self.attributes.get('mandate')
     
         @property
+        def mandate_request(self):
+            return self.attributes.get('mandate_request')
+    
+        @property
         def mandate_request_mandate(self):
             return self.attributes.get('mandate_request_mandate')
     

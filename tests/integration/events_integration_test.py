@@ -122,6 +122,7 @@ def test_events_get():
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.instalment_schedule == body.get('links')['instalment_schedule']
     assert response.links.mandate == body.get('links')['mandate']
+    assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.new_customer_bank_account == body.get('links')['new_customer_bank_account']
     assert response.links.new_mandate == body.get('links')['new_mandate']
