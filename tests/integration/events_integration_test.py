@@ -136,6 +136,8 @@ def test_events_get():
     assert response.links.refund == body.get('links')['refund']
     assert response.links.scheme_identifier == body.get('links')['scheme_identifier']
     assert response.links.subscription == body.get('links')['subscription']
+    assert response.source.name == body.get('source')['name']
+    assert response.source.type == body.get('source')['type']
 
 @responses.activate
 def test_timeout_events_get_retries():

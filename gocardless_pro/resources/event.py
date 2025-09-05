@@ -61,6 +61,11 @@ class Event(object):
         return self.attributes.get('resource_type')
   
 
+    @property
+    def source(self):
+        return self.Source(self.attributes.get('source'))
+  
+
 
   
 
@@ -224,5 +229,22 @@ class Event(object):
 
   
 
+  
+
+  
+    class Source(object):
+        """Wrapper for the response's 'source' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def name(self):
+            return self.attributes.get('name')
+    
+        @property
+        def type(self):
+            return self.attributes.get('type')
+    
   
 
