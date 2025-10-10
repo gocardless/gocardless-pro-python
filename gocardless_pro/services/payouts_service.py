@@ -48,7 +48,7 @@ class PayoutsService(base_service.BaseService):
 
         Retrieves the details of a single payout. For an example of how to
         reconcile the transactions in a payout, see [this
-        guide](#webhooks-payouts-with-events).
+        guide](#events-reconciling-payouts-with-events).
 
         Args:
               identity (string): Unique identifier, beginning with "PO".
