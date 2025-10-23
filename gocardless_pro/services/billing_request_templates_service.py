@@ -101,7 +101,7 @@ class BillingRequestTemplatesService(base_service.BaseService):
         Billing Requests created by this template.
 
         Args:
-              identity (string): Unique identifier, beginning with "BRQ".
+              identity (string): Unique identifier, beginning with "BRT".
               params (dict, optional): Request body.
 
         Returns:

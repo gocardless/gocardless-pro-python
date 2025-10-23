@@ -187,7 +187,7 @@ Billing request templates
     client.billing_request_templates.create(params={...})
 
     # Update a Billing Request Template
-    client.billing_request_templates.update('BRQ123', params={...})
+    client.billing_request_templates.update('BRT123', params={...})
 
 Billing request with actions
 ''''''''''''''''''''''''''''''''''''''''''

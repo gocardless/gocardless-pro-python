@@ -3,30 +3,30 @@
     "method": "POST",
     "path_template": "/customer_bank_accounts",
     "url_params": [],
-    "body": {"customer_bank_accounts":{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 2283"},"metadata":{}}}
+    "body": {"customer_bank_accounts":{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 1315"},"metadata":{}}}
   },
   "list": {
     "method": "GET",
     "path_template": "/customer_bank_accounts",
     "url_params": [],
-    "body": {"customer_bank_accounts":[{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 3755"},"metadata":{}},{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 4769"},"metadata":{}}],"meta":{"cursors":{"after":"example after 7694","before":"example before 4740"},"limit":50}}
+    "body": {"customer_bank_accounts":[{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 5540"},"metadata":{}},{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 4492"},"metadata":{}}],"meta":{"cursors":{"after":"example after 6591","before":"example before 342"},"limit":50}}
   },
   "get": {
     "method": "GET",
     "path_template": "/customer_bank_accounts/:identity",
     "url_params": ["BA123"],
-    "body": {"customer_bank_accounts":{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 8098"},"metadata":{}}}
+    "body": {"customer_bank_accounts":{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 1898"},"metadata":{}}}
   },
   "update": {
     "method": "PUT",
     "path_template": "/customer_bank_accounts/:identity",
     "url_params": ["BA123"],
-    "body": {"customer_bank_accounts":{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 1590"},"metadata":{}}}
+    "body": {"customer_bank_accounts":{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 3401"},"metadata":{}}}
   },
   "disable": {
     "method": "POST",
     "path_template": "/customer_bank_accounts/:identity/actions/disable",
     "url_params": ["BA123"],
-    "body": {"customer_bank_accounts":{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 7417"},"metadata":{}}}
+    "body": {"customer_bank_accounts":{"account_holder_name":"Billie Jean","account_number_ending":"1234","account_type":"savings","bank_account_token":"bat_f975ab3c-ecee-47a1-9590-5bb1d56fa113","bank_name":"BARCLAYS BANK PLC","country_code":"GB","created_at":"2014-01-01T12:00:00.000Z","currency":"EUR","enabled":true,"id":"BA123","links":{"customer":"example customer 5707"},"metadata":{}}}
   }
 }
