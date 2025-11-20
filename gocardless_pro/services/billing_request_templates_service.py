@@ -36,10 +36,11 @@ class BillingRequestTemplatesService(base_service.BaseService):
                                          retry_failures=True)
         return self._resource_for(response)
 
-    def all(self, params=None):
+    def all(self,params=None):
         if params is None:
             params = {}
-        return Paginator(self, params)
+        return Paginator(self, params, identity_params={
+          })
     
   
 
@@ -101,7 +102,7 @@ class BillingRequestTemplatesService(base_service.BaseService):
         Billing Requests created by this template.
 
         Args:
-              identity (string): Unique identifier, beginning with "BRQ".
+              identity (string): Unique identifier, beginning with "BRT".
               params (dict, optional): Request body.
 
         Returns:

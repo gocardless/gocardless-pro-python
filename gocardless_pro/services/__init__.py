@@ -32,6 +32,7 @@ from .outbound_payments_service import OutboundPaymentsService
 from .payer_authorisations_service import PayerAuthorisationsService
 from .payer_themes_service import PayerThemesService
 from .payments_service import PaymentsService
+from .payment_account_transactions_service import PaymentAccountTransactionsService
 from .payouts_service import PayoutsService
 from .payout_items_service import PayoutItemsService
 from .redirect_flows_service import RedirectFlowsService

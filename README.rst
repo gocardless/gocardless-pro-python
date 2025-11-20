@@ -8,7 +8,7 @@ A Python client for interacting with the GoCardless Pro API.
 
 |pypi-badge|
 
-Tested against Python 3.8, 3.9, 3.10, 3.11 and 3.12.
+Tested against Python 3.9, 3.10, 3.11 and 3.12.
 
 - `"Getting Started" guide <https://developer.gocardless.com/getting-started/api/introduction/?lang=python>`_ with copy and paste Python code samples
 - `API reference`_
@@ -187,7 +187,7 @@ Billing request templates
     client.billing_request_templates.create(params={...})
 
     # Update a Billing Request Template
-    client.billing_request_templates.update('BRQ123', params={...})
+    client.billing_request_templates.update('BRT123', params={...})
 
 Billing request with actions
 ''''''''''''''''''''''''''''''''''''''''''
@@ -439,13 +439,13 @@ Mandate imports
     client.mandate_imports.create(params={...})
 
     # Get a mandate import
-    client.mandate_imports.get('IM000010790WX1', params={...})
+    client.mandate_imports.get('IM123', params={...})
 
     # Submit a mandate import
-    client.mandate_imports.submit('IM000010790WX1', params={...})
+    client.mandate_imports.submit('IM123', params={...})
 
     # Cancel a mandate import
-    client.mandate_imports.cancel('IM000010790WX1', params={...})
+    client.mandate_imports.cancel('IM123', params={...})
 
 Mandate import entries
 ''''''''''''''''''''''''''''''''''''''''''
@@ -492,13 +492,13 @@ Outbound payments
     client.outbound_payments.withdraw(params={...})
 
     # Cancel an outbound payment
-    client.outbound_payments.cancel('OUT01JR7P5PKW3K7Q34CJAWC03E82', params={...})
+    client.outbound_payments.cancel('OUT123', params={...})
 
     # Approve an outbound payment
-    client.outbound_payments.approve('OUT01JR7P5PKW3K7Q34CJAWC03E82', params={...})
+    client.outbound_payments.approve('OUT123', params={...})
 
     # Get an outbound payment
-    client.outbound_payments.get('OUT01JR7P5PKW3K7Q34CJAWC03E82', params={...})
+    client.outbound_payments.get('OUT123', params={...})
 
     # List outbound payments
     client.outbound_payments.list(params={...})
@@ -507,7 +507,7 @@ Outbound payments
     client.outbound_payments.all(params={...})
 
     # Update an outbound payment
-    client.outbound_payments.update('OUT01JR7P5PKW3K7Q34CJAWC03E82', params={...})
+    client.outbound_payments.update('OUT123', params={...})
 
 Payer authorisations
 ''''''''''''''''''''''''''''''''''''''''''
@@ -562,6 +562,17 @@ Payments
 
     # Retry a payment
     client.payments.retry('PM123', params={...})
+
+Payment account transactions
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List payment account transactions
+    client.payment_account_transactions.list('BA123', params={...})
+
+    # Iterate through all payment_account_transactions
+    client.payment_account_transactions.all(params={...})
 
 Payouts
 ''''''''''''''''''''''''''''''''''''''''''

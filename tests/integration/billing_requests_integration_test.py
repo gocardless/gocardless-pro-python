@@ -63,6 +63,7 @@ def test_billing_requests_create():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -182,6 +183,7 @@ def test_billing_requests_collect_customer_details():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -277,6 +279,7 @@ def test_billing_requests_collect_bank_account():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -372,6 +375,7 @@ def test_billing_requests_confirm_payer_details():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -467,6 +471,7 @@ def test_billing_requests_fulfil():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -562,6 +567,7 @@ def test_billing_requests_cancel():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -672,10 +678,10 @@ def test_billing_requests_all():
           fixture['body']['meta']['cursors']['after'] = '123'
         return [200, {}, json.dumps(fixture['body'])]
 
-    url = 'http://example.com' + fixture['path_template']
-    responses.add_callback(fixture['method'], url, callback)
+    url_pattern = helpers.url_pattern_for(fixture)
+    responses.add_callback(fixture['method'], url_pattern, callback)
 
-    all_records = list(helpers.client.billing_requests.all())
+    all_records = list(helpers.client.billing_requests.all(*fixture['url_params']))
     assert len(all_records) == len(fixture['body']['billing_requests']) * 2
     for record in all_records:
       assert isinstance(record, resources.BillingRequest)
@@ -729,6 +735,7 @@ def test_billing_requests_get():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -831,6 +838,7 @@ def test_billing_requests_notify():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -926,6 +934,7 @@ def test_billing_requests_fallback():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -1021,6 +1030,7 @@ def test_billing_requests_choose_currency():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']
@@ -1116,6 +1126,7 @@ def test_billing_requests_select_institution():
     assert response.mandate_request.constraints == body.get('mandate_request')['constraints']
     assert response.mandate_request.currency == body.get('mandate_request')['currency']
     assert response.mandate_request.description == body.get('mandate_request')['description']
+    assert response.mandate_request.funds_settlement == body.get('mandate_request')['funds_settlement']
     assert response.mandate_request.links == body.get('mandate_request')['links']
     assert response.mandate_request.metadata == body.get('mandate_request')['metadata']
     assert response.mandate_request.payer_requested_dual_signature == body.get('mandate_request')['payer_requested_dual_signature']

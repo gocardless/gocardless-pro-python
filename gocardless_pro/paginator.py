@@ -8,9 +8,10 @@ class Paginator(object):
     loading each page until the last.
     """
 
-    def __init__(self, service, params):
+    def __init__(self, service, params, identity_params=None):
         self._service = service
         self._params = params
+        self._identity_params = identity_params or {}
 
     def __iter__(self):
         return self._iterate()
@@ -30,5 +31,5 @@ class Paginator(object):
         params = self._params.copy()
         if after is not None:
             params.update({'after': after})
-        return self._service.list(params=params)
+        return self._service.list(**self._identity_params, params=params)
 

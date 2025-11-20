@@ -61,6 +61,8 @@ from .payer_theme import PayerTheme
 
 from .payment import Payment
 
+from .payment_account_transaction import PaymentAccountTransaction
+
 from .payout import Payout
 
 from .payout_item import PayoutItem

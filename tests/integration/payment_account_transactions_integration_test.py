@@ -17,55 +17,60 @@ from .. import helpers
   
 
 @responses.activate
-def test_balances_list():
-    fixture = helpers.load_fixture('balances')['list']
+def test_payment_account_transactions_list():
+    fixture = helpers.load_fixture('payment_account_transactions')['list']
     helpers.stub_response(fixture)
-    response = helpers.client.balances.list(*fixture['url_params'])
-    body = fixture['body']['balances']
+    response = helpers.client.payment_account_transactions.list(*fixture['url_params'])
+    body = fixture['body']['payment_account_transactions']
 
     assert isinstance(response, list_response.ListResponse)
-    assert isinstance(response.records[0], resources.Balance)
+    assert isinstance(response.records[0], resources.PaymentAccountTransaction)
 
     assert response.before == fixture['body']['meta']['cursors']['before']
     assert response.after == fixture['body']['meta']['cursors']['after']
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert [r.amount for r in response.records] == [b.get('amount') for b in body]
-    assert [r.balance_type for r in response.records] == [b.get('balance_type') for b in body]
+    assert [r.balance_after_transaction for r in response.records] == [b.get('balance_after_transaction') for b in body]
+    assert [r.counterparty_name for r in response.records] == [b.get('counterparty_name') for b in body]
     assert [r.currency for r in response.records] == [b.get('currency') for b in body]
-    assert [r.last_updated_at for r in response.records] == [b.get('last_updated_at') for b in body]
+    assert [r.description for r in response.records] == [b.get('description') for b in body]
+    assert [r.direction for r in response.records] == [b.get('direction') for b in body]
+    assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.reference for r in response.records] == [b.get('reference') for b in body]
+    assert [r.value_date for r in response.records] == [b.get('value_date') for b in body]
 
 @responses.activate
-def test_timeout_balances_list_retries():
-    fixture = helpers.load_fixture('balances')['list']
+def test_timeout_payment_account_transactions_list_retries():
+    fixture = helpers.load_fixture('payment_account_transactions')['list']
     with helpers.stub_timeout_then_response(fixture) as rsps:
-      response = helpers.client.balances.list(*fixture['url_params'])
+      response = helpers.client.payment_account_transactions.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['balances']
+    body = fixture['body']['payment_account_transactions']
 
     assert isinstance(response, list_response.ListResponse)
-    assert isinstance(response.records[0], resources.Balance)
+    assert isinstance(response.records[0], resources.PaymentAccountTransaction)
 
     assert response.before == fixture['body']['meta']['cursors']['before']
     assert response.after == fixture['body']['meta']['cursors']['after']
 
-def test_502_balances_list_retries():
-    fixture = helpers.load_fixture('balances')['list']
+def test_502_payment_account_transactions_list_retries():
+    fixture = helpers.load_fixture('payment_account_transactions')['list']
     with helpers.stub_502_then_response(fixture) as rsps:
-      response = helpers.client.balances.list(*fixture['url_params'])
+      response = helpers.client.payment_account_transactions.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['balances']
+    body = fixture['body']['payment_account_transactions']
 
     assert isinstance(response, list_response.ListResponse)
-    assert isinstance(response.records[0], resources.Balance)
+    assert isinstance(response.records[0], resources.PaymentAccountTransaction)
 
     assert response.before == fixture['body']['meta']['cursors']['before']
     assert response.after == fixture['body']['meta']['cursors']['after']
 
 @responses.activate
-def test_balances_all():
-    fixture = helpers.load_fixture('balances')['list']
+def test_payment_account_transactions_all():
+    fixture = helpers.load_fixture('payment_account_transactions')['list']
 
     def callback(request):
         if 'after=123' in request.url:
@@ -77,9 +82,9 @@ def test_balances_all():
     url_pattern = helpers.url_pattern_for(fixture)
     responses.add_callback(fixture['method'], url_pattern, callback)
 
-    all_records = list(helpers.client.balances.all(*fixture['url_params']))
-    assert len(all_records) == len(fixture['body']['balances']) * 2
+    all_records = list(helpers.client.payment_account_transactions.all(*fixture['url_params']))
+    assert len(all_records) == len(fixture['body']['payment_account_transactions']) * 2
     for record in all_records:
-      assert isinstance(record, resources.Balance)
+      assert isinstance(record, resources.PaymentAccountTransaction)
     
   

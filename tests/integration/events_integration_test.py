@@ -77,10 +77,10 @@ def test_events_all():
           fixture['body']['meta']['cursors']['after'] = '123'
         return [200, {}, json.dumps(fixture['body'])]
 
-    url = 'http://example.com' + fixture['path_template']
-    responses.add_callback(fixture['method'], url, callback)
+    url_pattern = helpers.url_pattern_for(fixture)
+    responses.add_callback(fixture['method'], url_pattern, callback)
 
-    all_records = list(helpers.client.events.all())
+    all_records = list(helpers.client.events.all(*fixture['url_params']))
     assert len(all_records) == len(fixture['body']['events']) * 2
     for record in all_records:
       assert isinstance(record, resources.Event)
@@ -122,6 +122,7 @@ def test_events_get():
     assert response.links.customer_bank_account == body.get('links')['customer_bank_account']
     assert response.links.instalment_schedule == body.get('links')['instalment_schedule']
     assert response.links.mandate == body.get('links')['mandate']
+    assert response.links.mandate_request == body.get('links')['mandate_request']
     assert response.links.mandate_request_mandate == body.get('links')['mandate_request_mandate']
     assert response.links.new_customer_bank_account == body.get('links')['new_customer_bank_account']
     assert response.links.new_mandate == body.get('links')['new_mandate']
@@ -135,6 +136,8 @@ def test_events_get():
     assert response.links.refund == body.get('links')['refund']
     assert response.links.scheme_identifier == body.get('links')['scheme_identifier']
     assert response.links.subscription == body.get('links')['subscription']
+    assert response.source.name == body.get('source')['name']
+    assert response.source.type == body.get('source')['type']
 
 @responses.activate
 def test_timeout_events_get_retries():

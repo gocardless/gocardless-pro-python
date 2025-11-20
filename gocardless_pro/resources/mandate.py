@@ -110,8 +110,16 @@ class Mandate(object):
             return self.attributes.get('max_amount_per_payment')
     
         @property
-        def periods(self):
-            return self.attributes.get('periods')
+        def max_amount_per_period(self):
+            return self.attributes.get('max_amount_per_period')
+    
+        @property
+        def max_payments_per_period(self):
+            return self.attributes.get('max_payments_per_period')
+    
+        @property
+        def period(self):
+            return self.attributes.get('period')
     
         @property
         def start_date(self):

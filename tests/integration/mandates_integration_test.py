@@ -40,7 +40,9 @@ def test_mandates_create():
     assert response.verified_at == body.get('verified_at')
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
-    assert response.consent_parameters.periods == body.get('consent_parameters')['periods']
+    assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
+    assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
+    assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -153,10 +155,10 @@ def test_mandates_all():
           fixture['body']['meta']['cursors']['after'] = '123'
         return [200, {}, json.dumps(fixture['body'])]
 
-    url = 'http://example.com' + fixture['path_template']
-    responses.add_callback(fixture['method'], url, callback)
+    url_pattern = helpers.url_pattern_for(fixture)
+    responses.add_callback(fixture['method'], url_pattern, callback)
 
-    all_records = list(helpers.client.mandates.all())
+    all_records = list(helpers.client.mandates.all(*fixture['url_params']))
     assert len(all_records) == len(fixture['body']['mandates']) * 2
     for record in all_records:
       assert isinstance(record, resources.Mandate)
@@ -187,7 +189,9 @@ def test_mandates_get():
     assert response.verified_at == body.get('verified_at')
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
-    assert response.consent_parameters.periods == body.get('consent_parameters')['periods']
+    assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
+    assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
+    assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -240,7 +244,9 @@ def test_mandates_update():
     assert response.verified_at == body.get('verified_at')
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
-    assert response.consent_parameters.periods == body.get('consent_parameters')['periods']
+    assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
+    assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
+    assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -293,7 +299,9 @@ def test_mandates_cancel():
     assert response.verified_at == body.get('verified_at')
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
-    assert response.consent_parameters.periods == body.get('consent_parameters')['periods']
+    assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
+    assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
+    assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -339,7 +347,9 @@ def test_mandates_reinstate():
     assert response.verified_at == body.get('verified_at')
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
-    assert response.consent_parameters.periods == body.get('consent_parameters')['periods']
+    assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
+    assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
+    assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
