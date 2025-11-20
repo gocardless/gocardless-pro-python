@@ -104,6 +104,9 @@ def test_payer_themes_returns_service():
 def test_payments_returns_service():
     assert isinstance(client.payments, services.PaymentsService)
 
+def test_payment_account_transactions_returns_service():
+    assert isinstance(client.payment_account_transactions, services.PaymentAccountTransactionsService)
+
 def test_payouts_returns_service():
     assert isinstance(client.payouts, services.PayoutsService)
 

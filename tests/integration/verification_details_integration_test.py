@@ -121,10 +121,10 @@ def test_verification_details_all():
           fixture['body']['meta']['cursors']['after'] = '123'
         return [200, {}, json.dumps(fixture['body'])]
 
-    url = 'http://example.com' + fixture['path_template']
-    responses.add_callback(fixture['method'], url, callback)
+    url_pattern = helpers.url_pattern_for(fixture)
+    responses.add_callback(fixture['method'], url_pattern, callback)
 
-    all_records = list(helpers.client.verification_details.all())
+    all_records = list(helpers.client.verification_details.all(*fixture['url_params']))
     assert len(all_records) == len(fixture['body']['verification_details']) * 2
     for record in all_records:
       assert isinstance(record, resources.VerificationDetail)

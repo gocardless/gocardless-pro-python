@@ -64,10 +64,11 @@ class CreditorBankAccountsService(base_service.BaseService):
                                          retry_failures=True)
         return self._resource_for(response)
 
-    def all(self, params=None):
+    def all(self,params=None):
         if params is None:
             params = {}
-        return Paginator(self, params)
+        return Paginator(self, params, identity_params={
+          })
     
   
 
