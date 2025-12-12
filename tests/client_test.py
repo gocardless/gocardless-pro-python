@@ -23,6 +23,9 @@ def test_balances_returns_service():
 def test_bank_account_details_returns_service():
     assert isinstance(client.bank_account_details, services.BankAccountDetailsService)
 
+def test_bank_account_holder_verifications_returns_service():
+    assert isinstance(client.bank_account_holder_verifications, services.BankAccountHolderVerificationsService)
+
 def test_bank_authorisations_returns_service():
     assert isinstance(client.bank_authorisations, services.BankAuthorisationsService)
 

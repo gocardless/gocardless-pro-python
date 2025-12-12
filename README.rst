@@ -95,6 +95,17 @@ Bank account details
     # Get encrypted bank details
     client.bank_account_details.get('BA123', params={...})
 
+Bank account holder verifications
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a bank account holder verification.
+    client.bank_account_holder_verifications.create(params={...})
+
+    # Get a bank account holder verification.
+    client.bank_account_holder_verifications.get('BAHV123', params={...})
+
 Bank authorisations
 ''''''''''''''''''''''''''''''''''''''''''
 

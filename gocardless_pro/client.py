@@ -46,6 +46,10 @@ class Client(object):
         return services.BankAccountDetailsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def bank_account_holder_verifications(self):
+        return services.BankAccountHolderVerificationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def bank_authorisations(self):
         return services.BankAuthorisationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
