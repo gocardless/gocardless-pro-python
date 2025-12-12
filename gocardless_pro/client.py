@@ -158,6 +158,10 @@ class Client(object):
         return services.PaymentsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def payment_accounts(self):
+        return services.PaymentAccountsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def payment_account_transactions(self):
         return services.PaymentAccountTransactionsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 

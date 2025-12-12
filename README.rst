@@ -574,6 +574,17 @@ Payments
     # Retry a payment
     client.payments.retry('PM123', params={...})
 
+Payment accounts
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List payment accounts
+    client.payment_accounts.list(params={...})
+
+    # Iterate through all payment_accounts
+    client.payment_accounts.all(params={...})
+
 Payment account transactions
 ''''''''''''''''''''''''''''''''''''''''''
 
