@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_payer_authorisations_get():
     fixture = helpers.load_fixture('payer_authorisations')['get']
     helpers.stub_response(fixture)
     response = helpers.client.payer_authorisations.get(*fixture['url_params'])
-    body = fixture['body']['payer_authorisations']
+    if fixture['body'].get('payer_authorisations') is not None and isinstance(fixture['body'].get('payer_authorisations'), (dict, list)):
+        body = fixture['body']['payer_authorisations']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.PayerAuthorisation)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -70,7 +72,6 @@ def test_timeout_payer_authorisations_get_retries():
       response = helpers.client.payer_authorisations.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payer_authorisations']
 
     assert isinstance(response, resources.PayerAuthorisation)
 
@@ -80,17 +81,18 @@ def test_502_payer_authorisations_get_retries():
       response = helpers.client.payer_authorisations.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payer_authorisations']
 
     assert isinstance(response, resources.PayerAuthorisation)
-  
 
 @responses.activate
 def test_payer_authorisations_create():
     fixture = helpers.load_fixture('payer_authorisations')['create']
     helpers.stub_response(fixture)
     response = helpers.client.payer_authorisations.create(*fixture['url_params'])
-    body = fixture['body']['payer_authorisations']
+    if fixture['body'].get('payer_authorisations') is not None and isinstance(fixture['body'].get('payer_authorisations'), (dict, list)):
+        body = fixture['body']['payer_authorisations']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.PayerAuthorisation)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -156,7 +158,6 @@ def test_timeout_payer_authorisations_create_retries():
       response = helpers.client.payer_authorisations.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payer_authorisations']
 
     assert isinstance(response, resources.PayerAuthorisation)
 
@@ -166,17 +167,18 @@ def test_502_payer_authorisations_create_retries():
       response = helpers.client.payer_authorisations.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payer_authorisations']
 
     assert isinstance(response, resources.PayerAuthorisation)
-  
 
 @responses.activate
 def test_payer_authorisations_update():
     fixture = helpers.load_fixture('payer_authorisations')['update']
     helpers.stub_response(fixture)
     response = helpers.client.payer_authorisations.update(*fixture['url_params'])
-    body = fixture['body']['payer_authorisations']
+    if fixture['body'].get('payer_authorisations') is not None and isinstance(fixture['body'].get('payer_authorisations'), (dict, list)):
+        body = fixture['body']['payer_authorisations']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.PayerAuthorisation)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -225,7 +227,6 @@ def test_timeout_payer_authorisations_update_retries():
       response = helpers.client.payer_authorisations.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payer_authorisations']
 
     assert isinstance(response, resources.PayerAuthorisation)
 
@@ -235,17 +236,18 @@ def test_502_payer_authorisations_update_retries():
       response = helpers.client.payer_authorisations.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payer_authorisations']
 
     assert isinstance(response, resources.PayerAuthorisation)
-  
 
 @responses.activate
 def test_payer_authorisations_submit():
     fixture = helpers.load_fixture('payer_authorisations')['submit']
     helpers.stub_response(fixture)
     response = helpers.client.payer_authorisations.submit(*fixture['url_params'])
-    body = fixture['body']['payer_authorisations']
+    if fixture['body'].get('payer_authorisations') is not None and isinstance(fixture['body'].get('payer_authorisations'), (dict, list)):
+        body = fixture['body']['payer_authorisations']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.PayerAuthorisation)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -300,14 +302,16 @@ def test_502_payer_authorisations_submit_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.payer_authorisations.submit(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_payer_authorisations_confirm():
     fixture = helpers.load_fixture('payer_authorisations')['confirm']
     helpers.stub_response(fixture)
     response = helpers.client.payer_authorisations.confirm(*fixture['url_params'])
-    body = fixture['body']['payer_authorisations']
+    if fixture['body'].get('payer_authorisations') is not None and isinstance(fixture['body'].get('payer_authorisations'), (dict, list)):
+        body = fixture['body']['payer_authorisations']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.PayerAuthorisation)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -362,4 +366,3 @@ def test_502_payer_authorisations_confirm_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.payer_authorisations.confirm(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

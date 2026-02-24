@@ -8,29 +8,31 @@ from .. import resources
 from ..paginator import Paginator
 from .. import errors
 
-class TransferredMandatesService(base_service.BaseService):
-    """Service class that provides access to the transferred_mandates
+class FundsAvailabilitiesService(base_service.BaseService):
+    """Service class that provides access to the funds_availabilities
     endpoints of the GoCardless Pro API.
     """
 
-    RESOURCE_CLASS = resources.TransferredMandate
-    RESOURCE_NAME = 'transferred_mandates'
+    RESOURCE_CLASS = resources.FundsAvailability
+    RESOURCE_NAME = 'funds_availabilities'
 
 
-    def transferred_mandates(self,identity,params=None, headers=None):
-        """Get updated customer bank details.
+    def check(self,identity,params=None, headers=None):
+        """Funds availability.
 
-         Returns new customer bank details for a mandate that's been recently
-         transferred
+         Checks if the payer's current balance is sufficient to cover the
+         amount
+         the merchant wants to charge within the consent parameters defined on
+         the mandate.
 
         Args:
               identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.
               params (dict, optional): Query string parameters.
 
         Returns:
-              TransferredMandate
+              FundsAvailability
         """
-        path = self._sub_url_params('/transferred_mandates/:identity', {
+        path = self._sub_url_params('/funds_availability/:identity', {
           
             'identity': identity,
           })

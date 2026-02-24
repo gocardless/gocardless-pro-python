@@ -20,9 +20,9 @@ class PayerThemesService(base_service.BaseService):
     def create_for_creditor(self,params=None, headers=None):
         """Create a payer theme associated with a creditor.
 
-        Creates a new payer theme associated with a creditor. If a creditor
-        already has payer themes, this will update the existing payer theme
-        linked to the creditor.
+         Creates a new payer theme associated with a creditor. If a creditor
+         already has payer themes, this will update the existing payer theme
+         linked to the creditor.
 
         Args:
               params (dict, optional): Request body.

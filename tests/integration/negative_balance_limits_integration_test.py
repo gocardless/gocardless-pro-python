@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_negative_balance_limits_list():
     fixture = helpers.load_fixture('negative_balance_limits')['list']
     helpers.stub_response(fixture)
     response = helpers.client.negative_balance_limits.list(*fixture['url_params'])
-    body = fixture['body']['negative_balance_limits']
+    if fixture['body'].get('negative_balance_limits') is not None and isinstance(fixture['body'].get('negative_balance_limits'), (dict, list)):
+        body = fixture['body']['negative_balance_limits']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.NegativeBalanceLimit)
@@ -41,7 +43,6 @@ def test_timeout_negative_balance_limits_list_retries():
       response = helpers.client.negative_balance_limits.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['negative_balance_limits']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.NegativeBalanceLimit)
@@ -55,7 +56,6 @@ def test_502_negative_balance_limits_list_retries():
       response = helpers.client.negative_balance_limits.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['negative_balance_limits']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.NegativeBalanceLimit)
@@ -81,5 +81,3 @@ def test_negative_balance_limits_all():
     assert len(all_records) == len(fixture['body']['negative_balance_limits']) * 2
     for record in all_records:
       assert isinstance(record, resources.NegativeBalanceLimit)
-    
-  

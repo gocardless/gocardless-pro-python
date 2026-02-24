@@ -62,6 +62,16 @@ class BillingRequest(object):
   
 
     @property
+    def payment_context_code(self):
+        return self.attributes.get('payment_context_code')
+  
+
+    @property
+    def payment_purpose_code(self):
+        return self.attributes.get('payment_purpose_code')
+  
+
+    @property
     def payment_request(self):
         return self.PaymentRequest(self.attributes.get('payment_request'))
   
@@ -270,6 +280,10 @@ class BillingRequest(object):
         def verify(self):
             return self.attributes.get('verify')
     
+  
+
+  
+
   
 
   

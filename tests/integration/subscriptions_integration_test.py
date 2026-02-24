@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_subscriptions_create():
     fixture = helpers.load_fixture('subscriptions')['create']
     helpers.stub_response(fixture)
     response = helpers.client.subscriptions.create(*fixture['url_params'])
-    body = fixture['body']['subscriptions']
+    if fixture['body'].get('subscriptions') is not None and isinstance(fixture['body'].get('subscriptions'), (dict, list)):
+        body = fixture['body']['subscriptions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Subscription)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -71,7 +73,6 @@ def test_timeout_subscriptions_create_retries():
       response = helpers.client.subscriptions.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['subscriptions']
 
     assert isinstance(response, resources.Subscription)
 
@@ -81,17 +82,18 @@ def test_502_subscriptions_create_retries():
       response = helpers.client.subscriptions.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['subscriptions']
 
     assert isinstance(response, resources.Subscription)
-  
 
 @responses.activate
 def test_subscriptions_list():
     fixture = helpers.load_fixture('subscriptions')['list']
     helpers.stub_response(fixture)
     response = helpers.client.subscriptions.list(*fixture['url_params'])
-    body = fixture['body']['subscriptions']
+    if fixture['body'].get('subscriptions') is not None and isinstance(fixture['body'].get('subscriptions'), (dict, list)):
+        body = fixture['body']['subscriptions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Subscription)
@@ -127,7 +129,6 @@ def test_timeout_subscriptions_list_retries():
       response = helpers.client.subscriptions.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['subscriptions']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Subscription)
@@ -141,7 +142,6 @@ def test_502_subscriptions_list_retries():
       response = helpers.client.subscriptions.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['subscriptions']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Subscription)
@@ -167,15 +167,16 @@ def test_subscriptions_all():
     assert len(all_records) == len(fixture['body']['subscriptions']) * 2
     for record in all_records:
       assert isinstance(record, resources.Subscription)
-    
-  
 
 @responses.activate
 def test_subscriptions_get():
     fixture = helpers.load_fixture('subscriptions')['get']
     helpers.stub_response(fixture)
     response = helpers.client.subscriptions.get(*fixture['url_params'])
-    body = fixture['body']['subscriptions']
+    if fixture['body'].get('subscriptions') is not None and isinstance(fixture['body'].get('subscriptions'), (dict, list)):
+        body = fixture['body']['subscriptions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Subscription)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -208,7 +209,6 @@ def test_timeout_subscriptions_get_retries():
       response = helpers.client.subscriptions.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['subscriptions']
 
     assert isinstance(response, resources.Subscription)
 
@@ -218,17 +218,18 @@ def test_502_subscriptions_get_retries():
       response = helpers.client.subscriptions.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['subscriptions']
 
     assert isinstance(response, resources.Subscription)
-  
 
 @responses.activate
 def test_subscriptions_update():
     fixture = helpers.load_fixture('subscriptions')['update']
     helpers.stub_response(fixture)
     response = helpers.client.subscriptions.update(*fixture['url_params'])
-    body = fixture['body']['subscriptions']
+    if fixture['body'].get('subscriptions') is not None and isinstance(fixture['body'].get('subscriptions'), (dict, list)):
+        body = fixture['body']['subscriptions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Subscription)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -261,7 +262,6 @@ def test_timeout_subscriptions_update_retries():
       response = helpers.client.subscriptions.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['subscriptions']
 
     assert isinstance(response, resources.Subscription)
 
@@ -271,17 +271,18 @@ def test_502_subscriptions_update_retries():
       response = helpers.client.subscriptions.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['subscriptions']
 
     assert isinstance(response, resources.Subscription)
-  
 
 @responses.activate
 def test_subscriptions_pause():
     fixture = helpers.load_fixture('subscriptions')['pause']
     helpers.stub_response(fixture)
     response = helpers.client.subscriptions.pause(*fixture['url_params'])
-    body = fixture['body']['subscriptions']
+    if fixture['body'].get('subscriptions') is not None and isinstance(fixture['body'].get('subscriptions'), (dict, list)):
+        body = fixture['body']['subscriptions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Subscription)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -320,14 +321,16 @@ def test_502_subscriptions_pause_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.subscriptions.pause(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_subscriptions_resume():
     fixture = helpers.load_fixture('subscriptions')['resume']
     helpers.stub_response(fixture)
     response = helpers.client.subscriptions.resume(*fixture['url_params'])
-    body = fixture['body']['subscriptions']
+    if fixture['body'].get('subscriptions') is not None and isinstance(fixture['body'].get('subscriptions'), (dict, list)):
+        body = fixture['body']['subscriptions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Subscription)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -366,14 +369,16 @@ def test_502_subscriptions_resume_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.subscriptions.resume(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_subscriptions_cancel():
     fixture = helpers.load_fixture('subscriptions')['cancel']
     helpers.stub_response(fixture)
     response = helpers.client.subscriptions.cancel(*fixture['url_params'])
-    body = fixture['body']['subscriptions']
+    if fixture['body'].get('subscriptions') is not None and isinstance(fixture['body'].get('subscriptions'), (dict, list)):
+        body = fixture['body']['subscriptions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Subscription)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -412,4 +417,3 @@ def test_502_subscriptions_cancel_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.subscriptions.cancel(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

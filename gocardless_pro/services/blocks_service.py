@@ -20,7 +20,7 @@ class BlocksService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a block.
 
-        Creates a new Block of a given type. By default it will be active.
+         Creates a new Block of a given type. By default it will be active.
 
         Args:
               params (dict, optional): Request body.
@@ -48,7 +48,7 @@ class BlocksService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single block.
 
-        Retrieves the details of an existing block.
+         Retrieves the details of an existing block.
 
         Args:
               identity (string): Unique identifier, beginning with "BLC".
@@ -71,8 +71,8 @@ class BlocksService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List multiple blocks.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        blocks.
+         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+         your blocks.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -98,7 +98,7 @@ class BlocksService(base_service.BaseService):
     def disable(self,identity,params=None, headers=None):
         """Disable a block.
 
-        Disables a block so that it no longer will prevent mandate creation.
+         Disables a block so that it no longer will prevent mandate creation.
 
         Args:
               identity (string): Unique identifier, beginning with "BLC".
@@ -122,8 +122,8 @@ class BlocksService(base_service.BaseService):
     def enable(self,identity,params=None, headers=None):
         """Enable a block.
 
-        Enables a previously disabled block so that it will prevent mandate
-        creation
+         Enables a previously disabled block so that it will prevent mandate
+         creation
 
         Args:
               identity (string): Unique identifier, beginning with "BLC".
@@ -147,11 +147,11 @@ class BlocksService(base_service.BaseService):
     def block_by_ref(self,params=None, headers=None):
         """Create blocks by reference.
 
-        Creates new blocks for a given reference. By default blocks will be
-        active.
-        Returns 201 if at least one block was created. Returns 200 if there
-        were no new
-        blocks created.
+         Creates new blocks for a given reference. By default blocks will be
+         active.
+         Returns 201 if at least one block was created. Returns 200 if there
+         were no new
+         blocks created.
 
         Args:
               params (dict, optional): Request body.

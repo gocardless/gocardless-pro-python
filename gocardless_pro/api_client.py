@@ -131,8 +131,17 @@ class ApiClient(object):
         if response.status_code < 400:
             return
 
-        error = response.json()['error']
-        exception_class = errors.ApiError.exception_for(response.status_code, error['type'], error.get('errors'))
+        error = response_body.get('error', response_body)
+
+        if isinstance(error, str):
+            error = {
+                'code': response.status_code,
+                'message': error,
+            }
+            exception_class = errors.ApiError
+        else:
+            exception_class = errors.ApiError.exception_for(response.status_code, error['type'], error.get('errors'))
+
         raise exception_class(error)
 
     def _url_for(self, path):

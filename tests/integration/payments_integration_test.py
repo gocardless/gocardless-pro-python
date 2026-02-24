@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_payments_create():
     fixture = helpers.load_fixture('payments')['create']
     helpers.stub_response(fixture)
     response = helpers.client.payments.create(*fixture['url_params'])
-    body = fixture['body']['payments']
+    if fixture['body'].get('payments') is not None and isinstance(fixture['body'].get('payments'), (dict, list)):
+        body = fixture['body']['payments']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Payment)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -72,7 +74,6 @@ def test_timeout_payments_create_retries():
       response = helpers.client.payments.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payments']
 
     assert isinstance(response, resources.Payment)
 
@@ -82,17 +83,18 @@ def test_502_payments_create_retries():
       response = helpers.client.payments.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payments']
 
     assert isinstance(response, resources.Payment)
-  
 
 @responses.activate
 def test_payments_list():
     fixture = helpers.load_fixture('payments')['list']
     helpers.stub_response(fixture)
     response = helpers.client.payments.list(*fixture['url_params'])
-    body = fixture['body']['payments']
+    if fixture['body'].get('payments') is not None and isinstance(fixture['body'].get('payments'), (dict, list)):
+        body = fixture['body']['payments']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Payment)
@@ -121,7 +123,6 @@ def test_timeout_payments_list_retries():
       response = helpers.client.payments.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payments']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Payment)
@@ -135,7 +136,6 @@ def test_502_payments_list_retries():
       response = helpers.client.payments.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payments']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Payment)
@@ -161,15 +161,16 @@ def test_payments_all():
     assert len(all_records) == len(fixture['body']['payments']) * 2
     for record in all_records:
       assert isinstance(record, resources.Payment)
-    
-  
 
 @responses.activate
 def test_payments_get():
     fixture = helpers.load_fixture('payments')['get']
     helpers.stub_response(fixture)
     response = helpers.client.payments.get(*fixture['url_params'])
-    body = fixture['body']['payments']
+    if fixture['body'].get('payments') is not None and isinstance(fixture['body'].get('payments'), (dict, list)):
+        body = fixture['body']['payments']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Payment)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -203,7 +204,6 @@ def test_timeout_payments_get_retries():
       response = helpers.client.payments.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payments']
 
     assert isinstance(response, resources.Payment)
 
@@ -213,17 +213,18 @@ def test_502_payments_get_retries():
       response = helpers.client.payments.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payments']
 
     assert isinstance(response, resources.Payment)
-  
 
 @responses.activate
 def test_payments_update():
     fixture = helpers.load_fixture('payments')['update']
     helpers.stub_response(fixture)
     response = helpers.client.payments.update(*fixture['url_params'])
-    body = fixture['body']['payments']
+    if fixture['body'].get('payments') is not None and isinstance(fixture['body'].get('payments'), (dict, list)):
+        body = fixture['body']['payments']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Payment)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -257,7 +258,6 @@ def test_timeout_payments_update_retries():
       response = helpers.client.payments.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payments']
 
     assert isinstance(response, resources.Payment)
 
@@ -267,17 +267,18 @@ def test_502_payments_update_retries():
       response = helpers.client.payments.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payments']
 
     assert isinstance(response, resources.Payment)
-  
 
 @responses.activate
 def test_payments_cancel():
     fixture = helpers.load_fixture('payments')['cancel']
     helpers.stub_response(fixture)
     response = helpers.client.payments.cancel(*fixture['url_params'])
-    body = fixture['body']['payments']
+    if fixture['body'].get('payments') is not None and isinstance(fixture['body'].get('payments'), (dict, list)):
+        body = fixture['body']['payments']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Payment)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -317,14 +318,16 @@ def test_502_payments_cancel_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.payments.cancel(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_payments_retry():
     fixture = helpers.load_fixture('payments')['retry']
     helpers.stub_response(fixture)
     response = helpers.client.payments.retry(*fixture['url_params'])
-    body = fixture['body']['payments']
+    if fixture['body'].get('payments') is not None and isinstance(fixture['body'].get('payments'), (dict, list)):
+        body = fixture['body']['payments']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Payment)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -364,4 +367,3 @@ def test_502_payments_retry_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.payments.retry(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

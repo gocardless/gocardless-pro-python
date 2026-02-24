@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_creditors_create():
     fixture = helpers.load_fixture('creditors')['create']
     helpers.stub_response(fixture)
     response = helpers.client.creditors.create(*fixture['url_params'])
-    body = fixture['body']['creditors']
+    if fixture['body'].get('creditors') is not None and isinstance(fixture['body'].get('creditors'), (dict, list)):
+        body = fixture['body']['creditors']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Creditor)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -78,7 +80,6 @@ def test_timeout_creditors_create_retries():
       response = helpers.client.creditors.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['creditors']
 
     assert isinstance(response, resources.Creditor)
 
@@ -88,17 +89,18 @@ def test_502_creditors_create_retries():
       response = helpers.client.creditors.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['creditors']
 
     assert isinstance(response, resources.Creditor)
-  
 
 @responses.activate
 def test_creditors_list():
     fixture = helpers.load_fixture('creditors')['list']
     helpers.stub_response(fixture)
     response = helpers.client.creditors.list(*fixture['url_params'])
-    body = fixture['body']['creditors']
+    if fixture['body'].get('creditors') is not None and isinstance(fixture['body'].get('creditors'), (dict, list)):
+        body = fixture['body']['creditors']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Creditor)
@@ -134,7 +136,6 @@ def test_timeout_creditors_list_retries():
       response = helpers.client.creditors.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['creditors']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Creditor)
@@ -148,7 +149,6 @@ def test_502_creditors_list_retries():
       response = helpers.client.creditors.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['creditors']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Creditor)
@@ -174,15 +174,16 @@ def test_creditors_all():
     assert len(all_records) == len(fixture['body']['creditors']) * 2
     for record in all_records:
       assert isinstance(record, resources.Creditor)
-    
-  
 
 @responses.activate
 def test_creditors_get():
     fixture = helpers.load_fixture('creditors')['get']
     helpers.stub_response(fixture)
     response = helpers.client.creditors.get(*fixture['url_params'])
-    body = fixture['body']['creditors']
+    if fixture['body'].get('creditors') is not None and isinstance(fixture['body'].get('creditors'), (dict, list)):
+        body = fixture['body']['creditors']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Creditor)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -222,7 +223,6 @@ def test_timeout_creditors_get_retries():
       response = helpers.client.creditors.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['creditors']
 
     assert isinstance(response, resources.Creditor)
 
@@ -232,17 +232,18 @@ def test_502_creditors_get_retries():
       response = helpers.client.creditors.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['creditors']
 
     assert isinstance(response, resources.Creditor)
-  
 
 @responses.activate
 def test_creditors_update():
     fixture = helpers.load_fixture('creditors')['update']
     helpers.stub_response(fixture)
     response = helpers.client.creditors.update(*fixture['url_params'])
-    body = fixture['body']['creditors']
+    if fixture['body'].get('creditors') is not None and isinstance(fixture['body'].get('creditors'), (dict, list)):
+        body = fixture['body']['creditors']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Creditor)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -282,7 +283,6 @@ def test_timeout_creditors_update_retries():
       response = helpers.client.creditors.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['creditors']
 
     assert isinstance(response, resources.Creditor)
 
@@ -292,7 +292,5 @@ def test_502_creditors_update_retries():
       response = helpers.client.creditors.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['creditors']
 
     assert isinstance(response, resources.Creditor)
-  

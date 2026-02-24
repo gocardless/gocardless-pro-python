@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_transferred_mandates_transferred_mandates():
     fixture = helpers.load_fixture('transferred_mandates')['transferred_mandates']
     helpers.stub_response(fixture)
     response = helpers.client.transferred_mandates.transferred_mandates(*fixture['url_params'])
-    body = fixture['body']['transferred_mandates']
+    if fixture['body'].get('transferred_mandates') is not None and isinstance(fixture['body'].get('transferred_mandates'), (dict, list)):
+        body = fixture['body']['transferred_mandates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.TransferredMandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -44,4 +46,3 @@ def test_502_transferred_mandates_transferred_mandates_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.transferred_mandates.transferred_mandates(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

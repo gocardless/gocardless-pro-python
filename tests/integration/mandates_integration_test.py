@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_mandates_create():
     fixture = helpers.load_fixture('mandates')['create']
     helpers.stub_response(fixture)
     response = helpers.client.mandates.create(*fixture['url_params'])
-    body = fixture['body']['mandates']
+    if fixture['body'].get('mandates') is not None and isinstance(fixture['body'].get('mandates'), (dict, list)):
+        body = fixture['body']['mandates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -73,7 +75,6 @@ def test_timeout_mandates_create_retries():
       response = helpers.client.mandates.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandates']
 
     assert isinstance(response, resources.Mandate)
 
@@ -83,17 +84,18 @@ def test_502_mandates_create_retries():
       response = helpers.client.mandates.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandates']
 
     assert isinstance(response, resources.Mandate)
-  
 
 @responses.activate
 def test_mandates_list():
     fixture = helpers.load_fixture('mandates')['list']
     helpers.stub_response(fixture)
     response = helpers.client.mandates.list(*fixture['url_params'])
-    body = fixture['body']['mandates']
+    if fixture['body'].get('mandates') is not None and isinstance(fixture['body'].get('mandates'), (dict, list)):
+        body = fixture['body']['mandates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Mandate)
@@ -122,7 +124,6 @@ def test_timeout_mandates_list_retries():
       response = helpers.client.mandates.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandates']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Mandate)
@@ -136,7 +137,6 @@ def test_502_mandates_list_retries():
       response = helpers.client.mandates.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandates']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Mandate)
@@ -162,15 +162,16 @@ def test_mandates_all():
     assert len(all_records) == len(fixture['body']['mandates']) * 2
     for record in all_records:
       assert isinstance(record, resources.Mandate)
-    
-  
 
 @responses.activate
 def test_mandates_get():
     fixture = helpers.load_fixture('mandates')['get']
     helpers.stub_response(fixture)
     response = helpers.client.mandates.get(*fixture['url_params'])
-    body = fixture['body']['mandates']
+    if fixture['body'].get('mandates') is not None and isinstance(fixture['body'].get('mandates'), (dict, list)):
+        body = fixture['body']['mandates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -205,7 +206,6 @@ def test_timeout_mandates_get_retries():
       response = helpers.client.mandates.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandates']
 
     assert isinstance(response, resources.Mandate)
 
@@ -215,17 +215,18 @@ def test_502_mandates_get_retries():
       response = helpers.client.mandates.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandates']
 
     assert isinstance(response, resources.Mandate)
-  
 
 @responses.activate
 def test_mandates_update():
     fixture = helpers.load_fixture('mandates')['update']
     helpers.stub_response(fixture)
     response = helpers.client.mandates.update(*fixture['url_params'])
-    body = fixture['body']['mandates']
+    if fixture['body'].get('mandates') is not None and isinstance(fixture['body'].get('mandates'), (dict, list)):
+        body = fixture['body']['mandates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -260,7 +261,6 @@ def test_timeout_mandates_update_retries():
       response = helpers.client.mandates.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandates']
 
     assert isinstance(response, resources.Mandate)
 
@@ -270,17 +270,18 @@ def test_502_mandates_update_retries():
       response = helpers.client.mandates.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandates']
 
     assert isinstance(response, resources.Mandate)
-  
 
 @responses.activate
 def test_mandates_cancel():
     fixture = helpers.load_fixture('mandates')['cancel']
     helpers.stub_response(fixture)
     response = helpers.client.mandates.cancel(*fixture['url_params'])
-    body = fixture['body']['mandates']
+    if fixture['body'].get('mandates') is not None and isinstance(fixture['body'].get('mandates'), (dict, list)):
+        body = fixture['body']['mandates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -321,14 +322,16 @@ def test_502_mandates_cancel_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.mandates.cancel(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_mandates_reinstate():
     fixture = helpers.load_fixture('mandates')['reinstate']
     helpers.stub_response(fixture)
     response = helpers.client.mandates.reinstate(*fixture['url_params'])
-    body = fixture['body']['mandates']
+    if fixture['body'].get('mandates') is not None and isinstance(fixture['body'].get('mandates'), (dict, list)):
+        body = fixture['body']['mandates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Mandate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -369,4 +372,3 @@ def test_502_mandates_reinstate_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.mandates.reinstate(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

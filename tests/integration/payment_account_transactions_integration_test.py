@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_payment_account_transactions_list():
     fixture = helpers.load_fixture('payment_account_transactions')['list']
     helpers.stub_response(fixture)
     response = helpers.client.payment_account_transactions.list(*fixture['url_params'])
-    body = fixture['body']['payment_account_transactions']
+    if fixture['body'].get('payment_account_transactions') is not None and isinstance(fixture['body'].get('payment_account_transactions'), (dict, list)):
+        body = fixture['body']['payment_account_transactions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.PaymentAccountTransaction)
@@ -46,7 +48,6 @@ def test_timeout_payment_account_transactions_list_retries():
       response = helpers.client.payment_account_transactions.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payment_account_transactions']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.PaymentAccountTransaction)
@@ -60,7 +61,6 @@ def test_502_payment_account_transactions_list_retries():
       response = helpers.client.payment_account_transactions.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payment_account_transactions']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.PaymentAccountTransaction)
@@ -86,5 +86,3 @@ def test_payment_account_transactions_all():
     assert len(all_records) == len(fixture['body']['payment_account_transactions']) * 2
     for record in all_records:
       assert isinstance(record, resources.PaymentAccountTransaction)
-    
-  

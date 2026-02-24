@@ -20,8 +20,8 @@ class BillingRequestTemplatesService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List Billing Request Templates.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        Billing Request Templates.
+         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+         your Billing Request Templates.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -47,7 +47,7 @@ class BillingRequestTemplatesService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single Billing Request Template.
 
-        Fetches a Billing Request Template
+         Fetches a Billing Request Template
 
         Args:
               identity (string): Unique identifier, beginning with "BRT".
@@ -70,7 +70,7 @@ class BillingRequestTemplatesService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a Billing Request Template.
 
-        
+         
 
         Args:
               params (dict, optional): Request body.
@@ -98,8 +98,8 @@ class BillingRequestTemplatesService(base_service.BaseService):
     def update(self,identity,params=None, headers=None):
         """Update a Billing Request Template.
 
-        Updates a Billing Request Template, which will affect all future
-        Billing Requests created by this template.
+         Updates a Billing Request Template, which will affect all future
+         Billing Requests created by this template.
 
         Args:
               identity (string): Unique identifier, beginning with "BRT".

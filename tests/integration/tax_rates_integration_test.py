@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_tax_rates_list():
     fixture = helpers.load_fixture('tax_rates')['list']
     helpers.stub_response(fixture)
     response = helpers.client.tax_rates.list(*fixture['url_params'])
-    body = fixture['body']['tax_rates']
+    if fixture['body'].get('tax_rates') is not None and isinstance(fixture['body'].get('tax_rates'), (dict, list)):
+        body = fixture['body']['tax_rates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.TaxRate)
@@ -43,7 +45,6 @@ def test_timeout_tax_rates_list_retries():
       response = helpers.client.tax_rates.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['tax_rates']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.TaxRate)
@@ -57,7 +58,6 @@ def test_502_tax_rates_list_retries():
       response = helpers.client.tax_rates.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['tax_rates']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.TaxRate)
@@ -83,15 +83,16 @@ def test_tax_rates_all():
     assert len(all_records) == len(fixture['body']['tax_rates']) * 2
     for record in all_records:
       assert isinstance(record, resources.TaxRate)
-    
-  
 
 @responses.activate
 def test_tax_rates_get():
     fixture = helpers.load_fixture('tax_rates')['get']
     helpers.stub_response(fixture)
     response = helpers.client.tax_rates.get(*fixture['url_params'])
-    body = fixture['body']['tax_rates']
+    if fixture['body'].get('tax_rates') is not None and isinstance(fixture['body'].get('tax_rates'), (dict, list)):
+        body = fixture['body']['tax_rates']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.TaxRate)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -109,7 +110,6 @@ def test_timeout_tax_rates_get_retries():
       response = helpers.client.tax_rates.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['tax_rates']
 
     assert isinstance(response, resources.TaxRate)
 
@@ -119,7 +119,5 @@ def test_502_tax_rates_get_retries():
       response = helpers.client.tax_rates.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['tax_rates']
 
     assert isinstance(response, resources.TaxRate)
-  

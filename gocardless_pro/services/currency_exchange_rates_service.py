@@ -20,8 +20,8 @@ class CurrencyExchangeRatesService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List exchange rates.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
-        exchange rates.
+         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
+         exchange rates.
 
         Args:
               params (dict, optional): Query string parameters.

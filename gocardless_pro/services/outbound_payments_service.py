@@ -20,7 +20,7 @@ class OutboundPaymentsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create an outbound payment.
 
-        
+         
 
         Args:
               params (dict, optional): Request body.
@@ -48,8 +48,8 @@ class OutboundPaymentsService(base_service.BaseService):
     def withdraw(self,params=None, headers=None):
         """Create a withdrawal outbound payment.
 
-        Creates an outbound payment to your verified business bank account as
-        the recipient.
+         Creates an outbound payment to your verified business bank account as
+         the recipient.
 
         Args:
               params (dict, optional): Request body.
@@ -69,11 +69,11 @@ class OutboundPaymentsService(base_service.BaseService):
     def cancel(self,identity,params=None, headers=None):
         """Cancel an outbound payment.
 
-        Cancels an outbound payment. Only outbound payments with either
-        `verifying`, `pending_approval`, or `scheduled` status can be
-        cancelled.
-        Once an outbound payment is `executing`, the money moving process has
-        begun and cannot be reversed.
+         Cancels an outbound payment. Only outbound payments with either
+         `verifying`, `pending_approval`, or `scheduled` status can be
+         cancelled.
+         Once an outbound payment is `executing`, the money moving process has
+         begun and cannot be reversed.
 
         Args:
               identity (string): Unique identifier of the outbound payment.
@@ -97,8 +97,8 @@ class OutboundPaymentsService(base_service.BaseService):
     def approve(self,identity,params=None, headers=None):
         """Approve an outbound payment.
 
-        Approves an outbound payment. Only outbound payments with the
-        “pending_approval” status can be approved.
+         Approves an outbound payment. Only outbound payments with the
+         “pending_approval” status can be approved.
 
         Args:
               identity (string): Unique identifier of the outbound payment.
@@ -122,7 +122,7 @@ class OutboundPaymentsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get an outbound payment.
 
-        Fetches an outbound_payment by ID
+         Fetches an outbound_payment by ID
 
         Args:
               identity (string): Unique identifier of the outbound payment.
@@ -145,8 +145,8 @@ class OutboundPaymentsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List outbound payments.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        outbound payments.
+         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+         outbound payments.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -172,8 +172,8 @@ class OutboundPaymentsService(base_service.BaseService):
     def update(self,identity,params=None, headers=None):
         """Update an outbound payment.
 
-        Updates an outbound payment object. This accepts only the metadata
-        parameter.
+         Updates an outbound payment object. This accepts only the metadata
+         parameter.
 
         Args:
               identity (string): Unique identifier of the outbound payment.
@@ -192,5 +192,23 @@ class OutboundPaymentsService(base_service.BaseService):
 
         response = self._perform_request('PUT', path, params, headers,
                                          retry_failures=True)
+        return self._resource_for(response)
+  
+
+    def stats(self,params=None, headers=None):
+        """Outbound payment statistics.
+
+         Retrieve aggregate statistics on outbound payments.
+
+        Args:
+              params (dict, optional): Query string parameters.
+
+        Returns:
+              OutboundPayment
+        """
+        path = '/outbound_payments/stats'
+        
+        response = self._perform_request('GET', path, params, headers,
+                                         retry_failures=False)
         return self._resource_for(response)
   

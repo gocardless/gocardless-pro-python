@@ -367,6 +367,14 @@ Exports
     # Iterate through all exports
     client.exports.all(params={...})
 
+Funds availabilities
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Funds availability
+    client.funds_availabilities.check('MD123', params={...})
+
 Instalment schedules
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -520,6 +528,9 @@ Outbound payments
     # Update an outbound payment
     client.outbound_payments.update('OUT123', params={...})
 
+    # Outbound payment statistics
+    client.outbound_payments.stats(params={...})
+
 Payer authorisations
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -578,6 +589,9 @@ Payment accounts
 ''''''''''''''''''''''''''''''''''''''''''
 
 .. code:: python
+
+    # Get a single payment account details
+    client.payment_accounts.get('BA123', params={...})
 
     # List payment accounts
     client.payment_accounts.list(params={...})

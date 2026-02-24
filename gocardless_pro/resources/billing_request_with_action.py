@@ -120,6 +120,14 @@ class BillingRequestWithAction(object):
             return self.attributes.get('metadata')
     
         @property
+        def payment_context_code(self):
+            return self.attributes.get('payment_context_code')
+    
+        @property
+        def payment_purpose_code(self):
+            return self.attributes.get('payment_purpose_code')
+    
+        @property
         def payment_request(self):
             return self.attributes.get('payment_request')
     

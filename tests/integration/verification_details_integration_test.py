@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_verification_details_create():
     fixture = helpers.load_fixture('verification_details')['create']
     helpers.stub_response(fixture)
     response = helpers.client.verification_details.create(*fixture['url_params'])
-    body = fixture['body']['verification_details']
+    if fixture['body'].get('verification_details') is not None and isinstance(fixture['body'].get('verification_details'), (dict, list)):
+        body = fixture['body']['verification_details']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.VerificationDetail)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -43,7 +45,6 @@ def test_timeout_verification_details_create_retries():
       response = helpers.client.verification_details.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['verification_details']
 
     assert isinstance(response, resources.VerificationDetail)
 
@@ -53,17 +54,18 @@ def test_502_verification_details_create_retries():
       response = helpers.client.verification_details.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['verification_details']
 
     assert isinstance(response, resources.VerificationDetail)
-  
 
 @responses.activate
 def test_verification_details_list():
     fixture = helpers.load_fixture('verification_details')['list']
     helpers.stub_response(fixture)
     response = helpers.client.verification_details.list(*fixture['url_params'])
-    body = fixture['body']['verification_details']
+    if fixture['body'].get('verification_details') is not None and isinstance(fixture['body'].get('verification_details'), (dict, list)):
+        body = fixture['body']['verification_details']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.VerificationDetail)
@@ -88,7 +90,6 @@ def test_timeout_verification_details_list_retries():
       response = helpers.client.verification_details.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['verification_details']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.VerificationDetail)
@@ -102,7 +103,6 @@ def test_502_verification_details_list_retries():
       response = helpers.client.verification_details.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['verification_details']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.VerificationDetail)
@@ -128,5 +128,3 @@ def test_verification_details_all():
     assert len(all_records) == len(fixture['body']['verification_details']) * 2
     for record in all_records:
       assert isinstance(record, resources.VerificationDetail)
-    
-  

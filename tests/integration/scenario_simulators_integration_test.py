@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_scenario_simulators_run():
     fixture = helpers.load_fixture('scenario_simulators')['run']
     helpers.stub_response(fixture)
     response = helpers.client.scenario_simulators.run(*fixture['url_params'])
-    body = fixture['body']['scenario_simulators']
+    if fixture['body'].get('scenario_simulators') is not None and isinstance(fixture['body'].get('scenario_simulators'), (dict, list)):
+        body = fixture['body']['scenario_simulators']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.ScenarioSimulator)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -40,4 +42,3 @@ def test_502_scenario_simulators_run_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.scenario_simulators.run(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

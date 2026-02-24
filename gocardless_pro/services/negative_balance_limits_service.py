@@ -20,8 +20,8 @@ class NegativeBalanceLimitsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List negative balance limits.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        negative balance limits.
+         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+         negative balance limits.
 
         Args:
               params (dict, optional): Query string parameters.

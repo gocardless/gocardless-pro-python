@@ -110,6 +110,10 @@ class Client(object):
         return services.ExportsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def funds_availabilities(self):
+        return services.FundsAvailabilitiesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def instalment_schedules(self):
         return services.InstalmentSchedulesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 

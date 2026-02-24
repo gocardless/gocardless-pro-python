@@ -20,7 +20,7 @@ class VerificationDetailsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a verification detail.
 
-        Creates a new verification detail
+         Creates a new verification detail
 
         Args:
               params (dict, optional): Request body.
@@ -41,7 +41,7 @@ class VerificationDetailsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List verification details.
 
-        Returns a list of verification details belonging to a creditor.
+         Returns a list of verification details belonging to a creditor.
 
         Args:
               params (dict, optional): Query string parameters.

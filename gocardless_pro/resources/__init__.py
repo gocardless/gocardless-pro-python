@@ -39,6 +39,8 @@ from .event import Event
 
 from .export import Export
 
+from .funds_availability import FundsAvailability
+
 from .instalment_schedule import InstalmentSchedule
 
 from .institution import Institution

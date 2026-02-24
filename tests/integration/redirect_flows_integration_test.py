@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_redirect_flows_create():
     fixture = helpers.load_fixture('redirect_flows')['create']
     helpers.stub_response(fixture)
     response = helpers.client.redirect_flows.create(*fixture['url_params'])
-    body = fixture['body']['redirect_flows']
+    if fixture['body'].get('redirect_flows') is not None and isinstance(fixture['body'].get('redirect_flows'), (dict, list)):
+        body = fixture['body']['redirect_flows']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.RedirectFlow)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -65,7 +67,6 @@ def test_timeout_redirect_flows_create_retries():
       response = helpers.client.redirect_flows.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['redirect_flows']
 
     assert isinstance(response, resources.RedirectFlow)
 
@@ -75,17 +76,18 @@ def test_502_redirect_flows_create_retries():
       response = helpers.client.redirect_flows.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['redirect_flows']
 
     assert isinstance(response, resources.RedirectFlow)
-  
 
 @responses.activate
 def test_redirect_flows_get():
     fixture = helpers.load_fixture('redirect_flows')['get']
     helpers.stub_response(fixture)
     response = helpers.client.redirect_flows.get(*fixture['url_params'])
-    body = fixture['body']['redirect_flows']
+    if fixture['body'].get('redirect_flows') is not None and isinstance(fixture['body'].get('redirect_flows'), (dict, list)):
+        body = fixture['body']['redirect_flows']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.RedirectFlow)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -112,7 +114,6 @@ def test_timeout_redirect_flows_get_retries():
       response = helpers.client.redirect_flows.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['redirect_flows']
 
     assert isinstance(response, resources.RedirectFlow)
 
@@ -122,17 +123,18 @@ def test_502_redirect_flows_get_retries():
       response = helpers.client.redirect_flows.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['redirect_flows']
 
     assert isinstance(response, resources.RedirectFlow)
-  
 
 @responses.activate
 def test_redirect_flows_complete():
     fixture = helpers.load_fixture('redirect_flows')['complete']
     helpers.stub_response(fixture)
     response = helpers.client.redirect_flows.complete(*fixture['url_params'])
-    body = fixture['body']['redirect_flows']
+    if fixture['body'].get('redirect_flows') is not None and isinstance(fixture['body'].get('redirect_flows'), (dict, list)):
+        body = fixture['body']['redirect_flows']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.RedirectFlow)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -165,4 +167,3 @@ def test_502_redirect_flows_complete_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.redirect_flows.complete(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

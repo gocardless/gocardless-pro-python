@@ -21,6 +21,7 @@ from .customer_bank_accounts_service import CustomerBankAccountsService
 from .customer_notifications_service import CustomerNotificationsService
 from .events_service import EventsService
 from .exports_service import ExportsService
+from .funds_availabilities_service import FundsAvailabilitiesService
 from .instalment_schedules_service import InstalmentSchedulesService
 from .institutions_service import InstitutionsService
 from .logos_service import LogosService

@@ -20,7 +20,7 @@ class BillingRequestFlowsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a Billing Request Flow.
 
-        Creates a new billing request flow.
+         Creates a new billing request flow.
 
         Args:
               params (dict, optional): Request body.
@@ -41,9 +41,9 @@ class BillingRequestFlowsService(base_service.BaseService):
     def initialise(self,identity,params=None, headers=None):
         """Initialise a Billing Request Flow.
 
-        Returns the flow having generated a fresh session token which can be
-        used to power
-        integrations that manipulate the flow.
+         Returns the flow having generated a fresh session token which can be
+         used to power
+         integrations that manipulate the flow.
 
         Args:
               identity (string): Unique identifier, beginning with "BRF".

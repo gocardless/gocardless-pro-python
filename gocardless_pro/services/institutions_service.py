@@ -20,7 +20,7 @@ class InstitutionsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List Institutions.
 
-        Returns a list of supported institutions.
+         Returns a list of supported institutions.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -46,9 +46,9 @@ class InstitutionsService(base_service.BaseService):
     def list_for_billing_request(self,identity,params=None, headers=None):
         """List institutions for Billing Request.
 
-        Returns all institutions valid for a Billing Request.
-        
-        This endpoint is currently supported only for FasterPayments.
+         Returns all institutions valid for a Billing Request.
+         
+         This endpoint is currently supported only for FasterPayments.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".

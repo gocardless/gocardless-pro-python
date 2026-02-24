@@ -20,13 +20,13 @@ class BankAccountDetailsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get encrypted bank details.
 
-        Returns bank account details in the flattened JSON Web Encryption
-        format described in RFC 7516.
-        
-        You must specify a `Gc-Key-Id` header when using this endpoint. See
-        [Public Key
-        Setup](https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup)
-        for more details.
+         Returns bank account details in the flattened JSON Web Encryption
+         format described in RFC 7516.
+         
+         You must specify a `Gc-Key-Id` header when using this endpoint. See
+         [Public Key
+         Setup](https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup)
+         for more details.
 
         Args:
               identity (string): Unique identifier, beginning with "BA".

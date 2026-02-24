@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_billing_request_with_actions_create_with_actions():
     fixture = helpers.load_fixture('billing_request_with_actions')['create_with_actions']
     helpers.stub_response(fixture)
     response = helpers.client.billing_request_with_actions.create_with_actions(*fixture['url_params'])
-    body = fixture['body']['billing_request_with_actions']
+    if fixture['body'].get('billing_request_with_actions') is not None and isinstance(fixture['body'].get('billing_request_with_actions'), (dict, list)):
+        body = fixture['body']['billing_request_with_actions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequestWithAction)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -44,6 +46,8 @@ def test_billing_request_with_actions_create_with_actions():
     assert response.billing_requests.links == body.get('billing_requests')['links']
     assert response.billing_requests.mandate_request == body.get('billing_requests')['mandate_request']
     assert response.billing_requests.metadata == body.get('billing_requests')['metadata']
+    assert response.billing_requests.payment_context_code == body.get('billing_requests')['payment_context_code']
+    assert response.billing_requests.payment_purpose_code == body.get('billing_requests')['payment_purpose_code']
     assert response.billing_requests.payment_request == body.get('billing_requests')['payment_request']
     assert response.billing_requests.purpose_code == body.get('billing_requests')['purpose_code']
     assert response.billing_requests.resources == body.get('billing_requests')['resources']
@@ -57,7 +61,6 @@ def test_timeout_billing_request_with_actions_create_with_actions_retries():
       response = helpers.client.billing_request_with_actions.create_with_actions(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_request_with_actions']
 
     assert isinstance(response, resources.BillingRequestWithAction)
 
@@ -67,7 +70,5 @@ def test_502_billing_request_with_actions_create_with_actions_retries():
       response = helpers.client.billing_request_with_actions.create_with_actions(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_request_with_actions']
 
     assert isinstance(response, resources.BillingRequestWithAction)
-  

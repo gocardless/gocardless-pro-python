@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_bank_account_holder_verifications_create():
     fixture = helpers.load_fixture('bank_account_holder_verifications')['create']
     helpers.stub_response(fixture)
     response = helpers.client.bank_account_holder_verifications.create(*fixture['url_params'])
-    body = fixture['body']['bank_account_holder_verifications']
+    if fixture['body'].get('bank_account_holder_verifications') is not None and isinstance(fixture['body'].get('bank_account_holder_verifications'), (dict, list)):
+        body = fixture['body']['bank_account_holder_verifications']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BankAccountHolderVerification)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -55,7 +57,6 @@ def test_timeout_bank_account_holder_verifications_create_retries():
       response = helpers.client.bank_account_holder_verifications.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['bank_account_holder_verifications']
 
     assert isinstance(response, resources.BankAccountHolderVerification)
 
@@ -65,17 +66,18 @@ def test_502_bank_account_holder_verifications_create_retries():
       response = helpers.client.bank_account_holder_verifications.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['bank_account_holder_verifications']
 
     assert isinstance(response, resources.BankAccountHolderVerification)
-  
 
 @responses.activate
 def test_bank_account_holder_verifications_get():
     fixture = helpers.load_fixture('bank_account_holder_verifications')['get']
     helpers.stub_response(fixture)
     response = helpers.client.bank_account_holder_verifications.get(*fixture['url_params'])
-    body = fixture['body']['bank_account_holder_verifications']
+    if fixture['body'].get('bank_account_holder_verifications') is not None and isinstance(fixture['body'].get('bank_account_holder_verifications'), (dict, list)):
+        body = fixture['body']['bank_account_holder_verifications']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BankAccountHolderVerification)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -92,7 +94,6 @@ def test_timeout_bank_account_holder_verifications_get_retries():
       response = helpers.client.bank_account_holder_verifications.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['bank_account_holder_verifications']
 
     assert isinstance(response, resources.BankAccountHolderVerification)
 
@@ -102,7 +103,5 @@ def test_502_bank_account_holder_verifications_get_retries():
       response = helpers.client.bank_account_holder_verifications.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['bank_account_holder_verifications']
 
     assert isinstance(response, resources.BankAccountHolderVerification)
-  

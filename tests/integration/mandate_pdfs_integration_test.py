@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_mandate_pdfs_create():
     fixture = helpers.load_fixture('mandate_pdfs')['create']
     helpers.stub_response(fixture)
     response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
-    body = fixture['body']['mandate_pdfs']
+    if fixture['body'].get('mandate_pdfs') is not None and isinstance(fixture['body'].get('mandate_pdfs'), (dict, list)):
+        body = fixture['body']['mandate_pdfs']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.MandatePdf)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -35,7 +37,6 @@ def test_timeout_mandate_pdfs_create_retries():
       response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandate_pdfs']
 
     assert isinstance(response, resources.MandatePdf)
 
@@ -45,7 +46,5 @@ def test_502_mandate_pdfs_create_retries():
       response = helpers.client.mandate_pdfs.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandate_pdfs']
 
     assert isinstance(response, resources.MandatePdf)
-  

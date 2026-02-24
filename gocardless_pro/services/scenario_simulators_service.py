@@ -20,7 +20,7 @@ class ScenarioSimulatorsService(base_service.BaseService):
     def run(self,identity,params=None, headers=None):
         """Simulate a scenario.
 
-        Runs the specific scenario simulator against the specific resource
+         Runs the specific scenario simulator against the specific resource
 
         Args:
               identity (string): The unique identifier of the simulator, used to initiate simulations. One of:
@@ -41,7 +41,7 @@ class ScenarioSimulatorsService(base_service.BaseService):
 <li>`mandate_customer_approval_skipped`: Transitions a mandate through to `pending_submission`, as if the customer skipped the mandate approval during the mandate creation process. It must start in the `pending_customer_approval` state. Compatible only with Bacs and SEPA mandates, which support customer signatures on the mandate. All payments associated with the mandate will be transitioned to `pending_submission`. All subscriptions associated with the mandate will become `active`.</li>
 <li>`mandate_failed`: Transitions a mandate through to `failed`, having been submitted to the banks but found to be invalid (for example due to invalid bank details). It must start in the `pending_submission` or `submitted` states. Not compatible with SEPA mandates, which are submitted with their first payment.</li>
 <li>`mandate_expired`: Transitions a mandate through to `expired`, having been submitted to the banks, set up successfully and then expired because no collection attempts were made against it for longer than the scheme's dormancy period (13 months for Bacs, 3 years for SEPA, 15 months for ACH, Betalingsservice, and BECS). It must start in the `pending_submission` state. Not compatible with Autogiro, BECS NZ, and PAD mandates, which do not expire.</li>
-<li>`mandate_transferred`: Transitions a mandate through to `transferred`, having been submitted to the banks, set up successfully and then moved to a new bank account due to the customer using the UK's Current Account Switching Service (CASS). It must start in the `pending_submission` state. Only compatible with Bacs mandates.</li>
+<li>`mandate_transferred`: Transitions a mandate through to `transferred`, having been submitted to the banks, set up successfully and then moved to a new bank account due. It must start in the `pending_submission` state. Only compatible with Bacs and SEPA mandates.</li>
 <li>`mandate_transferred_with_resubmission`: Transitions a mandate through `transferred` and resubmits it to the banks, can be caused be the UK's Current Account Switching Service (CASS) or when a customer contacts GoCardless to change their bank details. It must start in the `pending_submission` state. Only compatible with Bacs mandates.</li>
 <li>`mandate_suspended_by_payer`: Transitions a mandate to `suspended_by_payer`, as if payer has suspended the mandate after it has been setup successfully. It must start in the `activated` state. Only compatible with PAY_TO mandates.</li>
 <li>`refund_paid`: Transitions a refund to `paid`. It must start in either the `pending_submission` or `submitted` state.</li>

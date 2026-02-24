@@ -71,6 +71,9 @@ def test_events_returns_service():
 def test_exports_returns_service():
     assert isinstance(client.exports, services.ExportsService)
 
+def test_funds_availabilities_returns_service():
+    assert isinstance(client.funds_availabilities, services.FundsAvailabilitiesService)
+
 def test_instalment_schedules_returns_service():
     assert isinstance(client.instalment_schedules, services.InstalmentSchedulesService)
 

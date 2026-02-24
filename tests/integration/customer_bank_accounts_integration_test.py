@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_customer_bank_accounts_create():
     fixture = helpers.load_fixture('customer_bank_accounts')['create']
     helpers.stub_response(fixture)
     response = helpers.client.customer_bank_accounts.create(*fixture['url_params'])
-    body = fixture['body']['customer_bank_accounts']
+    if fixture['body'].get('customer_bank_accounts') is not None and isinstance(fixture['body'].get('customer_bank_accounts'), (dict, list)):
+        body = fixture['body']['customer_bank_accounts']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.CustomerBankAccount)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -62,7 +64,6 @@ def test_timeout_customer_bank_accounts_create_retries():
       response = helpers.client.customer_bank_accounts.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['customer_bank_accounts']
 
     assert isinstance(response, resources.CustomerBankAccount)
 
@@ -72,17 +73,18 @@ def test_502_customer_bank_accounts_create_retries():
       response = helpers.client.customer_bank_accounts.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['customer_bank_accounts']
 
     assert isinstance(response, resources.CustomerBankAccount)
-  
 
 @responses.activate
 def test_customer_bank_accounts_list():
     fixture = helpers.load_fixture('customer_bank_accounts')['list']
     helpers.stub_response(fixture)
     response = helpers.client.customer_bank_accounts.list(*fixture['url_params'])
-    body = fixture['body']['customer_bank_accounts']
+    if fixture['body'].get('customer_bank_accounts') is not None and isinstance(fixture['body'].get('customer_bank_accounts'), (dict, list)):
+        body = fixture['body']['customer_bank_accounts']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.CustomerBankAccount)
@@ -109,7 +111,6 @@ def test_timeout_customer_bank_accounts_list_retries():
       response = helpers.client.customer_bank_accounts.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['customer_bank_accounts']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.CustomerBankAccount)
@@ -123,7 +124,6 @@ def test_502_customer_bank_accounts_list_retries():
       response = helpers.client.customer_bank_accounts.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['customer_bank_accounts']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.CustomerBankAccount)
@@ -149,15 +149,16 @@ def test_customer_bank_accounts_all():
     assert len(all_records) == len(fixture['body']['customer_bank_accounts']) * 2
     for record in all_records:
       assert isinstance(record, resources.CustomerBankAccount)
-    
-  
 
 @responses.activate
 def test_customer_bank_accounts_get():
     fixture = helpers.load_fixture('customer_bank_accounts')['get']
     helpers.stub_response(fixture)
     response = helpers.client.customer_bank_accounts.get(*fixture['url_params'])
-    body = fixture['body']['customer_bank_accounts']
+    if fixture['body'].get('customer_bank_accounts') is not None and isinstance(fixture['body'].get('customer_bank_accounts'), (dict, list)):
+        body = fixture['body']['customer_bank_accounts']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.CustomerBankAccount)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -181,7 +182,6 @@ def test_timeout_customer_bank_accounts_get_retries():
       response = helpers.client.customer_bank_accounts.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['customer_bank_accounts']
 
     assert isinstance(response, resources.CustomerBankAccount)
 
@@ -191,17 +191,18 @@ def test_502_customer_bank_accounts_get_retries():
       response = helpers.client.customer_bank_accounts.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['customer_bank_accounts']
 
     assert isinstance(response, resources.CustomerBankAccount)
-  
 
 @responses.activate
 def test_customer_bank_accounts_update():
     fixture = helpers.load_fixture('customer_bank_accounts')['update']
     helpers.stub_response(fixture)
     response = helpers.client.customer_bank_accounts.update(*fixture['url_params'])
-    body = fixture['body']['customer_bank_accounts']
+    if fixture['body'].get('customer_bank_accounts') is not None and isinstance(fixture['body'].get('customer_bank_accounts'), (dict, list)):
+        body = fixture['body']['customer_bank_accounts']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.CustomerBankAccount)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -225,7 +226,6 @@ def test_timeout_customer_bank_accounts_update_retries():
       response = helpers.client.customer_bank_accounts.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['customer_bank_accounts']
 
     assert isinstance(response, resources.CustomerBankAccount)
 
@@ -235,17 +235,18 @@ def test_502_customer_bank_accounts_update_retries():
       response = helpers.client.customer_bank_accounts.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['customer_bank_accounts']
 
     assert isinstance(response, resources.CustomerBankAccount)
-  
 
 @responses.activate
 def test_customer_bank_accounts_disable():
     fixture = helpers.load_fixture('customer_bank_accounts')['disable']
     helpers.stub_response(fixture)
     response = helpers.client.customer_bank_accounts.disable(*fixture['url_params'])
-    body = fixture['body']['customer_bank_accounts']
+    if fixture['body'].get('customer_bank_accounts') is not None and isinstance(fixture['body'].get('customer_bank_accounts'), (dict, list)):
+        body = fixture['body']['customer_bank_accounts']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.CustomerBankAccount)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -275,4 +276,3 @@ def test_502_customer_bank_accounts_disable_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.customer_bank_accounts.disable(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

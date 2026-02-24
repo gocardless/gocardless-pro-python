@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_billing_request_flows_create():
     fixture = helpers.load_fixture('billing_request_flows')['create']
     helpers.stub_response(fixture)
     response = helpers.client.billing_request_flows.create(*fixture['url_params'])
-    body = fixture['body']['billing_request_flows']
+    if fixture['body'].get('billing_request_flows') is not None and isinstance(fixture['body'].get('billing_request_flows'), (dict, list)):
+        body = fixture['body']['billing_request_flows']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequestFlow)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -64,7 +66,6 @@ def test_timeout_billing_request_flows_create_retries():
       response = helpers.client.billing_request_flows.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_request_flows']
 
     assert isinstance(response, resources.BillingRequestFlow)
 
@@ -74,17 +75,18 @@ def test_502_billing_request_flows_create_retries():
       response = helpers.client.billing_request_flows.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_request_flows']
 
     assert isinstance(response, resources.BillingRequestFlow)
-  
 
 @responses.activate
 def test_billing_request_flows_initialise():
     fixture = helpers.load_fixture('billing_request_flows')['initialise']
     helpers.stub_response(fixture)
     response = helpers.client.billing_request_flows.initialise(*fixture['url_params'])
-    body = fixture['body']['billing_request_flows']
+    if fixture['body'].get('billing_request_flows') is not None and isinstance(fixture['body'].get('billing_request_flows'), (dict, list)):
+        body = fixture['body']['billing_request_flows']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequestFlow)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -133,4 +135,3 @@ def test_502_billing_request_flows_initialise_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_request_flows.initialise(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

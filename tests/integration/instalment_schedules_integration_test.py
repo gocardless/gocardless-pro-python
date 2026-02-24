@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_instalment_schedules_create_with_dates():
     fixture = helpers.load_fixture('instalment_schedules')['create_with_dates']
     helpers.stub_response(fixture)
     response = helpers.client.instalment_schedules.create_with_dates(*fixture['url_params'])
-    body = fixture['body']['instalment_schedules']
+    if fixture['body'].get('instalment_schedules') is not None and isinstance(fixture['body'].get('instalment_schedules'), (dict, list)):
+        body = fixture['body']['instalment_schedules']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.InstalmentSchedule)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -61,7 +63,6 @@ def test_timeout_instalment_schedules_create_with_dates_retries():
       response = helpers.client.instalment_schedules.create_with_dates(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, resources.InstalmentSchedule)
 
@@ -71,17 +72,18 @@ def test_502_instalment_schedules_create_with_dates_retries():
       response = helpers.client.instalment_schedules.create_with_dates(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, resources.InstalmentSchedule)
-  
 
 @responses.activate
 def test_instalment_schedules_create_with_schedule():
     fixture = helpers.load_fixture('instalment_schedules')['create_with_schedule']
     helpers.stub_response(fixture)
     response = helpers.client.instalment_schedules.create_with_schedule(*fixture['url_params'])
-    body = fixture['body']['instalment_schedules']
+    if fixture['body'].get('instalment_schedules') is not None and isinstance(fixture['body'].get('instalment_schedules'), (dict, list)):
+        body = fixture['body']['instalment_schedules']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.InstalmentSchedule)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -121,7 +123,6 @@ def test_timeout_instalment_schedules_create_with_schedule_retries():
       response = helpers.client.instalment_schedules.create_with_schedule(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, resources.InstalmentSchedule)
 
@@ -131,17 +132,18 @@ def test_502_instalment_schedules_create_with_schedule_retries():
       response = helpers.client.instalment_schedules.create_with_schedule(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, resources.InstalmentSchedule)
-  
 
 @responses.activate
 def test_instalment_schedules_list():
     fixture = helpers.load_fixture('instalment_schedules')['list']
     helpers.stub_response(fixture)
     response = helpers.client.instalment_schedules.list(*fixture['url_params'])
-    body = fixture['body']['instalment_schedules']
+    if fixture['body'].get('instalment_schedules') is not None and isinstance(fixture['body'].get('instalment_schedules'), (dict, list)):
+        body = fixture['body']['instalment_schedules']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.InstalmentSchedule)
@@ -165,7 +167,6 @@ def test_timeout_instalment_schedules_list_retries():
       response = helpers.client.instalment_schedules.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.InstalmentSchedule)
@@ -179,7 +180,6 @@ def test_502_instalment_schedules_list_retries():
       response = helpers.client.instalment_schedules.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.InstalmentSchedule)
@@ -205,15 +205,16 @@ def test_instalment_schedules_all():
     assert len(all_records) == len(fixture['body']['instalment_schedules']) * 2
     for record in all_records:
       assert isinstance(record, resources.InstalmentSchedule)
-    
-  
 
 @responses.activate
 def test_instalment_schedules_get():
     fixture = helpers.load_fixture('instalment_schedules')['get']
     helpers.stub_response(fixture)
     response = helpers.client.instalment_schedules.get(*fixture['url_params'])
-    body = fixture['body']['instalment_schedules']
+    if fixture['body'].get('instalment_schedules') is not None and isinstance(fixture['body'].get('instalment_schedules'), (dict, list)):
+        body = fixture['body']['instalment_schedules']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.InstalmentSchedule)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -236,7 +237,6 @@ def test_timeout_instalment_schedules_get_retries():
       response = helpers.client.instalment_schedules.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, resources.InstalmentSchedule)
 
@@ -246,17 +246,18 @@ def test_502_instalment_schedules_get_retries():
       response = helpers.client.instalment_schedules.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, resources.InstalmentSchedule)
-  
 
 @responses.activate
 def test_instalment_schedules_update():
     fixture = helpers.load_fixture('instalment_schedules')['update']
     helpers.stub_response(fixture)
     response = helpers.client.instalment_schedules.update(*fixture['url_params'])
-    body = fixture['body']['instalment_schedules']
+    if fixture['body'].get('instalment_schedules') is not None and isinstance(fixture['body'].get('instalment_schedules'), (dict, list)):
+        body = fixture['body']['instalment_schedules']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.InstalmentSchedule)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -279,7 +280,6 @@ def test_timeout_instalment_schedules_update_retries():
       response = helpers.client.instalment_schedules.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, resources.InstalmentSchedule)
 
@@ -289,17 +289,18 @@ def test_502_instalment_schedules_update_retries():
       response = helpers.client.instalment_schedules.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['instalment_schedules']
 
     assert isinstance(response, resources.InstalmentSchedule)
-  
 
 @responses.activate
 def test_instalment_schedules_cancel():
     fixture = helpers.load_fixture('instalment_schedules')['cancel']
     helpers.stub_response(fixture)
     response = helpers.client.instalment_schedules.cancel(*fixture['url_params'])
-    body = fixture['body']['instalment_schedules']
+    if fixture['body'].get('instalment_schedules') is not None and isinstance(fixture['body'].get('instalment_schedules'), (dict, list)):
+        body = fixture['body']['instalment_schedules']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.InstalmentSchedule)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -328,4 +329,3 @@ def test_502_instalment_schedules_cancel_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.instalment_schedules.cancel(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
