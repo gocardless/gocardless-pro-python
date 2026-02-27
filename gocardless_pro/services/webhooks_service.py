@@ -20,8 +20,8 @@ class WebhooksService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List webhooks.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your webhooks.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        webhooks.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -47,7 +47,7 @@ class WebhooksService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single webhook.
 
-         Retrieves the details of an existing webhook.
+        Retrieves the details of an existing webhook.
 
         Args:
               identity (string): Unique identifier, beginning with "WB".
@@ -70,7 +70,7 @@ class WebhooksService(base_service.BaseService):
     def retry(self,identity,params=None, headers=None):
         """Retry a webhook.
 
-         Requests for a previous webhook to be sent again
+        Requests for a previous webhook to be sent again
 
         Args:
               identity (string): Unique identifier, beginning with "WB".

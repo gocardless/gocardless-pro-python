@@ -20,8 +20,8 @@ class TransferredMandatesService(base_service.BaseService):
     def transferred_mandates(self,identity,params=None, headers=None):
         """Get updated customer bank details.
 
-         Returns new customer bank details for a mandate that's been recently
-         transferred
+        Returns new customer bank details for a mandate that's been recently
+        transferred
 
         Args:
               identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.

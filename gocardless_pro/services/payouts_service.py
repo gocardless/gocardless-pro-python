@@ -20,8 +20,8 @@ class PayoutsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List payouts.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your payouts.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        payouts.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -47,9 +47,9 @@ class PayoutsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single payout.
 
-         Retrieves the details of a single payout. For an example of how to
-         reconcile the transactions in a payout, see [this
-         guide](#events-reconciling-payouts-with-events).
+        Retrieves the details of a single payout. For an example of how to
+        reconcile the transactions in a payout, see [this
+        guide](#events-reconciling-payouts-with-events).
 
         Args:
               identity (string): Unique identifier, beginning with "PO".
@@ -72,7 +72,7 @@ class PayoutsService(base_service.BaseService):
     def update(self,identity,params=None, headers=None):
         """Update a payout.
 
-         Updates a payout object. This accepts only the metadata parameter.
+        Updates a payout object. This accepts only the metadata parameter.
 
         Args:
               identity (string): Unique identifier, beginning with "PO".

@@ -20,9 +20,9 @@ class BalancesService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List balances.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         balances for a given creditor. This endpoint is rate limited to 60
-         requests per minute.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        balances for a given creditor. This endpoint is rate limited to 60
+        requests per minute.
 
         Args:
               params (dict, optional): Query string parameters.

@@ -20,7 +20,7 @@ class PaymentAccountTransactionsService(base_service.BaseService):
     def list(self,identity,params=None, headers=None):
         """List payment account transactions.
 
-         List transactions for a given payment account.
+        List transactions for a given payment account.
 
         Args:
               identity (string): The unique ID of the [bank account](#core-endpoints-creditor-bank-accounts) which happens to be the payment account.

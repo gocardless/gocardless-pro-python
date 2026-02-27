@@ -20,12 +20,12 @@ class MandateImportsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a new mandate import.
 
-         Mandate imports are first created, before mandates are added
-         one-at-a-time, so
-         this endpoint merely signals the start of the import process. Once
-         you've finished
-         adding entries to an import, you should
-         [submit](#mandate-imports-submit-a-mandate-import) it.
+        Mandate imports are first created, before mandates are added
+        one-at-a-time, so
+        this endpoint merely signals the start of the import process. Once
+        you've finished
+        adding entries to an import, you should
+        [submit](#mandate-imports-submit-a-mandate-import) it.
 
         Args:
               params (dict, optional): Request body.
@@ -53,7 +53,7 @@ class MandateImportsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a mandate import.
 
-         Returns a single mandate import.
+        Returns a single mandate import.
 
         Args:
               identity (string): Unique identifier, beginning with "IM".
@@ -76,19 +76,19 @@ class MandateImportsService(base_service.BaseService):
     def submit(self,identity,params=None, headers=None):
         """Submit a mandate import.
 
-         Submits the mandate import, which allows it to be processed by a
-         member of the
-         GoCardless team. Once the import has been submitted, it can no longer
-         have entries
-         added to it.
-         
-         In our sandbox environment, to aid development, we automatically
-         process mandate
-         imports approximately 10 seconds after they are submitted. This will
-         allow you to
-         test both the "submitted" response and wait for the webhook to confirm
-         the
-         processing has begun.
+        Submits the mandate import, which allows it to be processed by a member
+        of the
+        GoCardless team. Once the import has been submitted, it can no longer
+        have entries
+        added to it.
+        
+        In our sandbox environment, to aid development, we automatically
+        process mandate
+        imports approximately 10 seconds after they are submitted. This will
+        allow you to
+        test both the "submitted" response and wait for the webhook to confirm
+        the
+        processing has begun.
 
         Args:
               identity (string): Unique identifier, beginning with "IM".
@@ -112,13 +112,13 @@ class MandateImportsService(base_service.BaseService):
     def cancel(self,identity,params=None, headers=None):
         """Cancel a mandate import.
 
-         Cancels the mandate import, which aborts the import process and stops
-         the mandates
-         being set up in GoCardless. Once the import has been cancelled, it can
-         no longer have
-         entries added to it. Mandate imports which have already been submitted
-         or processed
-         cannot be cancelled.
+        Cancels the mandate import, which aborts the import process and stops
+        the mandates
+        being set up in GoCardless. Once the import has been cancelled, it can
+        no longer have
+        entries added to it. Mandate imports which have already been submitted
+        or processed
+        cannot be cancelled.
 
         Args:
               identity (string): Unique identifier, beginning with "IM".

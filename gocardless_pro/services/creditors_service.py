@@ -20,7 +20,7 @@ class CreditorsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a creditor.
 
-         Creates a new creditor.
+        Creates a new creditor.
 
         Args:
               params (dict, optional): Request body.
@@ -48,8 +48,8 @@ class CreditorsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List creditors.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your creditors.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        creditors.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -75,7 +75,7 @@ class CreditorsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single creditor.
 
-         Retrieves the details of an existing creditor.
+        Retrieves the details of an existing creditor.
 
         Args:
               identity (string): Unique identifier, beginning with "CR".
@@ -98,8 +98,8 @@ class CreditorsService(base_service.BaseService):
     def update(self,identity,params=None, headers=None):
         """Update a creditor.
 
-         Updates a creditor object. Supports all of the fields supported when
-         creating a creditor.
+        Updates a creditor object. Supports all of the fields supported when
+        creating a creditor.
 
         Args:
               identity (string): Unique identifier, beginning with "CR".

@@ -20,7 +20,7 @@ class ScenarioSimulatorsService(base_service.BaseService):
     def run(self,identity,params=None, headers=None):
         """Simulate a scenario.
 
-         Runs the specific scenario simulator against the specific resource
+        Runs the specific scenario simulator against the specific resource
 
         Args:
               identity (string): The unique identifier of the simulator, used to initiate simulations. One of:

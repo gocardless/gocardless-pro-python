@@ -20,7 +20,7 @@ class BankAuthorisationsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a Bank Authorisation.
 
-         Create a Bank Authorisation.
+        Create a Bank Authorisation.
 
         Args:
               params (dict, optional): Request body.
@@ -48,7 +48,7 @@ class BankAuthorisationsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a Bank Authorisation.
 
-         Get a single bank authorisation.
+        Get a single bank authorisation.
 
         Args:
               identity (string): Unique identifier, beginning with "BAU".

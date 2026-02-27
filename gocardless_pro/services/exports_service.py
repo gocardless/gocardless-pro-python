@@ -20,7 +20,7 @@ class ExportsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single export.
 
-         Returns a single export.
+        Returns a single export.
 
         Args:
               identity (string): Unique identifier, beginning with "EX".
@@ -43,7 +43,7 @@ class ExportsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List exports.
 
-         Returns a list of exports which are available for download.
+        Returns a list of exports which are available for download.
 
         Args:
               params (dict, optional): Query string parameters.

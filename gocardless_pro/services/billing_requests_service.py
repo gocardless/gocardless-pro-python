@@ -20,10 +20,9 @@ class BillingRequestsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a Billing Request.
 
-         <p class="notice"><strong>Important</strong>: All properties
-         associated with `subscription_request` and
-         `instalment_schedule_request` are only supported for ACH and PAD
-         schemes.</p>
+        <p class="notice"><strong>Important</strong>: All properties associated
+        with `subscription_request` and `instalment_schedule_request` are only
+        supported for ACH and PAD schemes.</p>
 
         Args:
               params (dict, optional): Request body.
@@ -51,18 +50,17 @@ class BillingRequestsService(base_service.BaseService):
     def collect_customer_details(self,identity,params=None, headers=None):
         """Collect customer details.
 
-         If the billing request has a pending
-         <code>collect_customer_details</code>
-         action, this endpoint can be used to collect the details in order to
-         complete it.
-         
-         The endpoint takes the same payload as Customers, but checks that the
-         customer fields are populated correctly for the billing request
-         scheme.
-         
-         Whatever is provided to this endpoint is used to update the referenced
-         customer, and will take effect immediately after the request is
-         successful.
+        If the billing request has a pending
+        <code>collect_customer_details</code>
+        action, this endpoint can be used to collect the details in order to
+        complete it.
+        
+        The endpoint takes the same payload as Customers, but checks that the
+        customer fields are populated correctly for the billing request scheme.
+        
+        Whatever is provided to this endpoint is used to update the referenced
+        customer, and will take effect immediately after the request is
+        successful.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -86,34 +84,34 @@ class BillingRequestsService(base_service.BaseService):
     def collect_bank_account(self,identity,params=None, headers=None):
         """Collect bank account details.
 
-         If the billing request has a pending
-         <code>collect_bank_account</code> action, this endpoint can be
-         used to collect the details in order to complete it.
-         
-         The endpoint takes the same payload as Customer Bank Accounts, but
-         check
-         the bank account is valid for the billing request scheme before
-         creating
-         and attaching it.
-         
-         If the scheme is PayTo and the pay_id is available, this can be
-         included in the payload along with the
-         country_code.
-         
-         _ACH scheme_ For compliance reasons, an extra validation step is done
-         using
-         a third-party provider to make sure the customer's bank account can
-         accept
-         Direct Debit. If a bank account is discovered to be closed or invalid,
-         the
-         customer is requested to adjust the account number/routing number and
-         succeed in this check to continue with the flow.
-         
-         _BACS scheme_ [Payer Name
-         Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
-         is enabled by default for UK based bank accounts, meaning we verify
-         the account holder name and bank account
-         number match the details held by the relevant bank.
+        If the billing request has a pending
+        <code>collect_bank_account</code> action, this endpoint can be
+        used to collect the details in order to complete it.
+        
+        The endpoint takes the same payload as Customer Bank Accounts, but
+        check
+        the bank account is valid for the billing request scheme before
+        creating
+        and attaching it.
+        
+        If the scheme is PayTo and the pay_id is available, this can be
+        included in the payload along with the
+        country_code.
+        
+        _ACH scheme_ For compliance reasons, an extra validation step is done
+        using
+        a third-party provider to make sure the customer's bank account can
+        accept
+        Direct Debit. If a bank account is discovered to be closed or invalid,
+        the
+        customer is requested to adjust the account number/routing number and
+        succeed in this check to continue with the flow.
+        
+        _BACS scheme_ [Payer Name
+        Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+        is enabled by default for UK based bank accounts, meaning we verify the
+        account holder name and bank account
+        number match the details held by the relevant bank.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -137,10 +135,10 @@ class BillingRequestsService(base_service.BaseService):
     def confirm_payer_details(self,identity,params=None, headers=None):
         """Confirm the payer details.
 
-         This is needed when you have a mandate request. As a scheme compliance
-         rule we are required to
-         allow the payer to crosscheck the details entered by them and confirm
-         it.
+        This is needed when you have a mandate request. As a scheme compliance
+        rule we are required to
+        allow the payer to crosscheck the details entered by them and confirm
+        it.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -164,9 +162,9 @@ class BillingRequestsService(base_service.BaseService):
     def fulfil(self,identity,params=None, headers=None):
         """Fulfil a Billing Request.
 
-         If a billing request is ready to be fulfilled, call this endpoint to
-         cause
-         it to fulfil, executing the payment.
+        If a billing request is ready to be fulfilled, call this endpoint to
+        cause
+        it to fulfil, executing the payment.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -190,9 +188,9 @@ class BillingRequestsService(base_service.BaseService):
     def cancel(self,identity,params=None, headers=None):
         """Cancel a Billing Request.
 
-         Immediately cancels a billing request, causing all billing request
-         flows
-         to expire.
+        Immediately cancels a billing request, causing all billing request
+        flows
+        to expire.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -216,8 +214,8 @@ class BillingRequestsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List Billing Requests.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your billing requests.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        billing requests.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -243,7 +241,7 @@ class BillingRequestsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single Billing Request.
 
-         Fetches a billing request
+        Fetches a billing request
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -266,12 +264,12 @@ class BillingRequestsService(base_service.BaseService):
     def notify(self,identity,params=None, headers=None):
         """Notify the customer.
 
-         Notifies the customer linked to the billing request, asking them to
-         authorise it.
-         Currently, the customer can only be notified by email.
-         
-         This endpoint is currently supported only for Instant Bank Pay Billing
-         Requests.
+        Notifies the customer linked to the billing request, asking them to
+        authorise it.
+        Currently, the customer can only be notified by email.
+        
+        This endpoint is currently supported only for Instant Bank Pay Billing
+        Requests.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -295,8 +293,8 @@ class BillingRequestsService(base_service.BaseService):
     def fallback(self,identity,params=None, headers=None):
         """Trigger fallback.
 
-         Triggers a fallback from the open-banking flow to direct debit. Note,
-         the billing request must have fallback enabled.
+        Triggers a fallback from the open-banking flow to direct debit. Note,
+        the billing request must have fallback enabled.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -320,13 +318,13 @@ class BillingRequestsService(base_service.BaseService):
     def choose_currency(self,identity,params=None, headers=None):
         """Change currency.
 
-         This will allow for the updating of the currency and subsequently the
-         scheme if
-         needed for a Billing Request. This will only be available for mandate
-         only flows
-         which do not have the lock_currency flag set to true on the Billing
-         Request Flow. It
-         will also not support any request which has a payments request.
+        This will allow for the updating of the currency and subsequently the
+        scheme if
+        needed for a Billing Request. This will only be available for mandate
+        only flows
+        which do not have the lock_currency flag set to true on the Billing
+        Request Flow. It
+        will also not support any request which has a payments request.
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -350,7 +348,7 @@ class BillingRequestsService(base_service.BaseService):
     def select_institution(self,identity,params=None, headers=None):
         """Select institution for a Billing Request.
 
-         Creates an Institution object and attaches it to the Billing Request
+        Creates an Institution object and attaches it to the Billing Request
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".

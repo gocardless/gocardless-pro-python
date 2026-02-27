@@ -20,46 +20,46 @@ class SchemeIdentifiersService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a scheme identifier.
 
-         Creates a new scheme identifier. The scheme identifier status will be
-         `pending` while GoCardless is
-         processing the request. Once the scheme identifier is ready to be used
-         the status will be updated to `active`.
-         At this point, GoCardless will emit a scheme identifier activated
-         event via webhook to notify you of this change.
-         In Bacs, it will take up to five working days for a scheme identifier
-         to become active. On other schemes, including SEPA,
-         this happens instantly.
-         
-         #### Scheme identifier name validations
-         
-         The `name` field of a scheme identifier can contain alphanumeric
-         characters, spaces and
-         special characters.
-         
-         Its maximum length and the special characters it supports depend on
-         the scheme:
-         
-         | __scheme__        | __maximum length__ | __special characters
-         allowed__                      |
-         | :---------------- | :----------------- |
-         :-------------------------------------------------- |
-         | `bacs`            | 18 characters      | `/` `.` `&` `-`            
-                                 |
-         | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.` `,`
-         `+` `&` `<` `>` `'` `"` |
-         | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.` `,`
-         `'` `+` `-`             |
-         | `faster_payments` | 18 characters      | `/` `?` `:` `(` `)` `.` `,`
-         `'` `+` `-`             |
-         
-         The validation error that gets returned for an invalid name will
-         contain a suggested name
-         in the metadata that is guaranteed to pass name validations.
-         
-         You should ensure that the name you set matches the legal name or the
-         trading name of
-         the creditor, otherwise, there is an increased risk of chargeback.
-         
+        Creates a new scheme identifier. The scheme identifier status will be
+        `pending` while GoCardless is
+        processing the request. Once the scheme identifier is ready to be used
+        the status will be updated to `active`.
+        At this point, GoCardless will emit a scheme identifier activated event
+        via webhook to notify you of this change.
+        In Bacs, it will take up to five working days for a scheme identifier
+        to become active. On other schemes, including SEPA,
+        this happens instantly.
+        
+        #### Scheme identifier name validations
+        
+        The `name` field of a scheme identifier can contain alphanumeric
+        characters, spaces and
+        special characters.
+        
+        Its maximum length and the special characters it supports depend on the
+        scheme:
+        
+        | __scheme__        | __maximum length__ | __special characters
+        allowed__                      |
+        | :---------------- | :----------------- |
+        :-------------------------------------------------- |
+        | `bacs`            | 18 characters      | `/` `.` `&` `-`             
+                               |
+        | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.` `,`
+        `+` `&` `<` `>` `'` `"` |
+        | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.` `,`
+        `'` `+` `-`             |
+        | `faster_payments` | 18 characters      | `/` `?` `:` `(` `)` `.` `,`
+        `'` `+` `-`             |
+        
+        The validation error that gets returned for an invalid name will
+        contain a suggested name
+        in the metadata that is guaranteed to pass name validations.
+        
+        You should ensure that the name you set matches the legal name or the
+        trading name of
+        the creditor, otherwise, there is an increased risk of chargeback.
+        
 
         Args:
               params (dict, optional): Request body.
@@ -87,8 +87,8 @@ class SchemeIdentifiersService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List scheme identifiers.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your scheme identifiers.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        scheme identifiers.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -114,7 +114,7 @@ class SchemeIdentifiersService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single scheme identifier.
 
-         Retrieves the details of an existing scheme identifier.
+        Retrieves the details of an existing scheme identifier.
 
         Args:
               identity (string): Unique identifier, usually beginning with "SU".

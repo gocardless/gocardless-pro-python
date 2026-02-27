@@ -20,15 +20,15 @@ class CustomerNotificationsService(base_service.BaseService):
     def handle(self,identity,params=None, headers=None):
         """Handle a notification.
 
-         "Handling" a notification means that you have sent the notification
-         yourself (and
-         don't want GoCardless to send it).
-         If the notification has already been actioned, or the deadline to
-         notify has passed,
-         this endpoint will return an `already_actioned` error and you should
-         not take
-         further action. This endpoint takes no additional parameters.
-         
+        "Handling" a notification means that you have sent the notification
+        yourself (and
+        don't want GoCardless to send it).
+        If the notification has already been actioned, or the deadline to
+        notify has passed,
+        this endpoint will return an `already_actioned` error and you should
+        not take
+        further action. This endpoint takes no additional parameters.
+        
 
         Args:
               identity (string): The id of the notification.

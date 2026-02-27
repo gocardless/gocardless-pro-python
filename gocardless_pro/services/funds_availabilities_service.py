@@ -20,10 +20,9 @@ class FundsAvailabilitiesService(base_service.BaseService):
     def check(self,identity,params=None, headers=None):
         """Funds availability.
 
-         Checks if the payer's current balance is sufficient to cover the
-         amount
-         the merchant wants to charge within the consent parameters defined on
-         the mandate.
+        Checks if the payer's current balance is sufficient to cover the amount
+        the merchant wants to charge within the consent parameters defined on
+        the mandate.
 
         Args:
               identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.

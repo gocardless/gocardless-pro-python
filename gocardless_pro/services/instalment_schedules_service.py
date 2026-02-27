@@ -20,26 +20,26 @@ class InstalmentSchedulesService(base_service.BaseService):
     def create_with_dates(self,params=None, headers=None):
         """Create (with dates).
 
-         Creates a new instalment schedule object, along with the associated
-         payments. This
-         API is recommended if you know the specific dates you wish to charge.
-         Otherwise,
-         please check out the [scheduling
-         version](#instalment-schedules-create-with-schedule).
-         
-         The `instalments` property is an array of payment properties (`amount`
-         and
-         `charge_date`).
-         
-         It can take quite a while to create the associated payments, so the
-         API will return
-         the status as `pending` initially. When processing has completed, a
-         subsequent GET
-         request for the instalment schedule will either have the status
-         `success` and link
-         to the created payments, or the status `error` and detailed
-         information about the
-         failures.
+        Creates a new instalment schedule object, along with the associated
+        payments. This
+        API is recommended if you know the specific dates you wish to charge.
+        Otherwise,
+        please check out the [scheduling
+        version](#instalment-schedules-create-with-schedule).
+        
+        The `instalments` property is an array of payment properties (`amount`
+        and
+        `charge_date`).
+        
+        It can take quite a while to create the associated payments, so the API
+        will return
+        the status as `pending` initially. When processing has completed, a
+        subsequent GET
+        request for the instalment schedule will either have the status
+        `success` and link
+        to the created payments, or the status `error` and detailed information
+        about the
+        failures.
 
         Args:
               params (dict, optional): Request body.
@@ -67,22 +67,22 @@ class InstalmentSchedulesService(base_service.BaseService):
     def create_with_schedule(self,params=None, headers=None):
         """Create (with schedule).
 
-         Creates a new instalment schedule object, along with the associated
-         payments. This
-         API is recommended if you wish to use the GoCardless scheduling logic.
-         For finer
-         control over the individual dates, please check out the [alternative
-         version](#instalment-schedules-create-with-dates).
-         
-         It can take quite a while to create the associated payments, so the
-         API will return
-         the status as `pending` initially. When processing has completed, a
-         subsequent
-         GET request for the instalment schedule will either have the status
-         `success` and link to
-         the created payments, or the status `error` and detailed information
-         about the
-         failures.
+        Creates a new instalment schedule object, along with the associated
+        payments. This
+        API is recommended if you wish to use the GoCardless scheduling logic.
+        For finer
+        control over the individual dates, please check out the [alternative
+        version](#instalment-schedules-create-with-dates).
+        
+        It can take quite a while to create the associated payments, so the API
+        will return
+        the status as `pending` initially. When processing has completed, a
+        subsequent
+        GET request for the instalment schedule will either have the status
+        `success` and link to
+        the created payments, or the status `error` and detailed information
+        about the
+        failures.
 
         Args:
               params (dict, optional): Request body.
@@ -110,8 +110,8 @@ class InstalmentSchedulesService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List instalment schedules.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your instalment schedules.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        instalment schedules.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -137,7 +137,7 @@ class InstalmentSchedulesService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single instalment schedule.
 
-         Retrieves the details of an existing instalment schedule.
+        Retrieves the details of an existing instalment schedule.
 
         Args:
               identity (string): Unique identifier, beginning with "IS".
@@ -160,8 +160,8 @@ class InstalmentSchedulesService(base_service.BaseService):
     def update(self,identity,params=None, headers=None):
         """Update an instalment schedule.
 
-         Updates an instalment schedule. This accepts only the metadata
-         parameter.
+        Updates an instalment schedule. This accepts only the metadata
+        parameter.
 
         Args:
               identity (string): Unique identifier, beginning with "IS".
@@ -186,11 +186,11 @@ class InstalmentSchedulesService(base_service.BaseService):
     def cancel(self,identity,params=None, headers=None):
         """Cancel an instalment schedule.
 
-         Immediately cancels an instalment schedule; no further payments will
-         be collected for it.
-         
-         This will fail with a `cancellation_failed` error if the instalment
-         schedule is already cancelled or has completed.
+        Immediately cancels an instalment schedule; no further payments will be
+        collected for it.
+        
+        This will fail with a `cancellation_failed` error if the instalment
+        schedule is already cancelled or has completed.
 
         Args:
               identity (string): Unique identifier, beginning with "IS".

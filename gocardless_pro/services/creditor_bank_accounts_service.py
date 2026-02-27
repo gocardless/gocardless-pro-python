@@ -20,7 +20,7 @@ class CreditorBankAccountsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a creditor bank account.
 
-         Creates a new creditor bank account object.
+        Creates a new creditor bank account object.
 
         Args:
               params (dict, optional): Request body.
@@ -48,8 +48,8 @@ class CreditorBankAccountsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List creditor bank accounts.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your creditor bank accounts.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        creditor bank accounts.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -75,7 +75,7 @@ class CreditorBankAccountsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single creditor bank account.
 
-         Retrieves the details of an existing creditor bank account.
+        Retrieves the details of an existing creditor bank account.
 
         Args:
               identity (string): Unique identifier, beginning with "BA".
@@ -98,14 +98,14 @@ class CreditorBankAccountsService(base_service.BaseService):
     def disable(self,identity,params=None, headers=None):
         """Disable a creditor bank account.
 
-         Immediately disables the bank account, no money can be paid out to a
-         disabled account.
-         
-         This will return a `disable_failed` error if the bank account has
-         already been disabled.
-         
-         A disabled bank account can be re-enabled by creating a new bank
-         account resource with the same details.
+        Immediately disables the bank account, no money can be paid out to a
+        disabled account.
+        
+        This will return a `disable_failed` error if the bank account has
+        already been disabled.
+        
+        A disabled bank account can be re-enabled by creating a new bank
+        account resource with the same details.
 
         Args:
               identity (string): Unique identifier, beginning with "BA".

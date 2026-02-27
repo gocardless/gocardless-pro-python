@@ -20,7 +20,7 @@ class CustomersService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a customer.
 
-         Creates a new customer object.
+        Creates a new customer object.
 
         Args:
               params (dict, optional): Request body.
@@ -48,8 +48,8 @@ class CustomersService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List customers.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your customers.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        customers.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -75,7 +75,7 @@ class CustomersService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single customer.
 
-         Retrieves the details of an existing customer.
+        Retrieves the details of an existing customer.
 
         Args:
               identity (string): Unique identifier, beginning with "CU".
@@ -98,8 +98,8 @@ class CustomersService(base_service.BaseService):
     def update(self,identity,params=None, headers=None):
         """Update a customer.
 
-         Updates a customer object. Supports all of the fields supported when
-         creating a customer.
+        Updates a customer object. Supports all of the fields supported when
+        creating a customer.
 
         Args:
               identity (string): Unique identifier, beginning with "CU".
@@ -124,14 +124,14 @@ class CustomersService(base_service.BaseService):
     def remove(self,identity,params=None, headers=None):
         """Remove a customer.
 
-         Removed customers will not appear in search results or lists of
-         customers (in our API
-         or exports), and it will not be possible to load an individually
-         removed customer by
-         ID.
-         
-         <p class="restricted-notice"><strong>The action of removing a customer
-         cannot be reversed, so please use with care.</strong></p>
+        Removed customers will not appear in search results or lists of
+        customers (in our API
+        or exports), and it will not be possible to load an individually
+        removed customer by
+        ID.
+        
+        <p class="restricted-notice"><strong>The action of removing a customer
+        cannot be reversed, so please use with care.</strong></p>
 
         Args:
               identity (string): Unique identifier, beginning with "CU".

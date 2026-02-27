@@ -20,7 +20,7 @@ class MandatesService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a mandate.
 
-         Creates a new mandate object.
+        Creates a new mandate object.
 
         Args:
               params (dict, optional): Request body.
@@ -48,8 +48,8 @@ class MandatesService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List mandates.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your mandates.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        mandates.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -75,7 +75,7 @@ class MandatesService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single mandate.
 
-         Retrieves the details of an existing mandate.
+        Retrieves the details of an existing mandate.
 
         Args:
               identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.
@@ -98,7 +98,7 @@ class MandatesService(base_service.BaseService):
     def update(self,identity,params=None, headers=None):
         """Update a mandate.
 
-         Updates a mandate object. This accepts only the metadata parameter.
+        Updates a mandate object. This accepts only the metadata parameter.
 
         Args:
               identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.
@@ -123,12 +123,12 @@ class MandatesService(base_service.BaseService):
     def cancel(self,identity,params=None, headers=None):
         """Cancel a mandate.
 
-         Immediately cancels a mandate and all associated cancellable payments.
-         Any metadata supplied to this endpoint will be stored on the mandate
-         cancellation event it causes.
-         
-         This will fail with a `cancellation_failed` error if the mandate is
-         already cancelled.
+        Immediately cancels a mandate and all associated cancellable payments.
+        Any metadata supplied to this endpoint will be stored on the mandate
+        cancellation event it causes.
+        
+        This will fail with a `cancellation_failed` error if the mandate is
+        already cancelled.
 
         Args:
               identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.
@@ -152,18 +152,18 @@ class MandatesService(base_service.BaseService):
     def reinstate(self,identity,params=None, headers=None):
         """Reinstate a mandate.
 
-         <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired
-         mandate to the banks. You will receive a `resubmission_requested`
-         webhook, but after that reinstating the mandate follows the same
-         process as its initial creation, so you will receive a `submitted`
-         webhook, followed by a `reinstated` or `failed` webhook up to two
-         working days later. Any metadata supplied to this endpoint will be
-         stored on the `resubmission_requested` event it causes.
-         
-         This will fail with a `mandate_not_inactive` error if the mandate is
-         already being submitted, or is active.
-         
-         Mandates can be resubmitted up to 10 times.
+        <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired
+        mandate to the banks. You will receive a `resubmission_requested`
+        webhook, but after that reinstating the mandate follows the same
+        process as its initial creation, so you will receive a `submitted`
+        webhook, followed by a `reinstated` or `failed` webhook up to two
+        working days later. Any metadata supplied to this endpoint will be
+        stored on the `resubmission_requested` event it causes.
+        
+        This will fail with a `mandate_not_inactive` error if the mandate is
+        already being submitted, or is active.
+        
+        Mandates can be resubmitted up to 10 times.
 
         Args:
               identity (string): Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.

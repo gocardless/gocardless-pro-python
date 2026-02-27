@@ -20,7 +20,7 @@ class PaymentAccountsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single payment account details.
 
-         Retrieves the details of an existing payment account.
+        Retrieves the details of an existing payment account.
 
         Args:
               identity (string): Unique identifier, beginning with "BA".
@@ -43,8 +43,8 @@ class PaymentAccountsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List payment accounts.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-         your payment accounts.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+        payment accounts.
 
         Args:
               params (dict, optional): Query string parameters.

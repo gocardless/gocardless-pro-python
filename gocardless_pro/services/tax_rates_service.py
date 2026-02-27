@@ -20,8 +20,8 @@ class TaxRatesService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List tax rates.
 
-         Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
-         tax rates.
+        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
+        tax rates.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -47,7 +47,7 @@ class TaxRatesService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single tax rate.
 
-         Retrieves the details of a tax rate.
+        Retrieves the details of a tax rate.
 
         Args:
               identity (string): The unique identifier created by the jurisdiction, tax type and version

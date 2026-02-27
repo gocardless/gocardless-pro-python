@@ -20,8 +20,8 @@ class RedirectFlowsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a redirect flow.
 
-         Creates a redirect flow object which can then be used to redirect your
-         customer to the GoCardless hosted payment pages.
+        Creates a redirect flow object which can then be used to redirect your
+        customer to the GoCardless hosted payment pages.
 
         Args:
               params (dict, optional): Request body.
@@ -49,7 +49,7 @@ class RedirectFlowsService(base_service.BaseService):
     def get(self,identity,params=None, headers=None):
         """Get a single redirect flow.
 
-         Returns all details about a single redirect flow
+        Returns all details about a single redirect flow
 
         Args:
               identity (string): Unique identifier, beginning with "RE".
@@ -72,17 +72,17 @@ class RedirectFlowsService(base_service.BaseService):
     def complete(self,identity,params=None, headers=None):
         """Complete a redirect flow.
 
-         This creates a [customer](#core-endpoints-customers), [customer bank
-         account](#core-endpoints-customer-bank-accounts), and
-         [mandate](#core-endpoints-mandates) using the details supplied by your
-         customer and returns the ID of the created mandate.
-         
-         This will return a `redirect_flow_incomplete` error if your customer
-         has not yet been redirected back to your site, and a
-         `redirect_flow_already_completed` error if your integration has
-         already completed this flow. It will return a `bad_request` error if
-         the `session_token` differs to the one supplied when the redirect flow
-         was created.
+        This creates a [customer](#core-endpoints-customers), [customer bank
+        account](#core-endpoints-customer-bank-accounts), and
+        [mandate](#core-endpoints-mandates) using the details supplied by your
+        customer and returns the ID of the created mandate.
+        
+        This will return a `redirect_flow_incomplete` error if your customer
+        has not yet been redirected back to your site, and a
+        `redirect_flow_already_completed` error if your integration has already
+        completed this flow. It will return a `bad_request` error if the
+        `session_token` differs to the one supplied when the redirect flow was
+        created.
 
         Args:
               identity (string): Unique identifier, beginning with "RE".

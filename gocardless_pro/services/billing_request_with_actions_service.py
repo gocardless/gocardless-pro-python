@@ -20,12 +20,12 @@ class BillingRequestWithActionsService(base_service.BaseService):
     def create_with_actions(self,params=None, headers=None):
         """Create a Billing Request with Actions.
 
-         Creates a billing request and completes any specified actions in a
-         single request.
-         This endpoint allows you to create a billing request and immediately
-         complete actions
-         such as collecting customer details, bank account details, or other
-         required actions.
+        Creates a billing request and completes any specified actions in a
+        single request.
+        This endpoint allows you to create a billing request and immediately
+        complete actions
+        such as collecting customer details, bank account details, or other
+        required actions.
 
         Args:
               params (dict, optional): Request body.
