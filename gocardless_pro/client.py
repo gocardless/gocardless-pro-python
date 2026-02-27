@@ -13,7 +13,7 @@ class Client(object):
     use the resource methods to access the API.
 
     Args:
-      access_token (str): Find or generate this in your GoCardless Pro dashboard
+      access_token (str): Find or generate this in your GoCardless dashboard
         (https://manage.gocardless.com/organisation/access-tokens).
       environment (str): Either 'sandbox' or 'live'.
       base_url (str): Manually set a base URL. Most people should use
