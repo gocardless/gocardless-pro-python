@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_payouts_list():
     fixture = helpers.load_fixture('payouts')['list']
     helpers.stub_response(fixture)
     response = helpers.client.payouts.list(*fixture['url_params'])
-    body = fixture['body']['payouts']
+    if fixture['body'].get('payouts') is not None and isinstance(fixture['body'].get('payouts'), (dict, list)):
+        body = fixture['body']['payouts']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Payout)
@@ -48,7 +50,6 @@ def test_timeout_payouts_list_retries():
       response = helpers.client.payouts.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payouts']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Payout)
@@ -62,7 +63,6 @@ def test_502_payouts_list_retries():
       response = helpers.client.payouts.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payouts']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Payout)
@@ -88,15 +88,16 @@ def test_payouts_all():
     assert len(all_records) == len(fixture['body']['payouts']) * 2
     for record in all_records:
       assert isinstance(record, resources.Payout)
-    
-  
 
 @responses.activate
 def test_payouts_get():
     fixture = helpers.load_fixture('payouts')['get']
     helpers.stub_response(fixture)
     response = helpers.client.payouts.get(*fixture['url_params'])
-    body = fixture['body']['payouts']
+    if fixture['body'].get('payouts') is not None and isinstance(fixture['body'].get('payouts'), (dict, list)):
+        body = fixture['body']['payouts']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Payout)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -125,7 +126,6 @@ def test_timeout_payouts_get_retries():
       response = helpers.client.payouts.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payouts']
 
     assert isinstance(response, resources.Payout)
 
@@ -135,17 +135,18 @@ def test_502_payouts_get_retries():
       response = helpers.client.payouts.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payouts']
 
     assert isinstance(response, resources.Payout)
-  
 
 @responses.activate
 def test_payouts_update():
     fixture = helpers.load_fixture('payouts')['update']
     helpers.stub_response(fixture)
     response = helpers.client.payouts.update(*fixture['url_params'])
-    body = fixture['body']['payouts']
+    if fixture['body'].get('payouts') is not None and isinstance(fixture['body'].get('payouts'), (dict, list)):
+        body = fixture['body']['payouts']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Payout)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -174,7 +175,6 @@ def test_timeout_payouts_update_retries():
       response = helpers.client.payouts.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payouts']
 
     assert isinstance(response, resources.Payout)
 
@@ -184,7 +184,5 @@ def test_502_payouts_update_retries():
       response = helpers.client.payouts.update(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payouts']
 
     assert isinstance(response, resources.Payout)
-  

@@ -138,3 +138,15 @@ def test_handles_invalid_empty_response():
 
     with pytest.raises(errors.MalformedResponseError):
         client.post('/test', body={'name': 'Billy Jean'})
+
+@responses.activate
+def test_handles_string_error_response():
+    body = json.dumps({'error': 'bank_account_exists'})
+    responses.add(responses.POST, 'http://example.com/test',
+                  body=body, status=400)
+
+    with pytest.raises(errors.ApiError) as exception:
+        client.post('/test', body={'name': 'Billy Jean'})
+
+    assert exception.value.message == 'bank_account_exists'
+    assert exception.value.code == 400

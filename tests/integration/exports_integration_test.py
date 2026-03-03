@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_exports_get():
     fixture = helpers.load_fixture('exports')['get']
     helpers.stub_response(fixture)
     response = helpers.client.exports.get(*fixture['url_params'])
-    body = fixture['body']['exports']
+    if fixture['body'].get('exports') is not None and isinstance(fixture['body'].get('exports'), (dict, list)):
+        body = fixture['body']['exports']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Export)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -38,7 +40,6 @@ def test_timeout_exports_get_retries():
       response = helpers.client.exports.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['exports']
 
     assert isinstance(response, resources.Export)
 
@@ -48,17 +49,18 @@ def test_502_exports_get_retries():
       response = helpers.client.exports.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['exports']
 
     assert isinstance(response, resources.Export)
-  
 
 @responses.activate
 def test_exports_list():
     fixture = helpers.load_fixture('exports')['list']
     helpers.stub_response(fixture)
     response = helpers.client.exports.list(*fixture['url_params'])
-    body = fixture['body']['exports']
+    if fixture['body'].get('exports') is not None and isinstance(fixture['body'].get('exports'), (dict, list)):
+        body = fixture['body']['exports']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Export)
@@ -79,7 +81,6 @@ def test_timeout_exports_list_retries():
       response = helpers.client.exports.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['exports']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Export)
@@ -93,7 +94,6 @@ def test_502_exports_list_retries():
       response = helpers.client.exports.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['exports']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Export)
@@ -119,5 +119,3 @@ def test_exports_all():
     assert len(all_records) == len(fixture['body']['exports']) * 2
     for record in all_records:
       assert isinstance(record, resources.Export)
-    
-  

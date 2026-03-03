@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_webhooks_list():
     fixture = helpers.load_fixture('webhooks')['list']
     helpers.stub_response(fixture)
     response = helpers.client.webhooks.list(*fixture['url_params'])
-    body = fixture['body']['webhooks']
+    if fixture['body'].get('webhooks') is not None and isinstance(fixture['body'].get('webhooks'), (dict, list)):
+        body = fixture['body']['webhooks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Webhook)
@@ -50,7 +52,6 @@ def test_timeout_webhooks_list_retries():
       response = helpers.client.webhooks.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['webhooks']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Webhook)
@@ -64,7 +65,6 @@ def test_502_webhooks_list_retries():
       response = helpers.client.webhooks.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['webhooks']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Webhook)
@@ -90,15 +90,16 @@ def test_webhooks_all():
     assert len(all_records) == len(fixture['body']['webhooks']) * 2
     for record in all_records:
       assert isinstance(record, resources.Webhook)
-    
-  
 
 @responses.activate
 def test_webhooks_get():
     fixture = helpers.load_fixture('webhooks')['get']
     helpers.stub_response(fixture)
     response = helpers.client.webhooks.get(*fixture['url_params'])
-    body = fixture['body']['webhooks']
+    if fixture['body'].get('webhooks') is not None and isinstance(fixture['body'].get('webhooks'), (dict, list)):
+        body = fixture['body']['webhooks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Webhook)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -123,7 +124,6 @@ def test_timeout_webhooks_get_retries():
       response = helpers.client.webhooks.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['webhooks']
 
     assert isinstance(response, resources.Webhook)
 
@@ -133,17 +133,18 @@ def test_502_webhooks_get_retries():
       response = helpers.client.webhooks.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['webhooks']
 
     assert isinstance(response, resources.Webhook)
-  
 
 @responses.activate
 def test_webhooks_retry():
     fixture = helpers.load_fixture('webhooks')['retry']
     helpers.stub_response(fixture)
     response = helpers.client.webhooks.retry(*fixture['url_params'])
-    body = fixture['body']['webhooks']
+    if fixture['body'].get('webhooks') is not None and isinstance(fixture['body'].get('webhooks'), (dict, list)):
+        body = fixture['body']['webhooks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Webhook)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -174,4 +175,3 @@ def test_502_webhooks_retry_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.webhooks.retry(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

@@ -1,14 +1,16 @@
 { 
+  
+  
   "create": {
     "method": "POST",
     "path_template": "/verification_details",
     "url_params": [],
-    "body": {"verification_details":{"address_line1":"338-346 Goswell Road","address_line2":"Islington","address_line3":"example address_line3 6458","city":"London","company_number":"07495895","description":"Wine and cheese seller","directors":[{"city":"London","country_code":"GB","date_of_birth":"1986-02-19","family_name":"Jones","given_name":"Tom","postal_code":"EC1V 7LQ","street":"example street 8464"}],"links":{"creditor":"CR123"},"name":"Acme Limited","postal_code":"EC1V 7LQ"}}
+    "body": {"verification_details":{"address_line1":"338-346 Goswell Road","address_line2":"Islington","address_line3":"example address_line3 101","city":"London","company_number":"07495895","description":"Wine and cheese seller","directors":[{"city":"London","country_code":"GB","date_of_birth":"1986-02-19","family_name":"Jones","given_name":"Tom","postal_code":"EC1V 7LQ","street":"example street 101"}],"links":{"creditor":"CR123"},"name":"Acme Limited","postal_code":"EC1V 7LQ"}}
   },
   "list": {
     "method": "GET",
     "path_template": "/verification_details",
     "url_params": [],
-    "body": {"meta":{"cursors":{"after":"example after 3416","before":"example before 7356"},"limit":50},"verification_details":[{"address_line1":"338-346 Goswell Road","address_line2":"Islington","address_line3":"example address_line3 9438","city":"London","company_number":"07495895","description":"Wine and cheese seller","directors":[{"city":"London","country_code":"GB","date_of_birth":"1986-02-19","family_name":"Jones","given_name":"Tom","postal_code":"EC1V 7LQ","street":"example street 9249"}],"links":{"creditor":"CR123"},"name":"Acme Limited","postal_code":"EC1V 7LQ"},{"address_line1":"338-346 Goswell Road","address_line2":"Islington","address_line3":"example address_line3 8788","city":"London","company_number":"07495895","description":"Wine and cheese seller","directors":[{"city":"London","country_code":"GB","date_of_birth":"1986-02-19","family_name":"Jones","given_name":"Tom","postal_code":"EC1V 7LQ","street":"example street 5809"}],"links":{"creditor":"CR123"},"name":"Acme Limited","postal_code":"EC1V 7LQ"}]}
+    "body": {"meta":{"cursors":{"after":"example after 101","before":"example before 101"},"limit":50},"verification_details":[{"address_line1":"338-346 Goswell Road","address_line2":"Islington","address_line3":"example address_line3 102","city":"London","company_number":"07495895","description":"Wine and cheese seller","directors":[{"city":"London","country_code":"GB","date_of_birth":"1986-02-19","family_name":"Jones","given_name":"Tom","postal_code":"EC1V 7LQ","street":"example street 102"}],"links":{"creditor":"CR123"},"name":"Acme Limited","postal_code":"EC1V 7LQ"},{"address_line1":"338-346 Goswell Road","address_line2":"Islington","address_line3":"example address_line3 103","city":"London","company_number":"07495895","description":"Wine and cheese seller","directors":[{"city":"London","country_code":"GB","date_of_birth":"1986-02-19","family_name":"Jones","given_name":"Tom","postal_code":"EC1V 7LQ","street":"example street 103"}],"links":{"creditor":"CR123"},"name":"Acme Limited","postal_code":"EC1V 7LQ"}]}
   }
 }

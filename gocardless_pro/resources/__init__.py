@@ -7,6 +7,8 @@ from .balance import Balance
 
 from .bank_account_detail import BankAccountDetail
 
+from .bank_account_holder_verification import BankAccountHolderVerification
+
 from .bank_authorisation import BankAuthorisation
 
 from .bank_details_lookup import BankDetailsLookup
@@ -37,6 +39,8 @@ from .event import Event
 
 from .export import Export
 
+from .funds_availability import FundsAvailability
+
 from .instalment_schedule import InstalmentSchedule
 
 from .institution import Institution
@@ -60,6 +64,8 @@ from .payer_authorisation import PayerAuthorisation
 from .payer_theme import PayerTheme
 
 from .payment import Payment
+
+from .payment_account import PaymentAccount
 
 from .payment_account_transaction import PaymentAccountTransaction
 

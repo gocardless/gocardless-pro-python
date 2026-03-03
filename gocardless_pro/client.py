@@ -13,7 +13,7 @@ class Client(object):
     use the resource methods to access the API.
 
     Args:
-      access_token (str): Find or generate this in your GoCardless Pro dashboard
+      access_token (str): Find or generate this in your GoCardless dashboard
         (https://manage.gocardless.com/organisation/access-tokens).
       environment (str): Either 'sandbox' or 'live'.
       base_url (str): Manually set a base URL. Most people should use
@@ -44,6 +44,10 @@ class Client(object):
     @property
     def bank_account_details(self):
         return services.BankAccountDetailsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
+    def bank_account_holder_verifications(self):
+        return services.BankAccountHolderVerificationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def bank_authorisations(self):
@@ -106,6 +110,10 @@ class Client(object):
         return services.ExportsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def funds_availabilities(self):
+        return services.FundsAvailabilitiesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def instalment_schedules(self):
         return services.InstalmentSchedulesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
@@ -152,6 +160,10 @@ class Client(object):
     @property
     def payments(self):
         return services.PaymentsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
+    def payment_accounts(self):
+        return services.PaymentAccountsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
     def payment_account_transactions(self):

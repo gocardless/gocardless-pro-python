@@ -5,6 +5,7 @@
 
 from .balances_service import BalancesService
 from .bank_account_details_service import BankAccountDetailsService
+from .bank_account_holder_verifications_service import BankAccountHolderVerificationsService
 from .bank_authorisations_service import BankAuthorisationsService
 from .bank_details_lookups_service import BankDetailsLookupsService
 from .billing_requests_service import BillingRequestsService
@@ -20,6 +21,7 @@ from .customer_bank_accounts_service import CustomerBankAccountsService
 from .customer_notifications_service import CustomerNotificationsService
 from .events_service import EventsService
 from .exports_service import ExportsService
+from .funds_availabilities_service import FundsAvailabilitiesService
 from .instalment_schedules_service import InstalmentSchedulesService
 from .institutions_service import InstitutionsService
 from .logos_service import LogosService
@@ -32,6 +34,7 @@ from .outbound_payments_service import OutboundPaymentsService
 from .payer_authorisations_service import PayerAuthorisationsService
 from .payer_themes_service import PayerThemesService
 from .payments_service import PaymentsService
+from .payment_accounts_service import PaymentAccountsService
 from .payment_account_transactions_service import PaymentAccountTransactionsService
 from .payouts_service import PayoutsService
 from .payout_items_service import PayoutItemsService

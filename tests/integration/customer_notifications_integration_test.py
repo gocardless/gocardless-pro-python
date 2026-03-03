@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_customer_notifications_handle():
     fixture = helpers.load_fixture('customer_notifications')['handle']
     helpers.stub_response(fixture)
     response = helpers.client.customer_notifications.handle(*fixture['url_params'])
-    body = fixture['body']['customer_notifications']
+    if fixture['body'].get('customer_notifications') is not None and isinstance(fixture['body'].get('customer_notifications'), (dict, list)):
+        body = fixture['body']['customer_notifications']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.CustomerNotification)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -50,4 +52,3 @@ def test_502_customer_notifications_handle_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.customer_notifications.handle(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

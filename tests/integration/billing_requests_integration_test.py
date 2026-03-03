@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_billing_requests_create():
     fixture = helpers.load_fixture('billing_requests')['create']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.create(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -31,6 +33,8 @@ def test_billing_requests_create():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -121,7 +125,6 @@ def test_timeout_billing_requests_create_retries():
       response = helpers.client.billing_requests.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
 
     assert isinstance(response, resources.BillingRequest)
 
@@ -131,17 +134,18 @@ def test_502_billing_requests_create_retries():
       response = helpers.client.billing_requests.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
 
     assert isinstance(response, resources.BillingRequest)
-  
 
 @responses.activate
 def test_billing_requests_collect_customer_details():
     fixture = helpers.load_fixture('billing_requests')['collect_customer_details']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.collect_customer_details(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -151,6 +155,8 @@ def test_billing_requests_collect_customer_details():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -230,14 +236,16 @@ def test_502_billing_requests_collect_customer_details_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.collect_customer_details(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_billing_requests_collect_bank_account():
     fixture = helpers.load_fixture('billing_requests')['collect_bank_account']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.collect_bank_account(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -247,6 +255,8 @@ def test_billing_requests_collect_bank_account():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -326,14 +336,16 @@ def test_502_billing_requests_collect_bank_account_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.collect_bank_account(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_billing_requests_confirm_payer_details():
     fixture = helpers.load_fixture('billing_requests')['confirm_payer_details']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.confirm_payer_details(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -343,6 +355,8 @@ def test_billing_requests_confirm_payer_details():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -422,14 +436,16 @@ def test_502_billing_requests_confirm_payer_details_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.confirm_payer_details(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_billing_requests_fulfil():
     fixture = helpers.load_fixture('billing_requests')['fulfil']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.fulfil(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -439,6 +455,8 @@ def test_billing_requests_fulfil():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -518,14 +536,16 @@ def test_502_billing_requests_fulfil_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.fulfil(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_billing_requests_cancel():
     fixture = helpers.load_fixture('billing_requests')['cancel']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.cancel(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -535,6 +555,8 @@ def test_billing_requests_cancel():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -614,14 +636,16 @@ def test_502_billing_requests_cancel_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.cancel(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_billing_requests_list():
     fixture = helpers.load_fixture('billing_requests')['list']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.list(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.BillingRequest)
@@ -635,6 +659,8 @@ def test_billing_requests_list():
     assert [r.fallback_occurred for r in response.records] == [b.get('fallback_occurred') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
+    assert [r.payment_context_code for r in response.records] == [b.get('payment_context_code') for b in body]
+    assert [r.payment_purpose_code for r in response.records] == [b.get('payment_purpose_code') for b in body]
     assert [r.purpose_code for r in response.records] == [b.get('purpose_code') for b in body]
     assert [r.status for r in response.records] == [b.get('status') for b in body]
 
@@ -645,7 +671,6 @@ def test_timeout_billing_requests_list_retries():
       response = helpers.client.billing_requests.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.BillingRequest)
@@ -659,7 +684,6 @@ def test_502_billing_requests_list_retries():
       response = helpers.client.billing_requests.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.BillingRequest)
@@ -685,15 +709,16 @@ def test_billing_requests_all():
     assert len(all_records) == len(fixture['body']['billing_requests']) * 2
     for record in all_records:
       assert isinstance(record, resources.BillingRequest)
-    
-  
 
 @responses.activate
 def test_billing_requests_get():
     fixture = helpers.load_fixture('billing_requests')['get']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.get(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -703,6 +728,8 @@ def test_billing_requests_get():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -776,7 +803,6 @@ def test_timeout_billing_requests_get_retries():
       response = helpers.client.billing_requests.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
 
     assert isinstance(response, resources.BillingRequest)
 
@@ -786,17 +812,18 @@ def test_502_billing_requests_get_retries():
       response = helpers.client.billing_requests.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['billing_requests']
 
     assert isinstance(response, resources.BillingRequest)
-  
 
 @responses.activate
 def test_billing_requests_notify():
     fixture = helpers.load_fixture('billing_requests')['notify']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.notify(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -806,6 +833,8 @@ def test_billing_requests_notify():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -885,14 +914,16 @@ def test_502_billing_requests_notify_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.notify(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_billing_requests_fallback():
     fixture = helpers.load_fixture('billing_requests')['fallback']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.fallback(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -902,6 +933,8 @@ def test_billing_requests_fallback():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -981,14 +1014,16 @@ def test_502_billing_requests_fallback_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.fallback(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_billing_requests_choose_currency():
     fixture = helpers.load_fixture('billing_requests')['choose_currency']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.choose_currency(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -998,6 +1033,8 @@ def test_billing_requests_choose_currency():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -1077,14 +1114,16 @@ def test_502_billing_requests_choose_currency_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.choose_currency(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_billing_requests_select_institution():
     fixture = helpers.load_fixture('billing_requests')['select_institution']
     helpers.stub_response(fixture)
     response = helpers.client.billing_requests.select_institution(*fixture['url_params'])
-    body = fixture['body']['billing_requests']
+    if fixture['body'].get('billing_requests') is not None and isinstance(fixture['body'].get('billing_requests'), (dict, list)):
+        body = fixture['body']['billing_requests']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BillingRequest)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -1094,6 +1133,8 @@ def test_billing_requests_select_institution():
     assert response.fallback_occurred == body.get('fallback_occurred')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.payment_context_code == body.get('payment_context_code')
+    assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
@@ -1173,4 +1214,3 @@ def test_502_billing_requests_select_institution_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.billing_requests.select_institution(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

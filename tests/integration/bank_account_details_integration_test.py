@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_bank_account_details_get():
     fixture = helpers.load_fixture('bank_account_details')['get']
     helpers.stub_response(fixture)
     response = helpers.client.bank_account_details.get(*fixture['url_params'])
-    body = fixture['body']['bank_account_details']
+    if fixture['body'].get('bank_account_details') is not None and isinstance(fixture['body'].get('bank_account_details'), (dict, list)):
+        body = fixture['body']['bank_account_details']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.BankAccountDetail)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -38,7 +40,6 @@ def test_timeout_bank_account_details_get_retries():
       response = helpers.client.bank_account_details.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['bank_account_details']
 
     assert isinstance(response, resources.BankAccountDetail)
 
@@ -48,7 +49,5 @@ def test_502_bank_account_details_get_retries():
       response = helpers.client.bank_account_details.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['bank_account_details']
 
     assert isinstance(response, resources.BankAccountDetail)
-  

@@ -23,6 +23,9 @@ def test_balances_returns_service():
 def test_bank_account_details_returns_service():
     assert isinstance(client.bank_account_details, services.BankAccountDetailsService)
 
+def test_bank_account_holder_verifications_returns_service():
+    assert isinstance(client.bank_account_holder_verifications, services.BankAccountHolderVerificationsService)
+
 def test_bank_authorisations_returns_service():
     assert isinstance(client.bank_authorisations, services.BankAuthorisationsService)
 
@@ -68,6 +71,9 @@ def test_events_returns_service():
 def test_exports_returns_service():
     assert isinstance(client.exports, services.ExportsService)
 
+def test_funds_availabilities_returns_service():
+    assert isinstance(client.funds_availabilities, services.FundsAvailabilitiesService)
+
 def test_instalment_schedules_returns_service():
     assert isinstance(client.instalment_schedules, services.InstalmentSchedulesService)
 
@@ -103,6 +109,9 @@ def test_payer_themes_returns_service():
 
 def test_payments_returns_service():
     assert isinstance(client.payments, services.PaymentsService)
+
+def test_payment_accounts_returns_service():
+    assert isinstance(client.payment_accounts, services.PaymentAccountsService)
 
 def test_payment_account_transactions_returns_service():
     assert isinstance(client.payment_account_transactions, services.PaymentAccountTransactionsService)

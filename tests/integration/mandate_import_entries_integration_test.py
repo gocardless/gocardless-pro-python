@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_mandate_import_entries_create():
     fixture = helpers.load_fixture('mandate_import_entries')['create']
     helpers.stub_response(fixture)
     response = helpers.client.mandate_import_entries.create(*fixture['url_params'])
-    body = fixture['body']['mandate_import_entries']
+    if fixture['body'].get('mandate_import_entries') is not None and isinstance(fixture['body'].get('mandate_import_entries'), (dict, list)):
+        body = fixture['body']['mandate_import_entries']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.MandateImportEntry)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -40,7 +42,6 @@ def test_timeout_mandate_import_entries_create_retries():
       response = helpers.client.mandate_import_entries.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandate_import_entries']
 
     assert isinstance(response, resources.MandateImportEntry)
 
@@ -50,17 +51,18 @@ def test_502_mandate_import_entries_create_retries():
       response = helpers.client.mandate_import_entries.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandate_import_entries']
 
     assert isinstance(response, resources.MandateImportEntry)
-  
 
 @responses.activate
 def test_mandate_import_entries_list():
     fixture = helpers.load_fixture('mandate_import_entries')['list']
     helpers.stub_response(fixture)
     response = helpers.client.mandate_import_entries.list(*fixture['url_params'])
-    body = fixture['body']['mandate_import_entries']
+    if fixture['body'].get('mandate_import_entries') is not None and isinstance(fixture['body'].get('mandate_import_entries'), (dict, list)):
+        body = fixture['body']['mandate_import_entries']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.MandateImportEntry)
@@ -79,7 +81,6 @@ def test_timeout_mandate_import_entries_list_retries():
       response = helpers.client.mandate_import_entries.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandate_import_entries']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.MandateImportEntry)
@@ -93,7 +94,6 @@ def test_502_mandate_import_entries_list_retries():
       response = helpers.client.mandate_import_entries.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['mandate_import_entries']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.MandateImportEntry)
@@ -119,5 +119,3 @@ def test_mandate_import_entries_all():
     assert len(all_records) == len(fixture['body']['mandate_import_entries']) * 2
     for record in all_records:
       assert isinstance(record, resources.MandateImportEntry)
-    
-  

@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_blocks_create():
     fixture = helpers.load_fixture('blocks')['create']
     helpers.stub_response(fixture)
     response = helpers.client.blocks.create(*fixture['url_params'])
-    body = fixture['body']['blocks']
+    if fixture['body'].get('blocks') is not None and isinstance(fixture['body'].get('blocks'), (dict, list)):
+        body = fixture['body']['blocks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Block)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -58,7 +60,6 @@ def test_timeout_blocks_create_retries():
       response = helpers.client.blocks.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['blocks']
 
     assert isinstance(response, resources.Block)
 
@@ -68,17 +69,18 @@ def test_502_blocks_create_retries():
       response = helpers.client.blocks.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['blocks']
 
     assert isinstance(response, resources.Block)
-  
 
 @responses.activate
 def test_blocks_get():
     fixture = helpers.load_fixture('blocks')['get']
     helpers.stub_response(fixture)
     response = helpers.client.blocks.get(*fixture['url_params'])
-    body = fixture['body']['blocks']
+    if fixture['body'].get('blocks') is not None and isinstance(fixture['body'].get('blocks'), (dict, list)):
+        body = fixture['body']['blocks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Block)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -98,7 +100,6 @@ def test_timeout_blocks_get_retries():
       response = helpers.client.blocks.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['blocks']
 
     assert isinstance(response, resources.Block)
 
@@ -108,17 +109,18 @@ def test_502_blocks_get_retries():
       response = helpers.client.blocks.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['blocks']
 
     assert isinstance(response, resources.Block)
-  
 
 @responses.activate
 def test_blocks_list():
     fixture = helpers.load_fixture('blocks')['list']
     helpers.stub_response(fixture)
     response = helpers.client.blocks.list(*fixture['url_params'])
-    body = fixture['body']['blocks']
+    if fixture['body'].get('blocks') is not None and isinstance(fixture['body'].get('blocks'), (dict, list)):
+        body = fixture['body']['blocks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Block)
@@ -142,7 +144,6 @@ def test_timeout_blocks_list_retries():
       response = helpers.client.blocks.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['blocks']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Block)
@@ -156,7 +157,6 @@ def test_502_blocks_list_retries():
       response = helpers.client.blocks.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['blocks']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Block)
@@ -182,15 +182,16 @@ def test_blocks_all():
     assert len(all_records) == len(fixture['body']['blocks']) * 2
     for record in all_records:
       assert isinstance(record, resources.Block)
-    
-  
 
 @responses.activate
 def test_blocks_disable():
     fixture = helpers.load_fixture('blocks')['disable']
     helpers.stub_response(fixture)
     response = helpers.client.blocks.disable(*fixture['url_params'])
-    body = fixture['body']['blocks']
+    if fixture['body'].get('blocks') is not None and isinstance(fixture['body'].get('blocks'), (dict, list)):
+        body = fixture['body']['blocks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Block)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -216,14 +217,16 @@ def test_502_blocks_disable_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.blocks.disable(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_blocks_enable():
     fixture = helpers.load_fixture('blocks')['enable']
     helpers.stub_response(fixture)
     response = helpers.client.blocks.enable(*fixture['url_params'])
-    body = fixture['body']['blocks']
+    if fixture['body'].get('blocks') is not None and isinstance(fixture['body'].get('blocks'), (dict, list)):
+        body = fixture['body']['blocks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Block)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -249,14 +252,16 @@ def test_502_blocks_enable_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.blocks.enable(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  
 
 @responses.activate
 def test_blocks_block_by_ref():
     fixture = helpers.load_fixture('blocks')['block_by_ref']
     helpers.stub_response(fixture)
     response = helpers.client.blocks.block_by_ref(*fixture['url_params'])
-    body = fixture['body']['blocks']
+    if fixture['body'].get('blocks') is not None and isinstance(fixture['body'].get('blocks'), (dict, list)):
+        body = fixture['body']['blocks']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Block)
@@ -286,4 +291,3 @@ def test_502_blocks_block_by_ref_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.blocks.block_by_ref(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_logos_create_for_creditor():
     fixture = helpers.load_fixture('logos')['create_for_creditor']
     helpers.stub_response(fixture)
     response = helpers.client.logos.create_for_creditor(*fixture['url_params'])
-    body = fixture['body']['logos']
+    if fixture['body'].get('logos') is not None and isinstance(fixture['body'].get('logos'), (dict, list)):
+        body = fixture['body']['logos']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Logo)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -34,7 +36,6 @@ def test_timeout_logos_create_for_creditor_retries():
       response = helpers.client.logos.create_for_creditor(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['logos']
 
     assert isinstance(response, resources.Logo)
 
@@ -44,7 +45,5 @@ def test_502_logos_create_for_creditor_retries():
       response = helpers.client.logos.create_for_creditor(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['logos']
 
     assert isinstance(response, resources.Logo)
-  

@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_institutions_list():
     fixture = helpers.load_fixture('institutions')['list']
     helpers.stub_response(fixture)
     response = helpers.client.institutions.list(*fixture['url_params'])
-    body = fixture['body']['institutions']
+    if fixture['body'].get('institutions') is not None and isinstance(fixture['body'].get('institutions'), (dict, list)):
+        body = fixture['body']['institutions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Institution)
@@ -44,7 +46,6 @@ def test_timeout_institutions_list_retries():
       response = helpers.client.institutions.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['institutions']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Institution)
@@ -58,7 +59,6 @@ def test_502_institutions_list_retries():
       response = helpers.client.institutions.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['institutions']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Institution)
@@ -84,15 +84,16 @@ def test_institutions_all():
     assert len(all_records) == len(fixture['body']['institutions']) * 2
     for record in all_records:
       assert isinstance(record, resources.Institution)
-    
-  
 
 @responses.activate
 def test_institutions_list_for_billing_request():
     fixture = helpers.load_fixture('institutions')['list_for_billing_request']
     helpers.stub_response(fixture)
     response = helpers.client.institutions.list_for_billing_request(*fixture['url_params'])
-    body = fixture['body']['institutions']
+    if fixture['body'].get('institutions') is not None and isinstance(fixture['body'].get('institutions'), (dict, list)):
+        body = fixture['body']['institutions']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Institution)
@@ -121,4 +122,3 @@ def test_502_institutions_list_for_billing_request_doesnt_retry():
       with pytest.raises(MalformedResponseError):
         response = helpers.client.institutions.list_for_billing_request(*fixture['url_params'])
       assert len(rsps.calls) == 1
-  

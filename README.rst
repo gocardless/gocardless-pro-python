@@ -95,6 +95,17 @@ Bank account details
     # Get encrypted bank details
     client.bank_account_details.get('BA123', params={...})
 
+Bank account holder verifications
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create a bank account holder verification.
+    client.bank_account_holder_verifications.create(params={...})
+
+    # Get a bank account holder verification.
+    client.bank_account_holder_verifications.get('BAHV123', params={...})
+
 Bank authorisations
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -356,6 +367,14 @@ Exports
     # Iterate through all exports
     client.exports.all(params={...})
 
+Funds availabilities
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Funds availability
+    client.funds_availabilities.check('MD123', params={...})
+
 Instalment schedules
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -509,6 +528,9 @@ Outbound payments
     # Update an outbound payment
     client.outbound_payments.update('OUT123', params={...})
 
+    # Outbound payment statistics
+    client.outbound_payments.stats(params={...})
+
 Payer authorisations
 ''''''''''''''''''''''''''''''''''''''''''
 
@@ -562,6 +584,20 @@ Payments
 
     # Retry a payment
     client.payments.retry('PM123', params={...})
+
+Payment accounts
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Get a single payment account details
+    client.payment_accounts.get('BA123', params={...})
+
+    # List payment accounts
+    client.payment_accounts.list(params={...})
+
+    # Iterate through all payment_accounts
+    client.payment_accounts.all(params={...})
 
 Payment account transactions
 ''''''''''''''''''''''''''''''''''''''''''

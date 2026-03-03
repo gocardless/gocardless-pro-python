@@ -194,3 +194,21 @@ class OutboundPaymentsService(base_service.BaseService):
                                          retry_failures=True)
         return self._resource_for(response)
   
+
+    def stats(self,params=None, headers=None):
+        """Outbound payment statistics.
+
+        Retrieve aggregate statistics on outbound payments.
+
+        Args:
+              params (dict, optional): Query string parameters.
+
+        Returns:
+              OutboundPayment
+        """
+        path = '/outbound_payments/stats'
+        
+        response = self._perform_request('GET', path, params, headers,
+                                         retry_failures=False)
+        return self._resource_for(response)
+  

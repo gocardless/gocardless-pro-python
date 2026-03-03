@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_scheme_identifiers_create():
     fixture = helpers.load_fixture('scheme_identifiers')['create']
     helpers.stub_response(fixture)
     response = helpers.client.scheme_identifiers.create(*fixture['url_params'])
-    body = fixture['body']['scheme_identifiers']
+    if fixture['body'].get('scheme_identifiers') is not None and isinstance(fixture['body'].get('scheme_identifiers'), (dict, list)):
+        body = fixture['body']['scheme_identifiers']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.SchemeIdentifier)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -68,7 +70,6 @@ def test_timeout_scheme_identifiers_create_retries():
       response = helpers.client.scheme_identifiers.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['scheme_identifiers']
 
     assert isinstance(response, resources.SchemeIdentifier)
 
@@ -78,17 +79,18 @@ def test_502_scheme_identifiers_create_retries():
       response = helpers.client.scheme_identifiers.create(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['scheme_identifiers']
 
     assert isinstance(response, resources.SchemeIdentifier)
-  
 
 @responses.activate
 def test_scheme_identifiers_list():
     fixture = helpers.load_fixture('scheme_identifiers')['list']
     helpers.stub_response(fixture)
     response = helpers.client.scheme_identifiers.list(*fixture['url_params'])
-    body = fixture['body']['scheme_identifiers']
+    if fixture['body'].get('scheme_identifiers') is not None and isinstance(fixture['body'].get('scheme_identifiers'), (dict, list)):
+        body = fixture['body']['scheme_identifiers']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.SchemeIdentifier)
@@ -122,7 +124,6 @@ def test_timeout_scheme_identifiers_list_retries():
       response = helpers.client.scheme_identifiers.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['scheme_identifiers']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.SchemeIdentifier)
@@ -136,7 +137,6 @@ def test_502_scheme_identifiers_list_retries():
       response = helpers.client.scheme_identifiers.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['scheme_identifiers']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.SchemeIdentifier)
@@ -162,15 +162,16 @@ def test_scheme_identifiers_all():
     assert len(all_records) == len(fixture['body']['scheme_identifiers']) * 2
     for record in all_records:
       assert isinstance(record, resources.SchemeIdentifier)
-    
-  
 
 @responses.activate
 def test_scheme_identifiers_get():
     fixture = helpers.load_fixture('scheme_identifiers')['get']
     helpers.stub_response(fixture)
     response = helpers.client.scheme_identifiers.get(*fixture['url_params'])
-    body = fixture['body']['scheme_identifiers']
+    if fixture['body'].get('scheme_identifiers') is not None and isinstance(fixture['body'].get('scheme_identifiers'), (dict, list)):
+        body = fixture['body']['scheme_identifiers']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.SchemeIdentifier)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -200,7 +201,6 @@ def test_timeout_scheme_identifiers_get_retries():
       response = helpers.client.scheme_identifiers.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['scheme_identifiers']
 
     assert isinstance(response, resources.SchemeIdentifier)
 
@@ -210,7 +210,5 @@ def test_502_scheme_identifiers_get_retries():
       response = helpers.client.scheme_identifiers.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['scheme_identifiers']
 
     assert isinstance(response, resources.SchemeIdentifier)
-  

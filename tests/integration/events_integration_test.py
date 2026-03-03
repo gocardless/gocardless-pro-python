@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_events_list():
     fixture = helpers.load_fixture('events')['list']
     helpers.stub_response(fixture)
     response = helpers.client.events.list(*fixture['url_params'])
-    body = fixture['body']['events']
+    if fixture['body'].get('events') is not None and isinstance(fixture['body'].get('events'), (dict, list)):
+        body = fixture['body']['events']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Event)
@@ -44,7 +46,6 @@ def test_timeout_events_list_retries():
       response = helpers.client.events.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['events']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Event)
@@ -58,7 +59,6 @@ def test_502_events_list_retries():
       response = helpers.client.events.list(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['events']
 
     assert isinstance(response, list_response.ListResponse)
     assert isinstance(response.records[0], resources.Event)
@@ -84,15 +84,16 @@ def test_events_all():
     assert len(all_records) == len(fixture['body']['events']) * 2
     for record in all_records:
       assert isinstance(record, resources.Event)
-    
-  
 
 @responses.activate
 def test_events_get():
     fixture = helpers.load_fixture('events')['get']
     helpers.stub_response(fixture)
     response = helpers.client.events.get(*fixture['url_params'])
-    body = fixture['body']['events']
+    if fixture['body'].get('events') is not None and isinstance(fixture['body'].get('events'), (dict, list)):
+        body = fixture['body']['events']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.Event)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
@@ -127,6 +128,7 @@ def test_events_get():
     assert response.links.new_customer_bank_account == body.get('links')['new_customer_bank_account']
     assert response.links.new_mandate == body.get('links')['new_mandate']
     assert response.links.organisation == body.get('links')['organisation']
+    assert response.links.outbound_payment == body.get('links')['outbound_payment']
     assert response.links.parent_event == body.get('links')['parent_event']
     assert response.links.payer_authorisation == body.get('links')['payer_authorisation']
     assert response.links.payment == body.get('links')['payment']
@@ -146,7 +148,6 @@ def test_timeout_events_get_retries():
       response = helpers.client.events.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['events']
 
     assert isinstance(response, resources.Event)
 
@@ -156,7 +157,5 @@ def test_502_events_get_retries():
       response = helpers.client.events.get(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['events']
 
     assert isinstance(response, resources.Event)
-  

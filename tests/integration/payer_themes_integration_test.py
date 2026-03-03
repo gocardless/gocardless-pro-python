@@ -14,14 +14,16 @@ from gocardless_pro import resources
 from gocardless_pro import list_response
 
 from .. import helpers
-  
 
 @responses.activate
 def test_payer_themes_create_for_creditor():
     fixture = helpers.load_fixture('payer_themes')['create_for_creditor']
     helpers.stub_response(fixture)
     response = helpers.client.payer_themes.create_for_creditor(*fixture['url_params'])
-    body = fixture['body']['payer_themes']
+    if fixture['body'].get('payer_themes') is not None and isinstance(fixture['body'].get('payer_themes'), (dict, list)):
+        body = fixture['body']['payer_themes']
+    else:
+        body = fixture['body']
 
     assert isinstance(response, resources.PayerTheme)
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
@@ -34,7 +36,6 @@ def test_timeout_payer_themes_create_for_creditor_retries():
       response = helpers.client.payer_themes.create_for_creditor(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payer_themes']
 
     assert isinstance(response, resources.PayerTheme)
 
@@ -44,7 +45,5 @@ def test_502_payer_themes_create_for_creditor_retries():
       response = helpers.client.payer_themes.create_for_creditor(*fixture['url_params'])
       assert len(rsps.calls) == 2
       assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
-    body = fixture['body']['payer_themes']
 
     assert isinstance(response, resources.PayerTheme)
-  
