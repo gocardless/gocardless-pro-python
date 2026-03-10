@@ -17,6 +17,29 @@ class PaymentAccountTransactionsService(base_service.BaseService):
     RESOURCE_NAME = 'payment_account_transactions'
 
 
+    def get(self,identity,params=None, headers=None):
+        """Get a single payment account transaction.
+
+        Retrieves the details of an existing payment account transaction.
+
+        Args:
+              identity (string): The unique ID of the [bank account](#core-endpoints-creditor-bank-accounts) which happens to be the payment account.
+              params (dict, optional): Query string parameters.
+
+        Returns:
+              PaymentAccountTransaction
+        """
+        path = self._sub_url_params('/payment_account_transactions/:identity', {
+          
+            'identity': identity,
+          })
+        
+
+        response = self._perform_request('GET', path, params, headers,
+                                         retry_failures=True)
+        return self._resource_for(response)
+  
+
     def list(self,identity,params=None, headers=None):
         """List payment account transactions.
 
