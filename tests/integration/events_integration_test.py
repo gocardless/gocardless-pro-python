@@ -132,6 +132,7 @@ def test_events_get():
     assert response.links.parent_event == body.get('links')['parent_event']
     assert response.links.payer_authorisation == body.get('links')['payer_authorisation']
     assert response.links.payment == body.get('links')['payment']
+    assert response.links.payment_account_transaction == body.get('links')['payment_account_transaction']
     assert response.links.payment_request_payment == body.get('links')['payment_request_payment']
     assert response.links.payout == body.get('links')['payout']
     assert response.links.previous_customer_bank_account == body.get('links')['previous_customer_bank_account']

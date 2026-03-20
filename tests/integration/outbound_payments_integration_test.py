@@ -40,6 +40,7 @@ def test_outbound_payments_create():
     assert response.status == body.get('status')
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
+    assert response.links.outbound_payment_import == body.get('links')['outbound_payment_import']
     assert response.links.recipient_bank_account == body.get('links')['recipient_bank_account']
     assert response.verifications.recipient_bank_account_holder_verification == body.get('verifications')['recipient_bank_account_holder_verification']
 
@@ -104,6 +105,7 @@ def test_outbound_payments_withdraw():
     assert response.status == body.get('status')
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
+    assert response.links.outbound_payment_import == body.get('links')['outbound_payment_import']
     assert response.links.recipient_bank_account == body.get('links')['recipient_bank_account']
     assert response.verifications.recipient_bank_account_holder_verification == body.get('verifications')['recipient_bank_account_holder_verification']
 
@@ -146,6 +148,7 @@ def test_outbound_payments_cancel():
     assert response.status == body.get('status')
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
+    assert response.links.outbound_payment_import == body.get('links')['outbound_payment_import']
     assert response.links.recipient_bank_account == body.get('links')['recipient_bank_account']
     assert response.verifications.recipient_bank_account_holder_verification == body.get('verifications')['recipient_bank_account_holder_verification']
 
@@ -188,6 +191,7 @@ def test_outbound_payments_approve():
     assert response.status == body.get('status')
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
+    assert response.links.outbound_payment_import == body.get('links')['outbound_payment_import']
     assert response.links.recipient_bank_account == body.get('links')['recipient_bank_account']
     assert response.verifications.recipient_bank_account_holder_verification == body.get('verifications')['recipient_bank_account_holder_verification']
 
@@ -230,6 +234,7 @@ def test_outbound_payments_get():
     assert response.status == body.get('status')
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
+    assert response.links.outbound_payment_import == body.get('links')['outbound_payment_import']
     assert response.links.recipient_bank_account == body.get('links')['recipient_bank_account']
     assert response.verifications.recipient_bank_account_holder_verification == body.get('verifications')['recipient_bank_account_holder_verification']
 
@@ -351,6 +356,7 @@ def test_outbound_payments_update():
     assert response.status == body.get('status')
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
+    assert response.links.outbound_payment_import == body.get('links')['outbound_payment_import']
     assert response.links.recipient_bank_account == body.get('links')['recipient_bank_account']
     assert response.verifications.recipient_bank_account_holder_verification == body.get('verifications')['recipient_bank_account_holder_verification']
 
