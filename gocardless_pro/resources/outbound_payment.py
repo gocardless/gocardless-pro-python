@@ -112,6 +112,10 @@ class OutboundPayment(object):
             return self.attributes.get('customer')
     
         @property
+        def outbound_payment_import(self):
+            return self.attributes.get('outbound_payment_import')
+    
+        @property
         def recipient_bank_account(self):
             return self.attributes.get('recipient_bank_account')
     

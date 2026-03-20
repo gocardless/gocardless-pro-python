@@ -16,6 +16,50 @@ from gocardless_pro import list_response
 from .. import helpers
 
 @responses.activate
+def test_payment_account_transactions_get():
+    fixture = helpers.load_fixture('payment_account_transactions')['get']
+    helpers.stub_response(fixture)
+    response = helpers.client.payment_account_transactions.get(*fixture['url_params'])
+    if fixture['body'].get('payment_account_transactions') is not None and isinstance(fixture['body'].get('payment_account_transactions'), (dict, list)):
+        body = fixture['body']['payment_account_transactions']
+    else:
+        body = fixture['body']
+
+    assert isinstance(response, resources.PaymentAccountTransaction)
+    assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
+    assert response.amount == body.get('amount')
+    assert response.balance_after_transaction == body.get('balance_after_transaction')
+    assert response.counterparty_name == body.get('counterparty_name')
+    assert response.currency == body.get('currency')
+    assert response.description == body.get('description')
+    assert response.direction == body.get('direction')
+    assert response.id == body.get('id')
+    assert response.reference == body.get('reference')
+    assert response.value_date == body.get('value_date')
+    assert response.links.outbound_payment == body.get('links')['outbound_payment']
+    assert response.links.payment_bank_account == body.get('links')['payment_bank_account']
+    assert response.links.payout == body.get('links')['payout']
+
+@responses.activate
+def test_timeout_payment_account_transactions_get_retries():
+    fixture = helpers.load_fixture('payment_account_transactions')['get']
+    with helpers.stub_timeout_then_response(fixture) as rsps:
+      response = helpers.client.payment_account_transactions.get(*fixture['url_params'])
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
+
+    assert isinstance(response, resources.PaymentAccountTransaction)
+
+def test_502_payment_account_transactions_get_retries():
+    fixture = helpers.load_fixture('payment_account_transactions')['get']
+    with helpers.stub_502_then_response(fixture) as rsps:
+      response = helpers.client.payment_account_transactions.get(*fixture['url_params'])
+      assert len(rsps.calls) == 2
+      assert rsps.calls[0].request.headers.get('Idempotency-Key') == rsps.calls[1].request.headers.get('Idempotency-Key')
+
+    assert isinstance(response, resources.PaymentAccountTransaction)
+
+@responses.activate
 def test_payment_account_transactions_list():
     fixture = helpers.load_fixture('payment_account_transactions')['list']
     helpers.stub_response(fixture)

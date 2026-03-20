@@ -204,6 +204,10 @@ class Event(object):
             return self.attributes.get('payment')
     
         @property
+        def payment_account_transaction(self):
+            return self.attributes.get('payment_account_transaction')
+    
+        @property
         def payment_request_payment(self):
             return self.attributes.get('payment_request_payment')
     

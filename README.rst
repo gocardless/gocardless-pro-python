@@ -604,6 +604,9 @@ Payment account transactions
 
 .. code:: python
 
+    # Get a single payment account transaction
+    client.payment_account_transactions.get('BA123', params={...})
+
     # List payment account transactions
     client.payment_account_transactions.list('BA123', params={...})
 
