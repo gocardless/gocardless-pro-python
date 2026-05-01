@@ -150,6 +150,14 @@ class Client(object):
         return services.OutboundPaymentsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
     @property
+    def outbound_payment_imports(self):
+        return services.OutboundPaymentImportsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
+    def outbound_payment_import_entries(self):
+        return services.OutboundPaymentImportEntriesService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
+
+    @property
     def payer_authorisations(self):
         return services.PayerAuthorisationsService(self._api_client, 3, 0.5, self._raise_on_idempotency_conflict)
 
