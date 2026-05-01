@@ -32,6 +32,11 @@ class Export(object):
   
 
     @property
+    def error_message(self):
+        return self.attributes.get('error_message')
+  
+
+    @property
     def export_type(self):
         return self.attributes.get('export_type')
   
@@ -41,6 +46,8 @@ class Export(object):
         return self.attributes.get('id')
   
 
+
+  
 
   
 
