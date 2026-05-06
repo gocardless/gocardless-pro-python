@@ -101,6 +101,12 @@ def test_negative_balance_limits_returns_service():
 def test_outbound_payments_returns_service():
     assert isinstance(client.outbound_payments, services.OutboundPaymentsService)
 
+def test_outbound_payment_imports_returns_service():
+    assert isinstance(client.outbound_payment_imports, services.OutboundPaymentImportsService)
+
+def test_outbound_payment_import_entries_returns_service():
+    assert isinstance(client.outbound_payment_import_entries, services.OutboundPaymentImportEntriesService)
+
 def test_payer_authorisations_returns_service():
     assert isinstance(client.payer_authorisations, services.PayerAuthorisationsService)
 

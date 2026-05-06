@@ -531,6 +531,34 @@ Outbound payments
     # Outbound payment statistics
     client.outbound_payments.stats(params={...})
 
+Outbound payment imports
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # Create an outbound payment import
+    client.outbound_payment_imports.create(params={...})
+
+    # Get an outbound payment import
+    client.outbound_payment_imports.get('IM123', params={...})
+
+    # List outbound payment imports
+    client.outbound_payment_imports.list(params={...})
+
+    # Iterate through all outbound_payment_imports
+    client.outbound_payment_imports.all(params={...})
+
+Outbound payment import entries
+''''''''''''''''''''''''''''''''''''''''''
+
+.. code:: python
+
+    # List outbound payment import entries
+    client.outbound_payment_import_entries.list(params={...})
+
+    # Iterate through all outbound_payment_import_entries
+    client.outbound_payment_import_entries.all(params={...})
+
 Payer authorisations
 ''''''''''''''''''''''''''''''''''''''''''
 

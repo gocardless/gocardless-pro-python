@@ -31,6 +31,8 @@ from .mandate_import_entries_service import MandateImportEntriesService
 from .mandate_pdfs_service import MandatePdfsService
 from .negative_balance_limits_service import NegativeBalanceLimitsService
 from .outbound_payments_service import OutboundPaymentsService
+from .outbound_payment_imports_service import OutboundPaymentImportsService
+from .outbound_payment_import_entries_service import OutboundPaymentImportEntriesService
 from .payer_authorisations_service import PayerAuthorisationsService
 from .payer_themes_service import PayerThemesService
 from .payments_service import PaymentsService

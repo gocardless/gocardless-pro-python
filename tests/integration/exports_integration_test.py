@@ -30,6 +30,7 @@ def test_exports_get():
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
     assert response.download_url == body.get('download_url')
+    assert response.error_message == body.get('error_message')
     assert response.export_type == body.get('export_type')
     assert response.id == body.get('id')
 
@@ -71,6 +72,7 @@ def test_exports_list():
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
     assert [r.currency for r in response.records] == [b.get('currency') for b in body]
     assert [r.download_url for r in response.records] == [b.get('download_url') for b in body]
+    assert [r.error_message for r in response.records] == [b.get('error_message') for b in body]
     assert [r.export_type for r in response.records] == [b.get('export_type') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
 
