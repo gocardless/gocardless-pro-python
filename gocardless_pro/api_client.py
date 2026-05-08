@@ -126,10 +126,17 @@ class ApiClient(object):
             response_body = response.json()
         except ValueError:
             msg = 'Malformed response received from server'
-            raise errors.MalformedResponseError(msg, response.text)
+            raise errors.MalformedResponseError(msg, response.text, response.status_code)
 
         if response.status_code < 400:
             return
+
+        if not isinstance(response_body, dict):
+            raise errors.MalformedResponseError(
+                'Malformed response received from server',
+                response.text,
+                response.status_code,
+            )
 
         error = response_body.get('error', response_body)
 
@@ -139,8 +146,14 @@ class ApiClient(object):
                 'message': error,
             }
             exception_class = errors.ApiError
-        else:
+        elif isinstance(error, dict) and 'type' in error:
             exception_class = errors.ApiError.exception_for(response.status_code, error['type'], error.get('errors'))
+        else:
+            raise errors.MalformedResponseError(
+                'Malformed response received from server',
+                response.text,
+                response.status_code,
+            )
 
         raise exception_class(error)
 

@@ -137,9 +137,26 @@ class RateLimitError(ApiError):
 
 class MalformedResponseError(GoCardlessProError):
 
-    def __init__(self, message, response):
-        super(MalformedResponseError, self).__init__(message)
+    BODY_PREVIEW_MAX_LENGTH = 500
+
+    def __init__(self, message, response, status_code=None):
+        self.status_code = status_code
         self.response = response
+        super(MalformedResponseError, self).__init__(
+            self._build_message(message, status_code, response)
+        )
+
+    @classmethod
+    def _build_message(cls, message, status_code, response):
+        parts = [message]
+        if status_code is not None:
+            parts.append('(HTTP {})'.format(status_code))
+        full = ' '.join(parts)
+        if response:
+            preview = response if len(response) <= cls.BODY_PREVIEW_MAX_LENGTH \
+                else response[:cls.BODY_PREVIEW_MAX_LENGTH] + '...'
+            full = '{}: {}'.format(full, preview)
+        return full
 
 
 class InvalidSignatureError(GoCardlessProError):

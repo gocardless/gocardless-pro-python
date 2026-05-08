@@ -126,6 +126,19 @@ def test_handles_malformed_response():
         client.post('/test', body={'name': 'Billy Jean'})
 
 @responses.activate
+def test_includes_status_code_and_body_for_non_json_error_response():
+    body = '<html>502 Bad Gateway</html>'
+    responses.add(responses.POST, 'http://example.com/test',
+                  body=body, status=502)
+
+    with pytest.raises(errors.MalformedResponseError) as exception:
+        client.post('/test', body={'name': 'Billy Jean'})
+
+    assert exception.value.status_code == 502
+    assert exception.value.response == body
+    assert 'HTTP 502' in str(exception.value)
+
+@responses.activate
 def test_handles_valid_empty_response():
     responses.add(responses.DELETE, 'http://example.com/test', body='', status=204)
     client.delete('/test', body={'name': 'Billy Jean'})
