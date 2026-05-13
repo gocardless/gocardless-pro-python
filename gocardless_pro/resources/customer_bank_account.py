@@ -76,6 +76,11 @@ class CustomerBankAccount(object):
         return self.attributes.get('metadata')
   
 
+    @property
+    def trusted_recipient(self):
+        return self.attributes.get('trusted_recipient')
+  
+
 
   
 
@@ -108,6 +113,8 @@ class CustomerBankAccount(object):
         def customer(self):
             return self.attributes.get('customer')
     
+  
+
   
 
   
