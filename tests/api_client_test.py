@@ -144,6 +144,16 @@ def test_handles_valid_empty_response():
     client.delete('/test', body={'name': 'Billy Jean'})
     assert responses.calls[0].request.body == '{"name": "Billy Jean"}'
 
+@responses.activate
+def test_handles_204_no_content_without_error():
+    from gocardless_pro.api_response import ApiResponse
+
+    responses.add(responses.DELETE, 'http://example.com/customers/CU123', body='', status=204)
+    response = client.delete('/customers/CU123', body={})
+
+    api_response = ApiResponse(response)
+    assert api_response.status_code == 204
+    assert api_response.body == {}
 
 @responses.activate
 def test_handles_invalid_empty_response():

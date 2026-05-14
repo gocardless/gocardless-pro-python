@@ -21,5 +21,8 @@ class ApiResponse(object):
 
     @property
     def body(self):
+        # Handle 204 No Content and other empty responses
+        if not self._response.content:
+            return {}
         return self._response.json()
 
