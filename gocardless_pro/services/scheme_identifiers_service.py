@@ -10,7 +10,7 @@ from .. import errors
 
 class SchemeIdentifiersService(base_service.BaseService):
     """Service class that provides access to the scheme_identifiers
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.SchemeIdentifier

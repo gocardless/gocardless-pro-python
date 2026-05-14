@@ -1,6 +1,6 @@
-"""A client library for the GoCardless Pro API."""
+"""A client library for the GoCardless API."""
 
 from .client import Client
 
-__version__ = '3.3.0'
+__version__ = '3.4.0'
 

@@ -38,6 +38,7 @@ def test_customer_bank_accounts_create():
     assert response.enabled == body.get('enabled')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.trusted_recipient == body.get('trusted_recipient')
     assert response.links.customer == body.get('links')['customer']
 
 @responses.activate
@@ -103,6 +104,7 @@ def test_customer_bank_accounts_list():
     assert [r.enabled for r in response.records] == [b.get('enabled') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
+    assert [r.trusted_recipient for r in response.records] == [b.get('trusted_recipient') for b in body]
 
 @responses.activate
 def test_timeout_customer_bank_accounts_list_retries():
@@ -173,6 +175,7 @@ def test_customer_bank_accounts_get():
     assert response.enabled == body.get('enabled')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.trusted_recipient == body.get('trusted_recipient')
     assert response.links.customer == body.get('links')['customer']
 
 @responses.activate
@@ -217,6 +220,7 @@ def test_customer_bank_accounts_update():
     assert response.enabled == body.get('enabled')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.trusted_recipient == body.get('trusted_recipient')
     assert response.links.customer == body.get('links')['customer']
 
 @responses.activate
@@ -261,6 +265,7 @@ def test_customer_bank_accounts_disable():
     assert response.enabled == body.get('enabled')
     assert response.id == body.get('id')
     assert response.metadata == body.get('metadata')
+    assert response.trusted_recipient == body.get('trusted_recipient')
     assert response.links.customer == body.get('links')['customer']
 
 def test_timeout_customer_bank_accounts_disable_doesnt_retry():

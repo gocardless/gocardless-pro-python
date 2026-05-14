@@ -10,7 +10,7 @@ from .. import errors
 
 class OutboundPaymentImportEntriesService(base_service.BaseService):
     """Service class that provides access to the outbound_payment_import_entries
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.OutboundPaymentImportEntry

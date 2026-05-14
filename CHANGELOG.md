@@ -1,5 +1,23 @@
 <!-- @format -->
 
+# 3.4.0
+
+- **Bug Fixes:**
+  - Fixed `JSONDecodeError` when calling endpoints that return `204 No Content` responses (e.g. `customers.remove()`) - fixes [#96](https://github.com/gocardless/gocardless-pro-python/issues/96)
+  - Fixed pagination cursor handling that was raising `KeyError` on endpoints without cursors (e.g. `institutions.list_for_billing_request`)
+  - Fixed POST/PUT request body envelope wrapping to use schema-defined envelopes instead of inferred ones
+  - Fixed invalid Python 3 syntax that was causing compatibility issues
+  - Improved error messages by including HTTP status code in malformed response errors
+
+- **Breaking Changes:**
+  - Removed Python 2 compatibility shim (Python 2 has been EOL for 6+ years, and this library already uses Python 3-only features like f-strings)
+  - Removed unused `six` dependency (was never actually imported in the codebase)
+  - Documented minimum Python version as 3.10
+
+- **Improvements:**
+  - README cleanup and documentation updates
+  - Added missing tests for paginator
+
 # 3.1.0
 - Added `mandate_request_constraints` to Billing Request templates
 - `constraints[max_amount_per_payment]` is required for Billing Requests Creation, if they contain PayTo `mandate_request`

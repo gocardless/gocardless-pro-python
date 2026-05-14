@@ -10,7 +10,7 @@ from .. import errors
 
 class CreditorBankAccountsService(base_service.BaseService):
     """Service class that provides access to the creditor_bank_accounts
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.CreditorBankAccount

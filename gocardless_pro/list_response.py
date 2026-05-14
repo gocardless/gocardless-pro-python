@@ -11,8 +11,10 @@ class ListResponse(object):
 
     @property
     def before(self):
-        return self.api_response.body['meta']['cursors']['before']
+        cursors = (self.api_response.body.get('meta') or {}).get('cursors') or {}
+        return cursors.get('before')
 
     @property
     def after(self):
-        return self.api_response.body['meta']['cursors']['after']
+        cursors = (self.api_response.body.get('meta') or {}).get('cursors') or {}
+        return cursors.get('after')

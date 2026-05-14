@@ -10,7 +10,7 @@ from .. import errors
 
 class ScenarioSimulatorsService(base_service.BaseService):
     """Service class that provides access to the scenario_simulators
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.ScenarioSimulator

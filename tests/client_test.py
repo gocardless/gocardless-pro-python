@@ -155,3 +155,21 @@ def test_verification_details_returns_service():
 def test_webhooks_returns_service():
     assert isinstance(client.webhooks, services.WebhooksService)
 
+@responses.activate
+def test_rate_limit_returns_dict():
+    headers = {
+        'ratelimit-limit': '1000',
+        'ratelimit-remaining': '163',
+        'ratelimit-reset': 'Thu, 03 May 2018 16:00:00 GMT'
+    }
+    responses.add(responses.GET, 'http://example.com/test', body='{}', headers=headers)
+
+    # Make a request to populate rate limit headers
+    client._api_client.get('/test')
+
+    # Test that rate_limit returns a dictionary with correct keys and values
+    rate_limit_dict = client.rate_limit
+    assert isinstance(rate_limit_dict, dict)
+    assert rate_limit_dict["ratelimit-limit"] == 1000
+    assert rate_limit_dict["ratelimit-remaining"] == 163
+    assert rate_limit_dict["ratelimit-reset"] == 'Thu, 03 May 2018 16:00:00 GMT'

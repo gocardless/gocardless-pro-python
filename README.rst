@@ -1,10 +1,10 @@
 .. |pypi-badge| image:: https://badge.fury.io/py/gocardless_pro.svg
     :target: https://pypi.python.org/pypi/gocardless_pro
 
-GoCardless Pro Python client library
+GoCardless Python client library
 ============================================
 
-A Python client for interacting with the GoCardless Pro API.
+A Python client for interacting with the GoCardless API.
 
 |pypi-badge|
 
@@ -62,10 +62,10 @@ Rate limit response headers can be read:
 
 .. code:: python
 
-    # Note these properties will be None until you make an API request with the client
-    client.rate_limit.limit
-    client.rate_limit.remaining
-    client.rate_limit.reset
+    # Note these values will be None until you make an API request with the client
+    client.rate_limit["ratelimit-limit"]
+    client.rate_limit["ratelimit-remaining"]
+    client.rate_limit["ratelimit-reset"]
 
 
 For full documentation, see our `API reference`_.

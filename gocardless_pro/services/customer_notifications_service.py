@@ -10,7 +10,7 @@ from .. import errors
 
 class CustomerNotificationsService(base_service.BaseService):
     """Service class that provides access to the customer_notifications
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.CustomerNotification

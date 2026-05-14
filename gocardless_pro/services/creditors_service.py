@@ -10,7 +10,7 @@ from .. import errors
 
 class CreditorsService(base_service.BaseService):
     """Service class that provides access to the creditors
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.Creditor

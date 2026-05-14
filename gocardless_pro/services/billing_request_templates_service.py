@@ -10,7 +10,7 @@ from .. import errors
 
 class BillingRequestTemplatesService(base_service.BaseService):
     """Service class that provides access to the billing_request_templates
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.BillingRequestTemplate

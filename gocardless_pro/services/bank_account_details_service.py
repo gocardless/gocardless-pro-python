@@ -10,7 +10,7 @@ from .. import errors
 
 class BankAccountDetailsService(base_service.BaseService):
     """Service class that provides access to the bank_account_details
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.BankAccountDetail

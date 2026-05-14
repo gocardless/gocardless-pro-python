@@ -10,7 +10,7 @@ from .. import errors
 
 class WebhooksService(base_service.BaseService):
     """Service class that provides access to the webhooks
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.Webhook

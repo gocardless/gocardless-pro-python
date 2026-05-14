@@ -10,7 +10,7 @@ from .. import errors
 
 class NegativeBalanceLimitsService(base_service.BaseService):
     """Service class that provides access to the negative_balance_limits
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.NegativeBalanceLimit

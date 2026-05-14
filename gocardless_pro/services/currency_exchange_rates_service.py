@@ -10,7 +10,7 @@ from .. import errors
 
 class CurrencyExchangeRatesService(base_service.BaseService):
     """Service class that provides access to the currency_exchange_rates
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.CurrencyExchangeRate

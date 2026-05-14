@@ -10,7 +10,7 @@ from .. import errors
 
 class PaymentAccountTransactionsService(base_service.BaseService):
     """Service class that provides access to the payment_account_transactions
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.PaymentAccountTransaction

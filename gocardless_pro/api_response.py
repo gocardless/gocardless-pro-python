@@ -4,7 +4,7 @@
 #
 
 class ApiResponse(object):
-    """Response from the {{ .Config.api_name }} API, providing access
+    """Response from the GoCardless API, providing access
     to the status code, headers, and body.
     """
 
@@ -21,5 +21,8 @@ class ApiResponse(object):
 
     @property
     def body(self):
+        # Handle 204 No Content and other empty responses
+        if not self._response.content:
+            return {}
         return self._response.json()
 
