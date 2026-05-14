@@ -10,7 +10,7 @@ from .. import errors
 
 class MandatePdfsService(base_service.BaseService):
     """Service class that provides access to the mandate_pdfs
-    endpoints of the GoCardless Pro API.
+    endpoints of the GoCardless API.
     """
 
     RESOURCE_CLASS = resources.MandatePdf

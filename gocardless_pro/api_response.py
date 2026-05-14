@@ -4,7 +4,7 @@
 #
 
 class ApiResponse(object):
-    """Response from the {{ .Config.api_name }} API, providing access
+    """Response from the GoCardless API, providing access
     to the status code, headers, and body.
     """
 

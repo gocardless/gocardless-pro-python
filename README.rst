@@ -1,10 +1,10 @@
 .. |pypi-badge| image:: https://badge.fury.io/py/gocardless_pro.svg
     :target: https://pypi.python.org/pypi/gocardless_pro
 
-GoCardless Pro Python client library
+GoCardless Python client library
 ============================================
 
-A Python client for interacting with the GoCardless Pro API.
+A Python client for interacting with the GoCardless API.
 
 |pypi-badge|
 

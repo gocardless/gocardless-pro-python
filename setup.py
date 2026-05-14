@@ -6,13 +6,13 @@ with codecs.open('README.rst', 'r', 'utf-8') as file:
 
 setup(
     name = 'gocardless_pro',
-    version = '3.3.0',
+    version = '3.4.0',
     packages = find_packages(exclude=['tests']),
     install_requires = ['requests>=2.6'],
     python_requires = '>=3.6',
     author = 'GoCardless',
     author_email = 'engineering@gocardless.com',
-    description = 'A client library for the GoCardless Pro API.',
+    description = 'A client library for the GoCardless API.',
     long_description = long_description,
     license = 'MIT',
     keywords = 'gocardless directdebit payments sepa bacs',

@@ -7,7 +7,7 @@ from . import services
 from .api_client import ApiClient
 
 class Client(object):
-    """Client for interacting with the GoCardless Pro API.
+    """Client for interacting with the GoCardless API.
 
     Instantiate a client object with your access token and environment, then
     use the resource methods to access the API.
@@ -23,7 +23,7 @@ class Client(object):
     Example:
       client = Client(access_token=ACCESS_TOKEN, environment='sandbox')
       for customer in client.customers.list():
-          print '{} {}'.format(customer.family_name, customer.given_name)
+          print('{} {}'.format(customer.family_name, customer.given_name))
     """
 
     def __init__(self, access_token=None, environment=None, base_url=None, raise_on_idempotency_conflict=False):
