@@ -60,7 +60,7 @@ class OutboundPaymentsService(base_service.BaseService):
         path = '/outbound_payments/withdrawal'
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)
@@ -88,7 +88,7 @@ class OutboundPaymentsService(base_service.BaseService):
           })
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)
@@ -98,7 +98,7 @@ class OutboundPaymentsService(base_service.BaseService):
         """Approve an outbound payment.
 
         Approves an outbound payment. Only outbound payments with the
-        “pending_approval” status can be approved.
+        "pending_approval" status can be approved.
 
         Args:
               identity (string): Unique identifier of the outbound payment.
@@ -113,7 +113,7 @@ class OutboundPaymentsService(base_service.BaseService):
           })
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)

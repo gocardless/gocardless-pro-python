@@ -113,7 +113,7 @@ class BlocksService(base_service.BaseService):
           })
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)
@@ -138,7 +138,7 @@ class BlocksService(base_service.BaseService):
           })
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)
@@ -162,7 +162,7 @@ class BlocksService(base_service.BaseService):
         path = '/blocks/block_by_ref'
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)

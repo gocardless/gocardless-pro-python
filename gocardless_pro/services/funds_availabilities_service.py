@@ -14,7 +14,7 @@ class FundsAvailabilitiesService(base_service.BaseService):
     """
 
     RESOURCE_CLASS = resources.FundsAvailability
-    RESOURCE_NAME = 'funds_availability'
+    RESOURCE_NAME = 'funds_availabilities'
 
 
     def check(self,identity,params=None, headers=None):

@@ -72,6 +72,71 @@ For full documentation, see our `API reference`_.
 
 .. _API reference: https://developer.gocardless.com/api-reference
 
+Handling webhooks
+`````````````````
+
+GoCardless supports webhooks, allowing you to receive real-time notifications when
+things happen in your account, so you can take automatic actions in response, for example:
+
+* When a customer cancels their mandate with the bank, suspend their club membership
+* When a payment fails due to lack of funds, mark their invoice as unpaid
+* When a customer's subscription generates a new payment, log it in their "past payments" list
+
+The client allows you to validate that a webhook you receive is genuinely from GoCardless,
+and to parse it into Event objects which are easy to work with:
+
+.. code:: python
+
+    import gocardless_pro
+
+    # When you create a webhook endpoint, you can specify a secret. When GoCardless sends
+    # you a webhook, it will sign the body using that secret. Since only you and GoCardless
+    # know the secret, you can check the signature and ensure that the webhook is truly
+    # from GoCardless.
+    webhook_endpoint_secret = os.environ['GOCARDLESS_WEBHOOK_ENDPOINT_SECRET']
+
+    # In your webhook handler (e.g. Flask route)
+    @app.route('/webhooks', methods=['POST'])
+    def handle_webhook():
+        request_body = request.data
+        signature_header = request.headers.get('Webhook-Signature')
+
+        try:
+            events = gocardless_pro.Webhook.parse(
+                request_body,
+                signature_header,
+                webhook_endpoint_secret
+            )
+
+            for event in events:
+                print(event.id)
+
+            return '', 200
+        except gocardless_pro.errors.InvalidSignatureError:
+            # The webhook doesn't appear to be genuinely from GoCardless
+            return '', 498
+
+Accessing the webhook ID
+''''''''''''''''''''''''
+
+If you need to access the webhook ID for debugging purposes, you can use ``parse_with_meta`` instead:
+
+.. code:: python
+
+    result = gocardless_pro.Webhook.parse_with_meta(
+        request_body,
+        signature_header,
+        webhook_endpoint_secret
+    )
+    events = result.events
+    webhook_id = result.webhook_id  # e.g. "WB123" - useful for debugging
+
+Note: The webhook ID is intended for debugging and logging purposes only. It should not be
+used for deduplication - instead, use the event IDs to deduplicate, as each event has a unique
+ID that remains consistent if the same event is sent multiple times.
+
+For more details on working with webhooks, see our `"Getting Started" guide <https://developer.gocardless.com/getting-started/api/introduction/?lang=python>`_.
+
 
 Available resources
 ```````````````````
