@@ -53,7 +53,7 @@ jobs:
       - name: Check if version tag exists
         id: check
         run: |
-          VERSION=$(python -c "import re; print(re.search(r\"version\s*=\s*['\"']([^'\"']+)['\"']\", open('setup.py').read()).group(1))")
+          VERSION=$(python -c "import re; print(re.search(r\"version\s*=\s*'([^']+)'\", open('setup.py').read()).group(1))")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           if git rev-parse "v${VERSION}" >/dev/null 2>&1; then
             echo "Tag v${VERSION} already exists, skipping publish"
