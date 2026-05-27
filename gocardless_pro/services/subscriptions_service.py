@@ -206,7 +206,7 @@ class SubscriptionsService(base_service.BaseService):
           })
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)
@@ -246,7 +246,7 @@ class SubscriptionsService(base_service.BaseService):
           })
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)
@@ -275,7 +275,7 @@ class SubscriptionsService(base_service.BaseService):
           })
         
         if params is not None:
-            params = {self._envelope_key(): params}
+            params = {'data': params}
         response = self._perform_request('POST', path, params, headers,
                                          retry_failures=False)
         return self._resource_for(response)
