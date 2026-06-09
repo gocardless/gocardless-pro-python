@@ -268,7 +268,7 @@ class BillingRequestsService(base_service.BaseService):
         authorise it.
         Currently, the customer can only be notified by email.
         
-        This endpoint is currently supported only for Instant Bank Pay Billing
+        This endpoint is currently supported only for Pay by Bank Billing
         Requests.
 
         Args:

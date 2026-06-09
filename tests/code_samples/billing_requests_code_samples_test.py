@@ -301,8 +301,60 @@ def test_billing_requests_notify_code_sample():
 
 
 
+@responses.activate
+def test_billing_requests_fallback_code_sample():
+    # Convert :param placeholders to regex wildcards for flexible matching
+    stub_url = '/billing_requests/:identity/actions/fallback'
+    url_pattern = re.compile('https://api.gocardless.com' + re.sub(r':[\w]+', r'[^/]+', stub_url))
+    # Mock response - repeat multiple times to handle code samples with multiple API calls
+    response_body = { 'billing_requests': {} }
+    for _ in range(5):
+        responses.add(
+            'POST',
+            url_pattern,
+            json=response_body,
+            status=200
+        )
+
+    client = gocardless_pro.Client(access_token='SECRET_TOKEN', environment='live')
+
+    # Suppress stdout from code samples that use print
+    old_stdout = sys.stdout
+    sys.stdout = StringIO()
+    try:
+        client.billing_requests.fallback("BR123")
+    finally:
+        sys.stdout = old_stdout
 
 
+
+
+@responses.activate
+def test_billing_requests_choose_currency_code_sample():
+    # Convert :param placeholders to regex wildcards for flexible matching
+    stub_url = '/billing_requests/:identity/actions/choose_currency'
+    url_pattern = re.compile('https://api.gocardless.com' + re.sub(r':[\w]+', r'[^/]+', stub_url))
+    # Mock response - repeat multiple times to handle code samples with multiple API calls
+    response_body = { 'billing_requests': {} }
+    for _ in range(5):
+        responses.add(
+            'POST',
+            url_pattern,
+            json=response_body,
+            status=200
+        )
+
+    client = gocardless_pro.Client(access_token='SECRET_TOKEN', environment='live')
+
+    # Suppress stdout from code samples that use print
+    old_stdout = sys.stdout
+    sys.stdout = StringIO()
+    try:
+        client.billing_requests.choose_currency("BR123", params={
+          "currency": "GBP"
+        })
+    finally:
+        sys.stdout = old_stdout
 
 
 
