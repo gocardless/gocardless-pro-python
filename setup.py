@@ -6,7 +6,7 @@ with codecs.open('README.rst', 'r', 'utf-8') as file:
 
 setup(
     name = 'gocardless_pro',
-    version = '3.4.1',
+    version = '3.5.0',
     packages = find_packages(exclude=['tests']),
     install_requires = ['requests>=2.6'],
     python_requires = '>=3.6',
