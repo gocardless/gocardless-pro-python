@@ -32,6 +32,7 @@ def test_mandates_create():
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
+    assert response.mandate_type == body.get('mandate_type')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
     assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
@@ -108,6 +109,7 @@ def test_mandates_list():
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
     assert [r.funds_settlement for r in response.records] == [b.get('funds_settlement') for b in body]
     assert [r.id for r in response.records] == [b.get('id') for b in body]
+    assert [r.mandate_type for r in response.records] == [b.get('mandate_type') for b in body]
     assert [r.metadata for r in response.records] == [b.get('metadata') for b in body]
     assert [r.next_possible_charge_date for r in response.records] == [b.get('next_possible_charge_date') for b in body]
     assert [r.next_possible_standard_ach_charge_date for r in response.records] == [b.get('next_possible_standard_ach_charge_date') for b in body]
@@ -180,6 +182,7 @@ def test_mandates_get():
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
+    assert response.mandate_type == body.get('mandate_type')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
     assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
@@ -235,6 +238,7 @@ def test_mandates_update():
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
+    assert response.mandate_type == body.get('mandate_type')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
     assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
@@ -290,6 +294,7 @@ def test_mandates_cancel():
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
+    assert response.mandate_type == body.get('mandate_type')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
     assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')
@@ -340,6 +345,7 @@ def test_mandates_reinstate():
     assert response.created_at == body.get('created_at')
     assert response.funds_settlement == body.get('funds_settlement')
     assert response.id == body.get('id')
+    assert response.mandate_type == body.get('mandate_type')
     assert response.metadata == body.get('metadata')
     assert response.next_possible_charge_date == body.get('next_possible_charge_date')
     assert response.next_possible_standard_ach_charge_date == body.get('next_possible_standard_ach_charge_date')

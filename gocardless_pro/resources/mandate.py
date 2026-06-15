@@ -52,6 +52,11 @@ class Mandate(object):
   
 
     @property
+    def mandate_type(self):
+        return self.attributes.get('mandate_type')
+  
+
+    @property
     def metadata(self):
         return self.attributes.get('metadata')
   
@@ -158,6 +163,8 @@ class Mandate(object):
         def new_mandate(self):
             return self.attributes.get('new_mandate')
     
+  
+
   
 
   
