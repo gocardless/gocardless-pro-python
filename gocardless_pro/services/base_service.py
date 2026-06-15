@@ -66,7 +66,13 @@ class BaseService(object):
         api_response = ApiResponse(response)
 
         body = api_response.body
-        data = body.get(self._envelope_key()) or body.get("data") or body
+        envelope_key = self._envelope_key()
+        if envelope_key in body:
+            data = body[envelope_key]
+        elif "data" in body:
+            data = body["data"]
+        else:
+            data = body
         klass = type(self).RESOURCE_CLASS
         if isinstance(data, dict):
             return klass(data, api_response)
