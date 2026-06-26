@@ -32,10 +32,12 @@ def test_verification_details_create():
     assert response.address_line3 == body.get('address_line3')
     assert response.city == body.get('city')
     assert response.company_number == body.get('company_number')
+    assert response.country_code == body.get('country_code')
     assert response.description == body.get('description')
     assert response.directors == body.get('directors')
     assert response.name == body.get('name')
     assert response.postal_code == body.get('postal_code')
+    assert response.region == body.get('region')
     assert response.links.creditor == body.get('links')['creditor']
 
 @responses.activate
@@ -78,10 +80,12 @@ def test_verification_details_list():
     assert [r.address_line3 for r in response.records] == [b.get('address_line3') for b in body]
     assert [r.city for r in response.records] == [b.get('city') for b in body]
     assert [r.company_number for r in response.records] == [b.get('company_number') for b in body]
+    assert [r.country_code for r in response.records] == [b.get('country_code') for b in body]
     assert [r.description for r in response.records] == [b.get('description') for b in body]
     assert [r.directors for r in response.records] == [b.get('directors') for b in body]
     assert [r.name for r in response.records] == [b.get('name') for b in body]
     assert [r.postal_code for r in response.records] == [b.get('postal_code') for b in body]
+    assert [r.region for r in response.records] == [b.get('region') for b in body]
 
 @responses.activate
 def test_timeout_verification_details_list_retries():
