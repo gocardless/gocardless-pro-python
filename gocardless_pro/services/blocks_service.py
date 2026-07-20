@@ -71,8 +71,9 @@ class BlocksService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List multiple blocks.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        blocks.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your blocks.
 
         Args:
               params (dict, optional): Query string parameters.

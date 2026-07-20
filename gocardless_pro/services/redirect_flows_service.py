@@ -72,10 +72,14 @@ class RedirectFlowsService(base_service.BaseService):
     def complete(self,identity,params=None, headers=None):
         """Complete a redirect flow.
 
-        This creates a [customer](#core-endpoints-customers), [customer bank
-        account](#core-endpoints-customer-bank-accounts), and
-        [mandate](#core-endpoints-mandates) using the details supplied by your
-        customer and returns the ID of the created mandate.
+        This creates a customer
+        (https://developer.gocardless.com/api-reference/#core-endpoints-customers),
+        customer bank account
+        (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts),
+        and mandate
+        (https://developer.gocardless.com/api-reference/#core-endpoints-mandates)
+        using the details supplied by your customer and returns the ID of the
+        created mandate.
         
         This will return a `redirect_flow_incomplete` error if your customer
         has not yet been redirected back to your site, and a

@@ -83,9 +83,9 @@ class PayerAuthorisationsService(base_service.BaseService):
         incomplete_fields means that the resource is valid. This endpoint has
         been designed this way so you do not need to save any payer data on
         your servers or the browser while still being able to implement a
-        progressive solution, such a multi-step form. <p class="notice"> Note
-        that in order to update the `metadata` attribute values it must be sent
-        completely as it overrides the previously existing values. </p>
+        progressive solution, such a multi-step form.  Note that in order to
+        update the `metadata` attribute values it must be sent completely as it
+        overrides the previously existing values. 
 
         Args:
               identity (string): Unique identifier, beginning with "PA".
@@ -143,13 +143,11 @@ class PayerAuthorisationsService(base_service.BaseService):
         A Payer Authorisation cannot be confirmed if it hasn't been submitted
         yet.
         
-        <p class="notice">
           The main use of the confirm endpoint is to enable integrators to
         acknowledge the end of the setup process.
-          They might want to make the payers go through some other steps after
+        They might want to make the payers go through some other steps after
         they go through our flow or make them go through the necessary
         verification mechanism (upcoming feature).
-        </p>
 
         Args:
               identity (string): Unique identifier, beginning with "PA".

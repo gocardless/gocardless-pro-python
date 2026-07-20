@@ -48,8 +48,9 @@ class CustomersService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List customers.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        customers.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your customers.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -130,8 +131,8 @@ class CustomersService(base_service.BaseService):
         removed customer by
         ID.
         
-        <p class="restricted-notice"><strong>The action of removing a customer
-        cannot be reversed, so please use with care.</strong></p>
+        The action of removing a customer cannot be reversed, so please use
+        with care.
 
         Args:
               identity (string): Unique identifier, beginning with "CU".

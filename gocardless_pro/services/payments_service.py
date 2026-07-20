@@ -20,13 +20,13 @@ class PaymentsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a payment.
 
-        <a name="mandate_is_inactive"></a>Creates a new payment object.
+        Creates a new payment object.
         
-        This fails with a `mandate_is_inactive` error if the linked
-        [mandate](#core-endpoints-mandates) is cancelled or has failed.
-        Payments can be created against mandates with status of:
-        `pending_customer_approval`, `pending_submission`, `submitted`, and
-        `active`.
+        This fails with a `mandate_is_inactive` error if the linked mandate
+        (https://developer.gocardless.com/api-reference/#core-endpoints-mandates)
+        is cancelled or has failed. Payments can be created against mandates
+        with status of: `pending_customer_approval`, `pending_submission`,
+        `submitted`, and `active`.
 
         Args:
               params (dict, optional): Request body.
@@ -54,8 +54,9 @@ class PaymentsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List payments.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        payments.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your payments.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -158,12 +159,12 @@ class PaymentsService(base_service.BaseService):
     def retry(self,identity,params=None, headers=None):
         """Retry a payment.
 
-        <a name="retry_failed"></a>Retries a failed payment if the underlying
-        mandate is active. You will receive a `resubmission_requested` webhook,
-        but after that retrying the payment follows the same process as its
-        initial creation, so you will receive a `submitted` webhook, followed
-        by a `confirmed` or `failed` event. Any metadata supplied to this
-        endpoint will be stored against the payment submission event it causes.
+        Retries a failed payment if the underlying mandate is active. You will
+        receive a `resubmission_requested` webhook, but after that retrying the
+        payment follows the same process as its initial creation, so you will
+        receive a `submitted` webhook, followed by a `confirmed` or `failed`
+        event. Any metadata supplied to this endpoint will be stored against
+        the payment submission event it causes.
         
         This will return a `retry_failed` error if the payment has not failed.
         

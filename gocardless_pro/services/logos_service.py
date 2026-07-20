@@ -27,7 +27,8 @@ class LogosService(base_service.BaseService):
         of 300px by 40px. For more guidance on how to upload logos that will
         look
         great across your customer payment page and notification emails see
-        [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
+        here
+        (https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
 
         Args:
               params (dict, optional): Request body.

@@ -20,8 +20,9 @@ class WebhooksService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List webhooks.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        webhooks.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your webhooks.
 
         Args:
               params (dict, optional): Query string parameters.

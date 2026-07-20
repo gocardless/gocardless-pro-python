@@ -20,13 +20,12 @@ class PayoutItemsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """Get all payout items in a single payout.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        items in the payout.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of items in the payout.
         
-        <strong>This endpoint only serves requests for payouts created in the
-        last 6 months. Requests for older payouts will return an HTTP status
-        <code>410 Gone</code>.</strong>
-        
+        This endpoint only serves requests for payouts created in the last 6
+        months. Requests for older payouts will return an HTTP status 410 Gone.
 
         Args:
               params (dict, optional): Query string parameters.

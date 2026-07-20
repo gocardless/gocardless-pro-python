@@ -71,8 +71,9 @@ class OutboundPaymentImportsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List outbound payment imports.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        outbound payment imports.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your outbound payment imports.
 
         Args:
               params (dict, optional): Query string parameters.

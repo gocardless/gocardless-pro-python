@@ -20,8 +20,9 @@ class PayoutsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List payouts.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        payouts.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your payouts.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -48,8 +49,8 @@ class PayoutsService(base_service.BaseService):
         """Get a single payout.
 
         Retrieves the details of a single payout. For an example of how to
-        reconcile the transactions in a payout, see [this
-        guide](#events-reconciling-payouts-with-events).
+        reconcile the transactions in a payout, see this guide
+        (https://developer.gocardless.com/api-reference/#events-reconciling-payouts-with-events).
 
         Args:
               identity (string): Unique identifier, beginning with "PO".

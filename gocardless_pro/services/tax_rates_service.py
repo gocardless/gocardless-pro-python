@@ -20,8 +20,9 @@ class TaxRatesService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List tax rates.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
-        tax rates.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of all tax rates.
 
         Args:
               params (dict, optional): Query string parameters.

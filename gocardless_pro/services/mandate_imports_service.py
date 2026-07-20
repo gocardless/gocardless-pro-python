@@ -25,7 +25,9 @@ class MandateImportsService(base_service.BaseService):
         this endpoint merely signals the start of the import process. Once
         you've finished
         adding entries to an import, you should
-        [submit](#mandate-imports-submit-a-mandate-import) it.
+        submit
+        (https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import)
+        it.
 
         Args:
               params (dict, optional): Request body.

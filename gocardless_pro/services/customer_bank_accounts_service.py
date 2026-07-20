@@ -24,15 +24,18 @@ class CustomerBankAccountsService(base_service.BaseService):
         
         There are three different ways to supply bank account details:
         
-        - [Local details](#appendix-local-bank-details)
-        
-        - IBAN
-        
-        - [Customer Bank Account
-        Tokens](#javascript-flow-create-a-customer-bank-account-token)
+        - 
+        Local details
+        (https://developer.gocardless.com/api-reference/#appendix-local-bank-details)
+        - 
+        IBAN
+        - 
+        Customer Bank Account Tokens
+        (https://developer.gocardless.com/api-reference/#javascript-flow-create-a-customer-bank-account-token)
         
         For more information on the different fields required in each country,
-        see [local bank details](#appendix-local-bank-details).
+        see local bank details
+        (https://developer.gocardless.com/api-reference/#appendix-local-bank-details).
 
         Args:
               params (dict, optional): Request body.
@@ -60,8 +63,9 @@ class CustomerBankAccountsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List customer bank accounts.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        bank accounts.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your bank accounts.
 
         Args:
               params (dict, optional): Query string parameters.

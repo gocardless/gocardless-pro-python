@@ -30,7 +30,7 @@ class SchemeIdentifiersService(base_service.BaseService):
         to become active. On other schemes, including SEPA,
         this happens instantly.
         
-        #### Scheme identifier name validations
+        Scheme identifier name validations
         
         The `name` field of a scheme identifier can contain alphanumeric
         characters, spaces and
@@ -39,8 +39,8 @@ class SchemeIdentifiersService(base_service.BaseService):
         Its maximum length and the special characters it supports depend on the
         scheme:
         
-        | __scheme__        | __maximum length__ | __special characters
-        allowed__                      |
+        | scheme        | maximum length | special characters allowed          
+                   |
         | :---------------- | :----------------- |
         :-------------------------------------------------- |
         | `bacs`            | 18 characters      | `/` `.` `&` `-`             
@@ -59,7 +59,6 @@ class SchemeIdentifiersService(base_service.BaseService):
         You should ensure that the name you set matches the legal name or the
         trading name of
         the creditor, otherwise, there is an increased risk of chargeback.
-        
 
         Args:
               params (dict, optional): Request body.
@@ -87,8 +86,9 @@ class SchemeIdentifiersService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List scheme identifiers.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        scheme identifiers.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your scheme identifiers.
 
         Args:
               params (dict, optional): Query string parameters.

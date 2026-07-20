@@ -77,6 +77,11 @@ class CustomerBankAccount(object):
   
 
     @property
+    def payer_name_verification_result(self):
+        return self.attributes.get('payer_name_verification_result')
+  
+
+    @property
     def trusted_recipient(self):
         return self.attributes.get('trusted_recipient')
   
@@ -113,6 +118,8 @@ class CustomerBankAccount(object):
         def customer(self):
             return self.attributes.get('customer')
     
+  
+
   
 
   
