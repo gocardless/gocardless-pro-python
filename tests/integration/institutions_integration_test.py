@@ -37,6 +37,7 @@ def test_institutions_list():
     assert [r.id for r in response.records] == [b.get('id') for b in body]
     assert [r.logo_url for r in response.records] == [b.get('logo_url') for b in body]
     assert [r.name for r in response.records] == [b.get('name') for b in body]
+    assert [r.roles for r in response.records] == [b.get('roles') for b in body]
     assert [r.status for r in response.records] == [b.get('status') for b in body]
 
 @responses.activate
@@ -107,6 +108,7 @@ def test_institutions_list_for_billing_request():
     assert [r.id for r in response.records] == [b.get('id') for b in body]
     assert [r.logo_url for r in response.records] == [b.get('logo_url') for b in body]
     assert [r.name for r in response.records] == [b.get('name') for b in body]
+    assert [r.roles for r in response.records] == [b.get('roles') for b in body]
     assert [r.status for r in response.records] == [b.get('status') for b in body]
 
 def test_timeout_institutions_list_for_billing_request_doesnt_retry():
