@@ -20,9 +20,8 @@ class BillingRequestsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a Billing Request.
 
-        Important: All properties associated with `subscription_request` and
-        `instalment_schedule_request` are only supported for ACH and PAD
-        schemes.
+        Important: All properties associated with subscription_request and
+        instalment_schedule_request are only supported for ACH and PAD schemes.
 
         Args:
               params (dict, optional): Request body.
