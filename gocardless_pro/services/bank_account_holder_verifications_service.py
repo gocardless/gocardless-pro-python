@@ -21,9 +21,9 @@ class BankAccountHolderVerificationsService(base_service.BaseService):
         """Create a bank account holder verification..
 
         Verify the account holder of the bank account. A complete verification
-        can be attached when creating an outbound payment. This endpoint allows
-        partner merchants to create Confirmation of Payee checks on customer
-        bank accounts before sending outbound payments.
+        can be attached when creating an outbound payment.
+        This endpoint allows partner merchants to create Confirmation of Payee
+        checks on customer bank accounts before sending outbound payments.
 
         Args:
               params (dict, optional): Request body.
