@@ -24,11 +24,15 @@ class BankDetailsLookupsService(base_service.BaseService):
         and
         reachability check are performed.
         
-        For UK-based bank accounts, where an account holder name is provided
-        (and an account number, a sort code or an iban
-        are already present), we verify that the account holder name and bank
-        account number match the details held by
-        the relevant bank.
+        For UK or Eurozone-based bank accounts, where an account holder name is
+        provided
+        (and an account number, a sort code or an IBAN are already present), we
+        verify that
+        the account holder name and bank account number match the details held
+        by the relevant bank.
+        If there is no match, the endpoint will return a 422 - validation error
+        on account_holder_name:
+        "Account holder name does not match bank account details provided".
         
         If your request returns an error
         (https://developer.gocardless.com/api-reference/#api-usage-errors) or
