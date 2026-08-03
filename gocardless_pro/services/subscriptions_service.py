@@ -48,10 +48,11 @@ class SubscriptionsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List subscriptions.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        subscriptions. Please note if the subscriptions are related to
-        customers who have been removed, they will not be shown in the
-        response.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your subscriptions. Please note if the subscriptions are
+        related to customers who have been removed, they will not be shown in
+        the response.
 
         Args:
               params (dict, optional): Query string parameters.
@@ -104,29 +105,29 @@ class SubscriptionsService(base_service.BaseService):
         
         This fails with:
         
-        - `validation_failed` if invalid data is provided when attempting to
+        - 
+        `validation_failed` if invalid data is provided when attempting to
         update a subscription.
-        
-        - `subscription_not_active` if the subscription is no longer active.
-        
-        - `subscription_already_ended` if the subscription has taken all
+        - 
+        `subscription_not_active` if the subscription is no longer active.
+        - 
+        `subscription_already_ended` if the subscription has taken all
         payments.
-        
-        - `mandate_payments_require_approval` if the amount is being changed
-        and the mandate requires approval.
-        
-        - `number_of_subscription_amendments_exceeded` error if the
-        subscription amount has already been changed 10 times.
-        
-        - `forbidden` if the amount is being changed, and the subscription was
+        - 
+        `mandate_payments_require_approval` if the amount is being changed and
+        the mandate requires approval.
+        - 
+        `number_of_subscription_amendments_exceeded` error if the subscription
+        amount has already been changed 10 times.
+        - 
+        `forbidden` if the amount is being changed, and the subscription was
         created by an app and you are not authenticated as that app, or if the
         subscription was not created by an app and you are authenticated as an
         app
-        
-        - `resource_created_by_another_app` if the app fee is being changed,
-        and the subscription was created by an app other than the app you are
+        - 
+        `resource_created_by_another_app` if the app fee is being changed, and
+        the subscription was created by an app other than the app you are
         authenticated as
-        
 
         Args:
               identity (string): Unique identifier, beginning with "SB".
@@ -160,7 +161,9 @@ class SubscriptionsService(base_service.BaseService):
         the subscription is already paused for a number of cycles.
         
         When `pause_cycles` is omitted the subscription is paused until the
-        [resume endpoint](#subscriptions-resume-a-subscription) is called.
+        resume endpoint
+        (https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription)
+        is called.
         If the subscription is collecting a fixed number of payments,
         `end_date` will be set to `null`.
         When paused indefinitely, `upcoming_payments` will be empty.
@@ -174,23 +177,24 @@ class SubscriptionsService(base_service.BaseService):
         
         This fails with:
         
-        - `forbidden` if the subscription was created by an app and you are not
+        - 
+        `forbidden` if the subscription was created by an app and you are not
         authenticated as that app, or if the subscription was not created by an
         app and you are authenticated as an app
-        
-        - `validation_failed` if invalid data is provided when attempting to
+        - 
+        `validation_failed` if invalid data is provided when attempting to
         pause a subscription.
-        
-        - `subscription_paused_cannot_update_cycles` if the subscription is
+        - 
+        `subscription_paused_cannot_update_cycles` if the subscription is
         already paused for a number of cycles and the request provides a value
         for `pause_cycle`.
-        
-        - `subscription_cannot_be_paused` if the subscription cannot be paused.
-        
-        - `subscription_already_ended` if the subscription has taken all
+        - 
+        `subscription_cannot_be_paused` if the subscription cannot be paused.
+        - 
+        `subscription_already_ended` if the subscription has taken all
         payments.
-        
-        - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value
+        - 
+        `pause_cycles_must_be_greater_than_or_equal_to` if the provided value
         for `pause_cycles` cannot be satisfied.
 
         Args:
@@ -223,15 +227,15 @@ class SubscriptionsService(base_service.BaseService):
         
         This fails with:
         
-        - `forbidden` if the subscription was created by an app and you are not
+        - 
+        `forbidden` if the subscription was created by an app and you are not
         authenticated as that app, or if the subscription was not created by an
         app and you are authenticated as an app
-        
-        - `validation_failed` if invalid data is provided when attempting to
+        - 
+        `validation_failed` if invalid data is provided when attempting to
         resume a subscription.
-        
-        - `subscription_not_paused` if the subscription is not paused.
-        
+        - 
+        `subscription_not_paused` if the subscription is not paused.
 
         Args:
               identity (string): Unique identifier, beginning with "SB".

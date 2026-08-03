@@ -23,7 +23,7 @@ class PaymentAccountTransactionsService(base_service.BaseService):
         Retrieves the details of an existing payment account transaction.
 
         Args:
-              identity (string): The unique ID of the [bank account](#core-endpoints-creditor-bank-accounts) which happens to be the payment account.
+              identity (string): The unique ID of the bank account (https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts) which happens to be the payment account.
               params (dict, optional): Query string parameters.
 
         Returns:
@@ -46,7 +46,7 @@ class PaymentAccountTransactionsService(base_service.BaseService):
         List transactions for a given payment account.
 
         Args:
-              identity (string): The unique ID of the [bank account](#core-endpoints-creditor-bank-accounts) which happens to be the payment account.
+              identity (string): The unique ID of the bank account (https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts) which happens to be the payment account.
               params (dict, optional): Query string parameters.
 
         Returns:

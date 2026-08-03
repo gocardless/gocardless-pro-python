@@ -24,13 +24,14 @@ class MandatePdfsService(base_service.BaseService):
         
         Customer and bank account details can be left blank (for a blank
         mandate), provided manually, or inferred from the ID of an existing
-        [mandate](#core-endpoints-mandates).
+        mandate
+        (https://developer.gocardless.com/api-reference/#core-endpoints-mandates).
         
         By default, we'll generate PDF mandates in English.
         
         To generate a PDF mandate in another language, set the
         `Accept-Language` header when creating the PDF mandate to the relevant
-        [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
         language code supported for the scheme.
         
         | Scheme           | Supported languages                               

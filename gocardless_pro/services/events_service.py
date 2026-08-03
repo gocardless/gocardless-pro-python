@@ -20,8 +20,14 @@ class EventsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List events.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        events.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your events.
+        
+        Important: This endpoint will no longer return events older than 18
+        months, including when filtering by resource. This takes effect no
+        sooner than 1 August 2026 in sandbox environments, and no sooner than 1
+        October 2026 in live environments.
 
         Args:
               params (dict, optional): Query string parameters.

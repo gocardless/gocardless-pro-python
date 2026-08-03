@@ -44,7 +44,7 @@ def test_customer_notifications_handle_code_sample():
     old_stdout = sys.stdout
     sys.stdout = StringIO()
     try:
-        client.customer_notifications.handle("PCN123")
+        client.customer_notifications.handle("EV1D18JEXAMPLE")
     finally:
         sys.stdout = old_stdout
 

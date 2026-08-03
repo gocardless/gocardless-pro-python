@@ -22,19 +22,17 @@ class RefundsService(base_service.BaseService):
 
         Creates a new refund object.
         
-        This fails with:<a name="total_amount_confirmation_invalid"></a><a
-        name="number_of_refunds_exceeded"></a><a
-        name="available_refund_amount_insufficient"></a>
+        This fails with:
         
-        - `total_amount_confirmation_invalid` if the confirmation amount
-        doesn't match the total amount refunded for the payment. This safeguard
-        is there to prevent two processes from creating refunds without
-        awareness of each other.
-        
-        - `available_refund_amount_insufficient` if the creditor does not have
+        - 
+        `total_amount_confirmation_invalid` if the confirmation amount doesn't
+        match the total amount refunded for the payment. This safeguard is
+        there to prevent two processes from creating refunds without awareness
+        of each other.
+        - 
+        `available_refund_amount_insufficient` if the creditor does not have
         sufficient balance for refunds available to cover the cost of the
         requested refund.
-        
 
         Args:
               params (dict, optional): Request body.
@@ -62,8 +60,9 @@ class RefundsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List refunds.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        refunds.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your refunds.
 
         Args:
               params (dict, optional): Query string parameters.

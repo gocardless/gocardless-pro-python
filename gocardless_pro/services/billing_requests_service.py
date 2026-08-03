@@ -20,9 +20,8 @@ class BillingRequestsService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Create a Billing Request.
 
-        <p class="notice"><strong>Important</strong>: All properties associated
-        with `subscription_request` and `instalment_schedule_request` are only
-        supported for ACH and PAD schemes.</p>
+        Important: All properties associated with subscription_request and
+        instalment_schedule_request are only supported for ACH and PAD schemes.
 
         Args:
               params (dict, optional): Request body.
@@ -50,8 +49,7 @@ class BillingRequestsService(base_service.BaseService):
     def collect_customer_details(self,identity,params=None, headers=None):
         """Collect customer details.
 
-        If the billing request has a pending
-        <code>collect_customer_details</code>
+        If the billing request has a pending collect_customer_details
         action, this endpoint can be used to collect the details in order to
         complete it.
         
@@ -85,7 +83,7 @@ class BillingRequestsService(base_service.BaseService):
         """Collect bank account details.
 
         If the billing request has a pending
-        <code>collect_bank_account</code> action, this endpoint can be
+        collect_bank_account action, this endpoint can be
         used to collect the details in order to complete it.
         
         The endpoint takes the same payload as Customer Bank Accounts, but
@@ -98,7 +96,7 @@ class BillingRequestsService(base_service.BaseService):
         included in the payload along with the
         country_code.
         
-        _ACH scheme_ For compliance reasons, an extra validation step is done
+        ACH scheme For compliance reasons, an extra validation step is done
         using
         a third-party provider to make sure the customer's bank account can
         accept
@@ -107,11 +105,15 @@ class BillingRequestsService(base_service.BaseService):
         customer is requested to adjust the account number/routing number and
         succeed in this check to continue with the flow.
         
-        _BACS scheme_ [Payer Name
-        Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
-        is enabled by default for UK based bank accounts, meaning we verify the
-        account holder name and bank account
-        number match the details held by the relevant bank.
+        BACS and SEPA schemes Payer Name Verification
+        (https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+        is enabled by default for UK and Eurozone based bank accounts, meaning
+        we verify the account holder name and bank account number/IBAN match
+        the details held by the relevant bank. If there is no match, the
+        endpoint will return a 422 - validation error on account_holder_name:
+        "Account holder name does not match bank account details provided".
+        Testing instructions are here
+        (https://developer.gocardless.com/developer-tools/scenario-simulators/#payer_name_verification)
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -214,8 +216,9 @@ class BillingRequestsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List Billing Requests.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        billing requests.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your billing requests.
 
         Args:
               params (dict, optional): Query string parameters.

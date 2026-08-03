@@ -20,8 +20,9 @@ class BillingRequestTemplatesService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List Billing Request Templates.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        Billing Request Templates.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your Billing Request Templates.
 
         Args:
               params (dict, optional): Query string parameters.

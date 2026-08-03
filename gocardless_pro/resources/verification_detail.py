@@ -42,6 +42,11 @@ class VerificationDetail(object):
   
 
     @property
+    def country_code(self):
+        return self.attributes.get('country_code')
+  
+
+    @property
     def description(self):
         return self.attributes.get('description')
   
@@ -66,6 +71,13 @@ class VerificationDetail(object):
         return self.attributes.get('postal_code')
   
 
+    @property
+    def region(self):
+        return self.attributes.get('region')
+  
+
+
+  
 
   
 
@@ -92,6 +104,8 @@ class VerificationDetail(object):
         def creditor(self):
             return self.attributes.get('creditor')
     
+  
+
   
 
   

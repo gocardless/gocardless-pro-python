@@ -48,8 +48,9 @@ class CreditorsService(base_service.BaseService):
     def list(self,params=None, headers=None):
         """List creditors.
 
-        Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-        creditors.
+        Returns a cursor-paginated
+        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        list of your creditors.
 
         Args:
               params (dict, optional): Query string parameters.

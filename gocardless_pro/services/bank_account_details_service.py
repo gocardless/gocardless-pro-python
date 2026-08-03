@@ -24,8 +24,8 @@ class BankAccountDetailsService(base_service.BaseService):
         format described in RFC 7516.
         
         You must specify a `Gc-Key-Id` header when using this endpoint. See
-        [Public Key
-        Setup](https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup)
+        Public Key Setup
+        (https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup)
         for more details.
 
         Args:

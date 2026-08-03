@@ -20,8 +20,9 @@ class MandateImportEntriesService(base_service.BaseService):
     def create(self,params=None, headers=None):
         """Add a mandate import entry.
 
-        For an existing [mandate import](#core-endpoints-mandate-imports), this
-        endpoint can
+        For an existing mandate import
+        (https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports),
+        this endpoint can
         be used to add individual mandates to be imported into GoCardless.
         
         You can add no more than 30,000 rows to a single mandate import.
@@ -55,7 +56,6 @@ class MandateImportEntriesService(base_service.BaseService):
         in your system (using the `record_identifier` that you provided when
         creating the
         mandate import).
-        
 
         Args:
               params (dict, optional): Query string parameters.

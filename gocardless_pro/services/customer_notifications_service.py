@@ -28,7 +28,6 @@ class CustomerNotificationsService(base_service.BaseService):
         this endpoint will return an `already_actioned` error and you should
         not take
         further action. This endpoint takes no additional parameters.
-        
 
         Args:
               identity (string): The id of the notification.
