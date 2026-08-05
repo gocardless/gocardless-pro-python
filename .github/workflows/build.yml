@@ -1,5 +1,9 @@
 name: build & publish
-on: push
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 permissions:
   contents: write  # Required for creating releases and tags
