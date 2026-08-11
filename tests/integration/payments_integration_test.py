@@ -29,6 +29,7 @@ def test_payments_create():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.amount == body.get('amount')
     assert response.amount_refunded == body.get('amount_refunded')
+    assert response.app_fee == body.get('app_fee')
     assert response.charge_date == body.get('charge_date')
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
@@ -104,6 +105,7 @@ def test_payments_list():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert [r.amount for r in response.records] == [b.get('amount') for b in body]
     assert [r.amount_refunded for r in response.records] == [b.get('amount_refunded') for b in body]
+    assert [r.app_fee for r in response.records] == [b.get('app_fee') for b in body]
     assert [r.charge_date for r in response.records] == [b.get('charge_date') for b in body]
     assert [r.created_at for r in response.records] == [b.get('created_at') for b in body]
     assert [r.currency for r in response.records] == [b.get('currency') for b in body]
@@ -176,6 +178,7 @@ def test_payments_get():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert response.amount == body.get('amount')
     assert response.amount_refunded == body.get('amount_refunded')
+    assert response.app_fee == body.get('app_fee')
     assert response.charge_date == body.get('charge_date')
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
@@ -230,6 +233,7 @@ def test_payments_update():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is None
     assert response.amount == body.get('amount')
     assert response.amount_refunded == body.get('amount_refunded')
+    assert response.app_fee == body.get('app_fee')
     assert response.charge_date == body.get('charge_date')
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
@@ -284,6 +288,7 @@ def test_payments_cancel():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.amount == body.get('amount')
     assert response.amount_refunded == body.get('amount_refunded')
+    assert response.app_fee == body.get('app_fee')
     assert response.charge_date == body.get('charge_date')
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')
@@ -333,6 +338,7 @@ def test_payments_retry():
     assert responses.calls[-1].request.headers.get('Idempotency-Key') is not None
     assert response.amount == body.get('amount')
     assert response.amount_refunded == body.get('amount_refunded')
+    assert response.app_fee == body.get('app_fee')
     assert response.charge_date == body.get('charge_date')
     assert response.created_at == body.get('created_at')
     assert response.currency == body.get('currency')

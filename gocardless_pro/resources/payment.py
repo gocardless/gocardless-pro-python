@@ -27,6 +27,11 @@ class Payment(object):
   
 
     @property
+    def app_fee(self):
+        return self.attributes.get('app_fee')
+  
+
+    @property
     def charge_date(self):
         return self.attributes.get('charge_date')
   
@@ -91,6 +96,8 @@ class Payment(object):
         return self.attributes.get('status')
   
 
+
+  
 
   
 
