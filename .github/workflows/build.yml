@@ -141,7 +141,6 @@ jobs:
           TAG="v${{ needs.check_version.outputs.version }}"
           git tag "$TAG"
           git push origin "$TAG"
-          NOTES="${{ steps.notes.outputs.notes }}"
           if [ -n "$(echo "$NOTES" | tr -d '[:space:]')" ]; then
             gh release create "$TAG" --title "$TAG" --notes "$NOTES"
           else
@@ -149,3 +148,4 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTES: ${{ steps.notes.outputs.notes }}
