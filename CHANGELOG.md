@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.7.1 (2026-09-02)
+
+### Fixes
+
+- Fix typo in Mandate next_possible_standard_ach_charge_date description
+
 ## 3.7.0 (2026-09-01)
 
 ### Features
