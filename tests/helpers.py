@@ -96,7 +96,7 @@ def idempotent_creation_conflict_body(conflicting_resource_id):
 @contextmanager
 def stub_timeout_then_idempotency_conflict(create_fixture, get_fixture):
     create_url_pattern = url_pattern_for(create_fixture)
-    get_url_pattern = url_pattern_for(create_fixture)
+    get_url_pattern = url_pattern_for(get_fixture)
     conflicting_resource_id = tuple(create_fixture['body'].values())[0]['id']
     error_body = json.dumps(idempotent_creation_conflict_body(conflicting_resource_id))
     get_body = json.dumps(get_fixture['body'])
