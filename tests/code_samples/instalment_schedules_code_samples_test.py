@@ -26,7 +26,7 @@ import gocardless_pro
 @responses.activate
 def test_instalment_schedules_create_with_dates_code_sample():
     # Convert :param placeholders to regex wildcards for flexible matching
-    stub_url = '/instalment_schedules'
+    stub_url = '/instalment_schedules/create_with_dates'
     url_pattern = re.compile('https://api.gocardless.com' + re.sub(r':[\w]+', r'[^/]+', stub_url))
     # Mock response - repeat multiple times to handle code samples with multiple API calls
     response_body = { 'instalment_schedules': {} }
@@ -82,7 +82,7 @@ def test_instalment_schedules_create_with_dates_code_sample():
 @responses.activate
 def test_instalment_schedules_create_with_schedule_code_sample():
     # Convert :param placeholders to regex wildcards for flexible matching
-    stub_url = '/instalment_schedules'
+    stub_url = '/instalment_schedules/create_with_schedule'
     url_pattern = re.compile('https://api.gocardless.com' + re.sub(r':[\w]+', r'[^/]+', stub_url))
     # Mock response - repeat multiple times to handle code samples with multiple API calls
     response_body = { 'instalment_schedules': {} }

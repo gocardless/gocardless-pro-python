@@ -47,7 +47,7 @@ class InstalmentSchedulesService(base_service.BaseService):
         Returns:
               InstalmentSchedule
         """
-        path = '/instalment_schedules'
+        path = '/instalment_schedules/create_with_dates'
         
         if params is not None:
             params = {self._envelope_key(): params}
@@ -91,7 +91,7 @@ class InstalmentSchedulesService(base_service.BaseService):
         Returns:
               InstalmentSchedule
         """
-        path = '/instalment_schedules'
+        path = '/instalment_schedules/create_with_schedule'
         
         if params is not None:
             params = {self._envelope_key(): params}
