@@ -1,6 +1,14 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.8.1 (2026-09-14)
+
+### Fixes
+
+#### Add missing enum values to schema definitions
+
+Adds `sepa_credit_transfer` and `sepa_instant_credit_transfer` to the complete scheme enum, adds hosted payment flow sources to the event source/type enum, and makes `creditor_type` nullable for legacy creditors.
+
 ## 3.8.0 (2026-09-11)
 
 ### Features
