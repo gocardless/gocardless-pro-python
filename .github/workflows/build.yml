@@ -71,6 +71,11 @@ jobs:
         id: check
         run: |
           VERSION=$(python -c "import re; print(re.search(r\"version\s*=\s*'([^']+)'\", open('setup.py').read()).group(1))")
+          # Guard against a crafted version string reaching later shell commands.
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Refusing to release: '$VERSION' is not a valid semantic version"
+            exit 1
+          fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           if git rev-parse "v${VERSION}" >/dev/null 2>&1; then
             echo "Tag v${VERSION} already exists, skipping publish"
@@ -118,8 +123,9 @@ jobs:
       - name: Extract changelog notes for this version
         id: notes
         if: needs.check_version.outputs.should_publish == 'true'
+        env:
+          VERSION: ${{ needs.check_version.outputs.version }}
         run: |
-          VERSION="${{ needs.check_version.outputs.version }}"
           NOTES=""
           if [ -f CHANGELOG.md ]; then
             NOTES=$(awk -v ver="$VERSION" '
@@ -138,7 +144,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          TAG="v${{ needs.check_version.outputs.version }}"
+          TAG="v${VERSION}"
           git tag "$TAG"
           git push origin "$TAG"
           if [ -n "$(echo "$NOTES" | tr -d '[:space:]')" ]; then
@@ -148,4 +154,5 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.check_version.outputs.version }}
           NOTES: ${{ steps.notes.outputs.notes }}
