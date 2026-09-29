@@ -1,6 +1,54 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.10.0 (2026-09-25)
+
+### Features
+
+#### Add `interval` param to `GET /reporting/metrics` for aggregating results by day, week, or month
+
+You can now pass `interval` (`daily`, `weekly`, or `monthly`) when fetching metrics to have values aggregated over that period, instead of only receiving a single value for the full `start_date`/`end_date` range.
+
+## 3.9.2 (2026-09-22)
+
+### Fixes
+
+- Fix example values for a small number of fields to comply with the schema
+
+## 3.9.1 (2026-09-22)
+
+### Fixes
+
+- Fix schema definition/component names to avoid losing types in openapi schema
+
+## 3.9.0 (2026-09-17)
+
+### Features
+
+- Add "reference" to Create Bank Account Holder Verification
+
+## 3.8.3 (2026-09-16)
+
+### Fixes
+
+- Clean up docs and use a shared definition of event `include` and `resource_type` enums
+
+## 3.8.2 (2026-09-14)
+
+### Fixes
+
+#### Fix nullable field declarations and missing properties across multiple resources
+
+Adds `null` to type declarations for fields that legitimately return nil across redirect_flows, webhooks, scheme_identifiers, customer_bank_accounts, outbound_payments, and billing_request_with_actions. Also adds the missing `period_alignment` property to mandate consent_parameters.
+
+## 3.8.1 (2026-09-14)
+
+### Fixes
+
+#### Add missing enum values to schema definitions
+
+Adds `sepa_credit_transfer` and `sepa_instant_credit_transfer` to the complete scheme enum, adds hosted payment flow sources to the event source/type enum, and makes `creditor_type` nullable for legacy creditors.
+
 ## 3.8.0 (2026-09-11)
 
 ### Features

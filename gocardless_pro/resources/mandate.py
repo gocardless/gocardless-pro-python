@@ -127,6 +127,10 @@ class Mandate(object):
             return self.attributes.get('period')
     
         @property
+        def period_alignment(self):
+            return self.attributes.get('period_alignment')
+    
+        @property
         def start_date(self):
             return self.attributes.get('start_date')
     
