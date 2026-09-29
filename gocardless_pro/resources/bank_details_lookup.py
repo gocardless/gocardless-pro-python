@@ -31,6 +31,13 @@ class BankDetailsLookup(object):
         return self.attributes.get('bic')
   
 
+    @property
+    def payer_name_verification_result(self):
+        return self.attributes.get('payer_name_verification_result')
+  
+
+
+  
 
   
 

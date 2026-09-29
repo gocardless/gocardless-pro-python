@@ -30,6 +30,7 @@ def test_bank_details_lookups_create():
     assert response.available_debit_schemes == body.get('available_debit_schemes')
     assert response.bank_name == body.get('bank_name')
     assert response.bic == body.get('bic')
+    assert response.payer_name_verification_result == body.get('payer_name_verification_result')
 
 @responses.activate
 def test_timeout_bank_details_lookups_create_retries():
