@@ -89,6 +89,10 @@ class PayerAuthorisation(object):
             return self.attributes.get('bank_code')
     
         @property
+        def bank_name(self):
+            return self.attributes.get('bank_name')
+    
+        @property
         def branch_code(self):
             return self.attributes.get('branch_code')
     
