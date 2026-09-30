@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.11.5 (2026-09-30)
+
+### Fixes
+
+- Add missing bank_name property to payer_authorisation bank_account schema
+
 ## 3.11.4 (2026-09-30)
 
 ### Fixes
