@@ -41,12 +41,16 @@ def test_mandates_create():
     assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.verified_at == body.get('verified_at')
+    assert response.consent_parameters.currency == body.get('consent_parameters')['currency']
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
+    assert response.consent_parameters.fixed_amount_per_payment == body.get('consent_parameters')['fixed_amount_per_payment']
+    assert response.consent_parameters.id == body.get('consent_parameters')['id']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
     assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
     assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
     assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.period_alignment == body.get('consent_parameters')['period_alignment']
+    assert response.consent_parameters.scheme == body.get('consent_parameters')['scheme']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -192,12 +196,16 @@ def test_mandates_get():
     assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.verified_at == body.get('verified_at')
+    assert response.consent_parameters.currency == body.get('consent_parameters')['currency']
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
+    assert response.consent_parameters.fixed_amount_per_payment == body.get('consent_parameters')['fixed_amount_per_payment']
+    assert response.consent_parameters.id == body.get('consent_parameters')['id']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
     assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
     assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
     assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.period_alignment == body.get('consent_parameters')['period_alignment']
+    assert response.consent_parameters.scheme == body.get('consent_parameters')['scheme']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -249,12 +257,16 @@ def test_mandates_update():
     assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.verified_at == body.get('verified_at')
+    assert response.consent_parameters.currency == body.get('consent_parameters')['currency']
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
+    assert response.consent_parameters.fixed_amount_per_payment == body.get('consent_parameters')['fixed_amount_per_payment']
+    assert response.consent_parameters.id == body.get('consent_parameters')['id']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
     assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
     assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
     assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.period_alignment == body.get('consent_parameters')['period_alignment']
+    assert response.consent_parameters.scheme == body.get('consent_parameters')['scheme']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -306,12 +318,16 @@ def test_mandates_cancel():
     assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.verified_at == body.get('verified_at')
+    assert response.consent_parameters.currency == body.get('consent_parameters')['currency']
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
+    assert response.consent_parameters.fixed_amount_per_payment == body.get('consent_parameters')['fixed_amount_per_payment']
+    assert response.consent_parameters.id == body.get('consent_parameters')['id']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
     assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
     assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
     assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.period_alignment == body.get('consent_parameters')['period_alignment']
+    assert response.consent_parameters.scheme == body.get('consent_parameters')['scheme']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -358,12 +374,16 @@ def test_mandates_reinstate():
     assert response.scheme == body.get('scheme')
     assert response.status == body.get('status')
     assert response.verified_at == body.get('verified_at')
+    assert response.consent_parameters.currency == body.get('consent_parameters')['currency']
     assert response.consent_parameters.end_date == body.get('consent_parameters')['end_date']
+    assert response.consent_parameters.fixed_amount_per_payment == body.get('consent_parameters')['fixed_amount_per_payment']
+    assert response.consent_parameters.id == body.get('consent_parameters')['id']
     assert response.consent_parameters.max_amount_per_payment == body.get('consent_parameters')['max_amount_per_payment']
     assert response.consent_parameters.max_amount_per_period == body.get('consent_parameters')['max_amount_per_period']
     assert response.consent_parameters.max_payments_per_period == body.get('consent_parameters')['max_payments_per_period']
     assert response.consent_parameters.period == body.get('consent_parameters')['period']
     assert response.consent_parameters.period_alignment == body.get('consent_parameters')['period_alignment']
+    assert response.consent_parameters.scheme == body.get('consent_parameters')['scheme']
     assert response.consent_parameters.start_date == body.get('consent_parameters')['start_date']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
