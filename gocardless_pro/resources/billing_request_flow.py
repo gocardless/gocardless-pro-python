@@ -208,6 +208,14 @@ class BillingRequestFlow(object):
             return self.attributes.get('given_name')
     
         @property
+        def language(self):
+            return self.attributes.get('language')
+    
+        @property
+        def phone_number(self):
+            return self.attributes.get('phone_number')
+    
+        @property
         def postal_code(self):
             return self.attributes.get('postal_code')
     
