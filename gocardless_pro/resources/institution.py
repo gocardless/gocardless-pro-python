@@ -17,11 +17,6 @@ class Institution(object):
         self.api_response = api_response
 
     @property
-    def autocompletes_collect_bank_account(self):
-        return self.attributes.get('autocompletes_collect_bank_account')
-  
-
-    @property
     def country_code(self):
         return self.attributes.get('country_code')
   
@@ -56,13 +51,6 @@ class Institution(object):
         return self.attributes.get('roles')
   
 
-    @property
-    def status(self):
-        return self.attributes.get('status')
-  
-
-
-  
 
   
 
@@ -85,8 +73,6 @@ class Institution(object):
         def single(self):
             return self.attributes.get('single')
     
-  
-
   
 
   

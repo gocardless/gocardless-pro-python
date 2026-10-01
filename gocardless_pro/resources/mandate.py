@@ -107,8 +107,20 @@ class Mandate(object):
             self.attributes = attributes
     
         @property
+        def currency(self):
+            return self.attributes.get('currency')
+    
+        @property
         def end_date(self):
             return self.attributes.get('end_date')
+    
+        @property
+        def fixed_amount_per_payment(self):
+            return self.attributes.get('fixed_amount_per_payment')
+    
+        @property
+        def id(self):
+            return self.attributes.get('id')
     
         @property
         def max_amount_per_payment(self):
@@ -129,6 +141,10 @@ class Mandate(object):
         @property
         def period_alignment(self):
             return self.attributes.get('period_alignment')
+    
+        @property
+        def scheme(self):
+            return self.attributes.get('scheme')
     
         @property
         def start_date(self):
