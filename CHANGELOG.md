@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.14.1 (2026-10-02)
+
+### Fixes
+
+- Fixed the url field on Bank Authorisations to correctly allow null values.
+
 ## 3.14.0 (2026-10-01)
 
 ### Features
