@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.17.0 (2026-10-05)
+
+### Features
+
+- Fixed postal_code and country_code fields on Scheme Identifiers to correctly allow null values.
+
 ## 3.16.0 (2026-10-02)
 
 ### Features
