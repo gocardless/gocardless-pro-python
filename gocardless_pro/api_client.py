@@ -158,7 +158,27 @@ class ApiClient(object):
         raise exception_class(error)
 
     def _url_for(self, path):
-        return urlparse.urljoin(self.base_url, path)
+        return urlparse.urljoin(self.base_url, self._validate_path(path))
+
+    @staticmethod
+    def _validate_path(path):
+        """Check that a request path cannot move the request off the configured base URL.
+
+        ``urljoin`` resolves ``path`` against ``base_url`` like a browser resolves a link,
+        so an absolute or scheme-relative path replaces the configured origin while the
+        access token stays attached. Checked with ``urlsplit``, the same parser ``urljoin``
+        itself uses. Dot segments are left alone, since they resolve against ``base_url``
+        and can't leave its origin.
+        """
+        parsed = urlparse.urlsplit(path)
+
+        if parsed.scheme or parsed.netloc:
+            raise errors.GoCardlessProError(
+                "Invalid request path '{0}': a path may not specify a scheme or a host, only "
+                'a location relative to the configured base URL'.format(path)
+            )
+
+        return path
 
     def _headers(self, custom_headers):
         headers = self._default_headers()

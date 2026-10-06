@@ -5,12 +5,13 @@
 
 import re
 import time
+from urllib.parse import quote
 from requests import Timeout, ConnectionError
 from uuid import uuid4
 
 from .. import list_response
 from ..api_response import ApiResponse
-from ..errors import MalformedResponseError
+from ..errors import GoCardlessProError, MalformedResponseError
 
 class BaseService(object):
     """Base class for API service classes."""
@@ -81,4 +82,36 @@ class BaseService(object):
             return list_response.ListResponse(records, api_response)
 
     def _sub_url_params(self, url, params):
-        return re.sub(r':(\w+)', lambda match: params[match.group(1)], url)
+        return re.sub(r':(\w+)',
+                      lambda match: _escape_url_param(match.group(1), params[match.group(1)]),
+                      url)
+
+
+FORBIDDEN_URL_PARAM_CHARACTERS = re.compile(r'[/?#\x00-\x1f\x7f]')
+
+
+def _escape_url_param(key, value):
+    """Escape a value before it is interpolated into a request path.
+
+    A URL parameter is a single path segment, so values that could move the request to a
+    different endpoint - path separators, control characters, '.', '..' (escaping can't make
+    these safe - a resolver strips them regardless), and empty values - are rejected instead.
+    """
+    value = str(value)
+
+    if value == '':
+        raise GoCardlessProError("No value provided for URL parameter '{}'".format(key))
+
+    if value in ('.', '..'):
+        raise GoCardlessProError(
+            "Invalid value for URL parameter '{}': '{}' would change which endpoint "
+            "the request is sent to".format(key, value)
+        )
+
+    if FORBIDDEN_URL_PARAM_CHARACTERS.search(value):
+        raise GoCardlessProError(
+            "Invalid value for URL parameter '{}': '{}' contains a character that is not "
+            "allowed in a path segment".format(key, value)
+        )
+
+    return quote(value, safe='')

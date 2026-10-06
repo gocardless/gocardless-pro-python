@@ -173,3 +173,69 @@ def test_handles_string_error_response():
 
     assert exception.value.message == 'bank_account_exists'
     assert exception.value.code == 400
+
+@responses.activate
+def test_rejects_absolute_url_as_path():
+    # An absolute URL in `path` would replace the configured base URL while the access token is
+    # still attached, handing the token to whichever host the URL names.
+    responses.add(responses.GET, 'http://elsewhere.example.com/capture', body='{}')
+
+    with pytest.raises(errors.GoCardlessProError):
+        client.get('http://elsewhere.example.com/capture')
+
+    assert len(responses.calls) == 0
+
+@responses.activate
+def test_rejects_scheme_relative_url_as_path():
+    responses.add(responses.GET, 'http://elsewhere.example.com/capture', body='{}')
+
+    with pytest.raises(errors.GoCardlessProError):
+        client.get('//elsewhere.example.com/capture')
+
+    assert len(responses.calls) == 0
+
+@responses.activate
+def test_rejects_absolute_url_hidden_behind_whitespace():
+    # `urlsplit` and `urljoin` both strip surrounding whitespace and control characters, so the
+    # check has to see the same value the join would.
+    responses.add(responses.GET, 'http://elsewhere.example.com/capture', body='{}')
+
+    with pytest.raises(errors.GoCardlessProError):
+        client.get('\thttp://elsewhere.example.com/capture')
+
+    assert len(responses.calls) == 0
+
+@responses.activate
+def test_rejects_absolute_url_for_every_verb():
+    responses.add(responses.GET, 'https://elsewhere.example.com/capture', body='{}')
+    responses.add(responses.POST, 'https://elsewhere.example.com/capture', body='{}')
+    responses.add(responses.PUT, 'https://elsewhere.example.com/capture', body='{}')
+    responses.add(responses.DELETE, 'https://elsewhere.example.com/capture', body='{}')
+
+    url = 'https://elsewhere.example.com/capture'
+    with pytest.raises(errors.GoCardlessProError):
+        client.get(url)
+    with pytest.raises(errors.GoCardlessProError):
+        client.post(url, body={})
+    with pytest.raises(errors.GoCardlessProError):
+        client.put(url, body={})
+    with pytest.raises(errors.GoCardlessProError):
+        client.delete(url, body={})
+
+    assert len(responses.calls) == 0
+
+@responses.activate
+def test_allows_query_string_in_path():
+    responses.add(responses.GET, 'http://example.com/test', body='{}')
+    client.get('/test?page=1')
+
+    assert responses.calls[0].request.url.startswith('http://example.com/test')
+
+@responses.activate
+def test_dot_segments_stay_on_the_configured_base_url():
+    # Dot segments resolve against `base_url`, so they can reach another path on the same origin
+    # but cannot leave it. They are allowed through, and this pins that behaviour.
+    responses.add(responses.GET, 'http://example.com/other', body='{}')
+    client.get('/test/../other')
+
+    assert responses.calls[0].request.url.startswith('http://example.com/')
