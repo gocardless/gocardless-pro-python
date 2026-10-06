@@ -1,6 +1,15 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.20.0 (2026-10-06)
+
+### Features
+
+#### Add previously undocumented fields to billing_request
+
+Add `payment_request.retry_if_possible` - On failure, automatically retry payments using intelligent retries.
+Add `actions.available_country_codes` - list of currencies the current mandate supports
+
 ## 3.19.0 (2026-10-06)
 
 ### Features
