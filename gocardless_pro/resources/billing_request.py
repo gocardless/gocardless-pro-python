@@ -328,6 +328,10 @@ class BillingRequest(object):
             return self.attributes.get('reference')
     
         @property
+        def retry_if_possible(self):
+            return self.attributes.get('retry_if_possible')
+    
+        @property
         def scheme(self):
             return self.attributes.get('scheme')
     
