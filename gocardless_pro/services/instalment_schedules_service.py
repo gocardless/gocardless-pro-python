@@ -58,8 +58,10 @@ class InstalmentSchedulesService(base_service.BaseService):
         except errors.IdempotentCreationConflictError as err:
           if self.raise_on_idempotency_conflict:
             raise err
+          # `params` is the create payload and is deliberately not forwarded: this is a
+          # GET for one resource, and requests would serialise the payload's keys into the
+          # query string.
           return self.get(identity=err.conflicting_resource_id,
-                          params=params,
                           headers=headers)
         return self._resource_for(response)
   
@@ -102,8 +104,10 @@ class InstalmentSchedulesService(base_service.BaseService):
         except errors.IdempotentCreationConflictError as err:
           if self.raise_on_idempotency_conflict:
             raise err
+          # `params` is the create payload and is deliberately not forwarded: this is a
+          # GET for one resource, and requests would serialise the payload's keys into the
+          # query string.
           return self.get(identity=err.conflicting_resource_id,
-                          params=params,
                           headers=headers)
         return self._resource_for(response)
   

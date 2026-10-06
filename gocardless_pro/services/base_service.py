@@ -54,7 +54,16 @@ class BaseService(object):
 
 
     def _inject_idempotency_key(self, headers):
-        headers = headers or {}
+        """Return the caller's headers with an idempotency key added, without touching theirs.
+
+        Writing the key into the caller's own dict would leave it there after the call, so a
+        caller reusing one dict across several creates would send the first call's key every
+        time, and silently get back the resource the first call created.
+
+        The copy is taken once per call, before the retry loop, so a retried request still
+        carries the same key.
+        """
+        headers = dict(headers or {})
         if 'Idempotency-Key' not in headers:
             headers['Idempotency-Key'] = str(uuid4())
 
