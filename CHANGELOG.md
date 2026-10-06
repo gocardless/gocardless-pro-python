@@ -1,6 +1,23 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.18.1 (2026-10-06)
+
+### Fixes
+
+#### Stop the generated idempotency key persisting in caller-owned state
+
+The generated `Idempotency-Key` was written into state owned by the caller: the
+headers dictionary in Python, and the request object in .NET. An application that
+reused either across independent create calls — a module-level custom-header
+template, or one request object in a loop — sent the first call's key every time.
+The API answers each repeat with `409 idempotent_creation_conflict`, which these
+clients resolve by default by returning the resource the first call created, so
+later creates returned the wrong resource with no error.
+
+The key is now generated per call without touching the caller's own objects, and
+remains stable across network retries of the same call.
+
 ## 3.18.0 (2026-10-06)
 
 ### Features
