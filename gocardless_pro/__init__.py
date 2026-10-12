@@ -2,5 +2,5 @@
 
 from .client import Client
 
-__version__ = '3.20.2'
+__version__ = '3.21.0'
 
