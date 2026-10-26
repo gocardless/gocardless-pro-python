@@ -4,7 +4,7 @@
 #
 
 from . import services
-from .api_client import ApiClient
+from .api_client import ApiClient, DEFAULT_TIMEOUT
 
 class Client(object):
     """Client for interacting with the GoCardless API.
@@ -19,6 +19,10 @@ class Client(object):
       base_url (str): Manually set a base URL. Most people should use
         `environment` instead.
       raise_on_idempotency_conflict (bool): Configure refetching of conflicting resource
+      timeout (float or tuple): Seconds to wait for the API to respond before
+        raising ``requests.Timeout``. Pass a ``(connect, read)`` tuple to set
+        the two limits separately. Defaults to 60 seconds; pass ``None``
+        to wait indefinitely.
 
     Example:
       client = Client(access_token=ACCESS_TOKEN, environment='sandbox')
@@ -26,7 +30,7 @@ class Client(object):
           print('{} {}'.format(customer.family_name, customer.given_name))
     """
 
-    def __init__(self, access_token=None, environment=None, base_url=None, raise_on_idempotency_conflict=False):
+    def __init__(self, access_token=None, environment=None, base_url=None, raise_on_idempotency_conflict=False, timeout=DEFAULT_TIMEOUT):
         if access_token is None:
             raise ValueError('No access_token provided')
 
@@ -34,7 +38,7 @@ class Client(object):
             raise ValueError('No environment or base_url specified')
 
         base_url = base_url or self._environment_url(environment)
-        self._api_client = ApiClient(base_url, access_token)
+        self._api_client = ApiClient(base_url, access_token, timeout=timeout)
         self._raise_on_idempotency_conflict = raise_on_idempotency_conflict
 
     @property

@@ -16,17 +16,22 @@ import requests
 from . import errors
 from .rate_limit import RateLimit, update_rate_limit
 
+DEFAULT_TIMEOUT = 60
+
 class ApiClient(object):
     """Client for interacting with a JSON HTTP API, using OAuth2-style auth.
 
     Args:
       base_url (string): The prefix that's prepended to all request paths.
       access_token (string): Token used in the Authorization header.
+      timeout (float or tuple, optional): Passed to ``requests`` as its
+        ``timeout`` argument. Defaults to 60 seconds; ``None`` waits indefinitely.
     """
 
-    def __init__(self, base_url, access_token):
+    def __init__(self, base_url, access_token, timeout=DEFAULT_TIMEOUT):
         self.base_url = base_url
         self.access_token = access_token
+        self.timeout = timeout
         self.rate_limit = RateLimit()
 
     @update_rate_limit
@@ -46,7 +51,8 @@ class ApiClient(object):
         response = requests.get(
             self._url_for(path),
             params=params,
-            headers=self._headers(headers)
+            headers=self._headers(headers),
+            timeout=self.timeout
         )
         self._handle_errors(response)
         return response
@@ -69,7 +75,8 @@ class ApiClient(object):
         response = requests.post(
             self._url_for(path),
             data=json.dumps(body),
-            headers=self._headers(headers)
+            headers=self._headers(headers),
+            timeout=self.timeout
         )
         self._handle_errors(response)
         return response
@@ -91,7 +98,8 @@ class ApiClient(object):
         response = requests.put(
             self._url_for(path),
             data=json.dumps(body),
-            headers=self._headers(headers)
+            headers=self._headers(headers),
+            timeout=self.timeout
         )
         self._handle_errors(response)
         return response
@@ -113,7 +121,8 @@ class ApiClient(object):
         response = requests.delete(
             self._url_for(path),
             data=json.dumps(body),
-            headers=self._headers(headers)
+            headers=self._headers(headers),
+            timeout=self.timeout
         )
         self._handle_errors(response)
         return response

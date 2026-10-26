@@ -34,6 +34,15 @@ you want to use:
     token = os.environ['ACCESS_TOKEN']
     client = gocardless_pro.Client(access_token=token, environment='live')
 
+Requests time out after 60 seconds by default. To change this, pass ``timeout`` in
+seconds, or a ``(connect, read)`` tuple to set the two limits separately, or ``None``
+to wait indefinitely. A request that times out raises ``requests.Timeout`` once the
+library has exhausted its automatic retries:
+
+.. code:: python
+
+    client = gocardless_pro.Client(access_token=token, environment='live', timeout=10)
+
 Access API endpoints using the corresponding methods on the client object:
 
 .. code:: python
