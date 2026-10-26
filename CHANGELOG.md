@@ -1,6 +1,22 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.22.0 (2026-10-26)
+
+### Features
+
+#### Add a `timeout` client option, with a 60 second default
+
+`Client` now accepts a `timeout` argument that is passed to `requests` on every call, so a request that gets no response in time raises `requests.Timeout`. It takes seconds, or a `(connect, read)` tuple to set the two limits separately, or `None` to wait indefinitely.
+
+```python
+client = gocardless_pro.Client(access_token=token, environment='live', timeout=10)
+```
+
+Previously requests had no timeout, so a stalled connection could hang forever. Requests now time out after 60 seconds by default. If you rely on requests taking longer than that, pass a larger `timeout` or `None`.
+
+Requests that time out are retried by the library's existing automatic retry logic before the error is raised.
+
 ## 3.21.0 (2026-10-12)
 
 ### Features
