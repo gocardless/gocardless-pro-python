@@ -16,6 +16,13 @@ def test_requires_valid_environment():
     with pytest.raises(ValueError):
         Client(access_token=access_token, environment='invalid')
 
+def test_has_a_default_timeout():
+    assert client._api_client.timeout == 60
+
+def test_passes_timeout_to_api_client():
+    timeout_client = Client(access_token=access_token, base_url='http://example.com', timeout=5)
+    assert timeout_client._api_client.timeout == 5
+
 
 def test_balances_returns_service():
     assert isinstance(client.balances, services.BalancesService)

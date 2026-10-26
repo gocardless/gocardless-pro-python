@@ -22,6 +22,30 @@ def test_uses_correct_url():
     client.get('/test')
 
 @responses.activate
+def test_sends_a_default_timeout():
+    responses.add(responses.GET, 'http://example.com/test', body='{}')
+    client.get('/test')
+    assert responses.calls[0].request.req_kwargs['timeout'] == 60
+
+@responses.activate
+def test_timeout_can_be_disabled_with_none():
+    no_timeout_client = api_client.ApiClient('http://example.com', access_token, timeout=None)
+    responses.add(responses.GET, 'http://example.com/test', body='{}')
+    no_timeout_client.get('/test')
+    assert responses.calls[0].request.req_kwargs['timeout'] is None
+
+@responses.activate
+@pytest.mark.parametrize('method', ['get', 'post', 'put', 'delete'])
+def test_passes_timeout_to_requests(method):
+    timeout_client = api_client.ApiClient('http://example.com', access_token, timeout=(3, 10))
+    responses.add(getattr(responses, method.upper()), 'http://example.com/test', body='{}')
+    if method == 'get':
+        timeout_client.get('/test')
+    else:
+        getattr(timeout_client, method)('/test', {})
+    assert responses.calls[0].request.req_kwargs['timeout'] == (3, 10)
+
+@responses.activate
 def test_authorization_header_present():
     responses.add(responses.GET, 'http://example.com/test', body='{}')
     client.get('/test')
