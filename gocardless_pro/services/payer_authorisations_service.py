@@ -3,6 +3,8 @@
 #   https://github.com/gocardless/crank
 #
 
+import warnings
+
 from . import base_service
 from .. import resources
 from ..paginator import Paginator
@@ -23,6 +25,9 @@ class PayerAuthorisationsService(base_service.BaseService):
         Retrieves the details of a single existing Payer Authorisation. It can
         be used for polling the status of a Payer Authorisation.
 
+        Deprecated:
+            Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.
+
         Args:
               identity (string): Unique identifier, beginning with "PA".
               params (dict, optional): Query string parameters.
@@ -30,6 +35,8 @@ class PayerAuthorisationsService(base_service.BaseService):
         Returns:
               PayerAuthorisation
         """
+        warnings.warn("Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.",
+                      DeprecationWarning, stacklevel=2)
         path = self._sub_url_params('/payer_authorisations/:identity', {
           
             'identity': identity,
@@ -51,12 +58,17 @@ class PayerAuthorisationsService(base_service.BaseService):
         save any payer data on your servers or the browser while still being
         able to implement a progressive solution, such as a multi-step form.
 
+        Deprecated:
+            Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.
+
         Args:
               params (dict, optional): Request body.
 
         Returns:
               PayerAuthorisation
         """
+        warnings.warn("Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.",
+                      DeprecationWarning, stacklevel=2)
         path = '/payer_authorisations'
         
         if params is not None:
@@ -89,6 +101,9 @@ class PayerAuthorisationsService(base_service.BaseService):
         update the `metadata` attribute values it must be sent completely as it
         overrides the previously existing values. 
 
+        Deprecated:
+            Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.
+
         Args:
               identity (string): Unique identifier, beginning with "PA".
               params (dict, optional): Request body.
@@ -96,6 +111,8 @@ class PayerAuthorisationsService(base_service.BaseService):
         Returns:
               PayerAuthorisation
         """
+        warnings.warn("Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.",
+                      DeprecationWarning, stacklevel=2)
         path = self._sub_url_params('/payer_authorisations/:identity', {
           
             'identity': identity,
@@ -118,6 +135,9 @@ class PayerAuthorisationsService(base_service.BaseService):
         it is successfully submitted, the Payer Authorisation can no longer be
         edited.
 
+        Deprecated:
+            Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.
+
         Args:
               identity (string): Unique identifier, beginning with "PA".
               params (dict, optional): Request body.
@@ -125,6 +145,8 @@ class PayerAuthorisationsService(base_service.BaseService):
         Returns:
               PayerAuthorisation
         """
+        warnings.warn("Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.",
+                      DeprecationWarning, stacklevel=2)
         path = self._sub_url_params('/payer_authorisations/:identity/actions/submit', {
           
             'identity': identity,
@@ -151,6 +173,9 @@ class PayerAuthorisationsService(base_service.BaseService):
         they go through our flow or make them go through the necessary
         verification mechanism (upcoming feature).
 
+        Deprecated:
+            Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.
+
         Args:
               identity (string): Unique identifier, beginning with "PA".
               params (dict, optional): Request body.
@@ -158,6 +183,8 @@ class PayerAuthorisationsService(base_service.BaseService):
         Returns:
               PayerAuthorisation
         """
+        warnings.warn("Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations.",
+                      DeprecationWarning, stacklevel=2)
         path = self._sub_url_params('/payer_authorisations/:identity/actions/confirm', {
           
             'identity': identity,
