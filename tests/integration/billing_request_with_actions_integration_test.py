@@ -37,6 +37,7 @@ def test_billing_request_with_actions_create_with_actions():
     assert response.bank_authorisations.qr_code_url == body.get('bank_authorisations')['qr_code_url']
     assert response.bank_authorisations.redirect_uri == body.get('bank_authorisations')['redirect_uri']
     assert response.bank_authorisations.url == body.get('bank_authorisations')['url']
+    assert response.billing_requests.account_information_request == body.get('billing_requests')['account_information_request']
     assert response.billing_requests.actions == body.get('billing_requests')['actions']
     assert response.billing_requests.created_at == body.get('billing_requests')['created_at']
     assert response.billing_requests.fallback_enabled == body.get('billing_requests')['fallback_enabled']

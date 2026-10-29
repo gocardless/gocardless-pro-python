@@ -17,6 +17,11 @@ class BillingRequest(object):
         self.api_response = api_response
 
     @property
+    def account_information_request(self):
+        return self.AccountInformationRequest(self.attributes.get('account_information_request'))
+  
+
+    @property
     def actions(self):
         return self.attributes.get('actions')
   
@@ -98,6 +103,23 @@ class BillingRequest(object):
 
 
   
+    class AccountInformationRequest(object):
+        """Wrapper for the response's 'account_information_request' attribute."""
+
+        def __init__(self, attributes):
+            self.attributes = attributes
+    
+        @property
+        def country_code(self):
+            return self.attributes.get('country_code')
+    
+        @property
+        def scopes(self):
+            return self.attributes.get('scopes')
+    
+  
+
+  
 
   
 
@@ -162,6 +184,10 @@ class BillingRequest(object):
 
         def __init__(self, attributes):
             self.attributes = attributes
+    
+        @property
+        def account_information_request(self):
+            return self.attributes.get('account_information_request')
     
         @property
         def bank_authorisation(self):
