@@ -84,6 +84,10 @@ class BillingRequestWithAction(object):
             self.attributes = attributes
     
         @property
+        def account_information_request(self):
+            return self.attributes.get('account_information_request')
+    
+        @property
         def actions(self):
             return self.attributes.get('actions')
     

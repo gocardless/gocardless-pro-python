@@ -37,6 +37,8 @@ def test_billing_requests_create():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -47,6 +49,7 @@ def test_billing_requests_create():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -160,6 +163,8 @@ def test_billing_requests_collect_customer_details():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -170,6 +175,7 @@ def test_billing_requests_collect_customer_details():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -261,6 +267,8 @@ def test_billing_requests_collect_bank_account():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -271,6 +279,7 @@ def test_billing_requests_collect_bank_account():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -362,6 +371,8 @@ def test_billing_requests_confirm_payer_details():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -372,6 +383,7 @@ def test_billing_requests_confirm_payer_details():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -463,6 +475,8 @@ def test_billing_requests_fulfil():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -473,6 +487,7 @@ def test_billing_requests_fulfil():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -564,6 +579,8 @@ def test_billing_requests_cancel():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -574,6 +591,7 @@ def test_billing_requests_cancel():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -738,6 +756,8 @@ def test_billing_requests_get():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -748,6 +768,7 @@ def test_billing_requests_get():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -844,6 +865,8 @@ def test_billing_requests_notify():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -854,6 +877,7 @@ def test_billing_requests_notify():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -945,6 +969,8 @@ def test_billing_requests_fallback():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -955,6 +981,7 @@ def test_billing_requests_fallback():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -1046,6 +1073,8 @@ def test_billing_requests_choose_currency():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -1056,6 +1085,7 @@ def test_billing_requests_choose_currency():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
@@ -1147,6 +1177,8 @@ def test_billing_requests_select_institution():
     assert response.payment_purpose_code == body.get('payment_purpose_code')
     assert response.purpose_code == body.get('purpose_code')
     assert response.status == body.get('status')
+    assert response.account_information_request.country_code == body.get('account_information_request')['country_code']
+    assert response.account_information_request.scopes == body.get('account_information_request')['scopes']
     assert response.instalment_schedule_request.app_fee == body.get('instalment_schedule_request')['app_fee']
     assert response.instalment_schedule_request.currency == body.get('instalment_schedule_request')['currency']
     assert response.instalment_schedule_request.instalments_with_dates == body.get('instalment_schedule_request')['instalments_with_dates']
@@ -1157,6 +1189,7 @@ def test_billing_requests_select_institution():
     assert response.instalment_schedule_request.payment_reference == body.get('instalment_schedule_request')['payment_reference']
     assert response.instalment_schedule_request.retry_if_possible == body.get('instalment_schedule_request')['retry_if_possible']
     assert response.instalment_schedule_request.total_amount == body.get('instalment_schedule_request')['total_amount']
+    assert response.links.account_information_request == body.get('links')['account_information_request']
     assert response.links.bank_authorisation == body.get('links')['bank_authorisation']
     assert response.links.creditor == body.get('links')['creditor']
     assert response.links.customer == body.get('links')['customer']
