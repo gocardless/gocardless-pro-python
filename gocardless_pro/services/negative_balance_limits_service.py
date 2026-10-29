@@ -21,7 +21,7 @@ class NegativeBalanceLimitsService(base_service.BaseService):
         """List negative balance limits.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of negative balance limits.
 
         Args:

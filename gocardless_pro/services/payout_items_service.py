@@ -21,7 +21,7 @@ class PayoutItemsService(base_service.BaseService):
         """Get all payout items in a single payout.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of items in the payout.
         
         This endpoint only serves requests for payouts created in the last 6

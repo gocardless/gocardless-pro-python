@@ -28,7 +28,7 @@ class LogosService(base_service.BaseService):
         look
         great across your customer payment page and notification emails see
         here
-        (https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
+        (https://docs.gocardless.com/docs/gc-embed/setting-up-branding#tips-for-uploading-your-logo).
 
         Args:
               params (dict, optional): Request body.

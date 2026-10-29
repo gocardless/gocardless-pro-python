@@ -24,8 +24,7 @@ class MandatePdfsService(base_service.BaseService):
         
         Customer and bank account details can be left blank (for a blank
         mandate), provided manually, or inferred from the ID of an existing
-        mandate
-        (https://developer.gocardless.com/api-reference/#core-endpoints-mandates).
+        mandate (https://docs.gocardless.com/docs/api-reference/mandate).
         
         By default, we'll generate PDF mandates in English.
         

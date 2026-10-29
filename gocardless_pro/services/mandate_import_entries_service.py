@@ -21,8 +21,8 @@ class MandateImportEntriesService(base_service.BaseService):
         """Add a mandate import entry.
 
         For an existing mandate import
-        (https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports),
-        this endpoint can
+        (https://docs.gocardless.com/docs/api-reference/mandate-import), this
+        endpoint can
         be used to add individual mandates to be imported into GoCardless.
         
         You can add no more than 30,000 rows to a single mandate import.

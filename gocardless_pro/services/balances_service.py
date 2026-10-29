@@ -21,7 +21,7 @@ class BalancesService(base_service.BaseService):
         """List balances.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of balances for a given creditor. This endpoint is rate limited to
         60 requests per minute.
 

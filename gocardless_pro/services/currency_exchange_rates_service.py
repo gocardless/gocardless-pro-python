@@ -21,7 +21,7 @@ class CurrencyExchangeRatesService(base_service.BaseService):
         """List exchange rates.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of all exchange rates.
 
         Args:

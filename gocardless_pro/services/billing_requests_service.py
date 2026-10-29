@@ -115,7 +115,7 @@ class BillingRequestsService(base_service.BaseService):
         endpoint will return a 422 - validation error on account_holder_name:
         "Account holder name does not match bank account details provided".
         Testing instructions are here
-        (https://developer.gocardless.com/developer-tools/scenario-simulators/#payer_name_verification)
+        (https://docs.gocardless.com/docs/developer-resources/scenario-simulators#payer-name-verification)
 
         Args:
               identity (string): Unique identifier, beginning with "BRQ".
@@ -219,7 +219,7 @@ class BillingRequestsService(base_service.BaseService):
         """List Billing Requests.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of your billing requests.
 
         Args:

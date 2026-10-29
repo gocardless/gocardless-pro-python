@@ -35,8 +35,8 @@ class BankDetailsLookupsService(base_service.BaseService):
         "Account holder name does not match bank account details provided".
         
         If your request returns an error
-        (https://developer.gocardless.com/api-reference/#api-usage-errors) or
-        the `available_debit_schemes`
+        (https://docs.gocardless.com/docs/api-reference/responses-and-errors)
+        or the `available_debit_schemes`
         attribute is an empty array, you will not be able to collect payments
         from the
         specified bank account. GoCardless may be able to collect payments from
@@ -44,8 +44,8 @@ class BankDetailsLookupsService(base_service.BaseService):
         even if no `bic` is returned.
         
         Bank account details may be supplied using local details
-        (https://developer.gocardless.com/api-reference/#appendix-local-bank-details)
-        or an IBAN.
+        (https://docs.gocardless.com/docs/api-reference/local-bank-details) or
+        an IBAN.
         
         ACH scheme For compliance reasons, an extra validation step is done
         using

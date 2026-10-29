@@ -21,7 +21,7 @@ class PayoutsService(base_service.BaseService):
         """List payouts.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of your payouts.
 
         Args:
@@ -50,7 +50,7 @@ class PayoutsService(base_service.BaseService):
 
         Retrieves the details of a single payout. For an example of how to
         reconcile the transactions in a payout, see this guide
-        (https://developer.gocardless.com/api-reference/#events-reconciling-payouts-with-events).
+        (https://docs.gocardless.com/docs/collect-payments/managing-payments/reconciling-payouts).
 
         Args:
               identity (string): Unique identifier, beginning with "PO".
