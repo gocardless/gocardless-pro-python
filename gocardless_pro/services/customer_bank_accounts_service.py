@@ -26,16 +26,16 @@ class CustomerBankAccountsService(base_service.BaseService):
         
         - 
         Local details
-        (https://developer.gocardless.com/api-reference/#appendix-local-bank-details)
+        (https://docs.gocardless.com/docs/api-reference/local-bank-details)
         - 
         IBAN
         - 
         Customer Bank Account Tokens
-        (https://developer.gocardless.com/api-reference/#javascript-flow-create-a-customer-bank-account-token)
+        (https://docs.gocardless.com/docs/collect-payments/integration-types/javascript-drop-in-flow)
         
         For more information on the different fields required in each country,
         see local bank details
-        (https://developer.gocardless.com/api-reference/#appendix-local-bank-details).
+        (https://docs.gocardless.com/docs/api-reference/local-bank-details).
 
         Args:
               params (dict, optional): Request body.
@@ -66,7 +66,7 @@ class CustomerBankAccountsService(base_service.BaseService):
         """List customer bank accounts.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of your bank accounts.
 
         Args:

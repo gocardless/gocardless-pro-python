@@ -23,10 +23,10 @@ class PaymentsService(base_service.BaseService):
         Creates a new payment object.
         
         This fails with a `mandate_is_inactive` error if the linked mandate
-        (https://developer.gocardless.com/api-reference/#core-endpoints-mandates)
-        is cancelled or has failed. Payments can be created against mandates
-        with status of: `pending_customer_approval`, `pending_submission`,
-        `submitted`, and `active`.
+        (https://docs.gocardless.com/docs/api-reference/mandate) is cancelled
+        or has failed. Payments can be created against mandates with status of:
+        `pending_customer_approval`, `pending_submission`, `submitted`, and
+        `active`.
 
         Args:
               params (dict, optional): Request body.
@@ -57,7 +57,7 @@ class PaymentsService(base_service.BaseService):
         """List payments.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of your payments.
 
         Args:

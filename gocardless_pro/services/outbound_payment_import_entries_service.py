@@ -21,7 +21,7 @@ class OutboundPaymentImportEntriesService(base_service.BaseService):
         """List outbound payment import entries.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of the entries for a given outbound payment import.
 
         Args:

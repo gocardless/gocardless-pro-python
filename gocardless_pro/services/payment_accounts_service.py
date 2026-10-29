@@ -44,7 +44,7 @@ class PaymentAccountsService(base_service.BaseService):
         """List payment accounts.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of your payment accounts.
 
         Args:

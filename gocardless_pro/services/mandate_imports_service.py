@@ -26,7 +26,7 @@ class MandateImportsService(base_service.BaseService):
         you've finished
         adding entries to an import, you should
         submit
-        (https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import)
+        (https://docs.gocardless.com/docs/api-reference/mandate-import#submit-a-mandate-import)
         it.
 
         Args:

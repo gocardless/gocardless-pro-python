@@ -26,7 +26,7 @@ class RedirectFlowsService(base_service.BaseService):
         customer to the GoCardless hosted payment pages.
 
         Deprecated:
-            Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows.
+            Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API should be used for your payment flows.
 
         Args:
               params (dict, optional): Request body.
@@ -34,7 +34,7 @@ class RedirectFlowsService(base_service.BaseService):
         Returns:
               RedirectFlow
         """
-        warnings.warn("Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows.",
+        warnings.warn("Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API should be used for your payment flows.",
                       DeprecationWarning, stacklevel=2)
         path = '/redirect_flows'
         
@@ -61,7 +61,7 @@ class RedirectFlowsService(base_service.BaseService):
         Returns all details about a single redirect flow
 
         Deprecated:
-            Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows.
+            Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API should be used for your payment flows.
 
         Args:
               identity (string): Unique identifier, beginning with "RE".
@@ -70,7 +70,7 @@ class RedirectFlowsService(base_service.BaseService):
         Returns:
               RedirectFlow
         """
-        warnings.warn("Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows.",
+        warnings.warn("Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API should be used for your payment flows.",
                       DeprecationWarning, stacklevel=2)
         path = self._sub_url_params('/redirect_flows/:identity', {
           
@@ -87,11 +87,10 @@ class RedirectFlowsService(base_service.BaseService):
         """Complete a redirect flow.
 
         This creates a customer
-        (https://developer.gocardless.com/api-reference/#core-endpoints-customers),
-        customer bank account
-        (https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts),
-        and mandate
-        (https://developer.gocardless.com/api-reference/#core-endpoints-mandates)
+        (https://docs.gocardless.com/docs/api-reference/customer), customer
+        bank account
+        (https://docs.gocardless.com/docs/api-reference/customer-bank-account),
+        and mandate (https://docs.gocardless.com/docs/api-reference/mandate)
         using the details supplied by your customer and returns the ID of the
         created mandate.
         
@@ -103,7 +102,7 @@ class RedirectFlowsService(base_service.BaseService):
         created.
 
         Deprecated:
-            Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows.
+            Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API should be used for your payment flows.
 
         Args:
               identity (string): Unique identifier, beginning with "RE".
@@ -112,7 +111,7 @@ class RedirectFlowsService(base_service.BaseService):
         Returns:
               RedirectFlow
         """
-        warnings.warn("Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows.",
+        warnings.warn("Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://docs.gocardless.com/docs/api-reference/billing-request) API should be used for your payment flows.",
                       DeprecationWarning, stacklevel=2)
         path = self._sub_url_params('/redirect_flows/:identity/actions/complete', {
           

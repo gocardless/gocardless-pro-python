@@ -25,7 +25,7 @@ class InstalmentSchedulesService(base_service.BaseService):
         API is recommended if you know the specific dates you wish to charge.
         Otherwise,
         please check out the scheduling version
-        (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule).
+        (https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule).
         
         The `instalments` property is an array of payment properties (`amount`
         and
@@ -75,7 +75,7 @@ class InstalmentSchedulesService(base_service.BaseService):
         For finer
         control over the individual dates, please check out the alternative
         version
-        (https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates).
+        (https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule).
         
         It can take quite a while to create the associated payments, so the API
         will return
@@ -116,7 +116,7 @@ class InstalmentSchedulesService(base_service.BaseService):
         """List instalment schedules.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of your instalment schedules.
 
         Args:

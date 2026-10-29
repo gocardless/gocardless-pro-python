@@ -25,7 +25,7 @@ class BankAccountDetailsService(base_service.BaseService):
         
         You must specify a `Gc-Key-Id` header when using this endpoint. See
         Public Key Setup
-        (https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup)
+        (https://docs.gocardless.com/docs/gc-embed/bank-details-access#public-key-setup)
         for more details.
 
         Args:

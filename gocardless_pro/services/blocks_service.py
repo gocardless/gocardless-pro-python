@@ -74,7 +74,7 @@ class BlocksService(base_service.BaseService):
         """List multiple blocks.
 
         Returns a cursor-paginated
-        (https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination)
+        (https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination)
         list of your blocks.
 
         Args:
