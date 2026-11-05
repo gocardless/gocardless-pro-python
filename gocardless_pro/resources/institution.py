@@ -51,6 +51,11 @@ class Institution(object):
         return self.attributes.get('roles')
   
 
+    @property
+    def status(self):
+        return self.attributes.get('status')
+  
+
 
   
 
@@ -73,6 +78,8 @@ class Institution(object):
         def single(self):
             return self.attributes.get('single')
     
+  
+
   
 
   
