@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.26.0 (2026-11-10)
+
+### Features
+
+- Add `mandate_submitted` scenario simulator for Bacs, Autogiro and Betalingsservice mandates, and allow `mandate_activated` to run on `submitted` mandates
+
 ## 3.25.0 (2026-11-05)
 
 ### Features
