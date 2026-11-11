@@ -1,6 +1,18 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 3.27.0 (2026-11-11)
+
+### Features
+
+#### Add `resources.mandate` to billing requests
+
+Billing requests now include the created mandate's `id` and `reference` in `resources.mandate` once the mandate request has been fulfilled. Before then, `resources.mandate` is not present.
+
+This means you no longer need a follow-up `GET /mandates/{id}` just to read the mandate reference, for example after calling `POST /billing_requests/create_with_actions` with auto-fulfilment.
+
+This is backward compatible - existing integrations are unaffected.
+
 ## 3.26.0 (2026-11-10)
 
 ### Features
