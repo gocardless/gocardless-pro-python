@@ -384,6 +384,10 @@ class BillingRequest(object):
         def customer_billing_detail(self):
             return self.attributes.get('customer_billing_detail')
     
+        @property
+        def mandate(self):
+            return self.attributes.get('mandate')
+    
   
 
   
